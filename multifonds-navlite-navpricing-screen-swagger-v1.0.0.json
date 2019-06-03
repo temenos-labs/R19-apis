@@ -1,0 +1,2005 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Nav Pricing Service",
+        "version": "v1.0.0",
+        "title": "Nav Pricing Service"
+    },
+    "host": "localhost:9089",
+    "basePath": "/IRISnavlite/multifonds/api/v1.0.0",
+    "schemes": ["http"],
+    "paths":
+    {
+        "/holdings/funds/NAVPrices/{fundId}":
+        {
+            "get":
+            {
+                "parameters": [
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "Current page number (Default:1)",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "size",
+                    "in": "query",
+                    "description": "Total number of records per page (Default:25)",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "orders",
+                    "in": "query",
+                    "description": "An 'orders' parameter allows you to specify the order in which rows appear in the result set Eg: orders=fundname:0,masterfund:1 where 'fundname' is field, '0' for ascending manner and ',' as seperator for fields",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "groups",
+                    "in": "query",
+                    "description": "A 'groups' parameter is used to collect data across multiple records and group the results by one or more columns. Eg: groups=nationality,reclaimtax-nationality:EQ:Indian,reclaimtax:EQ:N-nationality:COUNT where 'nationality,reclaimtax' is for the fields and 'nationality:EQ:Indian,reclaimtax:EQ:N-nationality' are filters, 'nationality:COUNT' is a aggregator and '-' as seperator ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "filters",
+                    "in": "query",
+                    "description": "Use a 'filters' parameter to select rows based on a value by using basic operators like EQ, NE etc.., Eg: filters=statistictype:NE:SRS where 'statistictype' is a field, 'NE' is a operator and 'SRS' is a value",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "fundId",
+                    "in": "path",
+                    "description": "noval~fundId~securityType~flgIntCorLeg~dctaPricing~contractNumber~depositaryBankIdentifierCode",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getNavPricing Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingSuccessResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "getNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingErrorResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "getNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "getNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "getNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingErrorResponse"
+                        }
+                    },
+                    "501":
+                    {
+                        "description": "getNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "parameters": [
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "fundId",
+                    "in": "path",
+                    "description": "noval~fundId~securityType~flgIntCorLeg~dctaPricing~contractNumber~depositaryBankIdentifierCode",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "Payload",
+                    "description": "updateNavPricing Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/sNavPricingV1.0.0Payload"
+                    }
+                }],
+                "responses":
+                {
+                    "201":
+                    {
+                        "description": "updateNavPricing Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingSuccessResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "updateNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "updateNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingErrorResponse"
+                        }
+                    },
+                    "405":
+                    {
+                        "description": "updateNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingErrorResponse"
+                        }
+                    },
+                    "409":
+                    {
+                        "description": "updateNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "updateNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingErrorResponse"
+                        }
+                    },
+                    "501":
+                    {
+                        "description": "updateNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "parameters": [
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "fundId",
+                    "in": "path",
+                    "description": "noval~fundId~securityType~flgIntCorLeg~dctaPricing~contractNumber~depositaryBankIdentifierCode",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "deleteNavPricing Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingSuccessResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "deleteNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "deleteNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingErrorResponse"
+                        }
+                    },
+                    "405":
+                    {
+                        "description": "deleteNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/funds/NAVPrices":
+        {
+            "get":
+            {
+                "parameters": [
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "Current page number (Default:1)",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "size",
+                    "in": "query",
+                    "description": "Total number of records per page (Default:25)",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "orders",
+                    "in": "query",
+                    "description": "An 'orders' parameter allows you to specify the order in which rows appear in the result set Eg: orders=fundname:0,masterfund:1 where 'fundname' is field, '0' for ascending manner and ',' as seperator for fields",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "groups",
+                    "in": "query",
+                    "description": "A 'groups' parameter is used to collect data across multiple records and group the results by one or more columns. Eg: groups=nationality,reclaimtax-nationality:EQ:Indian,reclaimtax:EQ:N-nationality:COUNT where 'nationality,reclaimtax' is for the fields and 'nationality:EQ:Indian,reclaimtax:EQ:N-nationality' are filters, 'nationality:COUNT' is a aggregator and '-' as seperator ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "filters",
+                    "in": "query",
+                    "description": "Use a 'filters' parameter to select rows based on a value by using basic operators like EQ, NE etc.., Eg: filters=statistictype:NE:SRS where 'statistictype' is a field, 'NE' is a operator and 'SRS' is a value",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getNavPricings Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingsSuccessResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "getNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingsErrorResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "getNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingsErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "getNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingsErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "getNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingsErrorResponse"
+                        }
+                    },
+                    "501":
+                    {
+                        "description": "getNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getNavPricingsErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "parameters": [
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "Payload",
+                    "description": "createNavPricing Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/sNavPricingV1.0.0Payload"
+                    }
+                }],
+                "responses":
+                {
+                    "201":
+                    {
+                        "description": "createNavPricing Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingSuccessResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    },
+                    "401":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    },
+                    "405":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    },
+                    "409":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "createNavPricing Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNavPricingErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "parameters": [
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "Payload",
+                    "description": "updateNavPricings Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/sNavPricingV1.0.0BULKPayload"
+                    }
+                }],
+                "responses":
+                {
+                    "201":
+                    {
+                        "description": "updateNavPricings Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsSuccessResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "updateNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "updateNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsErrorResponse"
+                        }
+                    },
+                    "405":
+                    {
+                        "description": "updateNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsErrorResponse"
+                        }
+                    },
+                    "409":
+                    {
+                        "description": "updateNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "updateNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsErrorResponse"
+                        }
+                    },
+                    "501":
+                    {
+                        "description": "updateNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNavPricingsErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "parameters": [
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "deleteNavPricings Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingsSuccessResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "deleteNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingsErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "deleteNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingsErrorResponse"
+                        }
+                    },
+                    "405":
+                    {
+                        "description": "deleteNavPricings Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/deleteNavPricingsErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "paginationSchema":
+        {
+            "properties":
+            {
+                "page":
+                {
+                    "type": "string"
+                },
+                "size":
+                {
+                    "type": "string"
+                },
+                "count":
+                {
+                    "type": "string"
+                },
+                "total":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "auditSchema":
+        {
+            "properties":
+            {
+                "startTime":
+                {
+                    "type": "string"
+                },
+                "endTime":
+                {
+                    "type": "string"
+                },
+                "processTime":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "successHeaderstatusSchema":
+        {
+            "properties":
+            {
+                "result":
+                {
+                    "type": "string"
+                },
+                "HTTP_MESSAGE":
+                {
+                    "type": "string"
+                },
+                "description":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "HTTP_CODE":
+                {
+                    "type": "string"
+                },
+                "requestId":
+                {
+                    "type": "string"
+                },
+                "responseId":
+                {
+                    "type": "string"
+                },
+                "eTag":
+                {
+                    "type": "string"
+                },
+                "lastModified":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getNavPricingSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getNavPricingrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "getNavPricingSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/getNavPricingrecordsSchema"
+                }
+            }
+        },
+        "getNavPricingSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getNavPricingSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getNavPricingSuccessbodyResponse"
+                }
+            }
+        },
+        "errorHeaderstatusSchema":
+        {
+            "properties":
+            {
+                "result":
+                {
+                    "type": "string"
+                },
+                "HTTP_MESSAGE":
+                {
+                    "type": "string"
+                },
+                "description":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "HTTP_CODE":
+                {
+                    "type": "string"
+                },
+                "requestId":
+                {
+                    "type": "string"
+                },
+                "responseId":
+                {
+                    "type": "string"
+                },
+                "eTag":
+                {
+                    "type": "string"
+                },
+                "lastModified":
+                {
+                    "type": "string"
+                },
+                "details":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getNavPricingErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getNavPricingErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getNavPricingErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getNavPricingErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "sNavPricingV1.0.0":
+        {
+            "properties":
+            {
+                "securityType":
+                {
+                    "type": "string",
+                    "description": "Security Type"
+                },
+                "secTypDesc":
+                {
+                    "type": "string",
+                    "description": "Security Type Description"
+                },
+                "cmoncota":
+                {
+                    "type": "string",
+                    "description": "Cmoncota"
+                },
+                "coursVal":
+                {
+                    "type": "number",
+                    "description": "Security price"
+                },
+                "accountingdate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This field is used to store the accounting date of the fund"
+                },
+                "noval":
+                {
+                    "type": "string",
+                    "description": "Internal Security ID"
+                },
+                "fundId":
+                {
+                    "type": "string",
+                    "description": "Internal fund identification code"
+                },
+                "typeCours":
+                {
+                    "type": "string",
+                    "description": "Type Cours"
+                },
+                "corc":
+                {
+                    "type": "string",
+                    "description": "Corc"
+                },
+                "dctaPricing":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Pricing Date"
+                },
+                "depositaryBankIdentifierCode":
+                {
+                    "type": "number"
+                },
+                "contractNumber":
+                {
+                    "type": "number",
+                    "description": "Contract Number"
+                },
+                "flgIntCorLeg":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "sNavPricingV1.0.0Payload":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "type": "object"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/sNavPricingV1.0.0"
+                }
+            }
+        },
+        "createNavPricingSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createNavPricingrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "createNavPricingSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/createNavPricingrecordsSchema"
+                }
+            }
+        },
+        "createNavPricingSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/createNavPricingSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createNavPricingSuccessbodyResponse"
+                }
+            }
+        },
+        "createNavPricingErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createNavPricingErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createNavPricingErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/createNavPricingErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "updateNavPricingSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateNavPricingrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "updateNavPricingSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/updateNavPricingrecordsSchema"
+                }
+            }
+        },
+        "updateNavPricingSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/updateNavPricingSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateNavPricingSuccessbodyResponse"
+                }
+            }
+        },
+        "updateNavPricingErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateNavPricingErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "updateNavPricingErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/updateNavPricingErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteNavPricingSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "deleteNavPricingrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "deleteNavPricingSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/deleteNavPricingrecordsSchema"
+                }
+            }
+        },
+        "deleteNavPricingSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/deleteNavPricingSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/deleteNavPricingSuccessbodyResponse"
+                }
+            }
+        },
+        "deleteNavPricingErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "deleteNavPricingErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "deleteNavPricingErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/deleteNavPricingErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "getNavPricingsSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getNavPricingsrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "getNavPricingsSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/getNavPricingsrecordsSchema"
+                }
+            }
+        },
+        "getNavPricingsSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getNavPricingsSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getNavPricingsSuccessbodyResponse"
+                }
+            }
+        },
+        "getNavPricingsErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getNavPricingsErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getNavPricingsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getNavPricingsErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "sNavPricingV1.0.0BULKPayload":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "type": "object"
+                },
+                "body":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "navPricings":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "$ref": "#/definitions/sNavPricingV1.0.0"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "updateNavPricingsSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateNavPricingsrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "updateNavPricingsSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/updateNavPricingsrecordsSchema"
+                }
+            }
+        },
+        "updateNavPricingsSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/updateNavPricingsSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateNavPricingsSuccessbodyResponse"
+                }
+            }
+        },
+        "updateNavPricingsErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateNavPricingsErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "updateNavPricingsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/updateNavPricingsErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteNavPricingsSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "deleteNavPricingsrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/sNavPricingV1.0.0"
+            }
+        },
+        "deleteNavPricingsSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/deleteNavPricingsrecordsSchema"
+                }
+            }
+        },
+        "deleteNavPricingsSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/deleteNavPricingsSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/deleteNavPricingsSuccessbodyResponse"
+                }
+            }
+        },
+        "deleteNavPricingsErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "deleteNavPricingsErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "deleteNavPricingsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/deleteNavPricingsErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

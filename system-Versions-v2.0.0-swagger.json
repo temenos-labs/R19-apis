@@ -1,0 +1,2037 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "PUTPOSTRequests",
+        "version": "v2.0.0",
+        "title": "Serviceautomation"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v2.0.0/",
+    "schemes": ["http"],
+    "paths":
+    {
+        "/system/batch/{batchId}":
+        {
+            "post":
+            {
+                "operationId": "createNewBatch",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "batchId",
+                    "in": "path",
+                    "description": "resource for batch URL",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createNewBatch"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createNewBatchResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNewBatchResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createNewBatchErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNewBatchErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateNewBatch",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "batchId",
+                    "in": "path",
+                    "description": "resource for batch URL",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateNewBatch"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateNewBatchResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNewBatchResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateNewBatchErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNewBatchErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/system/tsaservice/{tsaServiceId}":
+        {
+            "post":
+            {
+                "operationId": "createNewService",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "tsaServiceId",
+                    "in": "path",
+                    "description": "resource for tsa service URL",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createNewService"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createNewServiceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNewServiceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createNewServiceErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createNewServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateNewService",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "tsaServiceId",
+                    "in": "path",
+                    "description": "resource for tsa service URL",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateNewService"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateNewServiceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNewServiceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateNewServiceErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateNewServiceErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/system/workProfiles/{workProfileId}":
+        {
+            "post":
+            {
+                "operationId": "createWorkloadProfile",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "workProfileId",
+                    "in": "path",
+                    "description": "resource for workload profile URL",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createWorkloadProfile"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createWorkloadProfileResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createWorkloadProfileResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createWorkloadProfileErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createWorkloadProfileErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateWorkloadProfile",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "workProfileId",
+                    "in": "path",
+                    "description": "resource for workload profile URL",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateWorkloadProfile"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateWorkloadProfileResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateWorkloadProfileResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateWorkloadProfileErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateWorkloadProfileErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createNewBatch":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createNewBatchBody"
+                }
+            },
+            "description": "createNewBatch"
+        },
+        "createNewBatchBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "batchStage":
+                {
+                    "type": "string",
+                    "description": "Indicates which Stage of the  Batch and in which sequence number the service will run"
+                },
+                "batchEnvironment":
+                {
+                    "type": "string",
+                    "description": "Indicates whether service should run as a background process or a foreground process",
+                    "enum": ["B", "F"]
+                },
+                "jobId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the job"
+                },
+                "verificationJobId":
+                {
+                    "type": "string",
+                    "description": "Same as jobID, but functionally it does the verififcation as to whether a job is completed before the jobID is executed"
+                },
+                "jobFrequency":
+                {
+                    "type": "string",
+                    "description": "Defines the frequency at which the job is processed next."
+                },
+                "nextRunDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Specifies bank date on which the job is to be next run"
+                },
+                "data":
+                {
+                    "type": "string",
+                    "description": "Used to pass any data values which may be required by the job when it is being run."
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "createNewBatchResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createNewBatchResponseBody"
+                }
+            },
+            "description": "createNewBatchResponse"
+        },
+        "createNewBatchResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "batchStage":
+                {
+                    "type": "string",
+                    "description": "Indicates which Stage of the  Batch and in which sequence number the service will run"
+                },
+                "batchEnvironment":
+                {
+                    "type": "string",
+                    "description": "Indicates whether service should run as a background process or a foreground process",
+                    "enum": ["B", "F"]
+                },
+                "jobId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the job"
+                },
+                "verificationJobId":
+                {
+                    "type": "string",
+                    "description": "Same as jobID, but functionally it does the verififcation as to whether a job is completed before the jobID is executed"
+                },
+                "jobFrequency":
+                {
+                    "type": "string",
+                    "description": "Defines the frequency at which the job is processed next."
+                },
+                "nextRunDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Specifies bank date on which the job is to be next run"
+                },
+                "data":
+                {
+                    "type": "string",
+                    "description": "Used to pass any data values which may be required by the job when it is being run."
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createNewBatchErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createNewBatchErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "createNewBatchErrorResponse"
+        },
+        "createNewBatchErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "updateNewBatch":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateNewBatchBody"
+                }
+            },
+            "description": "updateNewBatch"
+        },
+        "updateNewBatchBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "batchStage":
+                {
+                    "type": "string",
+                    "description": "Indicates which Stage of the  Batch and in which sequence number the service will run"
+                },
+                "batchEnvironment":
+                {
+                    "type": "string",
+                    "description": "Indicates whether service should run as a background process or a foreground process",
+                    "enum": ["B", "F"]
+                },
+                "jobId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the job"
+                },
+                "verificationJobId":
+                {
+                    "type": "string",
+                    "description": "Same as jobID, but functionally it does the verififcation as to whether a job is completed before the jobID is executed"
+                },
+                "jobFrequency":
+                {
+                    "type": "string",
+                    "description": "Defines the frequency at which the job is processed next."
+                },
+                "nextRunDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Specifies bank date on which the job is to be next run"
+                },
+                "data":
+                {
+                    "type": "string",
+                    "description": "Used to pass any data values which may be required by the job when it is being run."
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "updateNewBatchResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateNewBatchResponseBody"
+                }
+            },
+            "description": "updateNewBatchResponse"
+        },
+        "updateNewBatchResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "batchStage":
+                {
+                    "type": "string",
+                    "description": "Indicates which Stage of the  Batch and in which sequence number the service will run"
+                },
+                "batchEnvironment":
+                {
+                    "type": "string",
+                    "description": "Indicates whether service should run as a background process or a foreground process",
+                    "enum": ["B", "F"]
+                },
+                "jobId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the job"
+                },
+                "verificationJobId":
+                {
+                    "type": "string",
+                    "description": "Same as jobID, but functionally it does the verififcation as to whether a job is completed before the jobID is executed"
+                },
+                "jobFrequency":
+                {
+                    "type": "string",
+                    "description": "Defines the frequency at which the job is processed next."
+                },
+                "nextRunDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Specifies bank date on which the job is to be next run"
+                },
+                "data":
+                {
+                    "type": "string",
+                    "description": "Used to pass any data values which may be required by the job when it is being run."
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "updateNewBatchErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateNewBatchErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "updateNewBatchErrorResponse"
+        },
+        "updateNewBatchErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "createNewService":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createNewServiceBody"
+                }
+            },
+            "description": "createNewService"
+        },
+        "createNewServiceBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "jobServerProfiles":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "jobProfileId":
+                            {
+                                "type": "string",
+                                "description": "Reference to the record in TSA.WORKLOAD.PROFILE"
+                            },
+                            "serverName":
+                            {
+                                "type": "string",
+                                "description": "Hostname of the Server on which the service will run"
+                            },
+                            "jobServerStatus":
+                            {
+                                "type": "string",
+                                "description": "Status of Server"
+                            }
+                        }
+                    }
+                },
+                "serviceDescription":
+                {
+                    "type": "string",
+                    "description": "Description of the Service"
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "jobOperation":
+                {
+                    "type": "string",
+                    "description": "Holds the control the user wishes to exercise upon the current service.i.e START,STOP,AUTO",
+                    "enum": ["START", "STOP", "AUTO"]
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed",
+                    "enum": ["Status of record -authorised/on hold/unauth etc"]
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified",
+                    "enum": ["No of times record has been changed"]
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction",
+                    "enum": ["User who has input or changed the record"]
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction",
+                    "enum": ["User who has authorised the input or change"]
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised",
+                    "enum": ["Department handling the record"]
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code",
+                    "enum": ["Code of Auditor who has audited the record"]
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "createNewServiceResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createNewServiceResponseBody"
+                }
+            },
+            "description": "createNewServiceResponse"
+        },
+        "createNewServiceResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "jobServerProfiles":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "jobProfileId":
+                            {
+                                "type": "string",
+                                "description": "Reference to the record in TSA.WORKLOAD.PROFILE"
+                            },
+                            "serverName":
+                            {
+                                "type": "string",
+                                "description": "Hostname of the Server on which the service will run"
+                            },
+                            "jobServerStatus":
+                            {
+                                "type": "string",
+                                "description": "Status of Server"
+                            }
+                        }
+                    }
+                },
+                "serviceDescription":
+                {
+                    "type": "string",
+                    "description": "Description of the Service"
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "jobOperation":
+                {
+                    "type": "string",
+                    "description": "Holds the control the user wishes to exercise upon the current service.i.e START,STOP,AUTO",
+                    "enum": ["START", "STOP", "AUTO"]
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed",
+                    "enum": ["Status of record -authorised/on hold/unauth etc"]
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified",
+                    "enum": ["No of times record has been changed"]
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction",
+                    "enum": ["User who has input or changed the record"]
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction",
+                    "enum": ["User who has authorised the input or change"]
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised",
+                    "enum": ["Department handling the record"]
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code",
+                    "enum": ["Code of Auditor who has audited the record"]
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "createNewServiceErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createNewServiceErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "createNewServiceErrorResponse"
+        },
+        "createNewServiceErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "updateNewService":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateNewServiceBody"
+                }
+            },
+            "description": "updateNewService"
+        },
+        "updateNewServiceBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "jobServerProfiles":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "jobProfileId":
+                            {
+                                "type": "string",
+                                "description": "Reference to the record in TSA.WORKLOAD.PROFILE"
+                            },
+                            "serverName":
+                            {
+                                "type": "string",
+                                "description": "Hostname of the Server on which the service will run"
+                            },
+                            "jobServerStatus":
+                            {
+                                "type": "string",
+                                "description": "Status of Server"
+                            }
+                        }
+                    }
+                },
+                "serviceDescription":
+                {
+                    "type": "string",
+                    "description": "Description of the Service"
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "jobOperation":
+                {
+                    "type": "string",
+                    "description": "Holds the control the user wishes to exercise upon the current service.i.e START,STOP,AUTO",
+                    "enum": ["START", "STOP", "AUTO"]
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed",
+                    "enum": ["Status of record -authorised/on hold/unauth etc"]
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified",
+                    "enum": ["No of times record has been changed"]
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction",
+                    "enum": ["User who has input or changed the record"]
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction",
+                    "enum": ["User who has authorised the input or change"]
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised",
+                    "enum": ["Department handling the record"]
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code",
+                    "enum": ["Code of Auditor who has audited the record"]
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "updateNewServiceResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateNewServiceResponseBody"
+                }
+            },
+            "description": "updateNewServiceResponse"
+        },
+        "updateNewServiceResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "jobServerProfiles":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "jobProfileId":
+                            {
+                                "type": "string",
+                                "description": "Reference to the record in TSA.WORKLOAD.PROFILE"
+                            },
+                            "serverName":
+                            {
+                                "type": "string",
+                                "description": "Hostname of the Server on which the service will run"
+                            },
+                            "jobServerStatus":
+                            {
+                                "type": "string",
+                                "description": "Status of Server"
+                            }
+                        }
+                    }
+                },
+                "serviceDescription":
+                {
+                    "type": "string",
+                    "description": "Description of the Service"
+                },
+                "userId":
+                {
+                    "type": "string",
+                    "description": "The unique user identifier"
+                },
+                "jobOperation":
+                {
+                    "type": "string",
+                    "description": "Holds the control the user wishes to exercise upon the current service.i.e START,STOP,AUTO",
+                    "enum": ["START", "STOP", "AUTO"]
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed",
+                    "enum": ["Status of record -authorised/on hold/unauth etc"]
+                },
+                "currNo":
+                {
+                    "type": "string",
+                    "description": "Current Number which indicates how many times the record is modified",
+                    "enum": ["No of times record has been changed"]
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction",
+                    "enum": ["User who has input or changed the record"]
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": ""
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction",
+                    "enum": ["User who has authorised the input or change"]
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised",
+                    "enum": ["Department handling the record"]
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code",
+                    "enum": ["Code of Auditor who has audited the record"]
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "updateNewServiceErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateNewServiceErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "updateNewServiceErrorResponse"
+        },
+        "updateNewServiceErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "createWorkloadProfile":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createWorkloadProfileBody"
+                }
+            },
+            "description": "createWorkloadProfile"
+        },
+        "createWorkloadProfileBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "startTime":
+                {
+                    "type": "string",
+                    "description": "Indicates start time"
+                },
+                "agentsRequired":
+                {
+                    "type": "string",
+                    "description": "Indicates the number of agents required"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "number",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "createWorkloadProfileResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createWorkloadProfileResponseBody"
+                }
+            },
+            "description": "createWorkloadProfileResponse"
+        },
+        "createWorkloadProfileResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "startTime":
+                {
+                    "type": "string",
+                    "description": "Indicates start time"
+                },
+                "agentsRequired":
+                {
+                    "type": "string",
+                    "description": "Indicates the number of agents required"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "number",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "createWorkloadProfileErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createWorkloadProfileErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "createWorkloadProfileErrorResponse"
+        },
+        "createWorkloadProfileErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "updateWorkloadProfile":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateWorkloadProfileBody"
+                }
+            },
+            "description": "updateWorkloadProfile"
+        },
+        "updateWorkloadProfileBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "startTime":
+                {
+                    "type": "string",
+                    "description": "Indicates start time"
+                },
+                "agentsRequired":
+                {
+                    "type": "string",
+                    "description": "Indicates the number of agents required"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "number",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "updateWorkloadProfileResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateWorkloadProfileResponseBody"
+                }
+            },
+            "description": "updateWorkloadProfileResponse"
+        },
+        "updateWorkloadProfileResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "startTime":
+                {
+                    "type": "string",
+                    "description": "Indicates start time"
+                },
+                "agentsRequired":
+                {
+                    "type": "string",
+                    "description": "Indicates the number of agents required"
+                },
+                "recordStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the record processed"
+                },
+                "currNo":
+                {
+                    "type": "number",
+                    "description": "Current Number which indicates how many times the record is modified"
+                },
+                "inputter":
+                {
+                    "type": "string",
+                    "description": "This shows the user who entered the transaction"
+                },
+                "authoriser":
+                {
+                    "type": "string",
+                    "description": "This indicates the user who authorised the transaction"
+                },
+                "dateTime":
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": ""
+                },
+                "companyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                },
+                "deptCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the department code where the transaction was authorised"
+                },
+                "auditorCode":
+                {
+                    "type": "string",
+                    "description": "This indicates the auditor code"
+                },
+                "auditTimeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This indicates the audit date time"
+                }
+            }
+        },
+        "updateWorkloadProfileErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateWorkloadProfileErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "updateWorkloadProfileErrorResponse"
+        },
+        "updateWorkloadProfileErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

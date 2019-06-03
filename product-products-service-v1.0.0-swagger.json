@@ -1,0 +1,467 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves product information, either as a full catalog or by product line and / or product group",
+        "version": "v1.0.0",
+        "title": "Product Products APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/product/products/":
+        {
+            "get":
+            {
+                "operationId": "getProducts",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getProductsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getProductsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getProductsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getProductsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/products/{productId}":
+        {
+            "get":
+            {
+                "operationId": "getProduct",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "productId",
+                    "in": "path",
+                    "description": "The identifier of the product",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getProductResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getProductResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getProductErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getProductErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getProductsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getProductsResponseBody"
+                }
+            },
+            "description": "getProductsResponse"
+        },
+        "getProductsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "currencies":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "currencyId":
+                                {
+                                    "type": "array",
+                                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "currencyName":
+                                {
+                                    "type": "array",
+                                    "description": "The name that is displayed for the currency",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "productLineId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product line"
+                    },
+                    "productLineName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the product line"
+                    },
+                    "productGroupId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product group",
+                        "maxLength": 35
+                    },
+                    "productGroupName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the product group",
+                        "maxLength": 35
+                    },
+                    "productId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product",
+                        "maxLength": 30
+                    },
+                    "productName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the product",
+                        "maxLength": 35
+                    },
+                    "availableFromDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date when the product is available for creating arrangements"
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getProductsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getProductsErrorResponseBody"
+                }
+            },
+            "description": "getProductsErrorResponse"
+        },
+        "getProductsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getProductResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getProductResponseBody"
+                }
+            },
+            "description": "getProductResponse"
+        },
+        "getProductResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "currencies":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "currencyId":
+                                {
+                                    "type": "array",
+                                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "currencyName":
+                                {
+                                    "type": "array",
+                                    "description": "The name that is displayed for the currency",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "productLineId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product line"
+                    },
+                    "productLineName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the product line"
+                    },
+                    "productGroupId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product group",
+                        "maxLength": 35
+                    },
+                    "productGroupName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the product group",
+                        "maxLength": 35
+                    },
+                    "productId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product",
+                        "maxLength": 30
+                    },
+                    "productName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the product",
+                        "maxLength": 35
+                    },
+                    "availableFromDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date when the product is available for creating arrangements"
+                    }
+                }
+            }
+        },
+        "getProductErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getProductErrorResponseBody"
+                }
+            },
+            "description": "getProductErrorResponse"
+        },
+        "getProductErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

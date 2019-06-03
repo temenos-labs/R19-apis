@@ -1,0 +1,853 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of screen definitions",
+        "version": "v1.0.0",
+        "title": "Meta APIs about Screens"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/meta/screens":
+        {
+            "get":
+            {
+                "operationId": "getScreens",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getScreensResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getScreensResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getScreensErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getScreensErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/meta/screens/{screenId}":
+        {
+            "get":
+            {
+                "operationId": "getScreen",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "screenId",
+                    "in": "path",
+                    "description": "The screen identifier",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getScreenResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getScreenResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createScreen",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "screenId",
+                    "in": "path",
+                    "description": "The screen identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createScreen"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createScreenResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createScreenResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getScreensResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getScreensResponseBody"
+                }
+            },
+            "description": "getScreensResponse"
+        },
+        "getScreensResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "screenId":
+                    {
+                        "type": "string",
+                        "description": "The screen identifier",
+                        "maxLength": 54
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 70
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getScreensErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getScreensErrorResponseBody"
+                }
+            },
+            "description": "getScreensErrorResponse"
+        },
+        "getScreensErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getScreenResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getScreenResponseBody"
+                }
+            },
+            "description": "getScreenResponse"
+        },
+        "getScreenResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "fields":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "field":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "column":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "label":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "labelLength":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "groupBy":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "explanation":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "dataType":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "defaults":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "defaultField":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "defaultValue":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "children":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "child":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "recordsPerPage":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "fieldsPerLine":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "language":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "requiredApprovers":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                }
+            }
+        },
+        "getScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getScreenErrorResponseBody"
+                }
+            },
+            "description": "getScreenErrorResponse"
+        },
+        "getScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "type": "object",
+            "properties":
+            {
+                "override_acceptId":
+                {
+                    "type": "string",
+                    "description": "pass the record Id to accept all its overrides"
+                }
+            }
+        },
+        "createScreen":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createScreenBody"
+                }
+            },
+            "description": "createScreen"
+        },
+        "createScreenBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "fields":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "field":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "column":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "label":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "labelLength":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "groupBy":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "explanation":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "dataType":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "defaults":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "defaultField":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "defaultValue":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "children":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "child":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "recordsPerPage":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "fieldsPerLine":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "language":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "requiredApprovers":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                }
+            }
+        },
+        "createScreenResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createScreenResponseBody"
+                }
+            },
+            "description": "createScreenResponse"
+        },
+        "createScreenResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "fields":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "field":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "column":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "label":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "labelLength":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "groupBy":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "explanation":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "dataType":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "defaults":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "defaultField":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "defaultValue":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "children":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "child":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "recordsPerPage":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "fieldsPerLine":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "language":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "requiredApprovers":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                }
+            }
+        },
+        "createScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createScreenErrorResponseBody"
+                }
+            },
+            "description": "createScreenErrorResponse"
+        },
+        "createScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

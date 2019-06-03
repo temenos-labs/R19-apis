@@ -1,0 +1,1194 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of menu definitions",
+        "version": "v1.0.0",
+        "title": "Meta APIs about Menus"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/meta/menus/mainmenus":
+        {
+            "get":
+            {
+                "operationId": "getMainMenus",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getMainMenusResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMainMenusResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getMainMenusErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMainMenusErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/meta/menus/mainmenus/{menuId}":
+        {
+            "get":
+            {
+                "operationId": "getMainMenu",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "menuId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getMainMenuResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMainMenuResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getMainMenuErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMainMenuErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createMainMenu",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "menuId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createMainMenu"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createMainMenuResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMainMenuResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createMainMenuErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMainMenuErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/meta/menus":
+        {
+            "get":
+            {
+                "operationId": "getMenus",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getMenusResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMenusResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getMenusErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMenusErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/meta/menus/{menuId}":
+        {
+            "get":
+            {
+                "operationId": "getMenu",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "menuId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getMenuResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMenuResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getMenuErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMenuErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createMenu",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "menuId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createMenu"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createMenuResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMenuResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createMenuErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMenuErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getMainMenusResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getMainMenusResponseBody"
+                }
+            },
+            "description": "getMainMenusResponse"
+        },
+        "getMainMenusResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "mainMenuId":
+                    {
+                        "type": "string",
+                        "description": "Record Id for Main Menu",
+                        "maxLength": 3
+                    },
+                    "title":
+                    {
+                        "type": "string",
+                        "description": "Main menu title which user wants to display",
+                        "maxLength": 35
+                    },
+                    "helpMenuId":
+                    {
+                        "type": "string",
+                        "description": "valid record id of helptext.menu table which user wants to include in mainmenu",
+                        "maxLength": 25
+                    },
+                    "description":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 45
+                    },
+                    "menuDisplayId":
+                    {
+                        "type": "string",
+                        "description": "user to request the inclusion of the ID of the menu(s) when displaying the main menu",
+                        "maxLength": 1
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getMainMenusErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getMainMenusErrorResponseBody"
+                }
+            },
+            "description": "getMainMenusErrorResponse"
+        },
+        "getMainMenusErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getMainMenuResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getMainMenuResponseBody"
+                }
+            },
+            "description": "getMainMenuResponse"
+        },
+        "getMainMenuResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "mainMenuId":
+                    {
+                        "type": "string",
+                        "description": "Record Id for Main Menu",
+                        "maxLength": 3
+                    },
+                    "title":
+                    {
+                        "type": "string",
+                        "description": "Main menu title which user wants to display",
+                        "maxLength": 35
+                    },
+                    "helpMenuId":
+                    {
+                        "type": "string",
+                        "description": "valid record id of helptext.menu table which user wants to include in mainmenu",
+                        "maxLength": 25
+                    },
+                    "description":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 45
+                    },
+                    "menuDisplayId":
+                    {
+                        "type": "string",
+                        "description": "user to request the inclusion of the ID of the menu(s) when displaying the main menu",
+                        "maxLength": 1
+                    }
+                }
+            }
+        },
+        "getMainMenuErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getMainMenuErrorResponseBody"
+                }
+            },
+            "description": "getMainMenuErrorResponse"
+        },
+        "getMainMenuErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getMenusResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getMenusResponseBody"
+                }
+            },
+            "description": "getMenusResponse"
+        },
+        "getMenusResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "menuName":
+                    {
+                        "type": "string",
+                        "description": "Represents the ID by which each menu will be uniquely identified",
+                        "maxLength": 50
+                    },
+                    "applicationName":
+                    {
+                        "type": "string",
+                        "description": "Valid application name which user want to include in this specific menu",
+                        "maxLength": 65
+                    },
+                    "description":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 45
+                    },
+                    "displayApplication":
+                    {
+                        "type": "string",
+                        "description": "Allows the user to request the inclusion of the Application name when displaying the menu",
+                        "maxLength": 1
+                    }
+                }
+            }
+        },
+        "getMenusErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getMenusErrorResponseBody"
+                }
+            },
+            "description": "getMenusErrorResponse"
+        },
+        "getMenusErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getMenuResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getMenuResponseBody"
+                }
+            },
+            "description": "getMenuResponse"
+        },
+        "getMenuResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "menuName":
+                    {
+                        "type": "string",
+                        "description": "Represents the ID by which each menu will be uniquely identified",
+                        "maxLength": 50
+                    },
+                    "applicationName":
+                    {
+                        "type": "string",
+                        "description": "Valid application name which user want to include in this specific menu",
+                        "maxLength": 65
+                    },
+                    "description":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 45
+                    },
+                    "displayApplication":
+                    {
+                        "type": "string",
+                        "description": "Allows the user to request the inclusion of the Application name when displaying the menu",
+                        "maxLength": 1
+                    }
+                }
+            }
+        },
+        "getMenuErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getMenuErrorResponseBody"
+                }
+            },
+            "description": "getMenuErrorResponse"
+        },
+        "getMenuErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "type": "object",
+            "properties":
+            {
+                "override_acceptId":
+                {
+                    "type": "string",
+                    "description": "pass the record Id to accept all its overrides"
+                }
+            }
+        },
+        "createMainMenu":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMainMenuBody"
+                }
+            },
+            "description": "createMainMenu"
+        },
+        "createMainMenuBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "title":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "title":
+                            {
+                                "type": "string",
+                                "description": "Main menu title which user wants to display"
+                            }
+                        }
+                    }
+                },
+                "helpmenuid":
+                {
+                    "type": "array",
+                    "description": "The name used for display purposes",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "helpMenuId":
+                            {
+                                "type": "string",
+                                "description": "valid record id of helptext.menu table which user wants to include in mainmenu"
+                            },
+                            "description":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "description":
+                                        {
+                                            "type": "string",
+                                            "description": "The name used for display purposes"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "displayMenuId":
+                {
+                    "type": "string",
+                    "description": "user to request the inclusion of the ID of the menu(s) when displaying the main menu"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "createMainMenuResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMainMenuResponseBody"
+                }
+            },
+            "description": "createMainMenuResponse"
+        },
+        "createMainMenuResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "title":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "title":
+                            {
+                                "type": "string",
+                                "description": "Main menu title which user wants to display"
+                            }
+                        }
+                    }
+                },
+                "helpmenuid":
+                {
+                    "type": "array",
+                    "description": "The name used for display purposes",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "helpMenuId":
+                            {
+                                "type": "string",
+                                "description": "valid record id of helptext.menu table which user wants to include in mainmenu"
+                            },
+                            "description":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "description":
+                                        {
+                                            "type": "string",
+                                            "description": "The name used for display purposes"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "displayMenuId":
+                {
+                    "type": "string",
+                    "description": "user to request the inclusion of the ID of the menu(s) when displaying the main menu"
+                }
+            }
+        },
+        "createMainMenuErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createMainMenuErrorResponseBody"
+                }
+            },
+            "description": "createMainMenuErrorResponse"
+        },
+        "createMainMenuErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "createMenu":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMenuBody"
+                }
+            },
+            "description": "createMenu"
+        },
+        "createMenuBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "application":
+                {
+                    "type": "array",
+                    "description": "The name used for display purposes",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "applicationName":
+                            {
+                                "type": "string",
+                                "description": "Valid application name which user want to include in this specific menu"
+                            },
+                            "description":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "description":
+                                        {
+                                            "type": "string",
+                                            "description": "The name used for display purposes"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "displayApplication":
+                {
+                    "type": "string",
+                    "description": "Allows the user to request the inclusion of the Application name when displaying the menu"
+                }
+            }
+        },
+        "createMenuResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMenuResponseBody"
+                }
+            },
+            "description": "createMenuResponse"
+        },
+        "createMenuResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "application":
+                {
+                    "type": "array",
+                    "description": "The name used for display purposes",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "applicationName":
+                            {
+                                "type": "string",
+                                "description": "Valid application name which user want to include in this specific menu"
+                            },
+                            "description":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "description":
+                                        {
+                                            "type": "string",
+                                            "description": "The name used for display purposes"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "displayApplication":
+                {
+                    "type": "string",
+                    "description": "Allows the user to request the inclusion of the Application name when displaying the menu"
+                }
+            }
+        },
+        "createMenuErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createMenuErrorResponseBody"
+                }
+            },
+            "description": "createMenuErrorResponse"
+        },
+        "createMenuErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

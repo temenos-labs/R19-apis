@@ -1,0 +1,305 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Enquiry for outstanding guarantees received",
+        "version": "v1.0.0",
+        "title": "getOutstandingReceivedGuarantees"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/product/guarantees/outstandingReceivedGuarantees/{customerId}":
+        {
+            "get":
+            {
+                "operationId": "getOutstandingReceivedGuarantees",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionReference",
+                    "in": "query",
+                    "description": "The transaction reference identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "guaranteeType",
+                    "in": "query",
+                    "description": "Refers to the type of the contract that is being issued",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expacted to get as part of reponse from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOutstandingReceivedGuaranteesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOutstandingReceivedGuaranteesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOutstandingReceivedGuaranteesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOutstandingReceivedGuaranteesErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Unique id expacted to get as part of reponse from t24 on every enquiry request"
+                }
+            }
+        },
+        "getOutstandingReceivedGuaranteesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOutstandingReceivedGuaranteesResponseBody"
+                }
+            },
+            "description": "getOutstandingReceivedGuaranteesResponse"
+        },
+        "getOutstandingReceivedGuaranteesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "beneficiaries":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "beneficiary":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                }
+                            }
+                        }
+                    },
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "description": "The transaction reference identifier",
+                        "maxLength": 16
+                    },
+                    "customer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer",
+                        "maxLength": 10
+                    },
+                    "guaranteeType":
+                    {
+                        "type": "string",
+                        "description": "Refers to the type of the contract that is being issued",
+                        "maxLength": 35
+                    },
+                    "issueDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date the item was issued."
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "amount":
+                    {
+                        "type": "number",
+                        "description": ""
+                    },
+                    "expiryDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date an agreement such as a credit facility or limit is due to expire"
+                    },
+                    "maturityDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The delivery period or maturity date of the contract transacted"
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getOutstandingReceivedGuaranteesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOutstandingReceivedGuaranteesErrorResponseBody"
+                }
+            },
+            "description": "getOutstandingReceivedGuaranteesErrorResponse"
+        },
+        "getOutstandingReceivedGuaranteesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

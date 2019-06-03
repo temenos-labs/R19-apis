@@ -1,0 +1,626 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the closure of the portfolio or delinking an account from the portfolio",
+        "version": "v1.0.0",
+        "title": "Holdings Portfolio Closure and Delink Account APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/holdings/portfolios/{portfolioId}/portfolioClosures":
+        {
+            "put":
+            {
+                "operationId": "updatePortfolioClosure",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "portfolioId",
+                    "in": "path",
+                    "description": "The identifier of the portfolio",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/holdingsPortfolioClosure"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "PortfolioClosureResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/holdingsPortfolioClosureResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/portfolios/{portfolioId}/accountRemovals":
+        {
+            "put":
+            {
+                "operationId": "updatePortfolioDelinkAccount",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "portfolioId",
+                    "in": "path",
+                    "description": "The identifier of the portfolio",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/holdingsPortfolioClosure"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "PortfolioDelinkAccountResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/holdingsPortfolioClosureResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "holdingsPortfolioClosure":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/holdingsPortfolioClosureBody"
+                }
+            },
+            "description": "holdingsPortfolioClosure"
+        },
+        "holdingsPortfolioClosureBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "accountIds":
+                {
+                    "type": "array",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "account":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "jointHolder":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "jointHolderId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the joint holder"
+                            },
+                            "jointRelationCode":
+                            {
+                                "type": "number",
+                                "description": ""
+                            },
+                            "additionalDetail":
+                            {
+                                "type": "string",
+                                "description": "Additional details provided to add context"
+                            }
+                        }
+                    }
+                },
+                "customerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the customer"
+                },
+                "referenceCurrency":
+                {
+                    "type": "string",
+                    "description": "The reference currency"
+                },
+                "valuationCurrency":
+                {
+                    "type": "string",
+                    "description": "The currency in which the account or portfolio is valued"
+                },
+                "portfolioName":
+                {
+                    "type": "string",
+                    "description": "The name that is displayed for the portfolio"
+                },
+                "accountOfficer":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "investmentProgram":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "managedAccount":
+                {
+                    "type": "number",
+                    "description": "The type of managed account- Discretionary or otherwise"
+                },
+                "safekeepChargeAccount":
+                {
+                    "type": "string",
+                    "description": "The cash account to which safe custody charges need to be posted"
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                },
+                "startDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The start date"
+                },
+                "closureDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date when the Security Account is to be closed"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "holdingsPortfolioClosureResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/holdingsPortfolioClosureResponseBody"
+                }
+            },
+            "description": "holdingsPortfolioClosureResponse"
+        },
+        "holdingsPortfolioClosureResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "accountIds":
+                {
+                    "type": "array",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "account":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "jointHolder":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "jointHolderId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the joint holder"
+                            },
+                            "jointRelationCode":
+                            {
+                                "type": "number",
+                                "description": ""
+                            },
+                            "additionalDetail":
+                            {
+                                "type": "string",
+                                "description": "Additional details provided to add context"
+                            }
+                        }
+                    }
+                },
+                "customerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the customer"
+                },
+                "referenceCurrency":
+                {
+                    "type": "string",
+                    "description": "The reference currency"
+                },
+                "valuationCurrency":
+                {
+                    "type": "string",
+                    "description": "The currency in which the account or portfolio is valued"
+                },
+                "portfolioName":
+                {
+                    "type": "string",
+                    "description": "The name that is displayed for the portfolio"
+                },
+                "accountOfficer":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "investmentProgram":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "managedAccount":
+                {
+                    "type": "number",
+                    "description": "The type of managed account- Discretionary or otherwise"
+                },
+                "safekeepChargeAccount":
+                {
+                    "type": "string",
+                    "description": "The cash account to which safe custody charges need to be posted"
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                },
+                "startDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The start date"
+                },
+                "closureDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date when the Security Account is to be closed"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ScreenErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ScreenErrorResponse"
+        },
+        "ScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

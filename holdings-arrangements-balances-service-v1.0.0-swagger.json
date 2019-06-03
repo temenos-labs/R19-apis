@@ -1,0 +1,270 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "List arrangement balances",
+        "version": "v1.0.0",
+        "title": "getArrangementBalances"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/holdings/arrangements/{arrangementId}/balances":
+        {
+            "get":
+            {
+                "operationId": "getArrangementBalances",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "arrangementId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getArrangementBalancesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getArrangementBalancesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getArrangementBalancesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getArrangementBalancesErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "getArrangementBalancesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getArrangementBalancesResponseBody"
+                }
+            },
+            "description": "getArrangementBalancesResponse"
+        },
+        "getArrangementBalancesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+              "type": "object",
+                "properties":
+                {
+                    "balanceType":
+                    {
+                        "type": "string",
+                        "description": "Virtual Balance Type"
+                    },
+                    "balanceAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount of the balance, typically linked to a balance type"
+                    },
+                    "overdueStatus":
+                    {
+                        "type": "string",
+                        "description": "Overdue status for storing balance movement"
+                    },
+                    "accrualStatus":
+                    {
+                        "type": "string",
+                        "description": "Accrual Status"
+                    },
+                    "ledgerBalance":
+                    {
+                        "type": "string",
+                        "description": "The total of all entries posted against the account excluding any entries with the processing date in the future."
+                    },
+                    "clearedBalance":
+                    {
+                        "type": "string",
+                        "description": "Total of cleared funds booked against the account. Same as onlineActuaBalance except credit or reversed debit entries with the exposure date in the future."
+                    },
+                    "workingBalance":
+                    {
+                        "type": "string",
+                        "description": "For Nostro and Internal Accounts, the same as Online Cleared Balance. For all other accounts it is the cleared balance plus the total of all unapproved debits.",
+                        "maxLength": 19
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getArrangementBalancesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getArrangementBalancesErrorResponseBody"
+                }
+            },
+            "description": "getArrangementBalancesErrorResponse"
+        },
+        "getArrangementBalancesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

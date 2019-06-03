@@ -1,0 +1,2161 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of derivative orders",
+        "version": "v1.0.0",
+        "title": "Order Derivative Orders APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/order/deriviativeOrders/OTCOrders":
+        {
+            "get":
+            {
+                "operationId": "getOTCDerivativeOrders",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "instrumentId",
+                    "in": "query",
+                    "description": "The identifier of the instrument",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "tradeType",
+                    "in": "query",
+                    "description": "The trade type",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "callOrPut",
+                    "in": "query",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOTCDerivativeOrdersResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOTCDerivativeOrdersResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOTCDerivativeOrdersErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOTCDerivativeOrdersErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/deriviativeOrders/ETDOrders":
+        {
+            "get":
+            {
+                "operationId": "getETDDerivativeOrders",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "instrumentId",
+                    "in": "query",
+                    "description": "The identifier of the instrument",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "tradeType",
+                    "in": "query",
+                    "description": "The trade type",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "callOrPut",
+                    "in": "query",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getETDDerivativeOrdersResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getETDDerivativeOrdersResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getETDDerivativeOrdersErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getETDDerivativeOrdersErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/deriviativeOrders":
+        {
+            "post":
+            {
+                "operationId": "createDerivativesOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createDerivativesOrder"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createDerivativesOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createDerivativesOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createDerivativesOrderErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createDerivativesOrderErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/deriviativeOrders/{deriviativeOrderId}":
+        {
+            "get":
+            {
+                "operationId": "getDerivativesOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "deriviativeOrderId",
+                    "in": "path",
+                    "description": "The identifier of the deriviative order",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getDerivativesOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getDerivativesOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getDerivativesOrderErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getDerivativesOrderErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateDerivativesOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "deriviativeOrderId",
+                    "in": "path",
+                    "description": "The identifier of the deriviative order",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateDerivativesOrder"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateDerivativesOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateDerivativesOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateDerivativesOrderErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateDerivativesOrderErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "getOTCDerivativeOrdersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOTCDerivativeOrdersResponseBody"
+                }
+            },
+            "description": "getOTCDerivativeOrdersResponse"
+        },
+        "getOTCDerivativeOrdersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "inOrOutFlag":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 16
+                    },
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 17
+                    },
+                    "instrumentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the instrument",
+                        "maxLength": 12
+                    },
+                    "instrumentName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the instrument, taken from securityMaster",
+                        "maxLength": 30
+                    },
+                    "maturityDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The delivery period or maturity date of the contract transacted"
+                    },
+                    "exoticType":
+                    {
+                        "type": "string",
+                        "description": "The type of exotic derivative instrument",
+                        "maxLength": 35
+                    },
+                    "underlying":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "strikePrice":
+                    {
+                        "type": "string",
+                        "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                    },
+                    "underlyingPrice":
+                    {
+                        "type": "string",
+                        "description": "The underlying price of the transaction"
+                    },
+                    "payoff":
+                    {
+                        "type": "string",
+                        "description": "The Loan payoff"
+                    },
+                    "callOrPut":
+                    {
+                        "type": "string",
+                        "description": "Indicates whether the transaction is a call or put. CALL or PUT.",
+                        "maxLength": 4
+                    },
+                    "lots":
+                    {
+                        "type": "string",
+                        "description": "The number of lots/contracts traded"
+                    },
+                    "buyer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "buyerName":
+                    {
+                        "type": "string",
+                        "description": "The name of the buyer",
+                        "maxLength": 25
+                    },
+                    "portfolioId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the portfolio",
+                        "maxLength": 14
+                    },
+                    "seller":
+                    {
+                        "type": "string",
+                        "description": "The account number through which the currency sold is to be settled.",
+                        "maxLength": 10
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getOTCDerivativeOrdersErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOTCDerivativeOrdersErrorResponseBody"
+                }
+            },
+            "description": "getOTCDerivativeOrdersErrorResponse"
+        },
+        "getOTCDerivativeOrdersErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getETDDerivativeOrdersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getETDDerivativeOrdersResponseBody"
+                }
+            },
+            "description": "getETDDerivativeOrdersResponse"
+        },
+        "getETDDerivativeOrdersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "inOrOutFlag":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 16
+                    },
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 17
+                    },
+                    "instrumentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the instrument",
+                        "maxLength": 12
+                    },
+                    "instrumentName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the instrument, taken from securityMaster",
+                        "maxLength": 30
+                    },
+                    "maturityDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The delivery period or maturity date of the contract transacted"
+                    },
+                    "exoticType":
+                    {
+                        "type": "string",
+                        "description": "The type of exotic derivative instrument",
+                        "maxLength": 35
+                    },
+                    "underlying":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "strikePrice":
+                    {
+                        "type": "string",
+                        "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                    },
+                    "underlyingPrice":
+                    {
+                        "type": "string",
+                        "description": "The underlying price of the transaction"
+                    },
+                    "payoff":
+                    {
+                        "type": "string",
+                        "description": "The Loan payoff"
+                    },
+                    "callOrPut":
+                    {
+                        "type": "string",
+                        "description": "Indicates whether the transaction is a call or put. CALL or PUT.",
+                        "maxLength": 4
+                    },
+                    "lots":
+                    {
+                        "type": "string",
+                        "description": "The number of lots/contracts traded"
+                    },
+                    "buyer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "buyerName":
+                    {
+                        "type": "string",
+                        "description": "The name of the buyer",
+                        "maxLength": 25
+                    },
+                    "portfolioId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the portfolio",
+                        "maxLength": 14
+                    },
+                    "seller":
+                    {
+                        "type": "string",
+                        "description": "The account number through which the currency sold is to be settled.",
+                        "maxLength": 10
+                    }
+                }
+            }
+        },
+        "getETDDerivativeOrdersErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getETDDerivativeOrdersErrorResponseBody"
+                }
+            },
+            "description": "getETDDerivativeOrdersErrorResponse"
+        },
+        "getETDDerivativeOrdersErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createDerivativesOrder":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createDerivativesOrderBody"
+                }
+            },
+            "description": "createDerivativesOrder"
+        },
+        "createDerivativesOrderBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "number",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "lots":
+                            {
+                                "type": "number",
+                                "description": "The number of lots/contracts traded"
+                            },
+                            "autoOrManual":
+                            {
+                                "type": "string",
+                                "description": "Determines whether the systtem will automatically process"
+                            },
+                            "transactionChannel":
+                            {
+                                "type": "string",
+                                "description": "The channel through which the transaction has been placed"
+                            },
+                            "commissions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "commissionName":
+                                        {
+                                            "type": "string",
+                                            "description": "The name that is displayed for the commission"
+                                        },
+                                        "commissionRate":
+                                        {
+                                            "type": "number",
+                                            "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                                        },
+                                        "currency":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "commissionAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The amount of commission charged in the currency of the event"
+                                        },
+                                        "taxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The tax amount"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "commissionRate":
+                            {
+                                "type": "number",
+                                "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                            }
+                        }
+                    }
+                },
+                "closeout":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "closeoutTrade":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "closeoutLots":
+                            {
+                                "type": "number",
+                                "description": "The lots to be closed out for the trades provided."
+                            }
+                        }
+                    }
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "tradeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The trade date of the contract"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "priceOrPremium":
+                {
+                    "type": "number",
+                    "description": "The Priceper unit of lot/lots traded. For 'OPTION' trades, this denotes the'PREMIUM' price in TRADE currency"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "cutOffTime":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "callOrPut":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT."
+                },
+                "strikePrice":
+                {
+                    "type": "number",
+                    "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                },
+                "price":
+                {
+                    "type": "number",
+                    "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the Limit order is valid until ."
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "brokerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the broker"
+                },
+                "autoOrManual":
+                {
+                    "type": "string",
+                    "description": "Determines whether the systtem will automatically process"
+                },
+                "orderToClose":
+                {
+                    "type": "string",
+                    "description": "Defines whether the trade order is to be Closed or not. When set to CLOSE the order is considered as a square-off order."
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "createDerivativesOrderResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createDerivativesOrderResponseBody"
+                }
+            },
+            "description": "createDerivativesOrderResponse"
+        },
+        "createDerivativesOrderResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "number",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "lots":
+                            {
+                                "type": "number",
+                                "description": "The number of lots/contracts traded"
+                            },
+                            "autoOrManual":
+                            {
+                                "type": "string",
+                                "description": "Determines whether the systtem will automatically process"
+                            },
+                            "transactionChannel":
+                            {
+                                "type": "string",
+                                "description": "The channel through which the transaction has been placed"
+                            },
+                            "commissions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "commissionName":
+                                        {
+                                            "type": "string",
+                                            "description": "The name that is displayed for the commission"
+                                        },
+                                        "commissionRate":
+                                        {
+                                            "type": "number",
+                                            "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                                        },
+                                        "currency":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "commissionAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The amount of commission charged in the currency of the event"
+                                        },
+                                        "taxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The tax amount"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "commissionRate":
+                            {
+                                "type": "number",
+                                "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                            }
+                        }
+                    }
+                },
+                "closeout":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "closeoutTrade":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "closeoutLots":
+                            {
+                                "type": "number",
+                                "description": "The lots to be closed out for the trades provided."
+                            }
+                        }
+                    }
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "tradeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The trade date of the contract"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "priceOrPremium":
+                {
+                    "type": "number",
+                    "description": "The Priceper unit of lot/lots traded. For 'OPTION' trades, this denotes the'PREMIUM' price in TRADE currency"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "cutOffTime":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "callOrPut":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT."
+                },
+                "strikePrice":
+                {
+                    "type": "number",
+                    "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                },
+                "price":
+                {
+                    "type": "number",
+                    "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the Limit order is valid until ."
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "brokerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the broker"
+                },
+                "autoOrManual":
+                {
+                    "type": "string",
+                    "description": "Determines whether the systtem will automatically process"
+                },
+                "orderToClose":
+                {
+                    "type": "string",
+                    "description": "Defines whether the trade order is to be Closed or not. When set to CLOSE the order is considered as a square-off order."
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createDerivativesOrderErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createDerivativesOrderErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "createDerivativesOrderErrorResponse"
+        },
+        "createDerivativesOrderErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "updateDerivativesOrder":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateDerivativesOrderBody"
+                }
+            },
+            "description": "updateDerivativesOrder"
+        },
+        "updateDerivativesOrderBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "number",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "lots":
+                            {
+                                "type": "number",
+                                "description": "The number of lots/contracts traded"
+                            },
+                            "autoOrManual":
+                            {
+                                "type": "string",
+                                "description": "Determines whether the systtem will automatically process"
+                            },
+                            "transactionChannel":
+                            {
+                                "type": "string",
+                                "description": "The channel through which the transaction has been placed"
+                            },
+                            "commissions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "commissionName":
+                                        {
+                                            "type": "string",
+                                            "description": "The name that is displayed for the commission"
+                                        },
+                                        "commissionRate":
+                                        {
+                                            "type": "number",
+                                            "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                                        },
+                                        "currency":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "commissionAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The amount of commission charged in the currency of the event"
+                                        },
+                                        "taxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The tax amount"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "commissionRate":
+                            {
+                                "type": "number",
+                                "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                            }
+                        }
+                    }
+                },
+                "closeout":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "closeoutTrade":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "closeoutLots":
+                            {
+                                "type": "number",
+                                "description": "The lots to be closed out for the trades provided."
+                            }
+                        }
+                    }
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "tradeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The trade date of the contract"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "priceOrPremium":
+                {
+                    "type": "number",
+                    "description": "The Priceper unit of lot/lots traded. For 'OPTION' trades, this denotes the'PREMIUM' price in TRADE currency"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "cutOffTime":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "callOrPut":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT."
+                },
+                "strikePrice":
+                {
+                    "type": "number",
+                    "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                },
+                "price":
+                {
+                    "type": "number",
+                    "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the Limit order is valid until ."
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "brokerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the broker"
+                },
+                "autoOrManual":
+                {
+                    "type": "string",
+                    "description": "Determines whether the systtem will automatically process"
+                },
+                "orderToClose":
+                {
+                    "type": "string",
+                    "description": "Defines whether the trade order is to be Closed or not. When set to CLOSE the order is considered as a square-off order."
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "updateDerivativesOrderResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateDerivativesOrderResponseBody"
+                }
+            },
+            "description": "updateDerivativesOrderResponse"
+        },
+        "updateDerivativesOrderResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "number",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "lots":
+                            {
+                                "type": "number",
+                                "description": "The number of lots/contracts traded"
+                            },
+                            "autoOrManual":
+                            {
+                                "type": "string",
+                                "description": "Determines whether the systtem will automatically process"
+                            },
+                            "transactionChannel":
+                            {
+                                "type": "string",
+                                "description": "The channel through which the transaction has been placed"
+                            },
+                            "commissions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "commissionName":
+                                        {
+                                            "type": "string",
+                                            "description": "The name that is displayed for the commission"
+                                        },
+                                        "commissionRate":
+                                        {
+                                            "type": "number",
+                                            "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                                        },
+                                        "currency":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "commissionAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The amount of commission charged in the currency of the event"
+                                        },
+                                        "taxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The tax amount"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "commissionRate":
+                            {
+                                "type": "number",
+                                "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                            }
+                        }
+                    }
+                },
+                "closeout":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "closeoutTrade":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "closeoutLots":
+                            {
+                                "type": "number",
+                                "description": "The lots to be closed out for the trades provided."
+                            }
+                        }
+                    }
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "tradeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The trade date of the contract"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "priceOrPremium":
+                {
+                    "type": "number",
+                    "description": "The Priceper unit of lot/lots traded. For 'OPTION' trades, this denotes the'PREMIUM' price in TRADE currency"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "cutOffTime":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "callOrPut":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT."
+                },
+                "strikePrice":
+                {
+                    "type": "number",
+                    "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                },
+                "price":
+                {
+                    "type": "number",
+                    "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the Limit order is valid until ."
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "brokerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the broker"
+                },
+                "autoOrManual":
+                {
+                    "type": "string",
+                    "description": "Determines whether the systtem will automatically process"
+                },
+                "orderToClose":
+                {
+                    "type": "string",
+                    "description": "Defines whether the trade order is to be Closed or not. When set to CLOSE the order is considered as a square-off order."
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "updateDerivativesOrderErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateDerivativesOrderErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "updateDerivativesOrderErrorResponse"
+        },
+        "updateDerivativesOrderErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getDerivativesOrderResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getDerivativesOrderResponseBody"
+                }
+            },
+            "description": "getDerivativesOrderResponse"
+        },
+        "getDerivativesOrderResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "number",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "lots":
+                            {
+                                "type": "number",
+                                "description": "The number of lots/contracts traded"
+                            },
+                            "autoOrManual":
+                            {
+                                "type": "string",
+                                "description": "Determines whether the systtem will automatically process"
+                            },
+                            "transactionChannel":
+                            {
+                                "type": "string",
+                                "description": "The channel through which the transaction has been placed"
+                            },
+                            "commissions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "commissionName":
+                                        {
+                                            "type": "string",
+                                            "description": "The name that is displayed for the commission"
+                                        },
+                                        "commissionRate":
+                                        {
+                                            "type": "number",
+                                            "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                                        },
+                                        "currency":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "commissionAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The amount of commission charged in the currency of the event"
+                                        },
+                                        "taxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": "The tax amount"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "commissionRate":
+                            {
+                                "type": "number",
+                                "description": "The commission by percentage. Allowed only for manual commission. Calculated commission amount can be overwritten manually."
+                            }
+                        }
+                    }
+                },
+                "closeout":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "closeoutTrade":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "closeoutLots":
+                            {
+                                "type": "number",
+                                "description": "The lots to be closed out for the trades provided."
+                            }
+                        }
+                    }
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "tradeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The trade date of the contract"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "priceOrPremium":
+                {
+                    "type": "number",
+                    "description": "The Priceper unit of lot/lots traded. For 'OPTION' trades, this denotes the'PREMIUM' price in TRADE currency"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "cutOffTime":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "callOrPut":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the transaction is a call or put. CALL or PUT."
+                },
+                "strikePrice":
+                {
+                    "type": "number",
+                    "description": "The price at which the option holder has the right to buy (Call Options) or sell (Put Options) the underlying instrument, or to cash-settle the option if appropriate"
+                },
+                "price":
+                {
+                    "type": "number",
+                    "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the Limit order is valid until ."
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "brokerId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the broker"
+                },
+                "autoOrManual":
+                {
+                    "type": "string",
+                    "description": "Determines whether the systtem will automatically process"
+                },
+                "orderToClose":
+                {
+                    "type": "string",
+                    "description": "Defines whether the trade order is to be Closed or not. When set to CLOSE the order is considered as a square-off order."
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "getDerivativesOrderErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getDerivativesOrderErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "getDerivativesOrderErrorResponse"
+        },
+        "getDerivativesOrderErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

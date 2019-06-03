@@ -1,0 +1,713 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "GetCustomerInformationService",
+        "version": "v1.0.0",
+        "title": "Party Customer Information"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/party/customers":
+        {
+            "get":
+            {
+                "operationId": "getCustomers",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "query",
+                    "description": "The identifier of the customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "customerName",
+                    "in": "query",
+                    "description": "The name that is displayed for the customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "street",
+                    "in": "query",
+                    "description": "The first line of Customer's base address",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "town",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "countryId",
+                    "in": "query",
+                    "description": "The identifier of the country, normally the SWIFT code of the country.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "postCode",
+                    "in": "query",
+                    "description": "Identifies the postal code for customer.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dateOfBirth",
+                    "in": "query",
+                    "description": "An individual's date of birth. ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "status",
+                    "in": "query",
+                    "description": "Get a detail status of the specified service/services",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "sectorId",
+                    "in": "query",
+                    "description": "The sector identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "accountOfficerId",
+                    "in": "query",
+                    "description": "The identifier of the account officer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "industryId",
+                    "in": "query",
+                    "description": "The identifier of the industry",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "nationalityId",
+                    "in": "query",
+                    "description": "The identifier of the nationality of a legal entity",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "residenceId",
+                    "in": "query",
+                    "description": "The residence country identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "lastName",
+                    "in": "query",
+                    "description": "The last name of an individual",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "phoneNumber",
+                    "in": "query",
+                    "description": "This field can contain the phone numbers of the customer.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomersResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomersResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "CustomersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomersResponseBody"
+                }
+            },
+            "description": "CustomersResponse"
+        },
+        "CustomersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "streets":
+                    {
+                        "type": "array",
+                        "description": "The first line of Customer's base address",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "street":
+                                {
+                                    "type": "string",
+                                    "description": "The first line of Customer's base address"
+                                }
+                            }
+                        }
+                    },
+                    "communicationDevices":
+                    {
+                        "type": "array",
+                        "description": "communication devices used by the customer.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "phoneNumber":
+                                {
+                                    "type": "string",
+                                    "description": "This field can contain the phone numbers of the customer."
+                                },
+                                "smsNumber":
+                                {
+                                    "type": "string",
+                                    "description": "The mobile telephone SMS number of the customer"
+                                },
+                                "email":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "officePhoneNumbers":
+                    {
+                        "type": "array",
+                        "description": "Office phone numbers.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "officePhoneNumber":
+                                {
+                                    "type": "string",
+                                    "description": "Office phone numbers."
+                                }
+                            }
+                        }
+                    },
+                    "addressDetails":
+                    {
+                        "type": "array",
+                        "description": "Holds unstructured address information, e.g. Contact Person. Building, Floor, Apartment, Street Number, Street Name, Town, Area, Code",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "address":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "addressCities":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "addressCity":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "postCodes":
+                    {
+                        "type": "array",
+                        "description": "Identifies the postal code for customer.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "postCode":
+                                {
+                                    "type": "string",
+                                    "description": "Identifies the postal code for customer."
+                                }
+                            }
+                        }
+                    },
+                    "countries":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "country":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "vulnerabilities":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "vulnerability":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "profileTypes":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "profileType":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "profileTypeName":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "profile":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "profileName":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "legalDetails":
+                    {
+                        "type": "array",
+                        "description": "legal details about the customer.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "legalId":
+                                {
+                                    "type": "string",
+                                    "description": "Unique reference number of the legal documents"
+                                },
+                                "legalDocumentName":
+                                {
+                                    "type": "string",
+                                    "description": "Name of the legal documents such as passport,driving licence etc"
+                                },
+                                "legalHolderName":
+                                {
+                                    "type": "string",
+                                    "description": "Enabling a holders name to be stored."
+                                },
+                                "legalIssueAuthorisedDate":
+                                {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Authorised date of the issued legal document."
+                                },
+                                "legalIssueDate":
+                                {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Date on which legal document issued."
+                                },
+                                "legalExpiredDate":
+                                {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Expired date of the legal document."
+                                }
+                            }
+                        }
+                    },
+                    "otherNationalityIds":
+                    {
+                        "type": "array",
+                        "description": "Primary nationality of the customer.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "otherNationalityId":
+                                {
+                                    "type": "string",
+                                    "description": "Primary nationality of the customer."
+                                }
+                            }
+                        }
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer"
+                    },
+                    "customerName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the customer"
+                    },
+                    "faxId":
+                    {
+                        "type": "string",
+                        "description": "!!!, faxNumber"
+                    },
+                    "dateOfBirth":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "An individual's date of birth. "
+                    },
+                    "status":
+                    {
+                        "type": "string",
+                        "description": "Get a detail status of the specified service/services"
+                    },
+                    "statusName":
+                    {
+                        "type": "string",
+                        "description": "The status description"
+                    },
+                    "customerMnemonic":
+                    {
+                        "type": "string",
+                        "description": "Specifies an alternative easy means of referencing the Customer"
+                    },
+                    "nationalityId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the nationality of a legal entity"
+                    },
+                    "nationalityName":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "residenceId":
+                    {
+                        "type": "string",
+                        "description": "The residence country identifier"
+                    },
+                    "accountOfficerId":
+                    {
+                        "type": "number",
+                        "description": "The identifier of the account officer"
+                    },
+                    "industryId":
+                    {
+                        "type": "number",
+                        "description": "The identifier of the industry"
+                    },
+                    "sectorId":
+                    {
+                        "type": "number",
+                        "description": "The sector identifier"
+                    },
+                    "lastName":
+                    {
+                        "type": "string",
+                        "description": "The last name of an individual"
+                    },
+                    "accountOfficerName":
+                    {
+                        "type": "string",
+                        "description": "The name of the account officer that is displayed"
+                    },
+                    "title":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "gender":
+                    {
+                        "type": "string",
+                        "description": "The gender of the individual"
+                    },
+                    "sectorName":
+                    {
+                        "type": "string",
+                        "description": "The sector name"
+                    },
+                    "targetName":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "maritalStatus":
+                    {
+                        "type": "string",
+                        "description": "Identifies the marital status of the customer."
+                    },
+                    "industryName":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "residenceName":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "dateOfDeath":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": ""
+                    },
+                    "notificationDateOfDeath":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": ""
+                    },
+                    "companyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001"
+                    },
+                    "customerLiability":
+                    {
+                        "type": "string",
+                        "description": "Indicates the customer consolidation number for credit grouping purposes,within the same branch/country."
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

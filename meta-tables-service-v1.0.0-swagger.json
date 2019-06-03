@@ -1,0 +1,522 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the viewing of table definitions",
+        "version": "v1.0.0",
+        "title": "Meta APIs about Tables"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/meta/tables/{tableId}/fields":
+        {
+            "get":
+            {
+                "operationId": "getFieldNames",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "tableId",
+                    "in": "path",
+                    "description": "The unique application table identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getFieldNamesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getFieldNamesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getFieldNamesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getFieldNamesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/meta/tables/":
+        {
+            "get":
+            {
+                "operationId": "getTables",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "moduleId",
+                    "in": "query",
+                    "description": "The identifier of the module",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getTablesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTablesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getTablesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTablesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/meta/tables/{tableId}/screens":
+        {
+            "get":
+            {
+                "operationId": "getTableScreens",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "tableId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getTableScreensResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTableScreensResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getTableScreensErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTableScreensErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getFieldNamesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getFieldNamesResponseBody"
+                }
+            },
+            "description": "getFieldNamesResponse"
+        },
+        "getFieldNamesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "systemFields":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "fieldName":
+                                {
+                                    "type": "array",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "customFields":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "fieldName":
+                                {
+                                    "type": "array",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getFieldNamesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getFieldNamesErrorResponseBody"
+                }
+            },
+            "description": "getFieldNamesErrorResponse"
+        },
+        "getFieldNamesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getTablesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getTablesResponseBody"
+                }
+            },
+            "description": "getTablesResponse"
+        },
+        "getTablesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "tableId":
+                    {
+                        "type": "string",
+                        "description": "The unique application table identifier",
+                        "maxLength": 40
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 32
+                    },
+                    "moduleId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the module",
+                        "maxLength": 6
+                    }
+                }
+            }
+        },
+        "getTablesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getTablesErrorResponseBody"
+                }
+            },
+            "description": "getTablesErrorResponse"
+        },
+        "getTablesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getTableScreensResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getTableScreensResponseBody"
+                }
+            },
+            "description": "getTableScreensResponse"
+        },
+        "getTableScreensResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "screenId":
+                    {
+                        "type": "string",
+                        "description": "The screen identifier",
+                        "maxLength": 54
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 70
+                    }
+                }
+            }
+        },
+        "getTableScreensErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getTableScreensErrorResponseBody"
+                }
+            },
+            "description": "getTableScreensErrorResponse"
+        },
+        "getTableScreensErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

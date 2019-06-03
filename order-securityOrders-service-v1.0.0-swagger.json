@@ -1,0 +1,1197 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of security orders",
+        "version": "v1.0.0",
+        "title": "Order Security Orders APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/order/securityOrders/":
+        {
+            "post":
+            {
+                "operationId": "createSecurityOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/orderSecurityOrder"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/orderSecurityOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/securityOrders/{securityOrderId}":
+        {
+            "get":
+            {
+                "operationId": "getSecurityOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "securityOrderId",
+                    "in": "path",
+                    "description": "The security order identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/orderSecurityOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateSecurityOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "securityOrderId",
+                    "in": "path",
+                    "description": "The security order identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/orderSecurityOrder"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/orderSecurityOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "orderSecurityOrder":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/orderSecurityOrderBody"
+                }
+            },
+            "description": "orderSecurityOrder"
+        },
+        "orderSecurityOrderBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "brokers":
+                {
+                    "type": "array",
+                    "description": "Specifies the counterparty with whom the trade is to be effected.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "broker":
+                            {
+                                "type": "string",
+                                "description": "Specifies the counterparty with whom the trade is to be effected."
+                            },
+                            "dateToBroker":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "Specifies the date a particular Order has been placed with the Broker/Counterparty"
+                            },
+                            "amountToBroker":
+                            {
+                                "type": "number",
+                                "description": "Specifies the particular amount of an order which has been placed with the previously defined Broker"
+                            }
+                        }
+                    }
+                },
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "depository":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "accountId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                            },
+                            "quantity":
+                            {
+                                "type": "number",
+                                "description": "The nominal quantity"
+                            },
+                            "amount":
+                            {
+                                "type": "number",
+                                "description": ""
+                            },
+                            "percentage":
+                            {
+                                "type": "number",
+                                "description": "The percentage of holdings redeemed/subscribed"
+                            },
+                            "price":
+                            {
+                                "type": "string",
+                                "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                            },
+                            "calculateCharges":
+                            {
+                                "type": "string",
+                                "description": "Indiciates whether charges will be calculated. YES or NO."
+                            },
+                            "chargesGrossOrNet":
+                            {
+                                "type": "string",
+                                "description": "Indicates whether the cash amount is to include charges (NET) or havecharges applied in addition (GROSS). If NET, the nominal will be calculated so that when the charges are added to the transaction. If GROSS, the nominal is calculated then the charges are added. NET or GROSS"
+                            },
+                            "rounding":
+                            {
+                                "type": "string",
+                                "description": "Defines the rounding type for the amount calculated or input"
+                            },
+                            "adjustCommission":
+                            {
+                                "type": "string",
+                                "description": "Determine whether to reduce the commission in order to make the total trade match the cash amount exactly."
+                            },
+                            "settlementCurrency":
+                            {
+                                "type": "string",
+                                "description": "The currency of the trade settlement"
+                            },
+                            "brokerCommission":
+                            {
+                                "type": "string",
+                                "description": "Specifies the amount of Broker Commission charged to the Customer for the tradeField length is 1-15 numeric characters with 0-9 decimal places.The number of decimal places is dependant on the number of decimal places stated on the CURRENCY file, for theTRADE.CCYInput will be carried forward into the subsequent field on SC.EXE.SEC.ORDERS record created"
+                            },
+                            "foreignFee":
+                            {
+                                "type": "string",
+                                "description": "This field Records the Foreign Fee amount charged to the Customer for the trade."
+                            },
+                            "commission":
+                            {
+                                "type": "number",
+                                "description": ""
+                            },
+                            "customerCommissionTax":
+                            {
+                                "type": "string",
+                                "description": "Specifies the tax amount based on the commision charged"
+                            },
+                            "stampTax":
+                            {
+                                "type": "string",
+                                "description": "The Stamp Tax amount charged to the Customer for the trade"
+                            },
+                            "EBVFee":
+                            {
+                                "type": "string",
+                                "description": "This field Records the amount of EBV Fees charged to the Customer for the trade."
+                            },
+                            "miscellaneousFees":
+                            {
+                                "type": "string",
+                                "description": "The amount of miscellaneous fees charged to the Customer for the trade"
+                            },
+                            "incomeAccount":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "incomeAccountCurrency":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "orderAmount":
+                            {
+                                "type": "number",
+                                "description": "The amount of the order"
+                            },
+                            "instructions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "customerInstructions":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "customerWitholdingTaxes":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "customerWitholdingTax":
+                                        {
+                                            "type": "string",
+                                            "description": "Specifies the amount of Tax on the Securities up to the Value Date of the trade"
+                                        }
+                                    }
+                                }
+                            },
+                            "buyingPowers":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "buyingPower":
+                                        {
+                                            "type": "string",
+                                            "description": "Indicates the buying power of the portfolio on placement of order"
+                                        }
+                                    }
+                                }
+                            },
+                            "customerChargeTaxTypes":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "customerChargeTaxType":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "customerChargeTaxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": ""
+                                        },
+                                        "customerChargeTaxCode":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "transactionChannel":
+                {
+                    "type": "string",
+                    "description": "The channel through which the transaction has been placed"
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "tradeType":
+                {
+                    "type": "string",
+                    "description": "The trade type"
+                },
+                "switchMethod":
+                {
+                    "type": "string",
+                    "description": "If the switch is within same fund house(intra) or between fund houses"
+                },
+                "switchSpecification":
+                {
+                    "type": "string",
+                    "description": "Mode of Swich Order (Unit /Percentage/Amount)"
+                },
+                "masterOrderOfSwitch":
+                {
+                    "type": "string",
+                    "description": "Indicates if this is the Master Order for Switch orders"
+                },
+                "commonSwitchRef":
+                {
+                    "type": "string",
+                    "description": "The field will hold a common reference to link a set of switch orders."
+                },
+                "noOfSwitchOrder":
+                {
+                    "type": "string",
+                    "description": "Number of Orders in a Switch Order combination"
+                },
+                "threadKey":
+                {
+                    "type": "string",
+                    "description": "The thread key for an order created by a service"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitExpiryDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This field specifies the validity of the Limit, i.e. how long is it to remain in force"
+                },
+                "fractionalOrder":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "depositoryId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                },
+                "frontOfficeInstructions":
+                {
+                    "type": "string",
+                    "description": "Optional narrative field for any narrative for the account officer.Field for narrative associated with the Account Officer.Up to 40 alpahnueric characters (Optional Input)."
+                },
+                "approximateSettlementAmount":
+                {
+                    "type": "number",
+                    "description": "The order value (Nominal x Price ) for each customer in the security currency. If a limit price is input and transaction code is debit, lower price among market and limit price is used for sell and higher price is used for buy. If transaction code is credit, then lowest is used."
+                },
+                "parent":
+                {
+                    "type": "string",
+                    "description": "This Field is to determine whether the order is a parent order, Allowed value is YES"
+                },
+                "parentReference":
+                {
+                    "type": "string",
+                    "description": "The parent reference that is common for both parent and child orders and will serve as a link."
+                },
+                "dealStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the deal"
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "orderSecurityOrderResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/orderSecurityOrderResponseBody"
+                }
+            },
+            "description": "orderSecurityOrderResponse"
+        },
+        "orderSecurityOrderResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "brokers":
+                {
+                    "type": "array",
+                    "description": "Specifies the counterparty with whom the trade is to be effected.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "broker":
+                            {
+                                "type": "string",
+                                "description": "Specifies the counterparty with whom the trade is to be effected."
+                            },
+                            "dateToBroker":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "Specifies the date a particular Order has been placed with the Broker/Counterparty"
+                            },
+                            "amountToBroker":
+                            {
+                                "type": "number",
+                                "description": "Specifies the particular amount of an order which has been placed with the previously defined Broker"
+                            }
+                        }
+                    }
+                },
+                "customers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "customerId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the customer"
+                            },
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "depository":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "accountId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                            },
+                            "quantity":
+                            {
+                                "type": "number",
+                                "description": "The nominal quantity"
+                            },
+                            "amount":
+                            {
+                                "type": "number",
+                                "description": ""
+                            },
+                            "percentage":
+                            {
+                                "type": "number",
+                                "description": "The percentage of holdings redeemed/subscribed"
+                            },
+                            "price":
+                            {
+                                "type": "string",
+                                "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                            },
+                            "calculateCharges":
+                            {
+                                "type": "string",
+                                "description": "Indiciates whether charges will be calculated. YES or NO."
+                            },
+                            "chargesGrossOrNet":
+                            {
+                                "type": "string",
+                                "description": "Indicates whether the cash amount is to include charges (NET) or havecharges applied in addition (GROSS). If NET, the nominal will be calculated so that when the charges are added to the transaction. If GROSS, the nominal is calculated then the charges are added. NET or GROSS"
+                            },
+                            "rounding":
+                            {
+                                "type": "string",
+                                "description": "Defines the rounding type for the amount calculated or input"
+                            },
+                            "adjustCommission":
+                            {
+                                "type": "string",
+                                "description": "Determine whether to reduce the commission in order to make the total trade match the cash amount exactly."
+                            },
+                            "settlementCurrency":
+                            {
+                                "type": "string",
+                                "description": "The currency of the trade settlement"
+                            },
+                            "brokerCommission":
+                            {
+                                "type": "string",
+                                "description": "Specifies the amount of Broker Commission charged to the Customer for the tradeField length is 1-15 numeric characters with 0-9 decimal places.The number of decimal places is dependant on the number of decimal places stated on the CURRENCY file, for theTRADE.CCYInput will be carried forward into the subsequent field on SC.EXE.SEC.ORDERS record created"
+                            },
+                            "foreignFee":
+                            {
+                                "type": "string",
+                                "description": "This field Records the Foreign Fee amount charged to the Customer for the trade."
+                            },
+                            "commission":
+                            {
+                                "type": "number",
+                                "description": ""
+                            },
+                            "customerCommissionTax":
+                            {
+                                "type": "string",
+                                "description": "Specifies the tax amount based on the commision charged"
+                            },
+                            "stampTax":
+                            {
+                                "type": "string",
+                                "description": "The Stamp Tax amount charged to the Customer for the trade"
+                            },
+                            "EBVFee":
+                            {
+                                "type": "string",
+                                "description": "This field Records the amount of EBV Fees charged to the Customer for the trade."
+                            },
+                            "miscellaneousFees":
+                            {
+                                "type": "string",
+                                "description": "The amount of miscellaneous fees charged to the Customer for the trade"
+                            },
+                            "incomeAccount":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "incomeAccountCurrency":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "orderAmount":
+                            {
+                                "type": "number",
+                                "description": "The amount of the order"
+                            },
+                            "instructions":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "customerInstructions":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "customerWitholdingTaxes":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "customerWitholdingTax":
+                                        {
+                                            "type": "string",
+                                            "description": "Specifies the amount of Tax on the Securities up to the Value Date of the trade"
+                                        }
+                                    }
+                                }
+                            },
+                            "buyingPowers":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "buyingPower":
+                                        {
+                                            "type": "string",
+                                            "description": "Indicates the buying power of the portfolio on placement of order"
+                                        }
+                                    }
+                                }
+                            },
+                            "customerChargeTaxTypes":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "customerChargeTaxType":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "customerChargeTaxAmount":
+                                        {
+                                            "type": "number",
+                                            "description": ""
+                                        },
+                                        "customerChargeTaxCode":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "transactionChannel":
+                {
+                    "type": "string",
+                    "description": "The channel through which the transaction has been placed"
+                },
+                "instrumentId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the instrument"
+                },
+                "tradeCurrency":
+                {
+                    "type": "string",
+                    "description": "The trade currency is the settlement currency for the trade"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "transactionType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "orderDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The order date of the instructions contained within the transaction"
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "orderedAt":
+                {
+                    "type": "string",
+                    "description": "The time at which the order has been transacted"
+                },
+                "orderType":
+                {
+                    "type": "string",
+                    "description": "Defines the order type of the transaction"
+                },
+                "tradeType":
+                {
+                    "type": "string",
+                    "description": "The trade type"
+                },
+                "switchMethod":
+                {
+                    "type": "string",
+                    "description": "If the switch is within same fund house(intra) or between fund houses"
+                },
+                "switchSpecification":
+                {
+                    "type": "string",
+                    "description": "Mode of Swich Order (Unit /Percentage/Amount)"
+                },
+                "masterOrderOfSwitch":
+                {
+                    "type": "string",
+                    "description": "Indicates if this is the Master Order for Switch orders"
+                },
+                "commonSwitchRef":
+                {
+                    "type": "string",
+                    "description": "The field will hold a common reference to link a set of switch orders."
+                },
+                "noOfSwitchOrder":
+                {
+                    "type": "string",
+                    "description": "Number of Orders in a Switch Order combination"
+                },
+                "threadKey":
+                {
+                    "type": "string",
+                    "description": "The thread key for an order created by a service"
+                },
+                "limitPrice":
+                {
+                    "type": "number",
+                    "description": "The Price at which the shares are to be bought or sold"
+                },
+                "limitType":
+                {
+                    "type": "string",
+                    "description": "Defines the limit type for the trade"
+                },
+                "limitExpiryDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This field specifies the validity of the Limit, i.e. how long is it to remain in force"
+                },
+                "fractionalOrder":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "depositoryId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                },
+                "frontOfficeInstructions":
+                {
+                    "type": "string",
+                    "description": "Optional narrative field for any narrative for the account officer.Field for narrative associated with the Account Officer.Up to 40 alpahnueric characters (Optional Input)."
+                },
+                "approximateSettlementAmount":
+                {
+                    "type": "number",
+                    "description": "The order value (Nominal x Price ) for each customer in the security currency. If a limit price is input and transaction code is debit, lower price among market and limit price is used for sell and higher price is used for buy. If transaction code is credit, then lowest is used."
+                },
+                "parent":
+                {
+                    "type": "string",
+                    "description": "This Field is to determine whether the order is a parent order, Allowed value is YES"
+                },
+                "parentReference":
+                {
+                    "type": "string",
+                    "description": "The parent reference that is common for both parent and child orders and will serve as a link."
+                },
+                "dealStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the deal"
+                },
+                "orderStatus":
+                {
+                    "type": "string",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ScreenErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ScreenErrorResponse"
+        },
+        "ScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

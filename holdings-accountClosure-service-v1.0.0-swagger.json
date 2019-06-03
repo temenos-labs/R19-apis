@@ -1,0 +1,618 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the amendment, viewing and management of Accounts Closure",
+        "version": "v1.0.0",
+        "title": "Holdings Account Closure APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/v1.0.0/",
+    "schemes": ["http"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/holdings/accounts/accountClosure/{accountId}":
+        {
+            "get":
+            {
+                "operationId": "getAccountClosure",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAccountClosureResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountClosureResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAccountClosureErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountClosureErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateAccountClosure",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateAccountClosure"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateAccountClosureResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountClosureResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateAccountClosureErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountClosureErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getAccountClosureResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAccountClosureResponseBody"
+                }
+            },
+            "description": "getAccountClosureResponse"
+        },
+        "getAccountClosureResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "accountCurrency":
+                {
+                    "type": "string",
+                    "description": "The currency of the account"
+                },
+                "closureDate":
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date when the Security Account is to be closed"
+                },
+                "creditAccount":
+                {
+                    "type": "string",
+                    "description": "Account Number to which the outstanding balance is to be transferred"
+                },
+                "capitaliseInterest":
+                {
+                    "type": "string",
+                    "description": "Indicate how a closed account must capitialise interest"
+                },
+                "chargeType":
+                {
+                    "type": "string",
+                    "description": "The type of charge"
+                },
+                "chargeAmount":
+                {
+                    "type": "number",
+                    "description": "Holds the charge amount equivalent in charge account currency"
+                },
+                "closeMode":
+                {
+                    "type": "string",
+                    "description": "Mode of the account closure needs to be specifed"
+                },
+                "ftId":
+                {
+                    "type": "string",
+                    "description": "This holds the Transaction reference number of the FT"
+                },
+                "closureReason":
+                {
+                    "type": "string",
+                    "description": "This field contains the reason for closing the account"
+                },
+                "closureNotes":
+                {
+                    "type": "string",
+                    "description": "This field is used to hold the notes for the reason of account closure"
+                },
+                "onlineLedgerBalance":
+                {
+                    "type": "number",
+                    "description": "Contains the current Online Actual Balance on the ACCOUNT at the time the Posting Restriction to flag it for closure was entered"
+                },
+                "onlineClearedBalance":
+                {
+                    "type": "number",
+                    "description": "The total of cleared funds booked against the account. Same as onlineActualBalance with the exception of credit or reversed debit entries with the exposure date in the future."
+                },
+                "balancePayable":
+                {
+                    "type": "number",
+                    "description": "Defines the total balance amount to the account inclusive of all charges and interest applicable at present"
+                },
+                "totalCreditInterest":
+                {
+                    "type": "string",
+                    "description": "The total amount of outstanding credit and credit 2 interest calculated up to the specified Capitalisation Date"
+                },
+                "totalDebitInterest":
+                {
+                    "type": "string",
+                    "description": "The total amount of outstanding debit and debit 2 interest calculated up to the specified Capitalisation Date"
+                },
+                "totalDrInterestPending":
+                {
+                    "type": "string",
+                    "description": "The total amount of outstanding debit and debit 2 interest calculated up to the specified Capitalisation Date."
+                },
+                "totalCharges":
+                {
+                    "type": "number",
+                    "description": "The total amount of outstanding account 'ledger' charges and interest related charges calculated up to the specified Capitalisation Date"
+                },
+                "totalChargesPending":
+                {
+                    "type": "number",
+                    "description": "This field reflects the total charges pending on the account."
+                },
+                "totalTax":
+                {
+                    "type": "number",
+                    "description": "The total amount of Tax on outstanding interest and charges calculated up to the specified Capitalisation Date"
+                },
+                "totalTaxPending":
+                {
+                    "type": "number",
+                    "description": "This field reflects the total tax pending on the account"
+                },
+                "postingRestriction":
+                {
+                    "type": "string",
+                    "description": "Identifies any restrictions for posting entries that are to be imposed on the Account"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getAccountClosureErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAccountClosureErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "getAccountClosureErrorResponse"
+        },
+        "getAccountClosureErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "updateAccountClosure":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateAccountClosureBody"
+                }
+            },
+            "description": "updateAccountClosure"
+        },
+        "updateAccountClosureBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "accountCurrency":
+                {
+                    "type": "string",
+                    "description": "The currency of the account"
+                },
+                "closureDate":
+                {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date when the Security Account is to be closed"
+                },
+                "creditAccount":
+                {
+                    "type": "string",
+                    "description": "Account Number to which the outstanding balance is to be transferred"
+                },
+                "capitaliseInterest":
+                {
+                    "type": "string",
+                    "description": "Indicate how a closed account must capitialise interest"
+                },
+                "chargeType":
+                {
+                    "type": "string",
+                    "description": "The type of charge"
+                },
+                "chargeAmount":
+                {
+                    "type": "number",
+                    "description": "Holds the charge amount equivalent in charge account currency"
+                },
+                "closeMode":
+                {
+                    "type": "string",
+                    "description": "Mode of the account closure needs to be specifed"
+                },
+                "ftId":
+                {
+                    "type": "string",
+                    "description": "This holds the Transaction reference number of the FT"
+                },
+                "closureReason":
+                {
+                    "type": "string",
+                    "description": "This field contains the reason for closing the account"
+                },
+                "closureNotes":
+                {
+                    "type": "string",
+                    "description": "This field is used to hold the notes for the reason of account closure"
+                },
+                "onlineLedgerBalance":
+                {
+                    "type": "number",
+                    "description": "Contains the current Online Actual Balance on the ACCOUNT at the time the Posting Restriction to flag it for closure was entered"
+                },
+                "onlineClearedBalance":
+                {
+                    "type": "number",
+                    "description": "The total of cleared funds booked against the account. Same as onlineActualBalance with the exception of credit or reversed debit entries with the exposure date in the future."
+                },
+                "balancePayable":
+                {
+                    "type": "number",
+                    "description": "Defines the total balance amount to the account inclusive of all charges and interest applicable at present"
+                },
+                "totalCreditInterest":
+                {
+                    "type": "string",
+                    "description": "The total amount of outstanding credit and credit 2 interest calculated up to the specified Capitalisation Date"
+                },
+                "totalDebitInterest":
+                {
+                    "type": "string",
+                    "description": "The total amount of outstanding debit and debit 2 interest calculated up to the specified Capitalisation Date"
+                },
+                "totalDrInterestPending":
+                {
+                    "type": "string",
+                    "description": "The total amount of outstanding debit and debit 2 interest calculated up to the specified Capitalisation Date."
+                },
+                "totalCharges":
+                {
+                    "type": "number",
+                    "description": "The total amount of outstanding account 'ledger' charges and interest related charges calculated up to the specified Capitalisation Date"
+                },
+                "totalChargesPending":
+                {
+                    "type": "number",
+                    "description": "This field reflects the total charges pending on the account."
+                },
+                "totalTax":
+                {
+                    "type": "number",
+                    "description": "The total amount of Tax on outstanding interest and charges calculated up to the specified Capitalisation Date"
+                },
+                "totalTaxPending":
+                {
+                    "type": "number",
+                    "description": "This field reflects the total tax pending on the account"
+                },
+                "postingRestriction":
+                {
+                    "type": "string",
+                    "description": "Identifies any restrictions for posting entries that are to be imposed on the Account"
+                }
+            }
+        }
+    }
+}

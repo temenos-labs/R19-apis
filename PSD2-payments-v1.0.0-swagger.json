@@ -1,0 +1,1439 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "version": "v1.0.0",
+        "title": "Payments Provider APIs",
+        "description": "These APIs are used to create and get the PaymentOrder records."
+    },
+    "host": "localhost:9089",
+    "basePath": "/irf-test-web/api/v1.0.0",
+    "schemes": [
+    "https", "http"
+  ],
+    "paths":
+    {
+        "/order/PSD2/paymentOrders/{paymentOrderId}":
+        {
+            "get":
+            {
+                "operationId": "getPaymentOrder",
+                "description": "Used to get the PaymentOrder record.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "paymentOrderId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "ID of the payment order record"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentOrderExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentOrderExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentOrderErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentOrderErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updatePaymentOrder",
+                "description": "Used to authorize a PaymentOrder record.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "paymentOrderId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "ID of the payment order record"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updatePaymentOrderExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updatePaymentOrderExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updatePaymentOrderErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updatePaymentOrderErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/paymentOrders/accounts/{accountId}/orderList":
+        {
+            "get":
+            {
+                "operationId": "getPaymentOrderList",
+                "description": "Used to get the PaymentOrder records list of a particular account.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "startDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The start date from which records in response should be displayed."
+                },
+                {
+                    "name": "endDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The end date upto which records in response should be displayed."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The total number of records per page"
+                },
+                {
+                    "name": "viewType",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates the summary or detail of account. S-Summary, D-Detail."
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The record no from which the response should be displayed"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentOrderListResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentOrderListResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentOrderListErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentOrderListErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/paymentOrders":
+        {
+            "post":
+            {
+                "operationId": "createPaymentInitiation",
+                "description": "Used to create an unauthorized PaymentOrder record. To authorize it, please use updatePaymentOrder API",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "description": "payload to create the payment initiation",
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createPaymentInitiation"
+                    }
+                },
+                {
+                    "name": "function",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "validate the payment initiation"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createPaymentInitiationExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createPaymentInitiationExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createPaymentInitiationErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createPaymentInitiationErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/paymentOrders/{paymentOrderId}/status":
+        {
+            "get":
+            {
+                "operationId": "getPaymentOrderStatus",
+                "description": "Used to get the status of a PaymentOrder record.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "paymentOrderId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "ID of the payment order record"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The total number of records per page"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The record no from which the response should be displayed"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentOrderStatusResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentOrderStatusResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentOrderStatusErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentOrderStatusErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "createPaymentInitiationBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "lastSimulationTime":
+                {
+                    "type": "string"
+                },
+                "chargeBearer":
+                {
+                    "type": "string"
+                },
+                "chargeInfo":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditorAgentNationalCode":
+                {
+                    "type": "string"
+                },
+                "simulationChecked":
+                {
+                    "type": "string"
+                },
+                "executionDate":
+                {
+                    "type": "string"
+                },
+                "creditValueDate":
+                {
+                    "type": "string"
+                },
+                "totalDebitAmount":
+                {
+                    "type": "string"
+                },
+                "chargeDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAddressRole":
+                {
+                    "type": "string"
+                },
+                "orderingPaymentFxCustomerRate":
+                {
+                    "type": "string"
+                },
+                "benPostAddressLine":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressLine1":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "benPostSwiftAddr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiarySWIFTAddress":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryBIC":
+                {
+                    "type": "string"
+                },
+                "debitAccountIBAN":
+                {
+                    "type": "string"
+                },
+                "beneficiaryName":
+                {
+                    "type": "string"
+                },
+                "transactionAmount":
+                {
+                    "type": "string"
+                },
+                "contextFieldValue":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "contextValue":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeAmt":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAmount":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "contextField":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "contextName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "endToEndReference":
+                {
+                    "type": "string"
+                },
+                "beneficiaryIBAN":
+                {
+                    "type": "string"
+                },
+                "debitAccountId":
+                {
+                    "type": "string"
+                },
+                "cutOffTime":
+                {
+                    "type": "string"
+                },
+                "creditorAgentId":
+                {
+                    "type": "string"
+                },
+                "creditorAgentCountryId":
+                {
+                    "type": "string"
+                },
+                "chargeAccCurr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAccountCurrencyId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAccount":
+                {
+                    "type": "string"
+                },
+                "chargeCurr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeCurrencyId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditorAgentBIC":
+                {
+                    "type": "string"
+                },
+                "instructionIdReference":
+                {
+                    "type": "string"
+                },
+                "remittanceInfo":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "paymentDetails":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentCurrency":
+                {
+                    "type": "string"
+                },
+                "paymentProduct":
+                {
+                    "type": "string"
+                },
+                "chargeAcc":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAccountId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "psdcompliant":
+                {
+                    "type": "string"
+                },
+                "chargeAccountAmt":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAmount":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "indicativeRate":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string"
+                },
+                "status":
+                {
+                    "type": "string"
+                },
+                "transactionStatus":
+                {
+                    "type": "string"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "T24_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "parse_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createPaymentInitiationErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createPaymentInitiationExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createPaymentInitiationExampleResponseBody"
+                }
+            },
+            "description": "createPaymentInitiationExampleResponse"
+        },
+        "PayloadHeader":
+        {
+            "type": "object"
+        },
+        "createPaymentInitiationErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createPaymentInitiationErrorResponseBody"
+                }
+            },
+            "description": "createPaymentInitiationErrorResponse"
+        },
+        "updatePaymentOrderExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updatePaymentOrderExampleResponseBody"
+                }
+            },
+            "description": "updatePaymentOrderExampleResponse"
+        },
+        "updatePaymentOrderExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "orderStatus":
+                {
+                    "type": "string",
+                    "maxLength": 35
+                }
+            }
+        },
+        "updatePaymentOrderErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updatePaymentOrderErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updatePaymentOrderErrorResponseBody"
+                }
+            },
+            "description": "updatePaymentOrderErrorResponse"
+        },
+        "getPaymentOrderListErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentOrderListErrorResponseBody"
+                }
+            },
+            "description": "getPaymentOrderListErrorResponse"
+        },
+        "getPaymentOrderStatusErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentOrderStatusErrorResponseBody"
+                }
+            },
+            "description": "getPaymentOrderStatusErrorResponse"
+        },
+        "getPaymentOrderStatusResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentOrderStatusResponseBody"
+                }
+            },
+            "description": "getPaymentOrderStatusResponse"
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "T24_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "parse_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "getPaymentOrderStatusResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "amount":
+                    {
+                        "type": "number",
+                        "maxLength": 19
+                    },
+                    "paymentOrderId":
+                    {
+                        "type": "string",
+                        "maxLength": 35
+                    },
+                    "orderStatus":
+                    {
+                        "type": "string",
+                        "maxLength": 35
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "maxLength": 3
+                    },
+                    "paymentStatus":
+                    {
+                        "type": "string",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getPaymentOrderListResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentOrderListResponseBody"
+                }
+            },
+            "description": "getPaymentOrderListResponse"
+        },
+        "getPaymentOrderListResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "accountId":
+                    {
+                        "type": "string"
+                    },
+                    "amount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "paymentOrderId":
+                    {
+                        "type": "string"
+                    },
+                    "beneficiaryAccount":
+                    {
+                        "type": "string"
+                    },
+                    "creditReference":
+                    {
+                        "type": "string"
+                    },
+                    "debitReference":
+                    {
+                        "type": "string"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string"
+                    },
+                    "orderStatus":
+                    {
+                        "type": "string"
+                    },
+                    "currency":
+                    {
+                        "type": "string"
+                    },
+                    "paymentDetails":
+                    {
+                        "type": "string"
+                    },
+                    "paymentStatus":
+                    {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "getPaymentOrderErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentOrderListErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentOrderStatusErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentOrderExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentOrderExampleResponseBody"
+                }
+            },
+            "description": "getPaymentOrderExampleResponse"
+        },
+        "createPaymentInitiationExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "executionDate":
+                {
+                    "type": "string"
+                },
+                "chargeDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeType":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeInfo":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeAmt":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAmount":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeCurr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeCurrency":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getPaymentOrderExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "lastSimulationTime":
+                {
+                    "type": "string"
+                },
+                "chargeBearer":
+                {
+                    "type": "string"
+                },
+                "chargeInfo":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditorAgentNationalCode":
+                {
+                    "type": "string"
+                },
+                "simulationChecked":
+                {
+                    "type": "string"
+                },
+                "executionDate":
+                {
+                    "type": "string"
+                },
+                "creditValueDate":
+                {
+                    "type": "string"
+                },
+                "totalDebitAmount":
+                {
+                    "type": "string"
+                },
+                "chargeDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAddressRole":
+                {
+                    "type": "string"
+                },
+                "orderingPaymentFxCustomerRate":
+                {
+                    "type": "string"
+                },
+                "benPostAddressLine":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressLine1":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "benPostSwiftAddr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiarySWIFTAddress":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryBIC":
+                {
+                    "type": "string"
+                },
+                "debitAccountIBAN":
+                {
+                    "type": "string"
+                },
+                "beneficiaryName":
+                {
+                    "type": "string"
+                },
+                "transactionAmount":
+                {
+                    "type": "string"
+                },
+                "contextFieldValue":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "contextValue":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeAmt":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAmount":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "contextField":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "contextName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "endToEndReference":
+                {
+                    "type": "string"
+                },
+                "beneficiaryIBAN":
+                {
+                    "type": "string"
+                },
+                "debitAccountId":
+                {
+                    "type": "string"
+                },
+                "cutOffTime":
+                {
+                    "type": "string"
+                },
+                "creditorAgentId":
+                {
+                    "type": "string"
+                },
+                "creditorAgentCountryId":
+                {
+                    "type": "string"
+                },
+                "chargeAccCurr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAccountCurrencyId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAccount":
+                {
+                    "type": "string"
+                },
+                "chargeCurr":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeCurrencyId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditorAgentBIC":
+                {
+                    "type": "string"
+                },
+                "instructionIdReference":
+                {
+                    "type": "string"
+                },
+                "remittanceInfo":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "paymentDetails":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentCurrency":
+                {
+                    "type": "string"
+                },
+                "paymentProduct":
+                {
+                    "type": "string"
+                },
+                "chargeAcc":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAccountId":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "psdcompliant":
+                {
+                    "type": "string"
+                },
+                "chargeAccountAmt":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeAmount":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "indicativeRate":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createPaymentInitiation":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createPaymentInitiationBody"
+                }
+            },
+            "description": "createPaymentInitiation"
+        },
+        "getPaymentOrderErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentOrderErrorResponseBody"
+                }
+            },
+            "description": "getPaymentOrderErrorResponse"
+        }
+    }
+}

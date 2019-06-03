@@ -1,0 +1,578 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of forex orders",
+        "version": "v1.0.0",
+        "title": "Order Forex Orders APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/order/forexOrders":
+        {
+            "get":
+            {
+                "operationId": "getForexOrders",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyId",
+                    "in": "query",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDeskId",
+                    "in": "query",
+                    "description": "The identifier of the dealer desk",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexOrdersResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexOrdersResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexOrdersErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexOrdersErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/forexOrders/outstandingOrders":
+        {
+            "get":
+            {
+                "operationId": "getOutstandingForexOrders",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "dealType",
+                    "in": "query",
+                    "description": "The Foreign Exchange deal type i.e. it is a Spot, Forward or a Swap transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterparty",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionId",
+                    "in": "query",
+                    "description": "The unique transaction identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "swapId",
+                    "in": "query",
+                    "description": "The swap contract identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyCurrency",
+                    "in": "query",
+                    "description": "The SWIFT code of the currency of the purchase",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyAmount",
+                    "in": "query",
+                    "description": "The amount being purchased.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "sellCurrency",
+                    "in": "query",
+                    "description": "The SWIFT code of the sold currency.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "sellAmount",
+                    "in": "query",
+                    "description": "The amount of the currency being sold. ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDeskId",
+                    "in": "query",
+                    "description": "The identifier of the dealer desk",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "unevenSwap",
+                    "in": "query",
+                    "description": "Defines the Foreign Exchange Swap transaction as an unven swap i.e. the base currency amount on near leg is not equals to the far leg base currency amount",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOutstandingForexOrdersResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOutstandingForexOrdersResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOutstandingForexOrdersErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOutstandingForexOrdersErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getForexOrdersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexOrdersResponseBody"
+                }
+            },
+            "description": "getForexOrdersResponse"
+        },
+        "getForexOrdersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "AL":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "assetLiabilityPosition":
+                                {
+                                    "type": "array",
+                                    "description": "The amount of the asset or liability position",
+                                    "items":
+                                    {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "SP":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "spotPosition":
+                                {
+                                    "type": "array",
+                                    "description": "The foreign exchange spot position",
+                                    "items":
+                                    {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "FWD":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "forwardPosition":
+                                {
+                                    "type": "array",
+                                    "description": "",
+                                    "items":
+                                    {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "currencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                    },
+                    "netPosition":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The value of a net position"
+                    },
+                    "unapprovedPosition":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getForexOrdersErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexOrdersErrorResponseBody"
+                }
+            },
+            "description": "getForexOrdersErrorResponse"
+        },
+        "getForexOrdersErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getOutstandingForexOrdersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOutstandingForexOrdersResponseBody"
+                }
+            },
+            "description": "getOutstandingForexOrdersResponse"
+        },
+        "getOutstandingForexOrdersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "description": "The transaction reference identifier",
+                        "maxLength": 16
+                    },
+                    "dealType":
+                    {
+                        "type": "string",
+                        "description": "The Foreign Exchange deal type i.e. it is a Spot, Forward or a Swap transaction",
+                        "maxLength": 2
+                    },
+                    "counterparty":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "counterpartyName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the counter party",
+                        "maxLength": 35
+                    },
+                    "dealDate":
+                    {
+                        "type": "string",
+                        "description": "The date on which the deal was made.",
+                        "maxLength": 11
+                    },
+                    "buyCurrency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT code of the currency of the purchase",
+                        "maxLength": 3
+                    },
+                    "buyAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount being purchased.",
+                        "maxLength": 19
+                    },
+                    "sellCurrency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT code of the sold currency.",
+                        "maxLength": 3
+                    },
+                    "sellAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount of the currency being sold. ",
+                        "maxLength": 19
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "description": "The applicable value date",
+                        "maxLength": 11
+                    },
+                    "exchangeRate":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "seller":
+                    {
+                        "type": "string",
+                        "description": "The account number through which the currency sold is to be settled.",
+                        "maxLength": 36
+                    },
+                    "buyer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 36
+                    },
+                    "unevenSwap":
+                    {
+                        "type": "string",
+                        "description": "Defines the Foreign Exchange Swap transaction as an unven swap i.e. the base currency amount on near leg is not equals to the far leg base currency amount",
+                        "maxLength": 1
+                    },
+                    "swapId":
+                    {
+                        "type": "string",
+                        "description": "The swap contract identifier",
+                        "maxLength": 12
+                    }
+                }
+            }
+        },
+        "getOutstandingForexOrdersErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOutstandingForexOrdersErrorResponseBody"
+                }
+            },
+            "description": "getOutstandingForexOrdersErrorResponse"
+        },
+        "getOutstandingForexOrdersErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

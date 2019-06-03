@@ -1,0 +1,988 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves various named holdings reports by customer and account / arrangement",
+        "version": "v1.0.0",
+        "title": "Holdings Reports APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/holdings/reports/treasuraryBlotter":
+        {
+            "get":
+            {
+                "operationId": "getBlotterReport",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "contractId",
+                    "in": "query",
+                    "description": "The identifier of the contract",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterpartyId",
+                    "in": "query",
+                    "description": "The identifier of the counter party",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterpartyName",
+                    "in": "query",
+                    "description": "The name that is displayed for the counter party",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealType",
+                    "in": "query",
+                    "description": "The Foreign Exchange deal type i.e. it is a Spot, Forward or a Swap transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealSubType",
+                    "in": "query",
+                    "description": "The sub division of a foreign exchange deal type",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyAmount",
+                    "in": "query",
+                    "description": "The amount being purchased.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyCurrency",
+                    "in": "query",
+                    "description": "The SWIFT code of the currency of the purchase",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyRate",
+                    "in": "query",
+                    "description": "The rate of the purchase",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "sellAmount",
+                    "in": "query",
+                    "description": "The amount of the currency being sold. ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "sellCurrency",
+                    "in": "query",
+                    "description": "The SWIFT code of the sold currency.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "sellRate",
+                    "in": "query",
+                    "description": "The market sell rate of the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "valueDate",
+                    "in": "query",
+                    "description": "The applicable value date",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "reutersDealId",
+                    "in": "query",
+                    "description": "The reuters deal identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "maturityDate",
+                    "in": "query",
+                    "description": "The delivery period or maturity date of the contract transacted",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "instrument",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "issuedBy",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "portfolio",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "depository",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "inputter",
+                    "in": "query",
+                    "description": "This shows the user who entered the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "broker",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "method",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDesk",
+                    "in": "query",
+                    "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "internalDealerDesk",
+                    "in": "query",
+                    "description": "The internal dealer responsible for a FX deal#",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "displayName",
+                    "in": "query",
+                    "description": "The name used for display purposes",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "orderStatus",
+                    "in": "query",
+                    "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyOrSell",
+                    "in": "query",
+                    "description": "Indicates whether the transaction is a buy or sell transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "recordStatus",
+                    "in": "query",
+                    "description": "The status of the record processed",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "contractStatus",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dateTime",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getBlotterReportResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getBlotterReportResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getBlotterReportErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getBlotterReportErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/reports/treasuraryProfitability":
+        {
+            "get":
+            {
+                "operationId": "getProfitabilityReport",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "dealer",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "groupId",
+                    "in": "query",
+                    "description": "The identifier of the group",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getProfitabilityReportResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getProfitabilityReportResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getProfitabilityReportErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getProfitabilityReportErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/reports/treasuryCurrencyCalendarPositions":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyCalendarPositionsReport",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionType",
+                    "in": "query",
+                    "description": "The buy or sell position type of the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDesk",
+                    "in": "query",
+                    "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "valueDate",
+                    "in": "query",
+                    "description": "The applicable value date",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "period",
+                    "in": "query",
+                    "description": "The unit of time that a financial agreement may be described as",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "calendar",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyCalendarPositionsReportResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyCalendarPositionsReportResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyCalendarPositionsReportErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyCalendarPositionsReportErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getBlotterReportResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getBlotterReportResponseBody"
+                }
+            },
+            "description": "getBlotterReportResponse"
+        },
+        "getBlotterReportResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 12
+                    },
+                    "counterpartyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the counter party",
+                        "maxLength": 10
+                    },
+                    "counterpartyName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the counter party",
+                        "maxLength": 10
+                    },
+                    "dealType":
+                    {
+                        "type": "string",
+                        "description": "The Foreign Exchange deal type i.e. it is a Spot, Forward or a Swap transaction",
+                        "maxLength": 2
+                    },
+                    "dealSubType":
+                    {
+                        "type": "string",
+                        "description": "The sub division of a foreign exchange deal type",
+                        "maxLength": 2
+                    },
+                    "buyAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount being purchased.",
+                        "maxLength": 20
+                    },
+                    "buyCurrency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT code of the currency of the purchase",
+                        "maxLength": 3
+                    },
+                    "buyRate":
+                    {
+                        "type": "string",
+                        "description": "The rate of the purchase",
+                        "maxLength": 16
+                    },
+                    "sellAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount of the currency being sold. ",
+                        "maxLength": 20
+                    },
+                    "sellCurrency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT code of the sold currency.",
+                        "maxLength": 3
+                    },
+                    "sellRate":
+                    {
+                        "type": "string",
+                        "description": "The market sell rate of the transaction",
+                        "maxLength": 16
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "description": "The applicable value date",
+                        "maxLength": 12
+                    },
+                    "reutersDealId":
+                    {
+                        "type": "string",
+                        "description": "The reuters deal identifier",
+                        "maxLength": 12
+                    },
+                    "maturityDate":
+                    {
+                        "type": "string",
+                        "description": "The delivery period or maturity date of the contract transacted",
+                        "maxLength": 12
+                    },
+                    "dealDate":
+                    {
+                        "type": "string",
+                        "description": "The date on which the deal was made.",
+                        "maxLength": 12
+                    },
+                    "instrument":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 12
+                    },
+                    "issuedBy":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 12
+                    },
+                    "portfolio":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 12
+                    },
+                    "depository":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 12
+                    },
+                    "inputter":
+                    {
+                        "type": "string",
+                        "description": "This shows the user who entered the transaction",
+                        "maxLength": 20
+                    },
+                    "broker":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "method":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 12
+                    },
+                    "dealerDesk":
+                    {
+                        "type": "string",
+                        "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                        "maxLength": 2
+                    },
+                    "internalDealerDesk":
+                    {
+                        "type": "string",
+                        "description": "The internal dealer responsible for a FX deal#",
+                        "maxLength": 2
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 30
+                    },
+                    "orderStatus":
+                    {
+                        "type": "string",
+                        "description": "The order status which can be OPEN, TRANSMITTED, REJECTED, CANCELLATION REQUEST, CANCELLED, MODIFICATION REQUEST, PARTIAL and FILLED",
+                        "maxLength": 12
+                    },
+                    "buyOrSell":
+                    {
+                        "type": "string",
+                        "description": "Indicates whether the transaction is a buy or sell transaction",
+                        "maxLength": 5
+                    },
+                    "recordStatus":
+                    {
+                        "type": "string",
+                        "description": "The status of the record processed",
+                        "maxLength": 4
+                    },
+                    "contractStatus":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 15
+                    },
+                    "dateTime":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getBlotterReportErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getBlotterReportErrorResponseBody"
+                }
+            },
+            "description": "getBlotterReportErrorResponse"
+        },
+        "getBlotterReportErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getProfitabilityReportResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getProfitabilityReportResponseBody"
+                }
+            },
+            "description": "getProfitabilityReportResponse"
+        },
+        "getProfitabilityReportResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "groupName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the group"
+                    },
+                    "dealerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the dealer"
+                    },
+                    "yearToMonth":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "monthToDate":
+                    {
+                        "type": "string",
+                        "description": "The calculated value in the current month"
+                    },
+                    "yearToDate":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "unrealizedMarkToMarket":
+                    {
+                        "type": "string",
+                        "description": "The amount of unrealised profit and loss calculated as a result of mark to market revaluation"
+                    },
+                    "totalYearToDate":
+                    {
+                        "type": "string",
+                        "description": "The total amount of profit or loss calculated since the start of the year up to the start of the current month, totalYearToDate"
+                    },
+                    "totalYearToDateRevalCurrency":
+                    {
+                        "type": "string",
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "getProfitabilityReportErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getProfitabilityReportErrorResponseBody"
+                }
+            },
+            "description": "getProfitabilityReportErrorResponse"
+        },
+        "getProfitabilityReportErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCurrencyCalendarPositionsReportResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyCalendarPositionsReportResponseBody"
+                }
+            },
+            "description": "getCurrencyCalendarPositionsReportResponse"
+        },
+        "getCurrencyCalendarPositionsReportResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "calendarPeriod":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "longPosition":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "shortPosition":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "netPosition":
+                    {
+                        "type": "string",
+                        "description": "The value of a net position",
+                        "maxLength": 20
+                    },
+                    "averageRate":
+                    {
+                        "type": "string",
+                        "description": "The average rate",
+                        "maxLength": 10
+                    },
+                    "marketRate":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "unrealizedMarkToMarket":
+                    {
+                        "type": "string",
+                        "description": "The amount of unrealised profit and loss calculated as a result of mark to market revaluation",
+                        "maxLength": 20
+                    },
+                    "netPositionCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency in which a net position value is expressed",
+                        "maxLength": 20
+                    },
+                    "unrealizedMarkToMarketCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency used to express the unrealsied mark to market profit and loss",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "getCurrencyCalendarPositionsReportErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyCalendarPositionsReportErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyCalendarPositionsReportErrorResponse"
+        },
+        "getCurrencyCalendarPositionsReportErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

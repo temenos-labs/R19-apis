@@ -1,0 +1,769 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Amendment to existing guarantee",
+        "version": "v1.0.0",
+        "title": "updateGuaranteesAmendment"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/product/guarantees/amendment/{transactionId}":
+        {
+            "put":
+            {
+                "operationId": "updateGuaranteesAmendment",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "transactionId",
+                    "in": "path",
+                    "description": "The unique transaction identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateGuaranteesAmendment"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateGuaranteesAmendmentResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateGuaranteesAmendmentResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateGuaranteesAmendmentErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateGuaranteesAmendmentErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "updateGuaranteesAmendment":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateGuaranteesAmendmentBody"
+                }
+            },
+            "description": "updateGuaranteesAmendment"
+        },
+        "updateGuaranteesAmendmentBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "BeneficiaryIds":
+                {
+                    "type": "array",
+                    "description": "The identifier of the beneficiary",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            }
+                        }
+                    }
+                },
+                "BeneficiaryAddresses":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "BeneficiaryAddress":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "pincipalMovements":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "increaseDecreaseAmount":
+                            {
+                                "type": "string",
+                                "description": "The field to change the principal movement over the lifetime of the deal"
+                            },
+                            "effectiveDate":
+                            {
+                                "type": "string",
+                                "description": "The date on which the principal movement is effected"
+                            },
+                            "marginToBeReleased":
+                            {
+                                "type": "string",
+                                "description": "The amount to be released under syndication when there is negative principal movement"
+                            }
+                        }
+                    }
+                },
+                "texts":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "amendmentInformation":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "charges":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the charge will be debited to the charge account"
+                            },
+                            "chargeCurrency":
+                            {
+                                "type": "string",
+                                "description": "Holds the currency code of the charge account from where the fee is deducted"
+                            },
+                            "debitChargeAccount":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "chargeCode":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "guaranteeReference":
+                {
+                    "type": "string",
+                    "description": "Another ID for the transaction for retrieval purposes"
+                },
+                "customerReference":
+                {
+                    "type": "string",
+                    "description": "The reference quoted by customer of the ordering account in a payment that is to be communicated to the beneficiary when a payment takes place"
+                },
+                "customerId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the customer"
+                },
+                "guaranteeType":
+                {
+                    "type": "string",
+                    "description": "Refers to the type of the contract that is being issued"
+                },
+                "productCategoryId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the product category"
+                },
+                "currency":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "amount":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "dealDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date on which the deal was made."
+                },
+                "expiryDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date an agreement such as a credit facility or limit is due to expire"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "limitReference":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of limit applicable to the Account"
+                },
+                "eventsProcessing":
+                {
+                    "type": "string",
+                    "description": "Determines whether the principal movements and raising entries will occur at Online or at End of Day"
+                },
+                "autoExpiry":
+                {
+                    "type": "string",
+                    "description": "Decision field to determine whether the contingent entries are to be reversed after the deal expiry date or not"
+                },
+                "marginToBeTaken":
+                {
+                    "type": "string",
+                    "description": "Cash Margin to be taken under leaders portion for guarantee issued under syndicated transaction"
+                },
+                "releaseProvision":
+                {
+                    "type": "string",
+                    "description": "Field to decide whether the provision should be released or not"
+                },
+                "releaseAmount":
+                {
+                    "type": "string",
+                    "description": "The amount of Cash Margin to be released online upon authorization"
+                },
+                "outstandingProvisionAmount":
+                {
+                    "type": "string",
+                    "description": "Indicates the current provision outstanding"
+                },
+                "reinstateContract":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the Liquidated contracts  to be reinstated or not"
+                },
+                "commissionRecalculationStartDate":
+                {
+                    "type": "string",
+                    "description": "The date from which the commission is to be recalculated upon reinstation of the contract"
+                },
+                "takeMargin":
+                {
+                    "type": "string",
+                    "description": "Field to check whether provision is to be taken for the transaction or not"
+                },
+                "marginPercent":
+                {
+                    "type": "string",
+                    "description": "Field to state the percentage of provision to be taken"
+                },
+                "marginAmount":
+                {
+                    "type": "string",
+                    "description": "Actual amount of provision that is debited for the transaction"
+                },
+                "marginDebitAccount":
+                {
+                    "type": "string",
+                    "description": "Field to state the account from which the provision amount is to be debited"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "updateGuaranteesAmendmentResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateGuaranteesAmendmentResponseBody"
+                }
+            },
+            "description": "updateGuaranteesAmendmentResponse"
+        },
+        "updateGuaranteesAmendmentResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "BeneficiaryIds":
+                {
+                    "type": "array",
+                    "description": "The identifier of the beneficiary",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            }
+                        }
+                    }
+                },
+                "BeneficiaryAddresses":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "BeneficiaryAddress":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "pincipalMovements":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "increaseDecreaseAmount":
+                            {
+                                "type": "string",
+                                "description": "The field to change the principal movement over the lifetime of the deal"
+                            },
+                            "effectiveDate":
+                            {
+                                "type": "string",
+                                "description": "The date on which the principal movement is effected"
+                            },
+                            "marginToBeReleased":
+                            {
+                                "type": "string",
+                                "description": "The amount to be released under syndication when there is negative principal movement"
+                            }
+                        }
+                    }
+                },
+                "texts":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "amendmentInformation":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "charges":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the charge will be debited to the charge account"
+                            },
+                            "chargeCurrency":
+                            {
+                                "type": "string",
+                                "description": "Holds the currency code of the charge account from where the fee is deducted"
+                            },
+                            "debitChargeAccount":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "chargeCode":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "guaranteeReference":
+                {
+                    "type": "string",
+                    "description": "Another ID for the transaction for retrieval purposes"
+                },
+                "customerReference":
+                {
+                    "type": "string",
+                    "description": "The reference quoted by customer of the ordering account in a payment that is to be communicated to the beneficiary when a payment takes place"
+                },
+                "customerId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the customer"
+                },
+                "guaranteeType":
+                {
+                    "type": "string",
+                    "description": "Refers to the type of the contract that is being issued"
+                },
+                "productCategoryId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the product category"
+                },
+                "currency":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "amount":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "dealDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date on which the deal was made."
+                },
+                "expiryDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date an agreement such as a credit facility or limit is due to expire"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "limitReference":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of limit applicable to the Account"
+                },
+                "eventsProcessing":
+                {
+                    "type": "string",
+                    "description": "Determines whether the principal movements and raising entries will occur at Online or at End of Day"
+                },
+                "autoExpiry":
+                {
+                    "type": "string",
+                    "description": "Decision field to determine whether the contingent entries are to be reversed after the deal expiry date or not"
+                },
+                "marginToBeTaken":
+                {
+                    "type": "string",
+                    "description": "Cash Margin to be taken under leaders portion for guarantee issued under syndicated transaction"
+                },
+                "releaseProvision":
+                {
+                    "type": "string",
+                    "description": "Field to decide whether the provision should be released or not"
+                },
+                "releaseAmount":
+                {
+                    "type": "string",
+                    "description": "The amount of Cash Margin to be released online upon authorization"
+                },
+                "outstandingProvisionAmount":
+                {
+                    "type": "string",
+                    "description": "Indicates the current provision outstanding"
+                },
+                "reinstateContract":
+                {
+                    "type": "string",
+                    "description": "Indicates whether the Liquidated contracts  to be reinstated or not"
+                },
+                "commissionRecalculationStartDate":
+                {
+                    "type": "string",
+                    "description": "The date from which the commission is to be recalculated upon reinstation of the contract"
+                },
+                "takeMargin":
+                {
+                    "type": "string",
+                    "description": "Field to check whether provision is to be taken for the transaction or not"
+                },
+                "marginPercent":
+                {
+                    "type": "string",
+                    "description": "Field to state the percentage of provision to be taken"
+                },
+                "marginAmount":
+                {
+                    "type": "string",
+                    "description": "Actual amount of provision that is debited for the transaction"
+                },
+                "marginDebitAccount":
+                {
+                    "type": "string",
+                    "description": "Field to state the account from which the provision amount is to be debited"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "updateGuaranteesAmendmentErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateGuaranteesAmendmentErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "updateGuaranteesAmendmentErrorResponse"
+        },
+        "updateGuaranteesAmendmentErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

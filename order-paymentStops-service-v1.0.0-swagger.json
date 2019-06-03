@@ -1,0 +1,1218 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of payment stop requests. Also enables blocking and activation of cards.",
+        "version": "v1.0.0",
+        "title": "Order Payment Stops APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/order/paymentStops/{accountId}":
+        {
+            "get":
+            {
+                "operationId": "getPaymentStop",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentStopResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentStopResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentStopErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentStopErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createPaymentStop",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createPaymentStop"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createPaymentStopResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createPaymentStopResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createPaymentStopErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createPaymentStopErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updatePaymentStop",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updatePaymentStop"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updatePaymentStopResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updatePaymentStopResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updatePaymentStopErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updatePaymentStopErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/paymentStops":
+        {
+            "get":
+            {
+                "operationId": "getPaymentStops",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "query",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "customerId",
+                    "in": "query",
+                    "description": "The identifier of the customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "stopTypeId",
+                    "in": "query",
+                    "description": "The payment stop identifier code",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentStopsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentStopsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentStopsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentStopsErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "type": "object",
+            "properties":
+            {
+                "override_acceptId":
+                {
+                    "type": "string",
+                    "description": "pass the record Id to accept all its overrides"
+                }
+            }
+        },
+        "updatePaymentStop":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updatePaymentStopBody"
+                }
+            },
+            "description": "updatePaymentStop"
+        },
+        "updatePaymentStopBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "stops":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "stopTypeId":
+                            {
+                                "type": "string",
+                                "description": "The payment stop identifier code"
+                            },
+                            "firstChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the first chequeId in a range or, if lastChequeId is not entered, then only chequeId which is being stopped. "
+                            },
+                            "lastChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the last chequeId in a range that is being stopped. "
+                            },
+                            "chequeTypeId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the cheque type"
+                            },
+                            "stopDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the Payment Stop is placed"
+                            },
+                            "amountFrom":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specifies the amount from used in selection"
+                            },
+                            "amountTo":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specific the amount to used in selection"
+                            },
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            },
+                            "waiveCharge":
+                            {
+                                "type": "string",
+                                "description": "Defines whether charges are to be collected or waived"
+                            },
+                            "charges":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "chargeId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the charge"
+                                        },
+                                        "accountId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "updatePaymentStopResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updatePaymentStopResponseBody"
+                }
+            },
+            "description": "updatePaymentStopResponse"
+        },
+        "updatePaymentStopResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "stops":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "stopTypeId":
+                            {
+                                "type": "string",
+                                "description": "The payment stop identifier code"
+                            },
+                            "firstChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the first chequeId in a range or, if lastChequeId is not entered, then only chequeId which is being stopped. "
+                            },
+                            "lastChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the last chequeId in a range that is being stopped. "
+                            },
+                            "chequeTypeId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the cheque type"
+                            },
+                            "stopDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the Payment Stop is placed"
+                            },
+                            "amountFrom":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specifies the amount from used in selection"
+                            },
+                            "amountTo":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specific the amount to used in selection"
+                            },
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            },
+                            "waiveCharge":
+                            {
+                                "type": "string",
+                                "description": "Defines whether charges are to be collected or waived"
+                            },
+                            "charges":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "chargeId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the charge"
+                                        },
+                                        "accountId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "updatePaymentStopErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updatePaymentStopErrorResponseBody"
+                }
+            },
+            "description": "updatePaymentStopErrorResponse"
+        },
+        "updatePaymentStopErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getPaymentStopResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentStopResponseBody"
+                }
+            },
+            "description": "getPaymentStopResponse"
+        },
+        "getPaymentStopResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "stops":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "stopTypeId":
+                            {
+                                "type": "string",
+                                "description": "The payment stop identifier code"
+                            },
+                            "firstChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the first chequeId in a range or, if lastChequeId is not entered, then only chequeId which is being stopped. "
+                            },
+                            "lastChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the last chequeId in a range that is being stopped. "
+                            },
+                            "chequeTypeId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the cheque type"
+                            },
+                            "stopDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the Payment Stop is placed"
+                            },
+                            "amountFrom":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specifies the amount from used in selection"
+                            },
+                            "amountTo":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specific the amount to used in selection"
+                            },
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            },
+                            "waiveCharge":
+                            {
+                                "type": "string",
+                                "description": "Defines whether charges are to be collected or waived"
+                            },
+                            "charges":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "chargeId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the charge"
+                                        },
+                                        "accountId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                }
+            }
+        },
+        "getPaymentStopErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentStopErrorResponseBody"
+                }
+            },
+            "description": "getPaymentStopErrorResponse"
+        },
+        "getPaymentStopErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getPaymentStopsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentStopsResponseBody"
+                }
+            },
+            "description": "getPaymentStopsResponse"
+        },
+        "getPaymentStopsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "stops":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "stopTypeId":
+                                {
+                                    "type": "array",
+                                    "description": "The payment stop identifier code",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "firstChequeId":
+                                {
+                                    "type": "array",
+                                    "description": "Identifies the first chequeId in a range or, if lastChequeId is not entered, then only chequeId which is being stopped. ",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "lastChequeId":
+                                {
+                                    "type": "array",
+                                    "description": "Identifies the last chequeId in a range that is being stopped. ",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "chequeTypeId":
+                                {
+                                    "type": "array",
+                                    "description": "The identifier of the cheque type",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "stopDate":
+                                {
+                                    "type": "array",
+                                    "description": "The date on which the Payment Stop is placed",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "amountFrom":
+                                {
+                                    "type": "array",
+                                    "description": "Specifies the amount from used in selection",
+                                    "items":
+                                    {
+                                        "type": "number"
+                                    }
+                                },
+                                "beneficiaryId":
+                                {
+                                    "type": "array",
+                                    "description": "The identifier of the beneficiary",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "accountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                        "maxLength": 36
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer",
+                        "maxLength": 10
+                    },
+                    "currencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                        "maxLength": 3
+                    }
+                }
+            }
+        },
+        "getPaymentStopsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentStopsErrorResponseBody"
+                }
+            },
+            "description": "getPaymentStopsErrorResponse"
+        },
+        "getPaymentStopsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "createPaymentStop":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createPaymentStopBody"
+                }
+            },
+            "description": "createPaymentStop"
+        },
+        "createPaymentStopBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "stops":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "stopTypeId":
+                            {
+                                "type": "string",
+                                "description": "The payment stop identifier code"
+                            },
+                            "firstChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the first chequeId in a range or, if lastChequeId is not entered, then only chequeId which is being stopped. "
+                            },
+                            "lastChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the last chequeId in a range that is being stopped. "
+                            },
+                            "chequeTypeId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the cheque type"
+                            },
+                            "stopDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the Payment Stop is placed"
+                            },
+                            "amountFrom":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specifies the amount from used in selection"
+                            },
+                            "amountTo":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specific the amount to used in selection"
+                            },
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            },
+                            "waiveCharge":
+                            {
+                                "type": "string",
+                                "description": "Defines whether charges are to be collected or waived"
+                            },
+                            "charges":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "chargeId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the charge"
+                                        },
+                                        "accountId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                }
+            }
+        },
+        "createPaymentStopResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createPaymentStopResponseBody"
+                }
+            },
+            "description": "createPaymentStopResponse"
+        },
+        "createPaymentStopResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "stops":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "stopTypeId":
+                            {
+                                "type": "string",
+                                "description": "The payment stop identifier code"
+                            },
+                            "firstChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the first chequeId in a range or, if lastChequeId is not entered, then only chequeId which is being stopped. "
+                            },
+                            "lastChequeId":
+                            {
+                                "type": "string",
+                                "description": "Identifies the last chequeId in a range that is being stopped. "
+                            },
+                            "chequeTypeId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the cheque type"
+                            },
+                            "stopDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the Payment Stop is placed"
+                            },
+                            "amountFrom":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specifies the amount from used in selection"
+                            },
+                            "amountTo":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "Specific the amount to used in selection"
+                            },
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            },
+                            "waiveCharge":
+                            {
+                                "type": "string",
+                                "description": "Defines whether charges are to be collected or waived"
+                            },
+                            "charges":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "chargeId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the charge"
+                                        },
+                                        "accountId":
+                                        {
+                                            "type": "string",
+                                            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                }
+            }
+        },
+        "createPaymentStopErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createPaymentStopErrorResponseBody"
+                }
+            },
+            "description": "createPaymentStopErrorResponse"
+        },
+        "createPaymentStopErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

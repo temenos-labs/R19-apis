@@ -1,0 +1,558 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Transactions for fund service",
+        "version": "v1.0.0",
+        "title": "Transactions service"
+    },
+    "host": "localhost:9089",
+    "basePath": "/IRISnavlite/multifonds/api/v1.0.0",
+    "schemes": ["http"],
+    "paths":
+    {
+        "/holdings/funds/transactions":
+        {
+            "get":
+            {
+                "description": "Transactions for fund",
+                "operationId": "getTransactionsForFund",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page",
+                    "in": "query",
+                    "description": "Current page number (Default:1)",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "size",
+                    "in": "query",
+                    "description": "Total number of records per page (Default:25)",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "orders",
+                    "in": "query",
+                    "description": "An 'orders' parameter allows you to specify the order in which rows appear in the result set Eg: orders=fundname:0,masterfund:1 where 'fundname' is field, '0' for ascending manner and ',' as seperator for fields",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "groups",
+                    "in": "query",
+                    "description": "A 'groups' parameter is used to collect data across multiple records and group the results by one or more columns. Eg: groups=nationality,reclaimtax-nationality:EQ:Indian,reclaimtax:EQ:N-nationality:COUNT where 'nationality,reclaimtax' is for the fields and 'nationality:EQ:Indian,reclaimtax:EQ:N-nationality' are filters, 'nationality:COUNT' is a aggregator and '-' as seperator ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "filters",
+                    "in": "query",
+                    "description": "Use a 'filters' parameter to select rows based on a value by using basic operators like EQ, NE etc.., Eg: filters=statistictype:NE:SRS where 'statistictype' is a field, 'NE' is a operator and 'SRS' is a value",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "referenceId",
+                    "in": "query",
+                    "description": "uniqueId for security purpose",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "token",
+                    "in": "query",
+                    "description": "unique token",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "query",
+                    "description": "username",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company",
+                    "in": "query",
+                    "description": "company name",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "command",
+                    "in": "query",
+                    "description": "API operations like INVOKE, VALIDATE, PROCESS can be set or by default PROCESS is set",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getTransactionsForFund Success Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionsForFundSuccessResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "getTransactionsForFund Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionsForFundErrorResponse"
+                        }
+                    },
+                    "403":
+                    {
+                        "description": "getTransactionsForFund Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionsForFundErrorResponse"
+                        }
+                    },
+                    "404":
+                    {
+                        "description": "getTransactionsForFund Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionsForFundErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "getTransactionsForFund Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionsForFundErrorResponse"
+                        }
+                    },
+                    "501":
+                    {
+                        "description": "getTransactionsForFund Error Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionsForFundErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "paginationSchema":
+        {
+            "properties":
+            {
+                "page":
+                {
+                    "type": "string"
+                },
+                "size":
+                {
+                    "type": "string"
+                },
+                "count":
+                {
+                    "type": "string"
+                },
+                "total":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "auditSchema":
+        {
+            "properties":
+            {
+                "startTime":
+                {
+                    "type": "string"
+                },
+                "endTime":
+                {
+                    "type": "string"
+                },
+                "processTime":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "successHeaderstatusSchema":
+        {
+            "properties":
+            {
+                "result":
+                {
+                    "type": "string"
+                },
+                "HTTP_MESSAGE":
+                {
+                    "type": "string"
+                },
+                "description":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "HTTP_CODE":
+                {
+                    "type": "string"
+                },
+                "requestId":
+                {
+                    "type": "string"
+                },
+                "responseId":
+                {
+                    "type": "string"
+                },
+                "eTag":
+                {
+                    "type": "string"
+                },
+                "lastModified":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getTransactionsForFundSuccessheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/successHeaderstatusSchema"
+                },
+                "company":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getTransactionsForFundrecordsSchema":
+        {
+            "type": "array",
+            "items":
+            {
+                "$ref": "#/definitions/qTransactionsForFundV1.0.0"
+            }
+        },
+        "getTransactionsForFundSuccessbodyResponse":
+        {
+            "properties":
+            {
+                "records":
+                {
+                    "$ref": "#/definitions/getTransactionsForFundrecordsSchema"
+                }
+            }
+        },
+        "getTransactionsForFundSuccessResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getTransactionsForFundSuccessheaderResponse"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getTransactionsForFundSuccessbodyResponse"
+                }
+            }
+        },
+        "errorHeaderstatusSchema":
+        {
+            "properties":
+            {
+                "result":
+                {
+                    "type": "string"
+                },
+                "HTTP_MESSAGE":
+                {
+                    "type": "string"
+                },
+                "description":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "HTTP_CODE":
+                {
+                    "type": "string"
+                },
+                "requestId":
+                {
+                    "type": "string"
+                },
+                "responseId":
+                {
+                    "type": "string"
+                },
+                "eTag":
+                {
+                    "type": "string"
+                },
+                "lastModified":
+                {
+                    "type": "string"
+                },
+                "details":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getTransactionsForFundErrorheaderResponse":
+        {
+            "properties":
+            {
+                "pagination":
+                {
+                    "$ref": "#/definitions/paginationSchema"
+                },
+                "audit":
+                {
+                    "$ref": "#/definitions/auditSchema"
+                },
+                "status":
+                {
+                    "$ref": "#/definitions/errorHeaderstatusSchema"
+                },
+                "referenceId":
+                {
+                    "type": "string"
+                },
+                "token":
+                {
+                    "type": "string"
+                },
+                "username":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getTransactionsForFundErrorbodyResponse":
+        {
+            "properties":
+            {
+                "items":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            },
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "getTransactionsForFundErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getTransactionsForFundErrorheaderResponse"
+                },
+                "body":
+                {
+                    "type": "object"
+                }
+            }
+        },
+        "qTransactionsForFundV1.0.0":
+        {
+            "properties":
+            {
+                "fund":
+                {
+                    "type": "string",
+                    "description": "Fund"
+                },
+                "tradeDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Trade Date"
+                },
+                "secType":
+                {
+                    "type": "string",
+                    "description": "Security Type"
+                },
+                "secId":
+                {
+                    "type": "number",
+                    "description": "Security Id"
+                },
+                "transId":
+                {
+                    "type": "string"
+                },
+                "transType":
+                {
+                    "type": "string"
+                },
+                "transDescr":
+                {
+                    "type": "string"
+                },
+                "quantity":
+                {
+                    "type": "number",
+                    "description": "Quantity"
+                },
+                "price":
+                {
+                    "type": "number",
+                    "description": "Price"
+                },
+                "currency":
+                {
+                    "type": "string",
+                    "description": "Currency"
+                },
+                "fxRate":
+                {
+                    "type": "number"
+                },
+                "fees":
+                {
+                    "type": "number"
+                },
+                "tax":
+                {
+                    "type": "number"
+                },
+                "tradedInterest":
+                {
+                    "type": "number"
+                },
+                "netAmountDealCurr":
+                {
+                    "type": "number"
+                },
+                "netAmountFundCurr":
+                {
+                    "type": "number"
+                },
+                "serviceCode":
+                {
+                    "type": "string",
+                    "description": "Service Code"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "Status"
+                },
+                "groupId":
+                {
+                    "type": "number",
+                    "description": "Group Id"
+                },
+                "familyId":
+                {
+                    "type": "number",
+                    "description": "Family Id"
+                },
+                "groupName":
+                {
+                    "type": "string",
+                    "description": "Group Name"
+                },
+                "familyName":
+                {
+                    "type": "string",
+                    "description": "Family Name"
+                },
+                "accountingDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This field is used to store the accounting date of the fund"
+                },
+                "clientFundId":
+                {
+                    "type": "string",
+                    "description": "Client Fund Id"
+                },
+                "companyID":
+                {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

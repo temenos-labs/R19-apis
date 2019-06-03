@@ -1,0 +1,625 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Version for creating Performance Bond guarantees",
+        "version": "v1.0.0",
+        "title": "createGuaranteesPerformanceBond"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/product/guarantees/issuanceOfPbond":
+        {
+            "post":
+            {
+                "operationId": "createGuaranteesPerformanceBond",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createGuaranteesPerformanceBond"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createGuaranteesPerformanceBondResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createGuaranteesPerformanceBondResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createGuaranteesPerformanceBondErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createGuaranteesPerformanceBondErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createGuaranteesPerformanceBond":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createGuaranteesPerformanceBondBody"
+                }
+            },
+            "description": "createGuaranteesPerformanceBond"
+        },
+        "createGuaranteesPerformanceBondBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "beneficiaryIds":
+                {
+                    "type": "array",
+                    "description": "The identifier of the beneficiary",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryaddresses":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryaddress":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "charges":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the charge will be debited to the charge account"
+                            },
+                            "chargeCurrency":
+                            {
+                                "type": "string",
+                                "description": "Holds the currency code of the charge account from where the fee is deducted"
+                            },
+                            "debitChargeAccount":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "chargeCode":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "performanceBondReference":
+                {
+                    "type": "string",
+                    "description": "Another ID for the transaction for retrieval purposes"
+                },
+                "customerId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the customer"
+                },
+                "currency":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "amount":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "dealDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date on which the deal was made."
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "expiryDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date an agreement such as a credit facility or limit is due to expire"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "termsAndConditions":
+                {
+                    "type": "string",
+                    "description": "The description of the terms and conditions"
+                },
+                "eventsProcessing":
+                {
+                    "type": "string",
+                    "description": "Determines whether the principal movements and raising entries will occur at Online or at End of Day"
+                },
+                "autoExpiry":
+                {
+                    "type": "string",
+                    "description": "Decision field to determine whether the contingent entries are to be reversed after the deal expiry date or not"
+                },
+                "liquidationMode":
+                {
+                    "type": "string",
+                    "description": "Indicates the manner in which the overdue payments are handled"
+                },
+                "takeMargin":
+                {
+                    "type": "string",
+                    "description": "Field to check whether provision is to be taken for the transaction or not"
+                },
+                "marginPercent":
+                {
+                    "type": "string",
+                    "description": "Field to state the percentage of provision to be taken"
+                },
+                "marginAmount":
+                {
+                    "type": "string",
+                    "description": "Actual amount of provision that is debited for the transaction"
+                },
+                "marginDebitAccount":
+                {
+                    "type": "string",
+                    "description": "Field to state the account from which the provision amount is to be debited"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "createGuaranteesPerformanceBondResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createGuaranteesPerformanceBondResponseBody"
+                }
+            },
+            "description": "createGuaranteesPerformanceBondResponse"
+        },
+        "createGuaranteesPerformanceBondResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "beneficiaryIds":
+                {
+                    "type": "array",
+                    "description": "The identifier of the beneficiary",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the beneficiary"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryaddresses":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryaddress":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "charges":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "chargeDate":
+                            {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date on which the charge will be debited to the charge account"
+                            },
+                            "chargeCurrency":
+                            {
+                                "type": "string",
+                                "description": "Holds the currency code of the charge account from where the fee is deducted"
+                            },
+                            "debitChargeAccount":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "chargeCode":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "performanceBondReference":
+                {
+                    "type": "string",
+                    "description": "Another ID for the transaction for retrieval purposes"
+                },
+                "customerId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the customer"
+                },
+                "guaranteeType":
+                {
+                    "type": "string",
+                    "description": "Refers to the type of the contract that is being issued"
+                },
+                "category":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "contractType":
+                {
+                    "type": "string",
+                    "description": "Indicates if the position is related to Loan, Deposit ,FX-Forward/FX-Swap"
+                },
+                "currency":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "amount":
+                {
+                    "type": "number",
+                    "description": ""
+                },
+                "dealDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date on which the deal was made."
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "expiryDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date an agreement such as a credit facility or limit is due to expire"
+                },
+                "maturityDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The delivery period or maturity date of the contract transacted"
+                },
+                "termsAndConditions":
+                {
+                    "type": "string",
+                    "description": "The description of the terms and conditions"
+                },
+                "eventsProcessing":
+                {
+                    "type": "string",
+                    "description": "Determines whether the principal movements and raising entries will occur at Online or at End of Day"
+                },
+                "autoExpiry":
+                {
+                    "type": "string",
+                    "description": "Decision field to determine whether the contingent entries are to be reversed after the deal expiry date or not"
+                },
+                "liquidationMode":
+                {
+                    "type": "string",
+                    "description": "Indicates the manner in which the overdue payments are handled"
+                },
+                "takeMargin":
+                {
+                    "type": "string",
+                    "description": "Field to check whether provision is to be taken for the transaction or not"
+                },
+                "marginPercent":
+                {
+                    "type": "string",
+                    "description": "Field to state the percentage of provision to be taken"
+                },
+                "marginAmount":
+                {
+                    "type": "string",
+                    "description": "Actual amount of provision that is debited for the transaction"
+                },
+                "marginDebitAccount":
+                {
+                    "type": "string",
+                    "description": "Field to state the account from which the provision amount is to be debited"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createGuaranteesPerformanceBondErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createGuaranteesPerformanceBondErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "createGuaranteesPerformanceBondErrorResponse"
+        },
+        "createGuaranteesPerformanceBondErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

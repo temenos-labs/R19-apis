@@ -1,0 +1,1152 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves interest condition information for products, groups and lines",
+        "version": "v1.0.0",
+        "title": "Product Interest Conditions APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/product/interestConditions":
+        {
+            "get":
+            {
+                "operationId": "getInterestConditions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getInterestConditionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getInterestConditionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getInterestConditionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getInterestConditionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/interestConditions/{interestConditionId}":
+        {
+            "get":
+            {
+                "operationId": "getInterestCondition",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "interestConditionId",
+                    "in": "path",
+                    "description": "This field represents the key to the product level conditions for defining interest rate. ",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getInterestConditionResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getInterestConditionResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getInterestConditionErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getInterestConditionErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createInterestCondition",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "interestConditionId",
+                    "in": "path",
+                    "description": "This field represents the key to the product level conditions for defining interest rate. ",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createInterestCondition"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createInterestConditionResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createInterestConditionResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createInterestConditionErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createInterestConditionErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateInterestCondition",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "interestConditionId",
+                    "in": "path",
+                    "description": "This field represents the key to the product level conditions for defining interest rate. ",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateInterestCondition"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateInterestConditionResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateInterestConditionResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateInterestConditionErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateInterestConditionErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getInterestConditionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getInterestConditionsResponseBody"
+                }
+            },
+            "description": "getInterestConditionsResponse"
+        },
+        "getInterestConditionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "interestConditionId":
+                    {
+                        "type": "string",
+                        "description": "This field represents the key to the product level conditions for defining interest rate. ",
+                        "maxLength": 80
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getInterestConditionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getInterestConditionsErrorResponseBody"
+                }
+            },
+            "description": "getInterestConditionsErrorResponse"
+        },
+        "getInterestConditionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getInterestConditionResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getInterestConditionResponseBody"
+                }
+            },
+            "description": "getInterestConditionResponse"
+        },
+        "getInterestConditionResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fixedRate":
+                            {
+                                "type": "string",
+                                "description": "A fixed rate is directly entered by the user specifying the Defined Property and is not defined by an index table.Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. "
+                            },
+                            "floatingRate":
+                            {
+                                "type": "string",
+                                "description": "Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. Each of these interest types can include one or more margins and can be specified in a tiered structure.A floating interest rate is tied to a variable base rate (i.e. BASIC.INTEREST). "
+                            },
+                            "linkedRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "Defines whether the rate for a given tier is Linked"
+                            },
+                            "customRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "This is a Yes or No flag field; if this field is set to yes then Interest rate would allow input of data required for calculation for the respective Arrangements'. "
+                            },
+                            "minimumTierRate":
+                            {
+                                "type": "string",
+                                "description": "In this field for each tier defined, a user can specify a minimum rate for the tier. This is applicable for variable and periodic rates and allows the tier rate to be controlled."
+                            },
+                            "maximumTierRate":
+                            {
+                                "type": "string",
+                                "description": "The maximum rate for the tier"
+                            },
+                            "tierAmount":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "The applicable tier amount"
+                            },
+                            "tierNegativeRate":
+                            {
+                                "type": "string",
+                                "description": "Defines whether a tier rate can be negative"
+                            },
+                            "tierPercent":
+                            {
+                                "type": "number",
+                                "description": "The applicable tier percentage"
+                            },
+                            "margins":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "marginType":
+                                        {
+                                            "type": "string",
+                                            "description": "Defines whether there are single or multiple margins to be considered while arriving at the applicable interest rate"
+                                        },
+                                        "marginOperand":
+                                        {
+                                            "type": "string",
+                                            "description": " Defines whether the marginRate should be added or subtracted from the Floating or Periodic Rate. The options are ADD or SUB. "
+                                        },
+                                        "marginRate":
+                                        {
+                                            "type": "string",
+                                            "description": "The margin rate used to adjust the specified rate of interest and to appropriately reflect any rate profit realized. The result is the nominal rate of interest.  "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rateTierType":
+                {
+                    "type": "string",
+                    "description": "Defines the interest or tax rate tier type e.g. Single, Level, Banded etc",
+                    "enum": ["Tier Type"]
+                },
+                "linkedArrangement":
+                {
+                    "type": "string",
+                    "description": "The Arrangement to be linked for calculating the Interest Rate",
+                    "enum": ["Tier Type"]
+                }
+            }
+        },
+        "getInterestConditionErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getInterestConditionErrorResponseBody"
+                }
+            },
+            "description": "getInterestConditionErrorResponse"
+        },
+        "getInterestConditionErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "type": "object",
+            "properties":
+            {
+                "override_acceptId":
+                {
+                    "type": "string",
+                    "description": "pass the record Id to accept all its overrides"
+                }
+            }
+        },
+        "createInterestCondition":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createInterestConditionBody"
+                }
+            },
+            "description": "createInterestCondition"
+        },
+        "createInterestConditionBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fixedRate":
+                            {
+                                "type": "string",
+                                "description": "A fixed rate is directly entered by the user specifying the Defined Property and is not defined by an index table.Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. "
+                            },
+                            "floatingRate":
+                            {
+                                "type": "string",
+                                "description": "Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. Each of these interest types can include one or more margins and can be specified in a tiered structure.A floating interest rate is tied to a variable base rate (i.e. BASIC.INTEREST). "
+                            },
+                            "linkedRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "Defines whether the rate for a given tier is Linked"
+                            },
+                            "customRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "This is a Yes or No flag field; if this field is set to yes then Interest rate would allow input of data required for calculation for the respective Arrangements'. "
+                            },
+                            "minimumTierRate":
+                            {
+                                "type": "string",
+                                "description": "In this field for each tier defined, a user can specify a minimum rate for the tier. This is applicable for variable and periodic rates and allows the tier rate to be controlled."
+                            },
+                            "maximumTierRate":
+                            {
+                                "type": "string",
+                                "description": "The maximum rate for the tier"
+                            },
+                            "tierAmount":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "The applicable tier amount"
+                            },
+                            "tierNegativeRate":
+                            {
+                                "type": "string",
+                                "description": "Defines whether a tier rate can be negative"
+                            },
+                            "tierPercent":
+                            {
+                                "type": "number",
+                                "description": "The applicable tier percentage"
+                            },
+                            "margins":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "marginType":
+                                        {
+                                            "type": "string",
+                                            "description": "Defines whether there are single or multiple margins to be considered while arriving at the applicable interest rate"
+                                        },
+                                        "marginOperand":
+                                        {
+                                            "type": "string",
+                                            "description": " Defines whether the marginRate should be added or subtracted from the Floating or Periodic Rate. The options are ADD or SUB. "
+                                        },
+                                        "marginRate":
+                                        {
+                                            "type": "string",
+                                            "description": "The margin rate used to adjust the specified rate of interest and to appropriately reflect any rate profit realized. The result is the nominal rate of interest.  "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rateTierType":
+                {
+                    "type": "string",
+                    "description": "Defines the interest or tax rate tier type e.g. Single, Level, Banded etc",
+                    "enum": ["Tier Type"]
+                },
+                "linkedArrangement":
+                {
+                    "type": "string",
+                    "description": "The Arrangement to be linked for calculating the Interest Rate",
+                    "enum": ["Tier Type"]
+                }
+            }
+        },
+        "createInterestConditionResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createInterestConditionResponseBody"
+                }
+            },
+            "description": "createInterestConditionResponse"
+        },
+        "createInterestConditionResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fixedRate":
+                            {
+                                "type": "string",
+                                "description": "A fixed rate is directly entered by the user specifying the Defined Property and is not defined by an index table.Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. "
+                            },
+                            "floatingRate":
+                            {
+                                "type": "string",
+                                "description": "Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. Each of these interest types can include one or more margins and can be specified in a tiered structure.A floating interest rate is tied to a variable base rate (i.e. BASIC.INTEREST). "
+                            },
+                            "linkedRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "Defines whether the rate for a given tier is Linked"
+                            },
+                            "customRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "This is a Yes or No flag field; if this field is set to yes then Interest rate would allow input of data required for calculation for the respective Arrangements'. "
+                            },
+                            "minimumTierRate":
+                            {
+                                "type": "string",
+                                "description": "In this field for each tier defined, a user can specify a minimum rate for the tier. This is applicable for variable and periodic rates and allows the tier rate to be controlled."
+                            },
+                            "maximumTierRate":
+                            {
+                                "type": "string",
+                                "description": "The maximum rate for the tier"
+                            },
+                            "tierAmount":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "The applicable tier amount"
+                            },
+                            "tierNegativeRate":
+                            {
+                                "type": "string",
+                                "description": "Defines whether a tier rate can be negative"
+                            },
+                            "tierPercent":
+                            {
+                                "type": "number",
+                                "description": "The applicable tier percentage"
+                            },
+                            "margins":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "marginType":
+                                        {
+                                            "type": "string",
+                                            "description": "Defines whether there are single or multiple margins to be considered while arriving at the applicable interest rate"
+                                        },
+                                        "marginOperand":
+                                        {
+                                            "type": "string",
+                                            "description": " Defines whether the marginRate should be added or subtracted from the Floating or Periodic Rate. The options are ADD or SUB. "
+                                        },
+                                        "marginRate":
+                                        {
+                                            "type": "string",
+                                            "description": "The margin rate used to adjust the specified rate of interest and to appropriately reflect any rate profit realized. The result is the nominal rate of interest.  "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rateTierType":
+                {
+                    "type": "string",
+                    "description": "Defines the interest or tax rate tier type e.g. Single, Level, Banded etc",
+                    "enum": ["Tier Type"]
+                },
+                "linkedArrangement":
+                {
+                    "type": "string",
+                    "description": "The Arrangement to be linked for calculating the Interest Rate",
+                    "enum": ["Tier Type"]
+                }
+            }
+        },
+        "createInterestConditionErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createInterestConditionErrorResponseBody"
+                }
+            },
+            "description": "createInterestConditionErrorResponse"
+        },
+        "createInterestConditionErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "updateInterestCondition":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateInterestConditionBody"
+                }
+            },
+            "description": "updateInterestCondition"
+        },
+        "updateInterestConditionBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fixedRate":
+                            {
+                                "type": "string",
+                                "description": "A fixed rate is directly entered by the user specifying the Defined Property and is not defined by an index table.Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. "
+                            },
+                            "floatingRate":
+                            {
+                                "type": "string",
+                                "description": "Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. Each of these interest types can include one or more margins and can be specified in a tiered structure.A floating interest rate is tied to a variable base rate (i.e. BASIC.INTEREST). "
+                            },
+                            "linkedRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "Defines whether the rate for a given tier is Linked"
+                            },
+                            "customRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "This is a Yes or No flag field; if this field is set to yes then Interest rate would allow input of data required for calculation for the respective Arrangements'. "
+                            },
+                            "minimumTierRate":
+                            {
+                                "type": "string",
+                                "description": "In this field for each tier defined, a user can specify a minimum rate for the tier. This is applicable for variable and periodic rates and allows the tier rate to be controlled."
+                            },
+                            "maximumTierRate":
+                            {
+                                "type": "string",
+                                "description": "The maximum rate for the tier"
+                            },
+                            "tierAmount":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "The applicable tier amount"
+                            },
+                            "tierNegativeRate":
+                            {
+                                "type": "string",
+                                "description": "Defines whether a tier rate can be negative"
+                            },
+                            "tierPercent":
+                            {
+                                "type": "number",
+                                "description": "The applicable tier percentage"
+                            },
+                            "margins":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "marginType":
+                                        {
+                                            "type": "string",
+                                            "description": "Defines whether there are single or multiple margins to be considered while arriving at the applicable interest rate"
+                                        },
+                                        "marginOperand":
+                                        {
+                                            "type": "string",
+                                            "description": " Defines whether the marginRate should be added or subtracted from the Floating or Periodic Rate. The options are ADD or SUB. "
+                                        },
+                                        "marginRate":
+                                        {
+                                            "type": "string",
+                                            "description": "The margin rate used to adjust the specified rate of interest and to appropriately reflect any rate profit realized. The result is the nominal rate of interest.  "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rateTierType":
+                {
+                    "type": "string",
+                    "description": "Defines the interest or tax rate tier type e.g. Single, Level, Banded etc",
+                    "enum": ["Tier Type"]
+                },
+                "linkedArrangement":
+                {
+                    "type": "string",
+                    "description": "The Arrangement to be linked for calculating the Interest Rate",
+                    "enum": ["Tier Type"]
+                }
+            }
+        },
+        "updateInterestConditionResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateInterestConditionResponseBody"
+                }
+            },
+            "description": "updateInterestConditionResponse"
+        },
+        "updateInterestConditionResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "rates":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fixedRate":
+                            {
+                                "type": "string",
+                                "description": "A fixed rate is directly entered by the user specifying the Defined Property and is not defined by an index table.Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. "
+                            },
+                            "floatingRate":
+                            {
+                                "type": "string",
+                                "description": "Three basic types of interest are supported by T24; Fixed, Floating, and Periodic. Each of these interest types can include one or more margins and can be specified in a tiered structure.A floating interest rate is tied to a variable base rate (i.e. BASIC.INTEREST). "
+                            },
+                            "linkedRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "Defines whether the rate for a given tier is Linked"
+                            },
+                            "customRateIndicator":
+                            {
+                                "type": "string",
+                                "description": "This is a Yes or No flag field; if this field is set to yes then Interest rate would allow input of data required for calculation for the respective Arrangements'. "
+                            },
+                            "minimumTierRate":
+                            {
+                                "type": "string",
+                                "description": "In this field for each tier defined, a user can specify a minimum rate for the tier. This is applicable for variable and periodic rates and allows the tier rate to be controlled."
+                            },
+                            "maximumTierRate":
+                            {
+                                "type": "string",
+                                "description": "The maximum rate for the tier"
+                            },
+                            "tierAmount":
+                            {
+                                "type": "number",
+                                "format": "int64",
+                                "description": "The applicable tier amount"
+                            },
+                            "tierNegativeRate":
+                            {
+                                "type": "string",
+                                "description": "Defines whether a tier rate can be negative"
+                            },
+                            "tierPercent":
+                            {
+                                "type": "number",
+                                "description": "The applicable tier percentage"
+                            },
+                            "margins":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "marginType":
+                                        {
+                                            "type": "string",
+                                            "description": "Defines whether there are single or multiple margins to be considered while arriving at the applicable interest rate"
+                                        },
+                                        "marginOperand":
+                                        {
+                                            "type": "string",
+                                            "description": " Defines whether the marginRate should be added or subtracted from the Floating or Periodic Rate. The options are ADD or SUB. "
+                                        },
+                                        "marginRate":
+                                        {
+                                            "type": "string",
+                                            "description": "The margin rate used to adjust the specified rate of interest and to appropriately reflect any rate profit realized. The result is the nominal rate of interest.  "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rateTierType":
+                {
+                    "type": "string",
+                    "description": "Defines the interest or tax rate tier type e.g. Single, Level, Banded etc",
+                    "enum": ["Tier Type"]
+                },
+                "linkedArrangement":
+                {
+                    "type": "string",
+                    "description": "The Arrangement to be linked for calculating the Interest Rate",
+                    "enum": ["Tier Type"]
+                }
+            }
+        },
+        "updateInterestConditionErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateInterestConditionErrorResponseBody"
+                }
+            },
+            "description": "updateInterestConditionErrorResponse"
+        },
+        "updateInterestConditionErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

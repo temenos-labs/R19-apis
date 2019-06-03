@@ -1,0 +1,1518 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves currency pair position information for the legal entity",
+        "version": "v1.0.0",
+        "title": "Holdings Treasury Currency Pairs APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/holdings/currencyPairs/{currencyPair}/positions":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyPairPositions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyPair",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionType",
+                    "in": "query",
+                    "description": "The buy or sell position type of the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDesk",
+                    "in": "query",
+                    "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyDate",
+                    "in": "query",
+                    "description": "The date of purchase",
+                    "required": false,
+                    "type": "string",
+                    "format": "date"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string",
+                    "format": "date"
+                },
+                {
+                    "name": "positionPeriod",
+                    "in": "query",
+                    "description": "The period for which the position is displayed",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterpartyName",
+                    "in": "query",
+                    "description": "The name that is displayed for the counter party",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyPairPositionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairPositionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyPairPositionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairPositionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/currencyPairs/{currencyPair}/calendarPositions":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyPairCalendarPositions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyPair",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionType",
+                    "in": "query",
+                    "description": "The buy or sell position type of the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDesk",
+                    "in": "query",
+                    "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyDate",
+                    "in": "query",
+                    "description": "The date of purchase",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionPeriod",
+                    "in": "query",
+                    "description": "The period for which the position is displayed",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterpartyName",
+                    "in": "query",
+                    "description": "The name that is displayed for the counter party",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "calendar",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyPairCalendarPositionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairCalendarPositionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyPairCalendarPositionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairCalendarPositionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/currencyPairs/{currencyPair}/rates":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyPairMarketRates",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyPair",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "rateSource",
+                    "in": "query",
+                    "description": "The source of the interest or tax rate",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "rateProvider",
+                    "in": "query",
+                    "description": "The provider of the interest or tax rate",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "assetType",
+                    "in": "query",
+                    "description": "The type of the asset",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dateOrPeriod",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "rateIndicator",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "interpolationMethod",
+                    "in": "query",
+                    "description": "The method applied to derive an interpolated rate",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyPairMarketRatesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairMarketRatesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyPairMarketRatesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairMarketRatesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/currencyPairs/positions":
+        {
+            "get":
+            {
+                "operationId": "getAllCurrencyPairPositions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyPair",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionType",
+                    "in": "query",
+                    "description": "The buy or sell position type of the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDesk",
+                    "in": "query",
+                    "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyDate",
+                    "in": "query",
+                    "description": "The date of purchase",
+                    "required": false,
+                    "type": "string",
+                    "format": "date"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string",
+                    "format": "date"
+                },
+                {
+                    "name": "positionPeriod",
+                    "in": "query",
+                    "description": "The period for which the position is displayed",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterpartyName",
+                    "in": "query",
+                    "description": "The name that is displayed for the counter party",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAllCurrencyPairPositionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAllCurrencyPairPositionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAllCurrencyPairPositionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAllCurrencyPairPositionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/currencyPairs/{currencyPair}/deals":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyPairPositionDeals",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyPair",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionType",
+                    "in": "query",
+                    "description": "The buy or sell position type of the transaction",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealerDesk",
+                    "in": "query",
+                    "description": "Code used to identify the dealing desk responsible for monitoring and managing Foreign exchange positions",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "buyDate",
+                    "in": "query",
+                    "description": "The date of purchase",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dealDate",
+                    "in": "query",
+                    "description": "The date on which the deal was made.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "positionPeriod",
+                    "in": "query",
+                    "description": "The period for which the position is displayed",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "counterpartyName",
+                    "in": "query",
+                    "description": "The name that is displayed for the counter party",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyPairPositionDealsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairPositionDealsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyPairPositionDealsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairPositionDealsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/currencyPairs/":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyPairs",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyPairsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyPairsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/currencyPairs/{currencyPair}":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyPair",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyPair",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "displayName",
+                    "in": "query",
+                    "description": "The name used for display purposes",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyPairResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyPairErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyPairErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getCurrencyPairPositionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyPairPositionsResponseBody"
+                }
+            },
+            "description": "getCurrencyPairPositionsResponse"
+        },
+        "getCurrencyPairPositionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "currencyPair":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    },
+                    "currency1":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currecy1Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "currency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currency2Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "averageRate":
+                    {
+                        "type": "string",
+                        "description": "The average rate",
+                        "maxLength": 19
+                    },
+                    "revaluationRate":
+                    {
+                        "type": "string",
+                        "description": "The revaluation rate",
+                        "maxLength": 19
+                    },
+                    "profitAndLossInCurrency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "profitAndLossInLocalCurrency":
+                    {
+                        "type": "string",
+                        "description": "The profit and loss amount expressed in the local currency",
+                        "maxLength": 35
+                    },
+                    "profitAndLossInRevaluationCurrency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getCurrencyPairPositionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyPairPositionsErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyPairPositionsErrorResponse"
+        },
+        "getCurrencyPairPositionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCurrencyPairCalendarPositionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyPairCalendarPositionsResponseBody"
+                }
+            },
+            "description": "getCurrencyPairCalendarPositionsResponse"
+        },
+        "getCurrencyPairCalendarPositionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "calendarPeriod":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 5
+                    },
+                    "currency1":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currecy1Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "currency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currency2Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "averageRate":
+                    {
+                        "type": "string",
+                        "description": "The average rate",
+                        "maxLength": 15
+                    },
+                    "revaluationRate":
+                    {
+                        "type": "string",
+                        "description": "The revaluation rate",
+                        "maxLength": 15
+                    },
+                    "profitLossCurrency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "profitLossLocalCurrency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "profitLossInRevaluationCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency used to express profit or loss from FX revaluation",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "getCurrencyPairCalendarPositionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyPairCalendarPositionsErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyPairCalendarPositionsErrorResponse"
+        },
+        "getCurrencyPairCalendarPositionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCurrencyPairMarketRatesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyPairMarketRatesResponseBody"
+                }
+            },
+            "description": "getCurrencyPairMarketRatesResponse"
+        },
+        "getCurrencyPairMarketRatesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "rateSource":
+                    {
+                        "type": "string",
+                        "description": "The source of the interest or tax rate",
+                        "maxLength": 20
+                    },
+                    "rateProvider":
+                    {
+                        "type": "string",
+                        "description": "The provider of the interest or tax rate",
+                        "maxLength": 2
+                    },
+                    "currencyOrPair":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    },
+                    "assetType":
+                    {
+                        "type": "string",
+                        "description": "The type of the asset",
+                        "maxLength": 20
+                    },
+                    "dateOrPeriod":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "rateIndicator":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 1
+                    },
+                    "interpolationMarker":
+                    {
+                        "type": "string",
+                        "description": "An indicator set if a rate has been derived through interpolation",
+                        "maxLength": 1
+                    },
+                    "marketRate":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "daysSinceToday":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "getCurrencyPairMarketRatesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyPairMarketRatesErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyPairMarketRatesErrorResponse"
+        },
+        "getCurrencyPairMarketRatesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getAllCurrencyPairPositionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAllCurrencyPairPositionsResponseBody"
+                }
+            },
+            "description": "getAllCurrencyPairPositionsResponse"
+        },
+        "getAllCurrencyPairPositionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "currencyPair":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    },
+                    "currency1":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currecy1Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "currency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currency2Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "averageRate":
+                    {
+                        "type": "string",
+                        "description": "The average rate",
+                        "maxLength": 19
+                    },
+                    "revaluationRate":
+                    {
+                        "type": "string",
+                        "description": "The revaluation rate",
+                        "maxLength": 19
+                    },
+                    "profitAndLossInCurrency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "profitAndLossInLocalCurrency":
+                    {
+                        "type": "string",
+                        "description": "The profit and loss amount expressed in the local currency",
+                        "maxLength": 35
+                    },
+                    "profitAndLossInRevaluationCurrency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getAllCurrencyPairPositionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAllCurrencyPairPositionsErrorResponseBody"
+                }
+            },
+            "description": "getAllCurrencyPairPositionsErrorResponse"
+        },
+        "getAllCurrencyPairPositionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCurrencyPairPositionDealsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyPairPositionDealsResponseBody"
+                }
+            },
+            "description": "getCurrencyPairPositionDealsResponse"
+        },
+        "getCurrencyPairPositionDealsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "description": "The transaction reference identifier",
+                        "maxLength": 12
+                    },
+                    "dealType":
+                    {
+                        "type": "string",
+                        "description": "The Foreign Exchange deal type i.e. it is a Spot, Forward or a Swap transaction",
+                        "maxLength": 2
+                    },
+                    "counterparty":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "currency1":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currecy1Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "currency2":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "currency2Amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "rate":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 19
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "description": "The applicable value date",
+                        "maxLength": 8
+                    },
+                    "dealer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 2
+                    },
+                    "status":
+                    {
+                        "type": "string",
+                        "description": "The status identifier",
+                        "maxLength": 5
+                    },
+                    "companyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                        "maxLength": 12
+                    }
+                }
+            }
+        },
+        "getCurrencyPairPositionDealsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyPairPositionDealsErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyPairPositionDealsErrorResponse"
+        },
+        "getCurrencyPairPositionDealsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCurrencyPairsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyPairsResponseBody"
+                }
+            },
+            "description": "getCurrencyPairsResponse"
+        },
+        "getCurrencyPairsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "currencyPair":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getCurrencyPairsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyPairsErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyPairsErrorResponse"
+        },
+        "getCurrencyPairsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCurrencyPairResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyPairResponseBody"
+                }
+            },
+            "description": "getCurrencyPairResponse"
+        },
+        "getCurrencyPairResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "currencyPair":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getCurrencyPairErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyPairErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyPairErrorResponse"
+        },
+        "getCurrencyPairErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

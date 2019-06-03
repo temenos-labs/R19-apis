@@ -1,0 +1,318 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "GetCustomerStandingOrderService",
+        "version": "v1.0.0",
+        "title": "PartyCustomerStandingOrder"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/party/customers/{customerId}/standingOrders":
+        {
+            "get":
+            {
+                "operationId": "getStandingOrders",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "accountId",
+                    "in": "query",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "orderingCustomerId",
+                    "in": "query",
+                    "description": "The identifier of the ordering customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "StandingOrdersResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/StandingOrdersResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "StandingOrdersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/StandingOrdersResponseBody"
+                }
+            },
+            "description": "StandingOrdersResponse"
+        },
+        "StandingOrdersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "standingOrderId":
+                    {
+                        "type": "string",
+                        "description": "The unique standing order identifier",
+                        "maxLength": 35
+                    },
+                    "orderType":
+                    {
+                        "type": "string",
+                        "description": "Defines the order type of the transaction",
+                        "maxLength": 5
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "paymentMethod":
+                    {
+                        "type": "string",
+                        "description": "The type of method used for the payment",
+                        "maxLength": 4
+                    },
+                    "currencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                        "maxLength": 3
+                    },
+                    "amount":
+                    {
+                        "type": "number",
+                        "description": ""
+                    },
+                    "frequency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 50
+                    },
+                    "counterPartyAccountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the counter party's account",
+                        "maxLength": 35
+                    },
+                    "beneficiaryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the beneficiary",
+                        "maxLength": 17
+                    },
+                    "percentageOverCurrentBalance":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

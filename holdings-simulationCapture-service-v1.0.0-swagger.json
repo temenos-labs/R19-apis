@@ -1,0 +1,926 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Management of Simulation Capture",
+		"version": "v1.0.0",
+		"title": "Holdings Simulation Capture APIs"
+	},
+	"host": "api.temenos.com",
+	"basePath": "/api/v1.0.0/",
+	"schemes": ["http"],
+	"security": [{
+			"basicAuth": []
+		}
+	],
+	"paths": {
+		"/holdings/simulationCapture/{arrangementId}": {
+			"post": {
+				"operationId": "createSimulationCapture",
+				"produces": ["application/json"],
+				"parameters": [{
+						"in": "body",
+						"name": "payload",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SimulationCapture"
+						}
+					}, {
+						"name": "credentials",
+						"in": "query",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "companyId",
+						"in": "query",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "createSimulationCaptureResponse",
+						"schema": {
+							"$ref": "#/definitions/SimulationCaptureResponse"
+						}
+					},
+					"default": {
+						"description": "ArrangementErrorResponse",
+						"schema": {
+							"$ref": "#/definitions/ArrangementErrorResponse"
+						}
+					}
+				}
+			},
+			"parameters": [{
+					"name": "arrangementId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}
+			]
+		}
+	},
+	"securityDefinitions": {
+		"basicAuth": {
+			"type": "basic"
+		}
+	},
+	"definitions": {
+		"PayloadHeader": {
+			"properties": {
+				"override": {
+					"type": "object",
+					"properties": {
+						"overrideDetails": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string",
+										"description": "The identifier of the override"
+									},
+									"description": {
+										"type": "string",
+										"description": "The actual override message"
+									},
+									"responseCode": {
+										"type": "string",
+										"description": "The user input to accept/reject the override."
+									}
+								}
+							}
+						}
+					}
+				},
+				"audit": {
+					"type": "object",
+					"properties": {
+						"versionNumber": {
+							"type": "string",
+							"description": "The CURR.NO. of the record"
+						}
+					}
+				}
+			}
+		},
+		"SimulationCapture": {
+			"properties": {
+				"header": {
+					"$ref": "#/definitions/PayloadHeader"
+				},
+				"body": {
+					"$ref": "#/definitions/SimulationCaptureBody"
+				}
+			},
+			"description": "SimulationCapture"
+		},
+		"SimulationCaptureBody": {
+			"type": "object",
+			"properties": {
+				"closureNotes": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"closureNote": {
+								"type": "string",
+								"description": ""
+							}
+						}
+					}
+				},
+				"activityId": {
+					"type": "string",
+					"description": "The identifier of the activity"
+				},
+				"automaticRun": {
+					"type": "string",
+					"description": ""
+				},
+				"simulationRunReference": {
+					"type": "string",
+					"description": ""
+				},
+				"effectiveDate": {
+					"type": "string",
+					"format": "date",
+					"description": "The date on which the principal movement is effected"
+				},
+				"currencyId": {
+					"type": "string",
+					"description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+				},
+				"transactionAmount": {
+					"type": "number",
+					"description": "The transaction amount"
+				},
+				"closureReason": {
+					"type": "string",
+					"description": ""
+				},
+				"payoff": {
+					"type": "object",
+					"properties": {
+						"amount": {
+							"type": "array",
+							"description": "",
+							"items": {
+								"type": "object",
+								"properties": {
+									"fixedamount": {
+										"type": "number",
+										"description": ""
+									}
+								}
+							}
+						},
+						"expiryDays": {
+							"type": "string",
+							"description": ""
+						},
+						"settleDues": {
+							"type": "string",
+							"description": ""
+						},
+						"percentage": {
+							"type": "number",
+							"description": "The percentage of holdings redeemed/subscribed"
+						},
+						"action": {
+							"type": "string",
+							"description": "view or cancel options"
+						}
+					}
+				},
+				"settlement": {
+					"type": "object",
+					"properties": {
+						"settlement": {
+							"type": "array",
+							"description": "",
+							"items": {
+								"type": "object",
+								"properties": {
+									"payinSettlement": {
+										"type": "string",
+										"description": ""
+									},
+									"payoutSettlement": {
+										"type": "string",
+										"description": ""
+									},
+									"reference": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"ddMandateReference": {
+													"type": "string",
+													"format": "date",
+													"description": ""
+												},
+												"payinAccount": {
+													"type": "string",
+													"description": ""
+												},
+												"payinBeneficiary": {
+													"type": "string",
+													"description": ""
+												},
+												"payinPercentage": {
+													"type": "number",
+													"description": ""
+												},
+												"payinAmount": {
+													"type": "number",
+													"description": ""
+												},
+												"payoutAccount": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutBeneficiary": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutPercentage": {
+													"type": "number",
+													"description": ""
+												},
+												"payoutAmount": {
+													"type": "number",
+													"description": ""
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"assocSettlement": {
+							"type": "array",
+							"description": "",
+							"items": {
+								"type": "object",
+								"properties": {
+									"payinSettlement": {
+										"type": "string",
+										"description": ""
+									},
+									"payinRule": {
+										"type": "string",
+										"description": ""
+									},
+									"payinSettlementActivity": {
+										"type": "string",
+										"description": ""
+									},
+									"payinRCType": {
+										"type": "string",
+										"description": ""
+									},
+									"payinRCCondition": {
+										"type": "string",
+										"description": ""
+									},
+									"reference": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"payinAccount": {
+													"type": "string",
+													"description": ""
+												},
+												"payinBeneficiary": {
+													"type": "string",
+													"description": ""
+												},
+												"payinPOProduct": {
+													"type": "string",
+													"description": ""
+												},
+												"payinPercentage": {
+													"type": "number",
+													"description": ""
+												},
+												"payinAmount": {
+													"type": "number",
+													"description": ""
+												},
+												"payinActivity": {
+													"type": "string",
+													"description": ""
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"asscoSettlement": {
+							"type": "array",
+							"description": "",
+							"items": {
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"ddMandateReference": {
+													"type": "string",
+													"format": "date",
+													"description": ""
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"payout": {
+							"type": "array",
+							"description": "",
+							"items": {
+								"type": "object",
+								"properties": {
+									"payoutSettlement": {
+										"type": "string",
+										"description": ""
+									},
+									"payoutSettlementActivity": {
+										"type": "string",
+										"description": ""
+									},
+									"property": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"payoutPropertyClass": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutProperty": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutAccount": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutBeneficiary": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutPOProduct": {
+													"type": "string",
+													"description": ""
+												},
+												"payoutPercentage": {
+													"type": "number",
+													"description": ""
+												},
+												"payoutAmount": {
+													"type": "number",
+													"description": ""
+												},
+												"payoutActivity": {
+													"type": "string",
+													"description": ""
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"paymentType": {
+							"type": "string",
+							"description": "The payment type identifier"
+						},
+						"defaultSettlementAccount": {
+							"type": "string",
+							"description": ""
+						}
+					}
+				}
+			
+			}
+		},
+		"ArrangementHeader": {
+			"properties": {
+				"transactionStatus": {
+					"type": "string",
+					"description": "The status of the transaction"
+				},
+				"aaaId": {
+					"type": "string",
+					"description": "The Identifier of the aa record created"
+				},
+				"id": {
+					"type": "string",
+					"description": "The Identifier of the record created"
+				},
+				"status": {
+					"type": "string",
+					"description": "The status of the record"
+				},
+				"audit": {
+					"type": "object",
+					"properties": {
+						"T24_time": {
+							"type": "integer",
+							"format": "int32",
+							"description": "Time taken to response by T24"
+						},
+						"versionNumber": {
+							"type": "string",
+							"description": "The CURR.NO. of the record"
+						},
+						"parse_time": {
+							"type": "integer",
+							"format": "int32",
+							"description": "Time taken to parse the response by IRIS"
+						}
+					}
+				}
+			}
+		},
+		"SimulationCaptureResponse": {
+			"properties": {
+				"header": {
+					"$ref": "#/definitions/ArrangementHeader"
+				},
+				"body": {
+					"$ref": "#/definitions/SimulationCaptureResponseBody"
+				}
+			},
+			"description": "SimulationCaptureResponse"
+		},
+		"SimulationCaptureResponseBody": {
+			"type": "object",
+			"properties": {
+				"arrangementActivity": {
+					"type": "object",
+					"properties": {
+						"closureNotes": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"closureNote": {
+										"type": "string",
+										"description": ""
+									}
+								}
+							}
+						},
+						"arrangementId": {
+							"type": "string",
+							"description": "The unique identifiier of an arrangement contract. The format of the ID is YYDDDXXXXX prefixed with AA. YYDDD is the year and date of input in julian date format, XXXXX - is a random generated string."
+						},
+						"activityId": {
+							"type": "string",
+							"description": "The identifier of the activity"
+						},
+						"automaticRun": {
+							"type": "string",
+							"description": ""
+						},
+						"simulationRunReference": {
+							"type": "string",
+							"description": ""
+						},
+						"effectiveDate": {
+							"type": "string",
+							"format": "date",
+							"description": "The date on which the principal movement is effected"
+						},
+						"currencyId": {
+							"type": "string",
+							"description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+						},
+						"transactionAmount": {
+							"type": "number",
+							"description": "The transaction amount"
+						},
+						"closureReason": {
+							"type": "string",
+							"description": ""
+						}
+					}
+				},
+				"activities": {
+					"type": "object",
+					"properties": {
+						"{activityName}": {
+							"type": "object",
+							"properties": {
+								"activity": {
+									"type": "string"
+								},
+								"transactionStatus": {
+									"type": "string",
+									"description": "The status of the transaction"
+								},
+								"id": {
+									"type": "string",
+									"description": "The Identifier of the record created"
+								}
+							}
+						}
+					}
+				},
+				"properties": {
+					"type": "object",
+					"properties": {
+						"payoff": {
+							"type": "object",
+							"properties": {
+								"header": {
+									"type": "object",
+									"properties": {
+										"transactionStatus": {
+											"type": "string",
+											"description": "The status of the transaction"
+										},
+										"audit": {
+											"type": "object",
+											"properties": {
+												"parseTime": {
+													"type": "integer",
+													"format": "int32",
+													"description": "Time taken to parse the response by IRIS"
+												}
+											}
+										},
+										"id": {
+											"type": "string",
+											"description": "The Identifier of the record created"
+										},
+										"status": {
+											"type": "string",
+											"description": "The status of the record"
+										}
+									}
+								},
+								"body": {
+									"type": "object",
+									"properties": {
+										"amount": {
+											"type": "array",
+											"description": "",
+											"items": {
+												"type": "object",
+												"properties": {
+													"fixedamount": {
+														"type": "number",
+														"description": ""
+													}
+												}
+											}
+										},
+										"expiryDays": {
+											"type": "string",
+											"description": ""
+										},
+										"settleDues": {
+											"type": "string",
+											"description": ""
+										},
+										"percentage": {
+											"type": "number",
+											"description": "The percentage of holdings redeemed/subscribed"
+										},
+										"action": {
+											"type": "string",
+											"description": "view or cancel options"
+										}
+									}
+								}
+							}
+						},
+						"settlement": {
+							"type": "object",
+							"properties": {
+								"header": {
+									"type": "object",
+									"properties": {
+										"transactionStatus": {
+											"type": "string",
+											"description": "The status of the transaction"
+										},
+										"audit": {
+											"type": "object",
+											"properties": {
+												"parseTime": {
+													"type": "integer",
+													"format": "int32",
+													"description": "Time taken to parse the response by IRIS"
+												}
+											}
+										},
+										"id": {
+											"type": "string",
+											"description": "The Identifier of the record created"
+										},
+										"status": {
+											"type": "string",
+											"description": "The status of the record"
+										}
+									}
+								},
+								"body": {
+									"type": "object",
+									"properties": {
+										"settlement": {
+											"type": "array",
+											"description": "",
+											"items": {
+												"type": "object",
+												"properties": {
+													"payinSettlement": {
+														"type": "string",
+														"description": ""
+													},
+													"payoutSettlement": {
+														"type": "string",
+														"description": ""
+													},
+													"reference": {
+														"type": "array",
+														"items": {
+															"type": "object",
+															"properties": {
+																"ddMandateReference": {
+																	"type": "string",
+																	"format": "date",
+																	"description": ""
+																},
+																"payinAccount": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payinBeneficiary": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payinPercentage": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payinAmount": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payoutAccount": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutBeneficiary": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutPercentage": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payoutAmount": {
+																	"type": "number",
+																	"description": ""
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"assocSettlement": {
+											"type": "array",
+											"description": "",
+											"items": {
+												"type": "object",
+												"properties": {
+													"payinSettlement": {
+														"type": "string",
+														"description": ""
+													},
+													"payinRule": {
+														"type": "string",
+														"description": ""
+													},
+													"payinSettlementActivity": {
+														"type": "string",
+														"description": ""
+													},
+													"payinRCType": {
+														"type": "string",
+														"description": ""
+													},
+													"payinRCCondition": {
+														"type": "string",
+														"description": ""
+													},
+													"reference": {
+														"type": "array",
+														"items": {
+															"type": "object",
+															"properties": {
+																"payinAccount": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payinBeneficiary": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payinPOProduct": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payinPercentage": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payinAmount": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payinActivity": {
+																	"type": "string",
+																	"description": ""
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"asscoSettlement": {
+											"type": "array",
+											"description": "",
+											"items": {
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "array",
+														"items": {
+															"type": "object",
+															"properties": {
+																"ddMandateReference": {
+																	"type": "string",
+																	"format": "date",
+																	"description": ""
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"payout": {
+											"type": "array",
+											"description": "",
+											"items": {
+												"type": "object",
+												"properties": {
+													"payoutSettlement": {
+														"type": "string",
+														"description": ""
+													},
+													"payoutSettlementActivity": {
+														"type": "string",
+														"description": ""
+													},
+													"property": {
+														"type": "array",
+														"items": {
+															"type": "object",
+															"properties": {
+																"payoutPropertyClass": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutProperty": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutAccount": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutBeneficiary": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutPOProduct": {
+																	"type": "string",
+																	"description": ""
+																},
+																"payoutPercentage": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payoutAmount": {
+																	"type": "number",
+																	"description": ""
+																},
+																"payoutActivity": {
+																	"type": "string",
+																	"description": ""
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"paymentType": {
+											"type": "string",
+											"description": "The payment type identifier"
+										},
+										"defaultSettlementAccount": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"overrideBody": {
+			"properties": {
+				"overrideDetails": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string",
+								"description": "The identifier of the override"
+							},
+							"description": {
+								"type": "string",
+								"description": "The actual override message"
+							}
+						}
+					}
+				}
+			}
+		},
+		"ArrangementErrorResponse": {
+			"properties": {
+				"header": {
+					"$ref": "#/definitions/ArrangementHeader"
+				},
+				"error": {
+					"$ref": "#/definitions/ArrangementErrorResponseBody"
+				},
+				"override": {
+					"$ref": "#/definitions/overrideBody"
+				}
+			},
+			"description": "ArrangementErrorResponse"
+		},
+		"ArrangementErrorResponseBody": {
+			"type": "object",
+			"properties": {
+				"errorDetails": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"fieldName": {
+								"type": "string",
+								"description": "The name of the field"
+							},
+							"code": {
+								"type": "string",
+								"description": "The identifier of the error message"
+							},
+							"message": {
+								"type": "string",
+								"description": "The actual t24 error message"
+							},
+							"property": {
+								"type": "string",
+								"description": "The corresponding property"
+							}
+						}
+					}
+				},
+				"type": {
+					"type": "string",
+					"description": "The identifier of error type"
+				}
+			}
+		}
+	}
+}

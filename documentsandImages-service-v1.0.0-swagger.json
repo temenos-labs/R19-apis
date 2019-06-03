@@ -1,0 +1,1153 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Get and management of documents and images ",
+        "version": "v1.0.0",
+        "title": "Documents and Images APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/customerProfile/customers/documents/fileUploads/{uploadId}":
+        {
+            "post":
+            {
+                "operationId": "createProfilePictureUpload",
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createProfilePictureUpload"
+                    }
+                },
+                {
+                    "name": "uploadId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ProfilePictureUploadResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ProfilePictureUploadResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateProfilePictureUpload",
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateProfilePictureUpload"
+                    }
+                },
+                {
+                    "name": "uploadId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ProfilePictureUploadResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ProfilePictureUploadResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "operationId": "deleteProfilePictureUpload",
+                "parameters": [
+                {
+                    "name": "uploadId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ProfilePictureUploadResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ProfilePictureUploadResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/customerProfile/customers/documents/{documentId}":
+        {
+            "put":
+            {
+                "operationId": "updateDocumentImage",
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateDocumentImage"
+                    }
+                },
+                {
+                    "name": "documentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "operationId": "deleteDocumentImage",
+                "parameters": [
+                {
+                    "name": "documentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/customerProfile/customers/documents":
+        {
+            "get":
+            {
+                "operationId": "getDocumentImages",
+                "parameters": [
+                {
+                    "name": "imageReference",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "imageApplication",
+                    "in": "query",
+                    "description": "This field is used to link an image to a T24 application or file.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "imageType",
+                    "in": "query",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "imageReferenceId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImagesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImagesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createDocumentImage",
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createDocumentImage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "updateProfilePictureUpload":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateProfilePictureUploadBody"
+                }
+            },
+            "description": "ProfilePictureUpload"
+        },
+        "updateProfilePictureUploadBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "fileUpload":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "ProfilePictureUploadResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ProfilePictureUploadResponseBody"
+                }
+            },
+            "description": "ProfilePictureUploadResponse"
+        },
+        "ProfilePictureUploadResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "fileUpload":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "ScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ScreenErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ScreenErrorResponse"
+        },
+        "ScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createProfilePictureUpload":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createProfilePictureUploadBody"
+                }
+            },
+            "description": "ProfilePictureUpload"
+        },
+        "createProfilePictureUploadBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "fileUpload":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "updateDocumentImage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateDocumentImageBody"
+                }
+            },
+            "description": "DocumentandImage"
+        },
+        "updateDocumentImageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "descriptions":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The name used for display purposes"
+                            }
+                        }
+                    }
+                },
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "imagePath":
+                {
+                    "type": "string",
+                    "description": "Identifies the image stored on the file system."
+                },
+                "notes":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "DocumentandImageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/DocumentandImageResponseBody"
+                }
+            },
+            "description": "DocumentandImageResponse"
+        },
+        "DocumentandImageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "descriptions":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The name used for display purposes"
+                            }
+                        }
+                    }
+                },
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "imagePath":
+                {
+                    "type": "string",
+                    "description": "Identifies the image stored on the file system."
+                },
+                "notes":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "createDocumentImage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createDocumentImageBody"
+                }
+            },
+            "description": "DocumentandImage"
+        },
+        "createDocumentImageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "descriptions":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The name used for display purposes"
+                            }
+                        }
+                    }
+                },
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "imagePath":
+                {
+                    "type": "string",
+                    "description": "Identifies the image stored on the file system."
+                },
+                "notes":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "DocumentandImagesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/DocumentandImagesResponseBody"
+                }
+            },
+            "description": "DocumentandImagesResponse"
+        },
+        "DocumentandImagesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "imageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the image used for advertisement",
+                        "maxLength": 12
+                    },
+                    "imageType":
+                    {
+                        "type": "string",
+                        "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE.",
+                        "maxLength": 15
+                    },
+                    "imageApplication":
+                    {
+                        "type": "string",
+                        "description": "This field is used to link an image to a T24 application or file.",
+                        "maxLength": 40
+                    },
+                    "imageContent":
+                    {
+                        "type": "string",
+                        "description": "This field is used to store the image base64 content.",
+                        "maxLength": 40
+                    },
+                    "companyMnemonic":
+                    {
+                        "type": "string",
+                        "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2",
+                        "maxLength": 3
+                    },
+                    "imageReference":
+                    {
+                        "type": "string",
+                        "description": "The reference of the image",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "fileName":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 50
+                    },
+                    "imagePath":
+                    {
+                        "type": "string",
+                        "description": "Identifies the image stored on the file system.",
+                        "maxLength": 15
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

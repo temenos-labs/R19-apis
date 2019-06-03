@@ -1,0 +1,1619 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves treasury configuration that is used by the legal entity",
+        "version": "v1.0.0",
+        "title": "Reference Treasury API"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/reference/treasury/forex/agreementTypes":
+        {
+            "get":
+            {
+                "operationId": "getForexAgreementTypes",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexAgreementTypesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexAgreementTypesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexAgreementTypesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexAgreementTypesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/forex/agreementTypes/{agreementTypeId}":
+        {
+            "get":
+            {
+                "operationId": "getForexAgreementType",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "agreementTypeId",
+                    "in": "path",
+                    "description": "The identifier of the agreement type",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexAgreementTypeResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexAgreementTypeResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexAgreementTypeErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexAgreementTypeErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/forex/dealMethods":
+        {
+            "get":
+            {
+                "operationId": "getForexDealMethods",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexDealMethodsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexDealMethodsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexDealMethodsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexDealMethodsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/forex/dealMethods/{dealMethodId}":
+        {
+            "get":
+            {
+                "operationId": "getForexDealMethod",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "dealMethodId",
+                    "in": "path",
+                    "description": "The identifier of the deal method, e.g. RE:for Reuter, TL:for Telex, PM:for Telephone etc.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexDealMethodResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexDealMethodResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexDealMethodErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexDealMethodErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/forex/revaluationTypes":
+        {
+            "get":
+            {
+                "operationId": "getForexRevaluationTypes",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexRevaluationTypesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexRevaluationTypesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexRevaluationTypesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexRevaluationTypesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/forex/revaluationTypes/{revaluationTypeId}":
+        {
+            "get":
+            {
+                "operationId": "getForexRevaluationType",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "revaluationTypeId",
+                    "in": "path",
+                    "description": "The revaluation type identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getForexRevaluationTypeResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexRevaluationTypeResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getForexRevaluationTypeErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getForexRevaluationTypeErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/settings":
+        {
+            "get":
+            {
+                "operationId": "getTreasurySettings",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getTreasurySettingsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTreasurySettingsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getTreasurySettingsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTreasurySettingsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/dates/{currencyOrPair}":
+        {
+            "get":
+            {
+                "operationId": "getPeriodDates",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyOrPair",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "in": "query",
+                    "description": "The start date",
+                    "required": false,
+                    "type": "string",
+                    "format": "date"
+                },
+                {
+                    "name": "period",
+                    "in": "query",
+                    "description": "The unit of time that a financial agreement may be described as",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPeriodDatesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPeriodDatesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPeriodDatesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPeriodDatesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/settlementMethods":
+        {
+            "get":
+            {
+                "operationId": "getSettlementMethods",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getSettlementMethodsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getSettlementMethodsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getSettlementMethodsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getSettlementMethodsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/agreementTypes":
+        {
+            "get":
+            {
+                "operationId": "getAgreementTypes",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAgreementTypesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAgreementTypesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAgreementTypesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAgreementTypesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/treasury/agreementTypes/{agreementTypeId}":
+        {
+            "get":
+            {
+                "operationId": "getAgreementType",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "agreementTypeId",
+                    "in": "path",
+                    "description": "The identifier of the agreement type",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAgreementTypeResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAgreementTypeResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAgreementTypeErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAgreementTypeErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getForexAgreementTypesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexAgreementTypesResponseBody"
+                }
+            },
+            "description": "getForexAgreementTypesResponse"
+        },
+        "getForexAgreementTypesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "agreementTypeId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the agreement type",
+                        "maxLength": 21
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "departmentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the department",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getForexAgreementTypesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexAgreementTypesErrorResponseBody"
+                }
+            },
+            "description": "getForexAgreementTypesErrorResponse"
+        },
+        "getForexAgreementTypesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getForexAgreementTypeResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexAgreementTypeResponseBody"
+                }
+            },
+            "description": "getForexAgreementTypeResponse"
+        },
+        "getForexAgreementTypeResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "agreementTypeId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the agreement type",
+                        "maxLength": 21
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "departmentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the department",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "getForexAgreementTypeErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexAgreementTypeErrorResponseBody"
+                }
+            },
+            "description": "getForexAgreementTypeErrorResponse"
+        },
+        "getForexAgreementTypeErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getForexDealMethodsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexDealMethodsResponseBody"
+                }
+            },
+            "description": "getForexDealMethodsResponse"
+        },
+        "getForexDealMethodsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "dealMethodId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the deal method, e.g. RE:for Reuter, TL:for Telex, PM:for Telephone etc.",
+                        "maxLength": 2
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 34
+                    }
+                }
+            }
+        },
+        "getForexDealMethodsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexDealMethodsErrorResponseBody"
+                }
+            },
+            "description": "getForexDealMethodsErrorResponse"
+        },
+        "getForexDealMethodsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getForexDealMethodResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexDealMethodResponseBody"
+                }
+            },
+            "description": "getForexDealMethodResponse"
+        },
+        "getForexDealMethodResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "dealMethodId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the deal method, e.g. RE:for Reuter, TL:for Telex, PM:for Telephone etc.",
+                        "maxLength": 2
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 34
+                    }
+                }
+            }
+        },
+        "getForexDealMethodErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexDealMethodErrorResponseBody"
+                }
+            },
+            "description": "getForexDealMethodErrorResponse"
+        },
+        "getForexDealMethodErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getForexRevaluationTypesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexRevaluationTypesResponseBody"
+                }
+            },
+            "description": "getForexRevaluationTypesResponse"
+        },
+        "getForexRevaluationTypesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "revaluationTypeId":
+                    {
+                        "type": "string",
+                        "description": "The revaluation type identifier",
+                        "maxLength": 2
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 25
+                    },
+                    "swapFowardProfitLoss":
+                    {
+                        "type": "string",
+                        "description": "The profit loss amount for the Swap or Forward contract",
+                        "maxLength": 3
+                    }
+                }
+            }
+        },
+        "getForexRevaluationTypesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexRevaluationTypesErrorResponseBody"
+                }
+            },
+            "description": "getForexRevaluationTypesErrorResponse"
+        },
+        "getForexRevaluationTypesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getForexRevaluationTypeResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getForexRevaluationTypeResponseBody"
+                }
+            },
+            "description": "getForexRevaluationTypeResponse"
+        },
+        "getForexRevaluationTypeResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "revaluationTypeId":
+                    {
+                        "type": "string",
+                        "description": "The revaluation type identifier",
+                        "maxLength": 2
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 25
+                    },
+                    "swapFowardProfitLoss":
+                    {
+                        "type": "string",
+                        "description": "The profit loss amount for the Swap or Forward contract",
+                        "maxLength": 3
+                    }
+                }
+            }
+        },
+        "getForexRevaluationTypeErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getForexRevaluationTypeErrorResponseBody"
+                }
+            },
+            "description": "getForexRevaluationTypeErrorResponse"
+        },
+        "getForexRevaluationTypeErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getTreasurySettingsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getTreasurySettingsResponseBody"
+                }
+            },
+            "description": "getTreasurySettingsResponse"
+        },
+        "getTreasurySettingsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "companyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the company, following the format CCGGGLLLL, where: CC is the country code, GGG is Company Group Code and LLLL is the Local Code. Country Code must be a valid countryCode, Company Group Code must be 3 numeric characters in the range 001-999 and must be a valid companyGroup. The Local Code is 4 numeric characters in the range 0001-9999, e.g. GB0010001",
+                        "maxLength": 20
+                    },
+                    "localCurrencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the local currency of the institution"
+                    },
+                    "currentWorkingDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Identifies the date of business being processed in the financial Instituion."
+                    },
+                    "nextWorkingDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "This is the state of the next business day which will be processed in this Company."
+                    },
+                    "rateSource":
+                    {
+                        "type": "string",
+                        "description": "The source of the interest or tax rate"
+                    },
+                    "rateProvider":
+                    {
+                        "type": "string",
+                        "description": "The provider of the interest or tax rate"
+                    },
+                    "revaluationCurrencyId":
+                    {
+                        "type": "string",
+                        "description": "The revaluation currency"
+                    }
+                }
+            }
+        },
+        "getTreasurySettingsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getTreasurySettingsErrorResponseBody"
+                }
+            },
+            "description": "getTreasurySettingsErrorResponse"
+        },
+        "getTreasurySettingsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getPeriodDatesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPeriodDatesResponseBody"
+                }
+            },
+            "description": "getPeriodDatesResponse"
+        },
+        "getPeriodDatesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "displacement":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "date":
+                    {
+                        "type": "string",
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "getPeriodDatesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPeriodDatesErrorResponseBody"
+                }
+            },
+            "description": "getPeriodDatesErrorResponse"
+        },
+        "getPeriodDatesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getSettlementMethodsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getSettlementMethodsResponseBody"
+                }
+            },
+            "description": "getSettlementMethodsResponse"
+        },
+        "getSettlementMethodsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "methodId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the method",
+                        "maxLength": 15
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 30
+                    },
+                    "paymentCurrencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the payment currency",
+                        "maxLength": 6
+                    },
+                    "paymentAccountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the payment account",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "getSettlementMethodsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getSettlementMethodsErrorResponseBody"
+                }
+            },
+            "description": "getSettlementMethodsErrorResponse"
+        },
+        "getSettlementMethodsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getAgreementTypesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAgreementTypesResponseBody"
+                }
+            },
+            "description": "getAgreementTypesResponse"
+        },
+        "getAgreementTypesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "agreementTypeId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the agreement type",
+                        "maxLength": 30
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "defaultAgreement":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 30
+                    },
+                    "defaultDate":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 11
+                    }
+                }
+            }
+        },
+        "getAgreementTypesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAgreementTypesErrorResponseBody"
+                }
+            },
+            "description": "getAgreementTypesErrorResponse"
+        },
+        "getAgreementTypesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getAgreementTypeResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAgreementTypeResponseBody"
+                }
+            },
+            "description": "getAgreementTypeResponse"
+        },
+        "getAgreementTypeResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "agreementTypeId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the agreement type",
+                        "maxLength": 30
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "defaultAgreement":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 30
+                    },
+                    "defaultDate":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 11
+                    }
+                }
+            }
+        },
+        "getAgreementTypeErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAgreementTypeErrorResponseBody"
+                }
+            },
+            "description": "getAgreementTypeErrorResponse"
+        },
+        "getAgreementTypeErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

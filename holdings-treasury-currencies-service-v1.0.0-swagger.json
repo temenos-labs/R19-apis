@@ -1,0 +1,309 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves currency position information for the legal entity",
+        "version": "v1.0.0",
+        "title": "Holdings Treasury Currencies APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/holdings/currencies/{currencyId}/rates":
+        {
+            "get":
+            {
+                "operationId": "getCurrencyMarketRates",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "currencyId",
+                    "in": "path",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "rateSource",
+                    "in": "query",
+                    "description": "The source of the interest or tax rate",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "rateProvider",
+                    "in": "query",
+                    "description": "The provider of the interest or tax rate",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "assetType",
+                    "in": "query",
+                    "description": "The type of the asset",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dateOrPeriod",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "rateIndicator",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "interpolationMethod",
+                    "in": "query",
+                    "description": "The method applied to derive an interpolated rate",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCurrencyMarketRatesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyMarketRatesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCurrencyMarketRatesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCurrencyMarketRatesErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getCurrencyMarketRatesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCurrencyMarketRatesResponseBody"
+                }
+            },
+            "description": "getCurrencyMarketRatesResponse"
+        },
+        "getCurrencyMarketRatesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "rateSource":
+                    {
+                        "type": "string",
+                        "description": "The source of the interest or tax rate",
+                        "maxLength": 20
+                    },
+                    "rateProvider":
+                    {
+                        "type": "string",
+                        "description": "The provider of the interest or tax rate",
+                        "maxLength": 2
+                    },
+                    "currencyOrPair":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 6
+                    },
+                    "assetType":
+                    {
+                        "type": "string",
+                        "description": "The type of the asset",
+                        "maxLength": 20
+                    },
+                    "dateOrPeriod":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "rateIndicator":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 1
+                    },
+                    "interpolationMarker":
+                    {
+                        "type": "string",
+                        "description": "An indicator set if a rate has been derived through interpolation",
+                        "maxLength": 1
+                    },
+                    "marketRate":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "daysSinceToday":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getCurrencyMarketRatesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCurrencyMarketRatesErrorResponseBody"
+                }
+            },
+            "description": "getCurrencyMarketRatesErrorResponse"
+        },
+        "getCurrencyMarketRatesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

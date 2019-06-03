@@ -1,0 +1,282 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "fundsAvailability",
+        "version": "v1.0.0",
+        "title": "fundsAvailability"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["https"],
+    "paths":
+    {
+        "/party/balance":
+        {
+            "get":
+            {
+                "operationId": "getBalance",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "account",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "cardNumber",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "instructedAmount",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "payee",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionCode",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "creditDebitIndicator",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getBalanceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getBalanceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getBalanceErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getBalanceErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getBalanceResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getBalanceResponseBody"
+                }
+            },
+            "description": "getBalanceResponse"
+        },
+        "getBalanceResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "accountId":
+                    {
+                        "type": "string",
+                        "description": "Id for the application is an account for which mandate is given, prefixed with 'D-' and suffixed with '.Sequence Number'.\nID can be given just as an Account Number and system formats the Accounts number with a prefix of 'D-' & suffix  '.Sequence Number'.\nReversal function is not allowed for this application and DDI can be marked as Inactive by changing the the Status of DDI to 'CANCELLED.DDI'.\nStandard numeric Account number or 3-10 character Account Mnemonic (uppercase alpha, numeric or .) - type MNE. or 6-12 character Internal Account Number (uppercase alpha or numeric) - type SS.\nAccount currency should be equal to Local currency.\nFormat is 'D-''Account Number''.Sequence Number wherein Input of Account number is mandatory.\n"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string",
+                        "description": "The IBAN of the account"
+                    },
+                    "cardNumber":
+                    {
+                        "type": "string",
+                        "description": "Card issues are defined with an ID consisting of three elements. The card type, a full stop and the card number. The card type must be a valid card defined on the CARD.TYPE table. The card number may be any alphanumeric construction, commonly a 16 numeric number is used.\nExample\nVISA.5332870296579001\nThe id must be in the form of:  CCCC.AAAAAAAAAAAAAAAA  Where CCCC is a valid CARD.TYPE record.  A full stop seperator  And where AAAAAAAAAAAAAAAA is a unique identifier.  Examples:   VISA.1234567887654321   GC.1111222233334444   AB21.1111111122222222\n",
+                        "maxLength": 20
+                    },
+                    "instructedAmount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 19
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT Currency Code for the entry. The Currency of the Account in Field 1.  Not used in Entries over local currency Accounts.\n3 type S (upper-case alpha or numeric) characters Currency Code, or blank. (Internal file, no input.)\n",
+                        "maxLength": 19
+                    },
+                    "accountStatus":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 19
+                    },
+                    "dateTime":
+                    {
+                        "type": "string",
+                        "description": "Timestamp of the issue that is logged.\n17 characters Date Time format.\nIt need to be displayed as DD MMM YYYY HH:MM:SS.sss.\nExample: 12 JAN 2015 12:34:25.123\nThe value is not editable by the user.\n",
+                        "maxLength": 20
+                    },
+                    "fundsAvailable":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 19
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            }
+        },
+        "getBalanceErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getBalanceErrorResponseBody"
+                }
+            },
+            "description": "getBalanceErrorResponse"
+        },
+        "getBalanceErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

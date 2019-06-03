@@ -1,0 +1,974 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "version": "v1.0.0",
+        "title": "Accounts Provider APIs",
+        "description": "These APIs are used to get the account information."
+    },
+    "host": "localhost:9089",
+    "basePath": "/irf-test-web/api/v1.0.0",
+    "schemes": [ "https", "http"
+  ],
+    "paths":
+    {
+        "/holdings/PSD2/accounts/{accountId}/transactions":
+        {
+            "get":
+            {
+                "operationId": "getTransactionHistory",
+                "description": "Used to get the transactions of a particular account.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "fromDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The start date from which records in response should be displayed."
+                },
+                {
+                    "name": "toDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The end date upto which records in response should be displayed."
+                },
+                {
+                    "name": "viewType",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates the summary or detail of account. S-Summary, D-Detail."
+                },
+                {
+                    "name": "toTime",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates the time upto which records in response should be displayed."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getTransactionHistoryResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionHistoryResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getTransactionHistoryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionHistoryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/PSD2/accounts/{accountId}/balance":
+        {
+            "get":
+            {
+                "operationId": "getAccountBalance",
+                "description": "Used to get the balance of a particular account.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAccountBalanceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountBalanceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAccountBalanceErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountBalanceErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/PSD2/accounts/{accountId}/status":
+        {
+            "get":
+            {
+                "operationId": "getAccountStatus",
+                "description": "Used to get the status of a particular account.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAccountStatusResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountStatusResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAccountStatusErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountStatusErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/PSD2/accounts/{accountId}":
+        {
+            "get":
+            {
+                "operationId": "getAccountOverview",
+                "description": "Used to get the overview of a particular account.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAccountOverviewResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountOverviewResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAccountOverviewErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountOverviewErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/PSD2/accounts/{accountId}/balances":
+        {
+            "get":
+            {
+                "operationId": "getAccountBalanceReport",
+                "description": "Used to get the balance report of a particular account.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "amount",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "description": "Indicates the amount you want to check."
+                },
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "description": "Indicates the Currency of the amount you want to check.3 type SSS (uppercase alpha) character or 1-3 numeric character Currency code. Example: For US Dollars, use USD."
+                },
+                {
+                    "name": "transactionType",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "This is the code by which the Transaction details can be identified.The following ranges have been assigned within EBS: 001 - 099 = Data Capture 100 - 199 = Internal & General use 200 - 249 = Funds Transfer 250 - 299 = Money Market/Fiduciaries 300 - 349 = Foreign Exchange 350 - 399 = Interest & Charges 400 - 499 = Commercial Loans & Deposits 500 - 599 = Trade Finance 600 - 649 = Securities 650 - 699 = Financial Futures 700 - 749 = Retail Banking 750 - 799 = Bonds. Validation Rules:1-10(Max Value) numeric characters Transaction Code."
+                },
+                {
+                    "name": "debitCreditIndicator",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates if the Transaction code is to be used for Debit or Credit entries. This information is used by the system to verify the sign of the Transaction.Validation Rules:Up to 6 type SSS (uppercase alpha) characters: CREDIT DEBIT."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getAccountBalanceReportResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountBalanceReportResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getAccountBalanceReportErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getAccountBalanceReportErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string"
+                },
+                "status":
+                {
+                    "type": "string"
+                },
+                "transactionStatus":
+                {
+                    "type": "string"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            }
+        },
+        "getAccountBalanceResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAccountBalanceResponseBody"
+                }
+            },
+            "description": "getAccountBalanceResponse"
+        },
+        "getAccountBalanceResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "accountId":
+                    {
+                        "type": "string"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string"
+                    },
+                    "currency":
+                    {
+                        "type": "string"
+                    },
+                    "availableBalance":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    }
+                }
+            }
+        },
+        "getAccountBalanceErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAccountBalanceErrorResponseBody"
+                }
+            },
+            "description": "getAccountBalanceErrorResponse"
+        },
+        "getTransactionHistoryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getAccountStatusResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAccountStatusResponseBody"
+                }
+            },
+            "description": "getAccountStatusResponse"
+        },
+        "getAccountOverviewErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAccountOverviewErrorResponseBody"
+                }
+            },
+            "description": "getAccountOverviewErrorResponse"
+        },
+        "getAccountOverviewErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getAccountBalanceErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "T24_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "parse_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "getAccountOverviewResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "accountStatus":
+                    {
+                        "type": "string"
+                    },
+                    "accountId":
+                    {
+                        "type": "string"
+                    },
+                    "productId":
+                    {
+                        "type": "string"
+                    },
+                    "ledgerBalance":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "displayName":
+                    {
+                        "type": "string"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string"
+                    },
+                    "currency":
+                    {
+                        "type": "string"
+                    },
+                    "BIC":
+                    {
+                        "type": "string"
+                    },
+                    "availableBalance":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    }
+                }
+            }
+        },
+        "getAccountBalanceReportResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "accountStatus":
+                    {
+                        "type": "string"
+                    },
+                    "dateTime":
+                    {
+                        "type": "string"
+                    },
+                    "arrangementId":
+                    {
+                        "type": "string"
+                    },
+                    "accountId":
+                    {
+                        "type": "string"
+                    },
+                    "activityId":
+                    {
+                        "type": "string"
+                    },
+                    "productId":
+                    {
+                        "type": "string"
+                    },
+                    "balanceStatus":
+                    {
+                        "type": "string"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "getAccountBalanceReportResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAccountBalanceReportResponseBody"
+                }
+            },
+            "description": "getAccountBalanceReportResponse"
+        },
+        "getTransactionHistoryResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getTransactionHistoryResponseQueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getTransactionHistoryResponseBody"
+                }
+            },
+            "description": "getTransactionHistoryResponse"
+        },
+        "getTransactionHistoryResponseQueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                },
+                "data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "id":
+                        {
+                            "type": "string"
+                        },
+                        "accountId":
+                        {
+                            "type": "string"
+                        },
+                        "accountDesc":
+                        {
+                            "type": "string"
+                        },
+                        "accountIBAN":
+                        {
+                            "type": "string"
+                        },
+                        "openBalance":
+                        {
+                            "type": "number"
+                        },
+                        "closeBalance":
+                        {
+                            "type": "number"
+                        },
+                        "executionEndTime":
+                        {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "getAccountStatusErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getTransactionHistoryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getTransactionHistoryErrorResponseBody"
+                }
+            },
+            "description": "getTransactionHistoryErrorResponse"
+        },
+        "getAccountStatusResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "accountStatus":
+                    {
+                        "type": "string"
+                    },
+                    "accountId":
+                    {
+                        "type": "string"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "getAccountOverviewResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getAccountOverviewResponseBody"
+                }
+            },
+            "description": "getAccountOverviewResponse"
+        },
+        "getAccountBalanceReportErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAccountBalanceReportErrorResponseBody"
+                }
+            },
+            "description": "getAccountBalanceReportErrorResponse"
+        },
+        "getTransactionHistoryResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "amount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "toAccountId":
+                    {
+                        "type": "string"
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "transactionTypeName":
+                    {
+                        "type": "string"
+                    },
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "maxLength": 90
+                    },
+                    "toCustomerId":
+                    {
+                        "type": "string"
+                    },
+                    "transactionType":
+                    {
+                        "type": "string",
+                        "maxLength": 3
+                    },
+                    "exchangeRate":
+                    {
+                        "type": "string",
+                        "maxLength": 11
+                    },
+                    "remittanceInformation":
+                    {
+                        "type": "string",
+                        "maxLength": 65
+                    },
+                    "transactionAmount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "bookingDate":
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "maxLength": 3
+                    }
+                }
+            }
+        },
+        "getAccountStatusErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getAccountStatusErrorResponseBody"
+                }
+            },
+            "description": "getAccountStatusErrorResponse"
+        },
+        "getAccountBalanceReportErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

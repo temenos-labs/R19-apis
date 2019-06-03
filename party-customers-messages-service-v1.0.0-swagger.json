@@ -1,0 +1,1697 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of messages to and from customers.",
+        "version": "v1.0.0",
+        "title": "Party Customers Messages APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/party/customers/secureMessages/{messageId}":
+        {
+            "get":
+            {
+                "operationId": "getMessage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "messageId",
+                    "in": "path",
+                    "description": "The identifier of the message",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getMessageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMessageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getMessageErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMessageErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateMessage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "messageId",
+                    "in": "path",
+                    "description": "The identifier of the message",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateMessage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateMessageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateMessageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateMessageErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateMessageErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/secureMessages/{messageId}":
+        {
+            "get":
+            {
+                "operationId": "getMessageByCustomer",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "messageId",
+                    "in": "path",
+                    "description": "The identifier of the message",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getMessageByCustomerResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMessageByCustomerResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getMessageByCustomerErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getMessageByCustomerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateMessageByCustomer",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "messageId",
+                    "in": "path",
+                    "description": "The identifier of the message",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateMessageByCustomer"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateMessageByCustomerResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateMessageByCustomerResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateMessageByCustomerErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateMessageByCustomerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/secureMessages":
+        {
+            "post":
+            {
+                "operationId": "createMessage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createMessage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createMessageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMessageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createMessageErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMessageErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/secureMessages":
+        {
+            "get":
+            {
+                "operationId": "getSecureMessagesForCustomer",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getSecureMessagesForCustomerResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getSecureMessagesForCustomerResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getSecureMessagesForCustomerErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getSecureMessagesForCustomerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createMessageForCustomer",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createMessageForCustomer"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createMessageForCustomerResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMessageForCustomerResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createMessageForCustomerErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createMessageForCustomerErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "type": "object",
+            "properties":
+            {
+                "override_acceptId":
+                {
+                    "type": "string",
+                    "description": "pass the record Id to accept all its overrides"
+                }
+            }
+        },
+        "updateMessage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateMessageBody"
+                }
+            },
+            "description": "updateMessage"
+        },
+        "updateMessageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "updateMessageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateMessageResponseBody"
+                }
+            },
+            "description": "updateMessageResponse"
+        },
+        "updateMessageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "updateMessageErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateMessageErrorResponseBody"
+                }
+            },
+            "description": "updateMessageErrorResponse"
+        },
+        "updateMessageErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getMessageByCustomerResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getMessageByCustomerResponseBody"
+                }
+            },
+            "description": "getMessageByCustomerResponse"
+        },
+        "getMessageByCustomerResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "getMessageByCustomerErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getMessageByCustomerErrorResponseBody"
+                }
+            },
+            "description": "getMessageByCustomerErrorResponse"
+        },
+        "getMessageByCustomerErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getMessageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getMessageResponseBody"
+                }
+            },
+            "description": "getMessageResponse"
+        },
+        "getMessageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "getMessageErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getMessageErrorResponseBody"
+                }
+            },
+            "description": "getMessageErrorResponse"
+        },
+        "getMessageErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "createMessageForCustomer":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMessageForCustomerBody"
+                }
+            },
+            "description": "createMessageForCustomer"
+        },
+        "createMessageForCustomerBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "createMessageForCustomerResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMessageForCustomerResponseBody"
+                }
+            },
+            "description": "createMessageForCustomerResponse"
+        },
+        "createMessageForCustomerResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "createMessageForCustomerErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createMessageForCustomerErrorResponseBody"
+                }
+            },
+            "description": "createMessageForCustomerErrorResponse"
+        },
+        "createMessageForCustomerErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "updateMessageByCustomer":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateMessageByCustomerBody"
+                }
+            },
+            "description": "updateMessageByCustomer"
+        },
+        "updateMessageByCustomerBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "updateMessageByCustomerResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateMessageByCustomerResponseBody"
+                }
+            },
+            "description": "updateMessageByCustomerResponse"
+        },
+        "updateMessageByCustomerResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "updateMessageByCustomerErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateMessageByCustomerErrorResponseBody"
+                }
+            },
+            "description": "updateMessageByCustomerErrorResponse"
+        },
+        "createMessage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMessageBody"
+                }
+            },
+            "description": "createMessage"
+        },
+        "createMessageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "createMessageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createMessageResponseBody"
+                }
+            },
+            "description": "createMessageResponse"
+        },
+        "createMessageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toAccountOfficerId":
+                {
+                    "type": "string",
+                    "description": "The unique account officer identifier"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "createMessageErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createMessageErrorResponseBody"
+                }
+            },
+            "description": "createMessageErrorResponse"
+        },
+        "createMessageErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateMessageByCustomerErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getSecureMessagesForCustomerResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getSecureMessagesForCustomerResponseBody"
+                }
+            },
+            "description": "getSecureMessagesForCustomerResponse"
+        },
+        "getSecureMessagesForCustomerResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "messages":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "message":
+                                {
+                                    "type": "array",
+                                    "description": "",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "toStatus":
+                    {
+                        "type": "string",
+                        "description": "Defines the status of the message",
+                        "maxLength": 35
+                    },
+                    "messageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the message",
+                        "maxLength": 35
+                    },
+                    "subject":
+                    {
+                        "type": "string",
+                        "description": "The subject of the message to be sent or received.",
+                        "maxLength": 80
+                    },
+                    "dateSent":
+                    {
+                        "type": "string",
+                        "description": "Holds the date when the item was sent.",
+                        "maxLength": 11
+                    },
+                    "sentAt":
+                    {
+                        "type": "string",
+                        "description": "The sent at time",
+                        "maxLength": 35
+                    },
+                    "fromDepartmentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the originating department",
+                        "maxLength": 35
+                    },
+                    "fromDepartmentName":
+                    {
+                        "type": "string",
+                        "description": "The display name of the originating department",
+                        "maxLength": 35
+                    },
+                    "parentMessageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the parent message.",
+                        "maxLength": 35
+                    },
+                    "toDepartmentId":
+                    {
+                        "type": "string",
+                        "description": "The unique department identifier, to which the message is to be sent",
+                        "maxLength": 35
+                    },
+                    "toDepartmentName":
+                    {
+                        "type": "string",
+                        "description": "The department name, to which the message is to be sent",
+                        "maxLength": 35
+                    },
+                    "toCustomerId":
+                    {
+                        "type": "string",
+                        "description": "The unique customer identifier, to whom the message is to be sent ",
+                        "maxLength": 10
+                    },
+                    "fromCustomerId":
+                    {
+                        "type": "string",
+                        "description": "Identifies the first customerId in a range",
+                        "maxLength": 10
+                    },
+                    "uploadId":
+                    {
+                        "type": "string",
+                        "description": "The unique ID of the uploaded file",
+                        "maxLength": 12
+                    },
+                    "fileUpload":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 50
+                    }
+                }
+            }
+        },
+        "getSecureMessagesForCustomerErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getSecureMessagesForCustomerErrorResponseBody"
+                }
+            },
+            "description": "getSecureMessagesForCustomerErrorResponse"
+        },
+        "getSecureMessagesForCustomerErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

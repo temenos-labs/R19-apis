@@ -1,0 +1,722 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the viewing and creation of Instruments Share Skeleton",
+        "version": "v1.0.0",
+        "title": "Reference Instrument Share Skeleton APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/reference/instruments/shares":
+        {
+            "post":
+            {
+                "operationId": "createSecurityShare",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/referenceSecurityShare"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityShareResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/referenceSecurityShareResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/instruments/{instrumentId}/shares":
+        {
+            "get":
+            {
+                "operationId": "getSecurityShare",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "instrumentId",
+                    "in": "path",
+                    "description": "The identifier of the instrument",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityShareResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/referenceSecurityShareResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "referenceSecurityShare":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/referenceSecurityShareBody"
+                }
+            },
+            "description": "referenceSecurityShare"
+        },
+        "referenceSecurityShareBody":
+        {
+            "type": "object",
+            "required": ["lastPrice", "mnemonic"],
+            "properties":
+            {
+                "alternateInstrumentDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "alternateInstrument":
+                            {
+                                "type": "string",
+                                "description": "The alternate security identifier"
+                            },
+                            "alternateInstrumentId":
+                            {
+                                "type": "string",
+                                "description": "The alternate security reference for the instrument"
+                            }
+                        }
+                    }
+                },
+                "minimumInvestmentDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "currencyId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                            },
+                            "initialInvestment":
+                            {
+                                "type": "number",
+                                "description": "Indicates the amount of initial investment"
+                            },
+                            "subsequentInvestment":
+                            {
+                                "type": "number",
+                                "description": "Indicates the amount of subsequent investment"
+                            },
+                            "SIPAmount":
+                            {
+                                "type": "number",
+                                "description": "Indicates the SIP amount"
+                            },
+                            "redemptionAmount":
+                            {
+                                "type": "number",
+                                "description": "Indicates the redemption amount"
+                            }
+                        }
+                    }
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "mnemonic":
+                {
+                    "type": "string",
+                    "description": "The alternative means of referencing the record"
+                },
+                "ISIN":
+                {
+                    "type": "string",
+                    "description": "The International Securities Identification Number of the instrument"
+                },
+                "subAssetType":
+                {
+                    "type": "number",
+                    "description": "The name of the Sub Asset Type"
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                },
+                "depositoryId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                },
+                "priceType":
+                {
+                    "type": "string",
+                    "description": "Defines the calculation method to be used when calculating the price of a trade"
+                },
+                "lastPrice":
+                {
+                    "type": "number",
+                    "description": "Indicates the last recorded price of the instrument"
+                },
+                "companyDomicile":
+                {
+                    "type": "string",
+                    "description": "Specifies the country of domicile, of the parent company or government or establishment issuing the Security"
+                },
+                "instrumentDomicile":
+                {
+                    "type": "string",
+                    "description": "Specifies the country domicile of the Security being issued"
+                },
+                "priceUpdateCode":
+                {
+                    "type": "string",
+                    "description": "Specifies the type of price update that will update the price of this security"
+                },
+                "industryId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the industry"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "parValue":
+                {
+                    "type": "number",
+                    "description": "Defines par value of the stock in the Security Currency"
+                },
+                "tradingUnits":
+                {
+                    "type": "number",
+                    "description": "Specifies the smallest nominal amount that may be traded"
+                },
+                "brokerTradingUnits":
+                {
+                    "type": "number",
+                    "description": "Specifies the smallest nominal amount that may be traded"
+                },
+                "couponTaxCodeId":
+                {
+                    "type": "string",
+                    "description": "Indicates the tax position"
+                },
+                "minimumHolding":
+                {
+                    "type": "number",
+                    "description": "Specifies the Minimum holding for the security."
+                },
+                "minimumHoldingPeriod":
+                {
+                    "type": "string",
+                    "description": "Holds the notice period required for redemption requests"
+                },
+                "minimumHoldingOverride":
+                {
+                    "type": "boolean",
+                    "description": "Indicates if the minimum holding period can be overridden by paying a fee"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "referenceSecurityShareResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/referenceSecurityShareResponseBody"
+                }
+            },
+            "description": "referenceSecurityShareResponse"
+        },
+        "referenceSecurityShareResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "alternateInstrumentDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "alternateInstrument":
+                            {
+                                "type": "string",
+                                "description": "The alternate security identifier"
+                            },
+                            "alternateInstrumentId":
+                            {
+                                "type": "string",
+                                "description": "The alternate security reference for the instrument"
+                            }
+                        }
+                    }
+                },
+                "minimumInvestmentDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "currencyId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                            },
+                            "initialInvestment":
+                            {
+                                "type": "number",
+                                "description": "Indicates the amount of initial investment"
+                            },
+                            "subsequentInvestment":
+                            {
+                                "type": "number",
+                                "description": "Indicates the amount of subsequent investment"
+                            },
+                            "SIPAmount":
+                            {
+                                "type": "number",
+                                "description": "Indicates the SIP amount"
+                            },
+                            "redemptionAmount":
+                            {
+                                "type": "number",
+                                "description": "Indicates the redemption amount"
+                            }
+                        }
+                    }
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "mnemonic":
+                {
+                    "type": "string",
+                    "description": "The alternative means of referencing the record"
+                },
+                "ISIN":
+                {
+                    "type": "string",
+                    "description": "The International Securities Identification Number of the instrument"
+                },
+                "subAssetType":
+                {
+                    "type": "number",
+                    "description": "The name of the Sub Asset Type"
+                },
+                "currencyId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency."
+                },
+                "depositoryId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                },
+                "priceType":
+                {
+                    "type": "string",
+                    "description": "Defines the calculation method to be used when calculating the price of a trade"
+                },
+                "instrumentType":
+                {
+                    "type": "string",
+                    "description": "Indicates the type of the security "
+                },
+                "lastPrice":
+                {
+                    "type": "number",
+                    "description": "Indicates the last recorded price of the instrument"
+                },
+                "companyDomicile":
+                {
+                    "type": "string",
+                    "description": "Specifies the country of domicile, of the parent company or government or establishment issuing the Security"
+                },
+                "instrumentDomicile":
+                {
+                    "type": "string",
+                    "description": "Specifies the country domicile of the Security being issued"
+                },
+                "priceUpdateCode":
+                {
+                    "type": "string",
+                    "description": "Specifies the type of price update that will update the price of this security"
+                },
+                "industryId":
+                {
+                    "type": "number",
+                    "description": "The identifier of the industry"
+                },
+                "stockExchange":
+                {
+                    "type": "string",
+                    "description": "The stock exchange identifier"
+                },
+                "parValue":
+                {
+                    "type": "number",
+                    "description": "Defines par value of the stock in the Security Currency"
+                },
+                "tradingUnits":
+                {
+                    "type": "number",
+                    "description": "Specifies the smallest nominal amount that may be traded"
+                },
+                "brokerTradingUnits":
+                {
+                    "type": "number",
+                    "description": "Specifies the smallest nominal amount that may be traded"
+                },
+                "couponTaxCodeId":
+                {
+                    "type": "string",
+                    "description": "Indicates the tax position"
+                },
+                "minimumHolding":
+                {
+                    "type": "number",
+                    "description": "Specifies the Minimum holding for the security."
+                },
+                "minimumHoldingPeriod":
+                {
+                    "type": "string",
+                    "description": "Holds the notice period required for redemption requests"
+                },
+                "minimumHoldingOverride":
+                {
+                    "type": "boolean",
+                    "description": "Indicates if the minimum holding period can be overridden by paying a fee"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ScreenErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ScreenErrorResponse"
+        },
+        "ScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1056 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of customer documents and images.",
+        "version": "v1.0.0",
+        "title": "Party Customers Documents APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/party/customers/{customerId}/documents":
+        {
+            "get":
+            {
+                "operationId": "getCustomerDocuments",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCustomerDocumentsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCustomerDocumentsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCustomerDocumentsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCustomerDocumentsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/images/{imageId}":
+        {
+            "get":
+            {
+                "operationId": "getDocumentImage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "imageId",
+                    "in": "path",
+                    "description": "The identifier of the image used for advertisement",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getDocumentImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getDocumentImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getDocumentImageErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getDocumentImageErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateDocumentImage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "imageId",
+                    "in": "path",
+                    "description": "The identifier of the image used for advertisement",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/updateDocumentImage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateDocumentImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateDocumentImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateDocumentImageErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateDocumentImageErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/images":
+        {
+            "get":
+            {
+                "operationId": "getCustomerImages",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getCustomerImagesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCustomerImagesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getCustomerImagesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getCustomerImagesErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createDocumentImage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createDocumentImage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createDocumentImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createDocumentImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createDocumentImageErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createDocumentImageErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getCustomerDocumentsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCustomerDocumentsResponseBody"
+                }
+            },
+            "description": "getCustomerDocumentsResponse"
+        },
+        "getCustomerDocumentsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "imageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the image used for advertisement",
+                        "maxLength": 12
+                    },
+                    "imageType":
+                    {
+                        "type": "string",
+                        "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE.",
+                        "maxLength": 15
+                    },
+                    "imageApplication":
+                    {
+                        "type": "string",
+                        "description": "This field is used to link an image to a T24 application or file.",
+                        "maxLength": 30
+                    },
+                    "companyMnemonic":
+                    {
+                        "type": "string",
+                        "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2",
+                        "maxLength": 3
+                    },
+                    "imageReference":
+                    {
+                        "type": "string",
+                        "description": "The reference of the image",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "imagePath":
+                    {
+                        "type": "string",
+                        "description": "Identifies the image stored on the file system.",
+                        "maxLength": 50
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getCustomerDocumentsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCustomerDocumentsErrorResponseBody"
+                }
+            },
+            "description": "getCustomerDocumentsErrorResponse"
+        },
+        "getCustomerDocumentsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "type": "object",
+            "properties":
+            {
+                "override_acceptId":
+                {
+                    "type": "string",
+                    "description": "pass the record Id to accept all its overrides"
+                }
+            }
+        },
+        "updateDocumentImage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateDocumentImageBody"
+                }
+            },
+            "description": "updateDocumentImage"
+        },
+        "updateDocumentImageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "Description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": "",
+                    "enum": ["IMAGE", "SOUND", "VIDEO", "DOCUMENT"]
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "updateDocumentImageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateDocumentImageResponseBody"
+                }
+            },
+            "description": "updateDocumentImageResponse"
+        },
+        "updateDocumentImageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "Description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": "",
+                    "enum": ["IMAGE", "SOUND", "VIDEO", "DOCUMENT"]
+                }
+            }
+        },
+        "updateDocumentImageErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateDocumentImageErrorResponseBody"
+                }
+            },
+            "description": "updateDocumentImageErrorResponse"
+        },
+        "updateDocumentImageErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getDocumentImageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getDocumentImageResponseBody"
+                }
+            },
+            "description": "getDocumentImageResponse"
+        },
+        "getDocumentImageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "Description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": "",
+                    "enum": ["IMAGE", "SOUND", "VIDEO", "DOCUMENT"]
+                }
+            }
+        },
+        "getDocumentImageErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getDocumentImageErrorResponseBody"
+                }
+            },
+            "description": "getDocumentImageErrorResponse"
+        },
+        "getDocumentImageErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getCustomerImagesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getCustomerImagesResponseBody"
+                }
+            },
+            "description": "getCustomerImagesResponse"
+        },
+        "getCustomerImagesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "imageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the image used for advertisement",
+                        "maxLength": 12
+                    },
+                    "imageType":
+                    {
+                        "type": "string",
+                        "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE.",
+                        "maxLength": 15
+                    },
+                    "imageApplication":
+                    {
+                        "type": "string",
+                        "description": "This field is used to link an image to a T24 application or file.",
+                        "maxLength": 30
+                    },
+                    "companyMnemonic":
+                    {
+                        "type": "string",
+                        "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2",
+                        "maxLength": 3
+                    },
+                    "imageReference":
+                    {
+                        "type": "string",
+                        "description": "The reference of the image",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "imagePath":
+                    {
+                        "type": "string",
+                        "description": "Identifies the image stored on the file system.",
+                        "maxLength": 50
+                    }
+                }
+            }
+        },
+        "getCustomerImagesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getCustomerImagesErrorResponseBody"
+                }
+            },
+            "description": "getCustomerImagesErrorResponse"
+        },
+        "getCustomerImagesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "createDocumentImage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createDocumentImageBody"
+                }
+            },
+            "description": "createDocumentImage"
+        },
+        "createDocumentImageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "Description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": "",
+                    "enum": ["IMAGE", "SOUND", "VIDEO", "DOCUMENT"]
+                }
+            }
+        },
+        "createDocumentImageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createDocumentImageResponseBody"
+                }
+            },
+            "description": "createDocumentImageResponse"
+        },
+        "createDocumentImageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "Description":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": "",
+                    "enum": ["IMAGE", "SOUND", "VIDEO", "DOCUMENT"]
+                }
+            }
+        },
+        "createDocumentImageErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createDocumentImageErrorResponseBody"
+                }
+            },
+            "description": "createDocumentImageErrorResponse"
+        },
+        "createDocumentImageErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

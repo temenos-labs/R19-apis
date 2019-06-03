@@ -1,0 +1,1060 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves valuation, holdings and transaction information on portfolios",
+        "version": "v1.0.0",
+        "title": "Holdings Portfolios APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/holdings/portfolios/{portfolioId}/overdueSettlement":
+        {
+            "get":
+            {
+                "operationId": "getOverdueSettlementsByPortfolio",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "portfolioId",
+                    "in": "path",
+                    "description": "The identifier of the portfolio",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionId",
+                    "in": "query",
+                    "description": "The unique transaction identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "customerId",
+                    "in": "query",
+                    "description": "The identifier of the customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "brokerId",
+                    "in": "query",
+                    "description": "The identifier of the broker",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "tradeDate",
+                    "in": "query",
+                    "description": "The trade date of the contract",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "valueDate",
+                    "in": "query",
+                    "description": "The applicable value date",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "depository",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "instrumentId",
+                    "in": "query",
+                    "description": "The identifier of the instrument",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "deliveryInstruction",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionType",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "quantity",
+                    "in": "query",
+                    "description": "The nominal quantity",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "stockExchange",
+                    "in": "query",
+                    "description": "The stock exchange identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOverdueSettlementsByPortfolioResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOverdueSettlementsByPortfolioResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOverdueSettlementsByPortfolioErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOverdueSettlementsByPortfolioErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/portfolios/{portfolioId}/outstandingSettlements":
+        {
+            "get":
+            {
+                "operationId": "getOutstandingSettlementsByPortfolio",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "portfolioId",
+                    "in": "path",
+                    "description": "The identifier of the portfolio",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionId",
+                    "in": "query",
+                    "description": "The unique transaction identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "customerId",
+                    "in": "query",
+                    "description": "The identifier of the customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "brokerId",
+                    "in": "query",
+                    "description": "The identifier of the broker",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "tradeDate",
+                    "in": "query",
+                    "description": "The trade date of the contract",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "valueDate",
+                    "in": "query",
+                    "description": "The applicable value date",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "depository",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "instrumentId",
+                    "in": "query",
+                    "description": "The identifier of the instrument",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "deliveryInstruction",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionType",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "quantity",
+                    "in": "query",
+                    "description": "The nominal quantity",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "stockExchange",
+                    "in": "query",
+                    "description": "The stock exchange identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOutstandingSettlementsByPortfolioResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOutstandingSettlementsByPortfolioResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOutstandingSettlementsByPortfolioErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOutstandingSettlementsByPortfolioErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/portfolios/{portfolioId}/positions":
+        {
+            "get":
+            {
+                "operationId": "getPortfolioSecurityPositions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "portfolioId",
+                    "in": "path",
+                    "description": "The identifier of the portfolio",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "instrumentId",
+                    "in": "query",
+                    "description": "The identifier of the instrument",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "depository",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPortfolioSecurityPositionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPortfolioSecurityPositionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPortfolioSecurityPositionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPortfolioSecurityPositionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getOverdueSettlementsByPortfolioResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOverdueSettlementsByPortfolioResponseBody"
+                }
+            },
+            "description": "getOverdueSettlementsByPortfolioResponse"
+        },
+        "getOverdueSettlementsByPortfolioResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 97
+                    },
+                    "instrumentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the instrument",
+                        "maxLength": 12
+                    },
+                    "instrumentName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the instrument, taken from securityMaster"
+                    },
+                    "depository":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "depositoryName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the depository"
+                    },
+                    "tradeDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The trade date of the contract"
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The applicable value date"
+                    },
+                    "tradeCurrency":
+                    {
+                        "type": "string",
+                        "description": "The trade currency is the settlement currency for the trade",
+                        "maxLength": 3
+                    },
+                    "quantity":
+                    {
+                        "type": "string",
+                        "description": "The nominal quantity",
+                        "maxLength": 10
+                    },
+                    "portfolioId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the portfolio",
+                        "maxLength": 18
+                    },
+                    "portfolioName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the portfolio",
+                        "maxLength": 10
+                    },
+                    "accountCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency of the account",
+                        "maxLength": 3
+                    },
+                    "customerOutstandingAmount":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": ""
+                    },
+                    "customerOutstandingQuantity":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "brokerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the broker",
+                        "maxLength": 10
+                    },
+                    "brokerName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the broker",
+                        "maxLength": 10
+                    },
+                    "nostro":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 97
+                    },
+                    "nostroCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency of the nostro"
+                    },
+                    "brokerOutstandingAmount":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount outstanding for the broker"
+                    },
+                    "brokerOutstandingQuantity":
+                    {
+                        "type": "string",
+                        "description": "The quantity of the instrument outstanding for the broker",
+                        "maxLength": 10
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getOverdueSettlementsByPortfolioErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOverdueSettlementsByPortfolioErrorResponseBody"
+                }
+            },
+            "description": "getOverdueSettlementsByPortfolioErrorResponse"
+        },
+        "getOverdueSettlementsByPortfolioErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getOutstandingSettlementsByPortfolioResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOutstandingSettlementsByPortfolioResponseBody"
+                }
+            },
+            "description": "getOutstandingSettlementsByPortfolioResponse"
+        },
+        "getOutstandingSettlementsByPortfolioResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 97
+                    },
+                    "instrumentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the instrument",
+                        "maxLength": 12
+                    },
+                    "instrumentName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the instrument, taken from securityMaster"
+                    },
+                    "depository":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "depositoryName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the depository"
+                    },
+                    "tradeDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The trade date of the contract"
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The applicable value date"
+                    },
+                    "tradeCurrency":
+                    {
+                        "type": "string",
+                        "description": "The trade currency is the settlement currency for the trade",
+                        "maxLength": 3
+                    },
+                    "quantity":
+                    {
+                        "type": "string",
+                        "description": "The nominal quantity",
+                        "maxLength": 10
+                    },
+                    "portfolioId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the portfolio",
+                        "maxLength": 18
+                    },
+                    "portfolioName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the portfolio",
+                        "maxLength": 10
+                    },
+                    "accountCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency of the account",
+                        "maxLength": 3
+                    },
+                    "customerOutstandingAmount":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": ""
+                    },
+                    "customerOutstandingQuantity":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "brokerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the broker",
+                        "maxLength": 10
+                    },
+                    "brokerName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the broker",
+                        "maxLength": 10
+                    },
+                    "nostro":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 97
+                    },
+                    "nostroCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency of the nostro"
+                    },
+                    "brokerOutstandingAmount":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount outstanding for the broker"
+                    },
+                    "brokerOutstandingQuantity":
+                    {
+                        "type": "string",
+                        "description": "The quantity of the instrument outstanding for the broker",
+                        "maxLength": 10
+                    }
+                }
+            }
+        },
+        "getOutstandingSettlementsByPortfolioErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOutstandingSettlementsByPortfolioErrorResponseBody"
+                }
+            },
+            "description": "getOutstandingSettlementsByPortfolioErrorResponse"
+        },
+        "getOutstandingSettlementsByPortfolioErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getPortfolioSecurityPositionsResponseQueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                },
+                "data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "portfolioId":
+                        {
+                            "type": "string",
+                            "description": "The identifier of the portfolio",
+                            "maxLength": 14
+                        },
+                        "portfolioName":
+                        {
+                            "type": "string",
+                            "description": "The name that is displayed for the portfolio",
+                            "maxLength": 35
+                        },
+                        "referenceCurrency":
+                        {
+                            "type": "string",
+                            "description": "The reference currency",
+                            "maxLength": 18
+                        },
+                        "investmentProgram":
+                        {
+                            "type": "string",
+                            "description": "",
+                            "maxLength": 35
+                        }
+                    }
+                }
+            }
+        },
+        "getPortfolioSecurityPositionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getPortfolioSecurityPositionsResponseQueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPortfolioSecurityPositionsResponseBody"
+                }
+            },
+            "description": "getPortfolioSecurityPositionsResponse"
+        },
+        "getPortfolioSecurityPositionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 80
+                    },
+                    "instrumentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the instrument",
+                        "maxLength": 12
+                    },
+                    "ISIN":
+                    {
+                        "type": "string",
+                        "description": "The International Securities Identification Number of the instrument",
+                        "maxLength": 12
+                    },
+                    "instrumentName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the instrument, taken from securityMaster",
+                        "maxLength": 35
+                    },
+                    "depository":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "depositoryName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the depository",
+                        "maxLength": 35
+                    },
+                    "subAccount":
+                    {
+                        "type": "string",
+                        "description": "The sub-account that the security position is held in.",
+                        "maxLength": 35
+                    },
+                    "position":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "openOrderPosition":
+                    {
+                        "type": "string",
+                        "description": "The number of securities related to the security position"
+                    },
+                    "unsettledCredits":
+                    {
+                        "type": "string",
+                        "description": "The nominal of securities relating to this security position that remains unreceived"
+                    },
+                    "unsettledDebits":
+                    {
+                        "type": "string",
+                        "description": "The nominal of securities relating to this security position that remains undelivered"
+                    },
+                    "blockedQuantity":
+                    {
+                        "type": "string",
+                        "description": "The nominal quantity on a securities instrument that prevents it from beging traded when the blocked quantity is exceeded."
+                    },
+                    "priceCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency of the Price",
+                        "maxLength": 3
+                    },
+                    "marketPrice":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 16
+                    },
+                    "instrumentCurrency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "valueInInstrumentCurrency":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount converted to the currency of the instrument"
+                    },
+                    "valueInReferenceCurrency":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount converted to the required reference currency"
+                    },
+                    "unrealizedMarkToMarket":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount of unrealised profit and loss calculated as a result of mark to market revaluation"
+                    },
+                    "unrealizedMarkToMarketNet":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The net mark to market gain or loss considering unrealised profits and losses"
+                    }
+                }
+            }
+        },
+        "getPortfolioSecurityPositionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPortfolioSecurityPositionsErrorResponseBody"
+                }
+            },
+            "description": "getPortfolioSecurityPositionsErrorResponse"
+        },
+        "getPortfolioSecurityPositionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

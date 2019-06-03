@@ -1,0 +1,367 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves position information for a legal entities own book portfolios",
+        "version": "v1.0.0",
+        "title": "Holdings Instruments APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/holdings/instruments/{instrumentId}/positions":
+        {
+            "get":
+            {
+                "operationId": "getInstrumentPositions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "instrumentId",
+                    "in": "path",
+                    "description": "The identifier of the instrument",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "portfolioId",
+                    "in": "query",
+                    "description": "The identifier of the portfolio",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "depository",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "subAccount",
+                    "in": "query",
+                    "description": "The sub-account that the security position is held in.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getInstrumentPositionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getInstrumentPositionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getInstrumentPositionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getInstrumentPositionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "getInstrumentPositionsResponseQueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                },
+                "data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "instrumentId":
+                        {
+                            "type": "string",
+                            "description": "The identifier of the instrument",
+                            "maxLength": 12
+                        },
+                        "instrumentName":
+                        {
+                            "type": "string",
+                            "description": "The name that is displayed for the instrument, taken from securityMaster",
+                            "maxLength": 35
+                        },
+                        "ISIN":
+                        {
+                            "type": "string",
+                            "description": "The International Securities Identification Number of the instrument",
+                            "maxLength": 12
+                        },
+                        "priceCurrency":
+                        {
+                            "type": "string",
+                            "description": "The currency of the Price",
+                            "maxLength": 12
+                        },
+                        "marketPrice":
+                        {
+                            "type": "string",
+                            "description": "",
+                            "maxLength": 16
+                        }
+                    }
+                }
+            }
+        },
+        "getInstrumentPositionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getInstrumentPositionsResponseQueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getInstrumentPositionsResponseBody"
+                }
+            },
+            "description": "getInstrumentPositionsResponse"
+        },
+        "getInstrumentPositionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 120
+                    },
+                    "portfolioId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the portfolio",
+                        "maxLength": 14
+                    },
+                    "portfolioName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the portfolio",
+                        "maxLength": 35
+                    },
+                    "depository":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "depositoryName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the depository",
+                        "maxLength": 35
+                    },
+                    "subAccount":
+                    {
+                        "type": "string",
+                        "description": "The sub-account that the security position is held in.",
+                        "maxLength": 35
+                    },
+                    "position":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "openOrderPosition":
+                    {
+                        "type": "string",
+                        "description": "The number of securities related to the security position",
+                        "maxLength": 18
+                    },
+                    "unsettledCredits":
+                    {
+                        "type": "string",
+                        "description": "The nominal of securities relating to this security position that remains unreceived",
+                        "maxLength": 18
+                    },
+                    "unsettledDebits":
+                    {
+                        "type": "string",
+                        "description": "The nominal of securities relating to this security position that remains undelivered"
+                    },
+                    "blockedQuantity":
+                    {
+                        "type": "string",
+                        "description": "The nominal quantity on a securities instrument that prevents it from beging traded when the blocked quantity is exceeded."
+                    },
+                    "instrumentCurrency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "valueInInstrumentCurrency":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount converted to the currency of the instrument"
+                    },
+                    "referenceCurrency":
+                    {
+                        "type": "string",
+                        "description": "The reference currency"
+                    },
+                    "valueInReferenceCurrency":
+                    {
+                        "type": "string",
+                        "description": "The amount converted to the required reference currency"
+                    },
+                    "unrealizedMarkToMarket":
+                    {
+                        "type": "number",
+                        "format": "int64",
+                        "description": "The amount of unrealised profit and loss calculated as a result of mark to market revaluation"
+                    },
+                    "unrealizedMarkToMarketNet":
+                    {
+                        "type": "string",
+                        "description": "The net mark to market gain or loss considering unrealised profits and losses"
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getInstrumentPositionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getInstrumentPositionsErrorResponseBody"
+                }
+            },
+            "description": "getInstrumentPositionsErrorResponse"
+        },
+        "getInstrumentPositionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

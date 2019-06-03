@@ -1,0 +1,1258 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of the Position Transfer Orders",
+        "version": "v1.0.0",
+        "title": "Order Position Transfer Orders Request APIs"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/order/securityPositionTransferOrders":
+        {
+            "post":
+            {
+                "operationId": "createSecurityPositionTransferOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/orderSecurityPositionTransferOrder"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityPositionTransferOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/orderSecurityPositionTransferOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/securityPositionTransferOrders/{positionTransferOrderId}":
+        {
+            "post":
+            {
+                "operationId": "getSecurityPositionTransferOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "positionTransferOrderId",
+                    "in": "path",
+                    "description": "The position transfer order identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/orderSecurityPositionTransferOrder1"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityPositionTransferOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/orderSecurityPositionTransferOrderResponse1"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateSecurityPositionTransferOrder",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "positionTransferOrderId",
+                    "in": "path",
+                    "description": "The position transfer order identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/orderSecurityPositionTransferOrder"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecurityPositionTransferOrderResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/orderSecurityPositionTransferOrderResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "orderSecurityPositionTransferOrder":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/orderSecurityPositionTransferOrderBody"
+                }
+            },
+            "description": "orderSecurityPositionTransferOrder"
+        },
+        "orderSecurityPositionTransferOrderBody":
+        {
+            "type": "object",
+            "required": ["fromPortfolio", "toPortfolio"],
+            "properties":
+            {
+                "instruments":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            }
+                        }
+                    }
+                },
+                "narratives":
+                {
+                    "type": "array",
+                    "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "narrative":
+                            {
+                                "type": "string",
+                                "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference"
+                            }
+                        }
+                    }
+                },
+                "securityPositions":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            },
+                            "depositoryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                            },
+                            "nomineeTo":
+                            {
+                                "type": "string",
+                                "description": "Nominee code to which the positions are to be transferred"
+                            },
+                            "toSubAccount":
+                            {
+                                "type": "string",
+                                "description": "Sub account to which the positions are to be transferred"
+                            },
+                            "subAccount":
+                            {
+                                "type": "string",
+                                "description": "The sub-account that the security position is held in."
+                            },
+                            "quantity":
+                            {
+                                "type": "number",
+                                "description": "The nominal quantity"
+                            },
+                            "price":
+                            {
+                                "type": "number",
+                                "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                            },
+                            "instrumentCurrencyId":
+                            {
+                                "type": "string",
+                                "description": "The currency of the instrument"
+                            },
+                            "outReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio from where positions are being transferred"
+                            },
+                            "inReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio to which the positions are being transferred to"
+                            },
+                            "exchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Contains the exchange rate applicable"
+                            },
+                            "outExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio from where the position has been transferred out"
+                            },
+                            "inExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio that the position has been transferred in to"
+                            }
+                        }
+                    }
+                },
+                "transferDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The transfer date of the transaction"
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "fromPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account from which the Transfer is to be made"
+                },
+                "fromCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository from which the Transfer is to be made"
+                },
+                "nomineeFrom":
+                {
+                    "type": "string",
+                    "description": "Nominee code from which the positions are to be transferred"
+                },
+                "fromSubAccount":
+                {
+                    "type": "string",
+                    "description": "Sub account from which the positions are to be transferred"
+                },
+                "toPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account to which the Transfer is to be made"
+                },
+                "toCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository to which the Transfer is to be made"
+                },
+                "nomineeTo":
+                {
+                    "type": "string",
+                    "description": "Nominee code to which the positions are to be transferred"
+                },
+                "selectMovements":
+                {
+                    "type": "string",
+                    "description": "Provides user the option of changing various details of the security position to be transferred"
+                },
+                "numberOfPositions":
+                {
+                    "type": "number",
+                    "description": "The maximum number of positions to be transferred using an online transaction"
+                },
+                "fundPosition":
+                {
+                    "type": "boolean",
+                    "description": "Denotes that the transaction is being performed for transferring fund holdings"
+                },
+                "segregatedAccount":
+                {
+                    "type": "boolean",
+                    "description": "This field is used to determine whether the position transfer is for segregated account"
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "orderSecurityPositionTransferOrderResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/orderSecurityPositionTransferOrderResponseBody"
+                }
+            },
+            "description": "orderSecurityPositionTransferOrderResponse"
+        },
+        "orderSecurityPositionTransferOrderResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "instruments":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            }
+                        }
+                    }
+                },
+                "narratives":
+                {
+                    "type": "array",
+                    "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "narrative":
+                            {
+                                "type": "string",
+                                "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference"
+                            }
+                        }
+                    }
+                },
+                "securityPositions":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            },
+                            "depositoryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                            },
+                            "nomineeTo":
+                            {
+                                "type": "string",
+                                "description": "Nominee code to which the positions are to be transferred"
+                            },
+                            "toSubAccount":
+                            {
+                                "type": "string",
+                                "description": "Sub account to which the positions are to be transferred"
+                            },
+                            "subAccount":
+                            {
+                                "type": "string",
+                                "description": "The sub-account that the security position is held in."
+                            },
+                            "quantity":
+                            {
+                                "type": "number",
+                                "description": "The nominal quantity"
+                            },
+                            "price":
+                            {
+                                "type": "number",
+                                "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                            },
+                            "instrumentCurrencyId":
+                            {
+                                "type": "string",
+                                "description": "The currency of the instrument"
+                            },
+                            "outReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio from where positions are being transferred"
+                            },
+                            "inReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio to which the positions are being transferred to"
+                            },
+                            "exchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Contains the exchange rate applicable"
+                            },
+                            "outExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio from where the position has been transferred out"
+                            },
+                            "inExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio that the position has been transferred in to"
+                            }
+                        }
+                    }
+                },
+                "transferDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The transfer date of the transaction"
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "fromPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account from which the Transfer is to be made"
+                },
+                "fromCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository from which the Transfer is to be made"
+                },
+                "nomineeFrom":
+                {
+                    "type": "string",
+                    "description": "Nominee code from which the positions are to be transferred"
+                },
+                "fromSubAccount":
+                {
+                    "type": "string",
+                    "description": "Sub account from which the positions are to be transferred"
+                },
+                "toPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account to which the Transfer is to be made"
+                },
+                "toCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository to which the Transfer is to be made"
+                },
+                "nomineeTo":
+                {
+                    "type": "string",
+                    "description": "Nominee code to which the positions are to be transferred"
+                },
+                "selectMovements":
+                {
+                    "type": "string",
+                    "description": "Provides user the option of changing various details of the security position to be transferred"
+                },
+                "numberOfPositions":
+                {
+                    "type": "number",
+                    "description": "The maximum number of positions to be transferred using an online transaction"
+                },
+                "fundPosition":
+                {
+                    "type": "boolean",
+                    "description": "Denotes that the transaction is being performed for transferring fund holdings"
+                },
+                "segregatedAccount":
+                {
+                    "type": "boolean",
+                    "description": "This field is used to determine whether the position transfer is for segregated account"
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ScreenErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ScreenErrorResponse"
+        },
+        "ScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "orderSecurityPositionTransferOrder1":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/orderSecurityPositionTransferOrder1Body"
+                }
+            },
+            "description": "orderSecurityPositionTransferOrder1"
+        },
+        "orderSecurityPositionTransferOrder1Body":
+        {
+            "type": "object",
+            "required": ["fromPortfolio", "toPortfolio"],
+            "properties":
+            {
+                "instruments":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            }
+                        }
+                    }
+                },
+                "narratives":
+                {
+                    "type": "array",
+                    "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "narrative":
+                            {
+                                "type": "string",
+                                "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference"
+                            }
+                        }
+                    }
+                },
+                "securityPositions":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            },
+                            "depositoryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                            },
+                            "nomineeTo":
+                            {
+                                "type": "string",
+                                "description": "Nominee code to which the positions are to be transferred"
+                            },
+                            "toSubAccount":
+                            {
+                                "type": "string",
+                                "description": "Sub account to which the positions are to be transferred"
+                            },
+                            "subAccount":
+                            {
+                                "type": "string",
+                                "description": "The sub-account that the security position is held in."
+                            },
+                            "quantity":
+                            {
+                                "type": "number",
+                                "description": "The nominal quantity"
+                            },
+                            "price":
+                            {
+                                "type": "number",
+                                "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                            },
+                            "instrumentCurrencyId":
+                            {
+                                "type": "string",
+                                "description": "The currency of the instrument"
+                            },
+                            "outReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio from where positions are being transferred"
+                            },
+                            "inReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio to which the positions are being transferred to"
+                            },
+                            "exchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Contains the exchange rate applicable"
+                            },
+                            "outExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio from where the position has been transferred out"
+                            },
+                            "inExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio that the position has been transferred in to"
+                            }
+                        }
+                    }
+                },
+                "transferDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The transfer date of the transaction"
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "fromPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account from which the Transfer is to be made"
+                },
+                "fromCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository from which the Transfer is to be made"
+                },
+                "nomineeFrom":
+                {
+                    "type": "string",
+                    "description": "Nominee code from which the positions are to be transferred"
+                },
+                "fromSubAccount":
+                {
+                    "type": "string",
+                    "description": "Sub account from which the positions are to be transferred"
+                },
+                "toPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account to which the Transfer is to be made"
+                },
+                "toCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository to which the Transfer is to be made"
+                },
+                "nomineeTo":
+                {
+                    "type": "string",
+                    "description": "Nominee code to which the positions are to be transferred"
+                },
+                "selectMovements":
+                {
+                    "type": "string",
+                    "description": "Provides user the option of changing various details of the security position to be transferred"
+                },
+                "numberOfPositions":
+                {
+                    "type": "number",
+                    "description": "The maximum number of positions to be transferred using an online transaction"
+                },
+                "fundPosition":
+                {
+                    "type": "boolean",
+                    "description": "Denotes that the transaction is being performed for transferring fund holdings"
+                },
+                "segregatedAccount":
+                {
+                    "type": "boolean",
+                    "description": "This field is used to determine whether the position transfer is for segregated account"
+                }
+            }
+        },
+        "orderSecurityPositionTransferOrderResponse1":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/orderSecurityPositionTransferOrderResponse1Body"
+                }
+            },
+            "description": "orderSecurityPositionTransferOrderResponse1"
+        },
+        "orderSecurityPositionTransferOrderResponse1Body":
+        {
+            "type": "object",
+            "properties":
+            {
+                "instruments":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            }
+                        }
+                    }
+                },
+                "narratives":
+                {
+                    "type": "array",
+                    "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "narrative":
+                            {
+                                "type": "string",
+                                "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference"
+                            }
+                        }
+                    }
+                },
+                "securityPositions":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "portfolioId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the portfolio"
+                            },
+                            "instrumentId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the instrument"
+                            },
+                            "depositoryId":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the depository. Must be a customerSecurity of type depository."
+                            },
+                            "nomineeTo":
+                            {
+                                "type": "string",
+                                "description": "Nominee code to which the positions are to be transferred"
+                            },
+                            "toSubAccount":
+                            {
+                                "type": "string",
+                                "description": "Sub account to which the positions are to be transferred"
+                            },
+                            "subAccount":
+                            {
+                                "type": "string",
+                                "description": "The sub-account that the security position is held in."
+                            },
+                            "quantity":
+                            {
+                                "type": "number",
+                                "description": "The nominal quantity"
+                            },
+                            "price":
+                            {
+                                "type": "number",
+                                "description": "The Price at which the NOMINAL.AMOUNT of the Security is to be valued for the transaction."
+                            },
+                            "instrumentCurrencyId":
+                            {
+                                "type": "string",
+                                "description": "The currency of the instrument"
+                            },
+                            "outReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio from where positions are being transferred"
+                            },
+                            "inReferenceCurrency":
+                            {
+                                "type": "string",
+                                "description": "This is the Reference Currency of the Portfolio to which the positions are being transferred to"
+                            },
+                            "exchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Contains the exchange rate applicable"
+                            },
+                            "outExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio from where the position has been transferred out"
+                            },
+                            "inExchangeRate":
+                            {
+                                "type": "number",
+                                "description": "Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio that the position has been transferred in to"
+                            }
+                        }
+                    }
+                },
+                "transferDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The transfer date of the transaction"
+                },
+                "valueDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicable value date"
+                },
+                "fromPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account from which the Transfer is to be made"
+                },
+                "fromCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository from which the Transfer is to be made"
+                },
+                "nomineeFrom":
+                {
+                    "type": "string",
+                    "description": "Nominee code from which the positions are to be transferred"
+                },
+                "fromSubAccount":
+                {
+                    "type": "string",
+                    "description": "Sub account from which the positions are to be transferred"
+                },
+                "toPortfolio":
+                {
+                    "type": "string",
+                    "description": "Specifies the Security Account to which the Transfer is to be made"
+                },
+                "toCustodian":
+                {
+                    "type": "string",
+                    "description": "Specifies the Depository to which the Transfer is to be made"
+                },
+                "nomineeTo":
+                {
+                    "type": "string",
+                    "description": "Nominee code to which the positions are to be transferred"
+                },
+                "selectMovements":
+                {
+                    "type": "string",
+                    "description": "Provides user the option of changing various details of the security position to be transferred"
+                },
+                "numberOfPositions":
+                {
+                    "type": "number",
+                    "description": "The maximum number of positions to be transferred using an online transaction"
+                },
+                "fundPosition":
+                {
+                    "type": "boolean",
+                    "description": "Denotes that the transaction is being performed for transferring fund holdings"
+                },
+                "segregatedAccount":
+                {
+                    "type": "boolean",
+                    "description": "This field is used to determine whether the position transfer is for segregated account"
+                }
+            }
+        }
+    }
+}

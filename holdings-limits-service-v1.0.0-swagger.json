@@ -1,0 +1,829 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves limit information for a customer, and allows checking and managing limits utilized by a party.",
+        "version": "v1.0.0",
+        "title": "Holdings Limits APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["http", "https"],
+    "paths":
+    {
+        "/holdings/limits/{limitId}/forexDeals":
+        {
+            "get":
+            {
+                "operationId": "getLimitForexDeals",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "limitId",
+                    "in": "path",
+                    "description": "The identifier of the limit",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getLimitForexDealsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitForexDealsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getLimitForexDealsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitForexDealsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/limits/{limitId}/liabilities":
+        {
+            "get":
+            {
+                "operationId": "getLimitForexLiabilities",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "limitId",
+                    "in": "path",
+                    "description": "The identifier of the limit",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getLimitForexLiabilitiesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitForexLiabilitiesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getLimitForexLiabilitiesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitForexLiabilitiesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/limits":
+        {
+            "get":
+            {
+                "operationId": "getLimits",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getLimitsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getLimitsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/holdings/limits/{limitId}":
+        {
+            "get":
+            {
+                "operationId": "getLimit",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "limitId",
+                    "in": "path",
+                    "description": "The identifier of the limit",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getLimitResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getLimitErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getLimitErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getLimitForexDealsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getLimitForexDealsResponseBody"
+                }
+            },
+            "description": "getLimitForexDealsResponse"
+        },
+        "getLimitForexDealsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "description": "The transaction reference identifier"
+                    },
+                    "buyCurrency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT code of the currency of the purchase"
+                    },
+                    "buyAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount being purchased.",
+                        "maxLength": 18
+                    },
+                    "sellCurrency":
+                    {
+                        "type": "string",
+                        "description": "The SWIFT code of the sold currency."
+                    },
+                    "sellAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount of the currency being sold. ",
+                        "maxLength": 18
+                    },
+                    "date":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 44
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getLimitForexDealsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getLimitForexDealsErrorResponseBody"
+                }
+            },
+            "description": "getLimitForexDealsErrorResponse"
+        },
+        "getLimitForexDealsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getLimitForexLiabilitiesResponseQueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                },
+                "data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "limitProduct":
+                        {
+                            "type": "string",
+                            "description": "Provides a unique reference for each Limit. "
+                        },
+                        "liabilityNumber":
+                        {
+                            "type": "string",
+                            "description": ""
+                        },
+                        "liabilityName":
+                        {
+                            "type": "string",
+                            "description": "The name that is displayed for the individual"
+                        },
+                        "customerName":
+                        {
+                            "type": "string",
+                            "description": "The name that is displayed for the customer"
+                        },
+                        "currency":
+                        {
+                            "type": "string",
+                            "description": ""
+                        },
+                        "limitAmount":
+                        {
+                            "type": "string",
+                            "description": "The amount allocated to a credit limit agreement",
+                            "maxLength": 11
+                        },
+                        "cleanRisk":
+                        {
+                            "type": "string",
+                            "description": "",
+                            "maxLength": 11
+                        }
+                    }
+                }
+            }
+        },
+        "getLimitForexLiabilitiesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getLimitForexLiabilitiesResponseQueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getLimitForexLiabilitiesResponseBody"
+                }
+            },
+            "description": "getLimitForexLiabilitiesResponse"
+        },
+        "getLimitForexLiabilitiesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "date":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 19
+                    },
+                    "amount":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 20
+                    },
+                    "totalAmount":
+                    {
+                        "type": "string",
+                        "description": "The total amount",
+                        "maxLength": 20
+                    },
+                    "limitExcess":
+                    {
+                        "type": "string",
+                        "description": "An indicator to show that a credit limit has been exceeded"
+                    },
+                    "riskExcess":
+                    {
+                        "type": "string",
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "getLimitForexLiabilitiesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getLimitForexLiabilitiesErrorResponseBody"
+                }
+            },
+            "description": "getLimitForexLiabilitiesErrorResponse"
+        },
+        "getLimitForexLiabilitiesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getLimitsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getLimitsResponseBody"
+                }
+            },
+            "description": "getLimitsResponse"
+        },
+        "getLimitsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "limitProduct":
+                    {
+                        "type": "string",
+                        "description": "Provides a unique reference for each Limit. "
+                    },
+                    "serialNumber":
+                    {
+                        "type": "string",
+                        "description": "The unique reference for the limit",
+                        "maxLength": 32
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "limitAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount allocated to a credit limit agreement",
+                        "maxLength": 20
+                    },
+                    "outstandingAmount":
+                    {
+                        "type": "string",
+                        "description": "Identifies the total outstanding amount for the corresponding Liability number and Limit reference. ",
+                        "maxLength": 20
+                    },
+                    "availableOrExcess":
+                    {
+                        "type": "string",
+                        "description": "The available amount for the corresponding liability number and limit reference.This amount is always expressed in the currency of the limit. Calculated as the sum of the online limit, the available balance and any sub allocation taken, less any sub allocation given, any commission available, the total oustanding.",
+                        "maxLength": 20
+                    },
+                    "expiryDate":
+                    {
+                        "type": "string",
+                        "description": "The date an agreement such as a credit facility or limit is due to expire",
+                        "maxLength": 11
+                    },
+                    "jointCustomer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "jointLiability":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    }
+                }
+            }
+        },
+        "getLimitsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getLimitsErrorResponseBody"
+                }
+            },
+            "description": "getLimitsErrorResponse"
+        },
+        "getLimitsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getLimitResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getLimitResponseBody"
+                }
+            },
+            "description": "getLimitResponse"
+        },
+        "getLimitResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "limitProduct":
+                    {
+                        "type": "string",
+                        "description": "Provides a unique reference for each Limit. "
+                    },
+                    "serialNumber":
+                    {
+                        "type": "string",
+                        "description": "The unique reference for the limit",
+                        "maxLength": 32
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    },
+                    "limitAmount":
+                    {
+                        "type": "string",
+                        "description": "The amount allocated to a credit limit agreement",
+                        "maxLength": 20
+                    },
+                    "outstandingAmount":
+                    {
+                        "type": "string",
+                        "description": "Identifies the total outstanding amount for the corresponding Liability number and Limit reference. ",
+                        "maxLength": 20
+                    },
+                    "availableOrExcess":
+                    {
+                        "type": "string",
+                        "description": "The available amount for the corresponding liability number and limit reference.This amount is always expressed in the currency of the limit. Calculated as the sum of the online limit, the available balance and any sub allocation taken, less any sub allocation given, any commission available, the total oustanding.",
+                        "maxLength": 20
+                    },
+                    "expiryDate":
+                    {
+                        "type": "string",
+                        "description": "The date an agreement such as a credit facility or limit is due to expire",
+                        "maxLength": 11
+                    },
+                    "jointCustomer":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "jointLiability":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 3
+                    }
+                }
+            }
+        },
+        "getLimitErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getLimitErrorResponseBody"
+                }
+            },
+            "description": "getLimitErrorResponse"
+        },
+        "getLimitErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

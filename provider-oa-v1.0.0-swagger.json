@@ -1,0 +1,911 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Reads origination reference data",
+        "version": "v1.0.0",
+        "title": "Origination Reference Data"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0",
+    "schemes": ["https"],
+    "paths":
+    {
+        "/reference/originationDefinitions":
+        {
+            "get":
+            {
+                "operationId": "getOriginationDefinitions",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "roleId",
+                    "in": "query",
+                    "description": "roleId",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOriginationDefinitionsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOriginationDefinitionsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOriginationDefinitionsErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOriginationDefinitionsErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/originationRoles":
+        {
+            "get":
+            {
+                "operationId": "getOriginationRoles",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOriginationRolesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOriginationRolesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOriginationRolesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOriginationRolesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/originationDefinitions/{definitionId}":
+        {
+            "get":
+            {
+                "operationId": "getOriginationDefinition",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "definitionId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "roleId",
+                    "in": "query",
+                    "description": "roleId",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getOriginationDefinitionResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOriginationDefinitionResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getOriginationDefinitionErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getOriginationDefinitionErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/entityTypes/{entityTypeId}/activities":
+        {
+            "get":
+            {
+                "operationId": "getClassTypeActivities",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "entityTypeId",
+                    "in": "path",
+                    "description": "entityTypeId",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getClassTypeActivitiesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getClassTypeActivitiesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getClassTypeActivitiesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getClassTypeActivitiesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/evidenceTypes":
+        {
+            "get":
+            {
+                "operationId": "getEvidenceTypes",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getEvidenceTypesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getEvidenceTypesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getEvidenceTypesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getEvidenceTypesErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/reference/questionnaireTypes":
+        {
+            "get":
+            {
+                "operationId": "getQuestionnaireTypes",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purpose",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getQuestionnaireTypesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getQuestionnaireTypesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getQuestionnaireTypesErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getQuestionnaireTypesErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+            }
+        },
+        "getOriginationDefinitionsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOriginationDefinitionsResponseBody"
+                }
+            },
+            "description": "getOriginationDefinitionsResponse"
+        },
+        "getOriginationDefinitionsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "roles":
+                    {
+                        "type": "array",
+                        "description": "role",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "roleId":
+                                {
+                                    "type": "string",
+                                    "description": "roleId",
+                                    "maxLength": 30
+                                }
+                            }
+                        }
+                    },
+                    "definitionId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the definition",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "getOriginationDefinitionsErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOriginationDefinitionsErrorResponseBody"
+                }
+            },
+            "description": "getOriginationDefinitionsErrorResponse"
+        },
+        "getOriginationDefinitionsErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getOriginationRolesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOriginationRolesResponseBody"
+                }
+            },
+            "description": "getOriginationRolesResponse"
+        },
+        "getOriginationRolesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "roleId":
+                    {
+                        "type": "string",
+                        "description": "roleId",
+                        "maxLength": 30
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 50
+                    }
+                }
+            }
+        },
+        "getOriginationRolesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOriginationRolesErrorResponseBody"
+                }
+            },
+            "description": "getOriginationRolesErrorResponse"
+        },
+        "getOriginationRolesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getOriginationDefinitionResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getOriginationDefinitionResponseBody"
+                }
+            },
+            "description": "getOriginationDefinitionResponse"
+        },
+        "getOriginationDefinitionResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "roles":
+                    {
+                        "type": "array",
+                        "description": "role",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "roleId":
+                                {
+                                    "type": "string",
+                                    "description": "roleId",
+                                    "maxLength": 30
+                                }
+                            }
+                        }
+                    },
+                    "definitionId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the definition",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getOriginationDefinitionErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getOriginationDefinitionErrorResponseBody"
+                }
+            },
+            "description": "getOriginationDefinitionErrorResponse"
+        },
+        "getOriginationDefinitionErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getClassTypeActivitiesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getClassTypeActivitiesResponseBody"
+                }
+            },
+            "description": "getClassTypeActivitiesResponse"
+        },
+        "getClassTypeActivitiesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "classTypeActivityId":
+                    {
+                        "type": "string",
+                        "description": "classTypeActivityId",
+                        "maxLength": 65
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getClassTypeActivitiesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getClassTypeActivitiesErrorResponseBody"
+                }
+            },
+            "description": "getClassTypeActivitiesErrorResponse"
+        },
+        "getClassTypeActivitiesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getEvidenceTypesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getEvidenceTypesResponseBody"
+                }
+            },
+            "description": "getEvidenceTypesResponse"
+        },
+        "getEvidenceTypesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "evidenceTypeId":
+                    {
+                        "type": "string",
+                        "description": "evidenceTypeId",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getEvidenceTypesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getEvidenceTypesErrorResponseBody"
+                }
+            },
+            "description": "getEvidenceTypesErrorResponse"
+        },
+        "getEvidenceTypesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "getQuestionnaireTypesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getQuestionnaireTypesResponseBody"
+                }
+            },
+            "description": "getQuestionnaireTypesResponse"
+        },
+        "getQuestionnaireTypesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "questionnaireTypeId":
+                    {
+                        "type": "string",
+                        "description": "questionnaireTypeId",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "getQuestionnaireTypesErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getQuestionnaireTypesErrorResponseBody"
+                }
+            },
+            "description": "getQuestionnaireTypesErrorResponse"
+        },
+        "getQuestionnaireTypesErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        }
+    }
+}

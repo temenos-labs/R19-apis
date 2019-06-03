@@ -1,0 +1,4716 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows the creation, viewing and management of customers.",
+        "version": "v1.0.0",
+        "title": "Party Customers APIs"
+    },
+    "host": "api.temenos.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": ["http", "https"],
+    "security": [
+    {
+        "basicAuth": []
+    }],
+    "paths":
+    {
+        "/party/customers/{customerId}/consents":
+        {
+            "get":
+            {
+                "operationId": "getCustomerConsents",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "propertyClassId",
+                    "in": "query",
+                    "description": "The identifier of the property class",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerConsentsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerConsentsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/travelNotifications":
+        {
+            "get":
+            {
+                "operationId": "getCustomerTravelNotifications",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "overallStatus",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "overallStatusNE",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "travelNotificationId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerTravelNotificationsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerTravelNotificationsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/contactDetails":
+        {
+            "get":
+            {
+                "operationId": "getCustomerContactDetails",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "customerName",
+                    "in": "query",
+                    "description": "The name that is displayed for the customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "street",
+                    "in": "query",
+                    "description": "The first line of Customer's base address",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "town",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "countryId",
+                    "in": "query",
+                    "description": "The identifier of the country, normally the SWIFT code of the country.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "postcode",
+                    "in": "query",
+                    "description": "Identifies the postal code for customer.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "dateOfBirth",
+                    "in": "query",
+                    "description": "An individual's date of birth. ",
+                    "required": false,
+                    "type": "string",
+                    "format": "date"
+                },
+                {
+                    "name": "customerStatus",
+                    "in": "query",
+                    "description": "The internal bank status of a customer",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "customerType",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerContactDetailsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerContactDetailsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateCustomerContactDetail",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/CustomerContactDetail"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerContactDetailResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerContactDetailResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/onlineBeneficiaries":
+        {
+            "get":
+            {
+                "operationId": "getCustomerBeneficiaries",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerBeneficiariesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerBeneficiariesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/deliveryPreferences":
+        {
+            "get":
+            {
+                "operationId": "getCustomerDeliveryPreferences",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerDeliveryPreferencesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerDeliveryPreferencesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createCustomerDeliveryPreference",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/CustomerDeliveryPreference"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerDeliveryPreferenceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerDeliveryPreferenceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateCustomerDeliveryPreference",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/CustomerDeliveryPreference"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerDeliveryPreferenceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerDeliveryPreferenceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "operationId": "deleteCustomerDeliveryPreference",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerDeliveryPreferenceResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerDeliveryPreferenceResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/adverts":
+        {
+            "get":
+            {
+                "operationId": "getCustomerAdverts",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "languageId",
+                    "in": "query",
+                    "description": "The identifier of the language",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerAdvertsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerAdvertsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/adverts/{advertId}":
+        {
+            "put":
+            {
+                "operationId": "updateAdvert",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "advertId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Advert"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "AdvertResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/AdvertResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/adverts":
+        {
+            "post":
+            {
+                "operationId": "createAdvert",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Advert"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "AdvertResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/AdvertResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/documents/{documentId}":
+        {
+            "put":
+            {
+                "operationId": "updateDocumentandImage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "documentId",
+                    "in": "path",
+                    "description": "The identifier of the document",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/DocumentandImage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "operationId": "deleteDocumentandImage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "documentId",
+                    "in": "path",
+                    "description": "The identifier of the document",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/documents/fileUploads/{uploadId}":
+        {
+            "post":
+            {
+                "operationId": "createProfilePictureUpload",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "uploadId",
+                    "in": "path",
+                    "description": "The unique ID of the uploaded file",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/ProfilePictureUpload"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ProfilePictureUploadResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ProfilePictureUploadResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateProfilePictureUpload",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "uploadId",
+                    "in": "path",
+                    "description": "The unique ID of the uploaded file",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/ProfilePictureUpload"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ProfilePictureUploadResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ProfilePictureUploadResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "operationId": "deleteProfilePictureUpload",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "uploadId",
+                    "in": "path",
+                    "description": "The unique ID of the uploaded file",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ProfilePictureUploadResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ProfilePictureUploadResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/secureMessages":
+        {
+            "get":
+            {
+                "operationId": "getSecureMessages",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "messageId",
+                    "in": "query",
+                    "description": "The identifier of the message",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "parentMessageIdNE",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "parentMessageId",
+                    "in": "query",
+                    "description": "The identifier of the parent message.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "toCustomerId",
+                    "in": "query",
+                    "description": "The unique customer identifier, to whom the message is to be sent ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "fromCustomerId",
+                    "in": "query",
+                    "description": "Identifies the first customerId in a range",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "messageStatus",
+                    "in": "query",
+                    "description": "The status of a financial message",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecureMessagesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecureMessagesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post":
+            {
+                "operationId": "createSecureMessage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/SecureMessage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecureMessageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecureMessageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/secureMessages/{secureMessageId}":
+        {
+            "get":
+            {
+                "operationId": "readSecureMessage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "secureMessageId",
+                    "in": "path",
+                    "description": "The secure message identifier",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SecureMessageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SecureMessageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/beneficiaries":
+        {
+            "get":
+            {
+                "operationId": "getCustomerBeneficiary",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "nickName",
+                    "in": "query",
+                    "description": "The familiar form of a proper name.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "CustomerBeneficiaryResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/CustomerBeneficiaryResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/party/customers/{customerId}/portfolios/{portfolioId}/overdueSettlements":
+        {
+            "get":
+            {
+                "operationId": "getOverdueSettlements",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "portfolioId",
+                    "in": "path",
+                    "description": "The identifier of the portfolio",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionId",
+                    "in": "query",
+                    "description": "The unique transaction identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "brokerId",
+                    "in": "query",
+                    "description": "The identifier of the broker",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "tradeDate",
+                    "in": "query",
+                    "description": "The trade date of the contract",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "valueDate",
+                    "in": "query",
+                    "description": "The applicable value date",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "depository",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "currency",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "instrumentId",
+                    "in": "query",
+                    "description": "The identifier of the instrument",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "deliveryInstruction",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionType",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "quantity",
+                    "in": "query",
+                    "description": "The nominal quantity",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "stockExchange",
+                    "in": "query",
+                    "description": "The stock exchange identifier",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "OverdueSettlementsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/OverdueSettlementsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },       
+        "/party/customers/{customerId}/alertRequests":
+        {
+            "get":
+            {
+                "operationId": "getAlertRequests",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "name": "customerId",
+                    "in": "path",
+                    "description": "The identifier of the customer",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "contractReference",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "subscribe",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "alertRequestId",
+                    "in": "query",
+                    "description": "The identifier of the alert request",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "AlertRequestsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/AlertRequestsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },       
+        "/party/customers/documents":
+        {
+            "post":
+            {
+                "operationId": "createDocumentandImage",
+                "produces": ["application/json"],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "description": "body Payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/DocumentandImage"
+                    }
+                },
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "query",
+                    "required": false,
+                    "type": "string"
+                }],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "DocumentandImageResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/DocumentandImageResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ScreenErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ScreenErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "CustomerConsentsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerConsentsResponseBody"
+                }
+            },
+            "description": "CustomerConsentsResponse"
+        },
+        "CustomerConsentsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "consentTypes":
+                    {
+                        "type": "array",
+                        "description": "Conset Type for which the consent is given.The pre-defined consent types are set at Product level and will default on to the arrangement.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "consentType":
+                                {
+                                    "type": "string",
+                                    "description": "Conset Type for which the consent is given.The pre-defined consent types are set at Product level and will default on to the arrangement."
+                                },
+                                "consentGiven":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "consentBlock":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "blockNotes":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "consentWithdraw":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "withdrawNotes":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "consentTypeName":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "subTypes":
+                                {
+                                    "type": "array",
+                                    "items":
+                                    {
+                                        "type": "object",
+                                        "properties":
+                                        {
+                                            "consentSubType":
+                                            {
+                                                "type": "string",
+                                                "description": ""
+                                            },
+                                            "consentSubTypeGiven":
+                                            {
+                                                "type": "string",
+                                                "description": ""
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "arrangementId":
+                    {
+                        "type": "string",
+                        "description": "The unique identifiier of an arrangement contract. The format of the ID is YYDDDXXXXX prefixed with AA. YYDDD is the year and date of input in julian date format, XXXXX - is a random generated string."
+                    },
+                    "effectiveDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date on which the principal movement is effected"
+                    },
+                    "productId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the product"
+                    },
+                    "expiryDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date an agreement such as a credit facility or limit is due to expire"
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message"
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "CustomerTravelNotificationsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerTravelNotificationsResponseBody"
+                }
+            },
+            "description": "CustomerTravelNotificationsResponse"
+        },
+        "CustomerTravelNotificationsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "travelNotifications":
+                    {
+                        "type": "array",
+                        "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "countryId":
+                                {
+                                    "type": "string",
+                                    "description": "The identifier of the country, normally the SWIFT code of the country.",
+                                    "maxLength": 2
+                                },
+                                "startDate":
+                                {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "The start date"
+                                },
+                                "endDate":
+                                {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "The date an agreement or contract ceases - the opposite of start date"
+                                },
+                                "startTime":
+                                {
+                                    "type": "string",
+                                    "description": "Indicates start time",
+                                    "maxLength": 5
+                                },
+                                "endTime":
+                                {
+                                    "type": "string",
+                                    "description": "Indicates end time",
+                                    "maxLength": 5
+                                },
+                                "visitPurpose":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 15
+                                },
+                                "scheduleType":
+                                {
+                                    "type": "string",
+                                    "description": "Schedule Type",
+                                    "maxLength": 35
+                                },
+                                "travelStatus":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                },
+                                "additionalInformation":
+                                {
+                                    "type": "string",
+                                    "description": "Additional Information provided to add context",
+                                    "maxLength": 100
+                                },
+                                "contactDetails":
+                                {
+                                    "type": "array",
+                                    "items":
+                                    {
+                                        "type": "object",
+                                        "properties":
+                                        {
+                                            "contactDetail":
+                                            {
+                                                "type": "string",
+                                                "description": "Additional Information provided to add context",
+                                                "maxLength": 100
+                                            }
+                                        }
+                                    }
+                                },
+                                "accountIds":
+                                {
+                                    "type": "array",
+                                    "items":
+                                    {
+                                        "type": "object",
+                                        "properties":
+                                        {
+                                            "accountId":
+                                            {
+                                                "type": "string",
+                                                "description": "Additional Information provided to add context",
+                                                "maxLength": 100
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "travelNotificationId":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 15
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer",
+                        "maxLength": 10
+                    },
+                    "overallStatus":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "CustomerContactDetailsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerContactDetailsResponseBody"
+                }
+            },
+            "description": "CustomerContactDetailsResponse"
+        },
+        "CustomerContactDetailsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "addressDetails":
+                    {
+                        "type": "array",
+                        "description": "Holds unstructured address information, e.g. Contact Person. Building, Floor, Apartment, Street Number, Street Name, Town, Area, Code",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "street":
+                                {
+                                    "type": "string",
+                                    "description": "The first line of Customer's base address",
+                                    "maxLength": 35
+                                },
+                                "address":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                },
+                                "addressCity":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                },
+                                "postCode":
+                                {
+                                    "type": "string",
+                                    "description": "Identifies the postal code for customer.",
+                                    "maxLength": 35
+                                },
+                                "country":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                }
+                            }
+                        }
+                    },
+                    "contactDetails":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "phoneNumber":
+                                {
+                                    "type": "string",
+                                    "description": "This field can contain the phone numbers of the customer.",
+                                    "maxLength": 17
+                                },
+                                "officePhoneNumber":
+                                {
+                                    "type": "string",
+                                    "description": "Office phone numbers.",
+                                    "maxLength": 17
+                                },
+                                "smsNumber":
+                                {
+                                    "type": "string",
+                                    "description": "The mobile telephone SMS number of the customer",
+                                    "maxLength": 17
+                                },
+                                "emailId":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 50
+                                },
+                                "faxNumber":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 17
+                                }
+                            }
+                        }
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer",
+                        "maxLength": 10
+                    },
+                    "customerName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the customer",
+                        "maxLength": 35
+                    },
+                    "dateOfBirth":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "An individual's date of birth. "
+                    },
+                    "customerStatus":
+                    {
+                        "type": "string",
+                        "description": "The internal bank status of a customer",
+                        "maxLength": 4
+                    },
+                    "customerStatusName":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    },
+                    "customerType":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "CustomerContactDetail":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerContactDetailBody"
+                }
+            },
+            "description": "CustomerContactDetail"
+        },
+        "CustomerContactDetailBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "contactDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "phoneNumber":
+                            {
+                                "type": "string",
+                                "description": "This field can contain the phone numbers of the customer."
+                            },
+                            "smsNumber":
+                            {
+                                "type": "string",
+                                "description": "The mobile telephone SMS number of the customer"
+                            },
+                            "emailId":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "officePhoneNumbers":
+                {
+                    "type": "array",
+                    "description": "Office phone numbers.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "officePhoneNumber":
+                            {
+                                "type": "string",
+                                "description": "Office phone numbers."
+                            }
+                        }
+                    }
+                },
+                "faxNumbers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "faxNumber":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "overrides":
+                {
+                    "type": "array",
+                    "description": "Records the override messages generated during processing of an activity. ",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "override":
+                            {
+                                "type": "string",
+                                "description": "Records the override messages generated during processing of an activity. "
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "CustomerContactDetailResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerContactDetailResponseBody"
+                }
+            },
+            "description": "CustomerContactDetailResponse"
+        },
+        "CustomerContactDetailResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "contactDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "phoneNumber":
+                            {
+                                "type": "string",
+                                "description": "This field can contain the phone numbers of the customer."
+                            },
+                            "smsNumber":
+                            {
+                                "type": "string",
+                                "description": "The mobile telephone SMS number of the customer"
+                            },
+                            "emailId":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "officePhoneNumbers":
+                {
+                    "type": "array",
+                    "description": "Office phone numbers.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "officePhoneNumber":
+                            {
+                                "type": "string",
+                                "description": "Office phone numbers."
+                            }
+                        }
+                    }
+                },
+                "faxNumbers":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "faxNumber":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "overrides":
+                {
+                    "type": "array",
+                    "description": "Records the override messages generated during processing of an activity. ",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "override":
+                            {
+                                "type": "string",
+                                "description": "Records the override messages generated during processing of an activity. "
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ScreenErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ScreenErrorResponse"
+        },
+        "ScreenErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type"
+                }
+            }
+        },
+        "CustomerBeneficiariesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerBeneficiariesResponseBody"
+                }
+            },
+            "description": "CustomerBeneficiariesResponse"
+        },
+        "CustomerBeneficiariesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "beneficiaries":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "beneficiaryAccountId":
+                                {
+                                    "type": "string",
+                                    "description": "The identifier of the beneficiary account"
+                                },
+                                "beneficiaryCustomerId":
+                                {
+                                    "type": "string",
+                                    "description": "The customer identifier where the beneficiary is a customer of the bank"
+                                },
+                                "beneficiaryBIC":
+                                {
+                                    "type": "string",
+                                    "description": "BIC (Bank Identifier Code) of the beneficiary customer "
+                                },
+                                "beneficiaryIBAN":
+                                {
+                                    "type": "string",
+                                    "description": "The IBAN of the beneficiary's account"
+                                },
+                                "beneficiaryNickName":
+                                {
+                                    "type": "string",
+                                    "description": "The nick name of the beneficiary"
+                                },
+                                "beneficiaryCustomerNickName":
+                                {
+                                    "type": "string",
+                                    "description": "The nick name assigned to a benefeciary by the customer"
+                                },
+                                "beneficiaryOurCharges":
+                                {
+                                    "type": "string",
+                                    "description": "Determines who will be responsible for charges."
+                                }
+                            }
+                        }
+                    },
+                    "beneficiaryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the beneficiary"
+                    },
+                    "companyName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the company"
+                    },
+                    "categoryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the category"
+                    },
+                    "transactionName":
+                    {
+                        "type": "string",
+                        "description": "The name of the transaction"
+                    },
+                    "transactionType":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "bankSortCode":
+                    {
+                        "type": "string",
+                        "description": "Defines the bank sorting code of the bank and branch. The code entered must exist as a sort code. 6 numeric characters."
+                    },
+                    "linkToBeneficiaryId":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "customerReference":
+                    {
+                        "type": "string",
+                        "description": "The reference quoted by customer of the ordering account in a payment that is to be communicated to the beneficiary when a payment takes place"
+                    },
+                    "comment":
+                    {
+                        "type": "string",
+                        "description": "Relevant comments"
+                    },
+                    "accountWithBank":
+                    {
+                        "type": "string",
+                        "description": "Identifies the bank where the beneficiary maintains his account."
+                    },
+                    "paymentCurrencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the payment currency"
+                    },
+                    "preferredPaymentAmount":
+                    {
+                        "type": "number",
+                        "description": "The payment amount to be populated in the FT (Fund Transfer) or Payment Order when the Beneficiary will be used is displayed in this field "
+                    },
+                    "paymentCountry":
+                    {
+                        "type": "string",
+                        "description": "The country to which a payment is sent, usually where the beneficiary resides"
+                    },
+                    "preferredPaymentProductId":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "accountWithBankSortCode":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "CustomerDeliveryPreferencesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerDeliveryPreferencesResponseBody"
+                }
+            },
+            "description": "CustomerDeliveryPreferencesResponse"
+        },
+        "CustomerDeliveryPreferencesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "groups":
+                    {
+                        "type": "array",
+                        "description": "Carrier to be used for sending messages.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "messageGroupId":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                },
+                                "carriers":
+                                {
+                                    "type": "array",
+                                    "items":
+                                    {
+                                        "type": "object",
+                                        "properties":
+                                        {
+                                            "carrierId":
+                                            {
+                                                "type": "string",
+                                                "description": "",
+                                                "maxLength": 35
+                                            },
+                                            "required":
+                                            {
+                                                "type": "string",
+                                                "description": "",
+                                                "maxLength": 35
+                                            },
+                                            "carrierPosition":
+                                            {
+                                                "type": "string",
+                                                "description": "",
+                                                "maxLength": 35
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer",
+                        "maxLength": 35
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "CustomerDeliveryPreference":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerDeliveryPreferenceBody"
+                }
+            },
+            "description": "CustomerDeliveryPreference"
+        },
+        "CustomerDeliveryPreferenceBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "groups":
+                {
+                    "type": "array",
+                    "description": "Carrier to be used for sending messages.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "messageGroupId":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "carriers":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "carrierId":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "required":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "carrierPosition":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CustomerDeliveryPreferenceResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerDeliveryPreferenceResponseBody"
+                }
+            },
+            "description": "CustomerDeliveryPreferenceResponse"
+        },
+        "CustomerDeliveryPreferenceResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "groups":
+                {
+                    "type": "array",
+                    "description": "Carrier to be used for sending messages.",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "messageGroupId":
+                            {
+                                "type": "string",
+                                "description": ""
+                            },
+                            "carriers":
+                            {
+                                "type": "array",
+                                "items":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "carrierId":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "required":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "carrierPosition":
+                                        {
+                                            "type": "string",
+                                            "description": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CustomerAdvertsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerAdvertsResponseBody"
+                }
+            },
+            "description": "CustomerAdvertsResponse"
+        },
+        "CustomerAdvertsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "opportunities":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "opportunityProductId":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityDirection":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityGeneratorId":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityTemplateId":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityTemplateDisplayName":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityStatus":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityProbabilitySuccess":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "opportunityDisplayName":
+                                {
+                                    "type": "string",
+                                    "description": "The name that is displayed for the oppportunity, opportunityName"
+                                }
+                            }
+                        }
+                    },
+                    "advertDocs":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "advertDocImageId":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "advertDocImageType":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "advertDocImageMediaType":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "advertDocImageName":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "advertDetails":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "advertDetailDocImageId":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "advertDetailDocImageType":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "advertDetailDocImageMediaType":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "advertDetailDocImageName":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                }
+                            }
+                        }
+                    },
+                    "products":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "productGroupId":
+                                {
+                                    "type": "string",
+                                    "description": "The identifier of the product group"
+                                },
+                                "productLineId":
+                                {
+                                    "type": "string",
+                                    "description": "The identifier of the product line"
+                                }
+                            }
+                        }
+                    },
+                    "opportunityId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the opportunity"
+                    },
+                    "campaignId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the campaign"
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "Advert":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/AdvertBody"
+                }
+            },
+            "description": "Advert"
+        },
+        "AdvertBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customerId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the customer"
+                },
+                "opportunityProductId":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "opportunityDirection":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "opportunityTemplateId":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "startDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The start date"
+                },
+                "opportunityStatus":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "transactionApplication":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "transactionId":
+                {
+                    "type": "string",
+                    "description": "The unique transaction identifier"
+                }
+            }
+        },
+        "AdvertResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/AdvertResponseBody"
+                }
+            },
+            "description": "AdvertResponse"
+        },
+        "AdvertResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "customerId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the customer"
+                },
+                "opportunityProductId":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "opportunityDirection":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "opportunityTemplateId":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "startDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The start date"
+                },
+                "opportunityStatus":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "transactionApplication":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "transactionId":
+                {
+                    "type": "string",
+                    "description": "The unique transaction identifier"
+                }
+            }
+        },
+        "DocumentandImage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/DocumentandImageBody"
+                }
+            },
+            "description": "DocumentandImage"
+        },
+        "DocumentandImageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "descriptions":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The name used for display purposes"
+                            }
+                        }
+                    }
+                },
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "imagePath":
+                {
+                    "type": "string",
+                    "description": "Identifies the image stored on the file system."
+                },
+                "notes":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "DocumentandImageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/DocumentandImageResponseBody"
+                }
+            },
+            "description": "DocumentandImageResponse"
+        },
+        "DocumentandImageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "descriptions":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The name used for display purposes"
+                            }
+                        }
+                    }
+                },
+                "imageType":
+                {
+                    "type": "string",
+                    "description": "Identifies the type of image to be stored and its location. Typical usage would be to segregate images by criteria such as PASSPORTS, PHOTOGRAPHS, SIGNATURES and DOCUMENTS. Image types can be used to assist selection of records in Enquiries as well as the physical distribution of files.Must be a valid record on IM.IMAGE.TYPE."
+                },
+                "imageApplication":
+                {
+                    "type": "string",
+                    "description": "This field is used to link an image to a T24 application or file."
+                },
+                "companyMnemonic":
+                {
+                    "type": "string",
+                    "description": "Shortened identiifier for a company. 3 alphanumer characters, e.g. BNK, BN1, BN2"
+                },
+                "imageReference":
+                {
+                    "type": "string",
+                    "description": "The reference of the image"
+                },
+                "displayName":
+                {
+                    "type": "string",
+                    "description": "The name used for display purposes"
+                },
+                "multiMediaType":
+                {
+                    "type": "string",
+                    "description": ""
+                },
+                "imagePath":
+                {
+                    "type": "string",
+                    "description": "Identifies the image stored on the file system."
+                },
+                "notes":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "ProfilePictureUpload":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ProfilePictureUploadBody"
+                }
+            },
+            "description": "ProfilePictureUpload"
+        },
+        "ProfilePictureUploadBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "fileUpload":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "ProfilePictureUploadResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ProfilePictureUploadResponseBody"
+                }
+            },
+            "description": "ProfilePictureUploadResponse"
+        },
+        "ProfilePictureUploadResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "fileUpload":
+                {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "SecureMessagesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/SecureMessagesResponseBody"
+                }
+            },
+            "description": "SecureMessagesResponse"
+        },
+        "SecureMessagesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "messages":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "message":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 80
+                                }
+                            }
+                        }
+                    },
+                    "messageStatus":
+                    {
+                        "type": "string",
+                        "description": "The status of a financial message",
+                        "maxLength": 35
+                    },
+                    "messageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the message",
+                        "maxLength": 35
+                    },
+                    "subject":
+                    {
+                        "type": "string",
+                        "description": "The subject of the message to be sent or received.",
+                        "maxLength": 80
+                    },
+                    "dateSent":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Holds the date when the item was sent."
+                    },
+                    "sentAt":
+                    {
+                        "type": "string",
+                        "description": "The sent at time",
+                        "maxLength": 35
+                    },
+                    "fromDepartmentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the originating department",
+                        "maxLength": 35
+                    },
+                    "fromDepartmentName":
+                    {
+                        "type": "string",
+                        "description": "The display name of the originating department",
+                        "maxLength": 35
+                    },
+                    "parentMessageId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the parent message.",
+                        "maxLength": 35
+                    },
+                    "toDepartmentId":
+                    {
+                        "type": "string",
+                        "description": "The unique department identifier, to which the message is to be sent",
+                        "maxLength": 35
+                    },
+                    "toDepartmentName":
+                    {
+                        "type": "string",
+                        "description": "The department name, to which the message is to be sent",
+                        "maxLength": 35
+                    },
+                    "toCustomerId":
+                    {
+                        "type": "string",
+                        "description": "The unique customer identifier, to whom the message is to be sent ",
+                        "maxLength": 10
+                    },
+                    "fromCustomerId":
+                    {
+                        "type": "string",
+                        "description": "Identifies the first customerId in a range",
+                        "maxLength": 10
+                    },
+                    "uploadId":
+                    {
+                        "type": "string",
+                        "description": "The unique ID of the uploaded file",
+                        "maxLength": 12
+                    },
+                    "uploadPath":
+                    {
+                        "type": "string",
+                        "description": "The directory path to which the file is uploaded",
+                        "maxLength": 50
+                    }
+                }
+            }
+        },
+        "SecureMessageResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/SecureMessageResponseBody"
+                }
+            },
+            "description": "SecureMessageResponse"
+        },
+        "SecureMessageResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toDepartmentId":
+                {
+                    "type": "string",
+                    "description": "The unique department identifier, to which the message is to be sent"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "SecureMessage":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/SecureMessageBody"
+                }
+            },
+            "description": "SecureMessage"
+        },
+        "SecureMessageBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "messages":
+                {
+                    "type": "array",
+                    "description": "",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "message":
+                            {
+                                "type": "string",
+                                "description": ""
+                            }
+                        }
+                    }
+                },
+                "subject":
+                {
+                    "type": "string",
+                    "description": "The subject of the message to be sent or received."
+                },
+                "parentMessageId":
+                {
+                    "type": "string",
+                    "description": "The identifier of the parent message."
+                },
+                "fromCustomerId":
+                {
+                    "type": "string",
+                    "description": "Identifies the first customerId in a range"
+                },
+                "messageStatus":
+                {
+                    "type": "string",
+                    "description": "The status of a financial message"
+                },
+                "toDepartmentId":
+                {
+                    "type": "string",
+                    "description": "The unique department identifier, to which the message is to be sent"
+                },
+                "uploadId":
+                {
+                    "type": "string",
+                    "description": "The unique ID of the uploaded file"
+                },
+                "uploadPath":
+                {
+                    "type": "string",
+                    "description": "The directory path to which the file is uploaded"
+                }
+            }
+        },
+        "CustomerBeneficiaryResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomerBeneficiaryResponseBody"
+                }
+            },
+            "description": "CustomerBeneficiaryResponse"
+        },
+        "CustomerBeneficiaryResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "beneficiaryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the beneficiary",
+                        "maxLength": 17
+                    },
+                    "nickName":
+                    {
+                        "type": "string",
+                        "description": "The familiar form of a proper name.",
+                        "maxLength": 35
+                    },
+                    "categoryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the category",
+                        "maxLength": 35
+                    },
+                    "beneficiaryAccountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the beneficiary account",
+                        "maxLength": 34
+                    },
+                    "beneficiaryCustomerId":
+                    {
+                        "type": "string",
+                        "description": "The customer identifier where the beneficiary is a customer of the bank",
+                        "maxLength": 35
+                    },
+                    "transactionName":
+                    {
+                        "type": "string",
+                        "description": "The name of the transaction",
+                        "maxLength": 4
+                    },
+                    "bankSortCode":
+                    {
+                        "type": "string",
+                        "description": "Defines the bank sorting code of the bank and branch. The code entered must exist as a sort code. 6 numeric characters.",
+                        "maxLength": 20
+                    },
+                    "BIC":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "IBAN":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "linkBeneficiaryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the linked beneficiary",
+                        "maxLength": 35
+                    },
+                    "customerReference":
+                    {
+                        "type": "string",
+                        "description": "The reference quoted by customer of the ordering account in a payment that is to be communicated to the beneficiary when a payment takes place",
+                        "maxLength": 35
+                    },
+                    "accountWithBank":
+                    {
+                        "type": "string",
+                        "description": "Identifies the bank where the beneficiary maintains his account.",
+                        "maxLength": 35
+                    },
+                    "paymentCurrencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the payment currency",
+                        "maxLength": 3
+                    },
+                    "preferredPaymentAmount":
+                    {
+                        "type": "number",
+                        "description": "The payment amount to be populated in the FT (Fund Transfer) or Payment Order when the Beneficiary will be used is displayed in this field "
+                    },
+                    "ourCharges":
+                    {
+                        "type": "string",
+                        "description": "Charge borne by the bank for providing a financial service",
+                        "maxLength": 35
+                    },
+                    "paymentCountry":
+                    {
+                        "type": "string",
+                        "description": "The country to which a payment is sent, usually where the beneficiary resides",
+                        "maxLength": 35
+                    }
+                }
+            }
+        },
+        "OverdueSettlementsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/OverdueSettlementsResponseBody"
+                }
+            },
+            "description": "OverdueSettlementsResponse"
+        },
+        "OverdueSettlementsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "broker":
+                    {
+                        "type": "array",
+                        "description": "Specifies the counterparty with whom the trade is to be effected.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "brokerId":
+                                {
+                                    "type": "string",
+                                    "description": "The identifier of the broker",
+                                    "maxLength": 10
+                                },
+                                "brokerName":
+                                {
+                                    "type": "string",
+                                    "description": "The name that is displayed for the broker",
+                                    "maxLength": 10
+                                },
+                                "nostro":
+                                {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "nostroCurrency":
+                                {
+                                    "type": "string",
+                                    "description": "The currency of the nostro"
+                                },
+                                "brokerOutstandingAmount":
+                                {
+                                    "type": "number",
+                                    "description": "The amount outstanding for the broker"
+                                },
+                                "brokerOutstandingQuantity":
+                                {
+                                    "type": "string",
+                                    "description": "The quantity of the instrument outstanding for the broker",
+                                    "maxLength": 19
+                                }
+                            }
+                        }
+                    },
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "The unique transaction identifier",
+                        "maxLength": 97
+                    },
+                    "instrumentId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the instrument",
+                        "maxLength": 12
+                    },
+                    "instrumentName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the instrument, taken from securityMaster"
+                    },
+                    "depository":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "depositoryName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the depository"
+                    },
+                    "tradeDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The trade date of the contract"
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The applicable value date"
+                    },
+                    "tradeCurrency":
+                    {
+                        "type": "string",
+                        "description": "The trade currency is the settlement currency for the trade",
+                        "maxLength": 3
+                    },
+                    "quantity":
+                    {
+                        "type": "string",
+                        "description": "The nominal quantity",
+                        "maxLength": 19
+                    },
+                    "portfolioId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the portfolio",
+                        "maxLength": 18
+                    },
+                    "portfolioName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the portfolio",
+                        "maxLength": 10
+                    },
+                    "accountCurrency":
+                    {
+                        "type": "string",
+                        "description": "The currency of the account",
+                        "maxLength": 3
+                    },
+                    "customerOutstandingAmount":
+                    {
+                        "type": "number",
+                        "description": ""
+                    },
+                    "customerOutstandingQuantity":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 19
+                    }
+                }
+            }
+        },
+        "DirectDebitsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/DirectDebitsResponseBody"
+                }
+            },
+            "description": "DirectDebitsResponse"
+        },
+        "DirectDebitsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "directDebitId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the direct debit mandate. Format is 'D-accountId.sequenceNumber', e.g. D-123456.1",
+                        "maxLength": 25
+                    },
+                    "creditAccountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the credit account",
+                        "maxLength": 35
+                    },
+                    "sortCode":
+                    {
+                        "type": "string",
+                        "description": "The bank identifier code which identifies both the bank and the branch where the account is held",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "direction":
+                    {
+                        "type": "string",
+                        "description": "Specify the direction of the Direct debit claim for which mandate is received.The Claim can be 'Outward' ie. Claim is sent to the Customer's Bank or Inward Claim ie. other Bank submit their claim.Currently the Outward claim processing is supported through DD module & for Inward claim has to be handled through local interface.Mandatory field-Value allowed 'OUTWARD'",
+                        "maxLength": 10
+                    },
+                    "currencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                        "maxLength": 3
+                    },
+                    "standaloneDdi":
+                    {
+                        "type": "string",
+                        "description": "Defines whether the direct debit mandate is for stand-alone purpose",
+                        "maxLength": 1
+                    },
+                    "standaloneAmount":
+                    {
+                        "type": "number",
+                        "description": "The amount of the stand-alone direct debit"
+                    },
+                    "directDebitStatus":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "accountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                    },
+                    "startDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The start date"
+                    },
+                    "nextPaymentDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": ""
+                    },
+                    "creditAccountName":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 70
+                    },
+                    "currencyName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the currency"
+                    },
+                    "accountName":
+                    {
+                        "type": "string",
+                        "description": "The name of the account that is displayed"
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "StandingOrdersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/StandingOrdersResponseBody"
+                }
+            },
+            "description": "StandingOrdersResponse"
+        },
+        "StandingOrdersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "displayNames":
+                    {
+                        "type": "array",
+                        "description": "The name used for display purposes",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "displayName":
+                                {
+                                    "type": "string",
+                                    "description": "The name used for display purposes",
+                                    "maxLength": 35
+                                }
+                            }
+                        }
+                    },
+                    "accountWithBanks":
+                    {
+                        "type": "array",
+                        "description": "Identifies the bank where the beneficiary maintains his account.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "accountWithBank":
+                                {
+                                    "type": "string",
+                                    "description": "Identifies the bank where the beneficiary maintains his account.",
+                                    "maxLength": 35
+                                }
+                            }
+                        }
+                    },
+                    "standingOrderId":
+                    {
+                        "type": "string",
+                        "description": "The unique standing order identifier",
+                        "maxLength": 35
+                    },
+                    "orderType":
+                    {
+                        "type": "string",
+                        "description": "Defines the order type of the transaction",
+                        "maxLength": 5
+                    },
+                    "paymentMethod":
+                    {
+                        "type": "string",
+                        "description": "The type of method used for the payment",
+                        "maxLength": 4
+                    },
+                    "currencyId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the curreny. The is the 3 letter ISO 4217 code of the currency.",
+                        "maxLength": 3
+                    },
+                    "amount":
+                    {
+                        "type": "number",
+                        "description": ""
+                    },
+                    "currentFrequency":
+                    {
+                        "type": "string",
+                        "description": "The present frequency",
+                        "maxLength": 50
+                    },
+                    "counterPartyAccountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the counter party's account",
+                        "maxLength": 35
+                    },
+                    "beneficiaryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the beneficiary",
+                        "maxLength": 17
+                    },
+                    "payTo":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "currentFrequencyDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Identifies the date component of field CURRENT.FREQUENCY- The Standing Order Application will execute the Standing Order instruction (i.e. the currency and amount specified in the two previous fields) according to the frequency specified in this field "
+                    },
+                    "frequency":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "startDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The start date"
+                    },
+                    "currentEndDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Identifies the Current End Date of the Standing Order for the Currency, "
+                    },
+                    "futureNotice":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 10
+                    },
+                    "creditAccountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the credit account"
+                    },
+                    "creditAccountName":
+                    {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "bankSortCode":
+                    {
+                        "type": "string",
+                        "description": "Defines the bank sorting code of the bank and branch. The code entered must exist as a sort code. 6 numeric characters."
+                    },
+                    "stoStartDate":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": ""
+                    },
+                    "beneficiaryBIC":
+                    {
+                        "type": "string",
+                        "description": "BIC (Bank Identifier Code) of the beneficiary customer ",
+                        "maxLength": 11
+                    },
+                    "beneficiaryIBAN":
+                    {
+                        "type": "string",
+                        "description": "The IBAN of the beneficiary's account",
+                        "maxLength": 35
+                    },
+                    "beneficiaryOurCharges":
+                    {
+                        "type": "string",
+                        "description": "Determines who will be responsible for charges.",
+                        "maxLength": 3
+                    },
+                    "paymentOrderProductName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the paymentOrderProduct",
+                        "maxLength": 10
+                    },
+                    "beneficiaryCountryId":
+                    {
+                        "type": "string",
+                        "description": "The country of the beneficiary",
+                        "maxLength": 2
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "AlertRequestsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/AlertRequestsResponseBody"
+                }
+            },
+            "description": "AlertRequestsResponse"
+        },
+        "AlertRequestsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "fields":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "fieldDisplayName":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 50
+                                },
+                                "operand":
+                                {
+                                    "type": "string",
+                                    "description": "Defines the operand",
+                                    "maxLength": 35
+                                },
+                                "fieldValue":
+                                {
+                                    "type": "string",
+                                    "description": "",
+                                    "maxLength": 35
+                                }
+                            }
+                        }
+                    },
+                    "alertRequestId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the alert request",
+                        "maxLength": 35
+                    },
+                    "contractReference":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "eventId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the event",
+                        "maxLength": 35
+                    },
+                    "displayName":
+                    {
+                        "type": "string",
+                        "description": "The name used for display purposes",
+                        "maxLength": 35
+                    },
+                    "messageGroupId":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 35
+                    },
+                    "versionNumber":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 4
+                    }
+                }
+            }
+        },
+        "CustomersResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/CustomersResponseBody"
+                }
+            },
+            "description": "CustomersResponse"
+        },
+        "CustomersResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "address":
+                    {
+                        "type": "array",
+                        "description": "",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "street":
+                                {
+                                    "type": "array",
+                                    "description": "The first line of Customer's base address",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "addressDetails":
+                                {
+                                    "type": "array",
+                                    "description": "Holds unstructured address information, e.g. Contact Person. Building, Floor, Apartment, Street Number, Street Name, Town, Area, Code",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "addressCity":
+                                {
+                                    "type": "array",
+                                    "description": "",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "postCode":
+                                {
+                                    "type": "array",
+                                    "description": "Identifies the postal code for customer.",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "country":
+                                {
+                                    "type": "array",
+                                    "description": "",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "customerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the customer",
+                        "maxLength": 10
+                    },
+                    "customerName":
+                    {
+                        "type": "string",
+                        "description": "The name that is displayed for the customer",
+                        "maxLength": 35
+                    },
+                    "phoneNumber":
+                    {
+                        "type": "string",
+                        "description": "This field can contain the phone numbers of the customer.",
+                        "maxLength": 17
+                    },
+                    "officePhoneNumber":
+                    {
+                        "type": "string",
+                        "description": "Office phone numbers.",
+                        "maxLength": 17
+                    },
+                    "smsNumber":
+                    {
+                        "type": "string",
+                        "description": "The mobile telephone SMS number of the customer",
+                        "maxLength": 17
+                    },
+                    "emailId":
+                    {
+                        "type": "string",
+                        "description": "",
+                        "maxLength": 50
+                    },
+                    "faxId":
+                    {
+                        "type": "string",
+                        "description": "!!!, faxNumber",
+                        "maxLength": 17
+                    },
+                    "dateOfBirth":
+                    {
+                        "type": "string",
+                        "format": "date",
+                        "description": "An individual's date of birth. "
+                    },
+                    "status":
+                    {
+                        "type": "string",
+                        "description": "Get a detail status of the specified service/services",
+                        "maxLength": 4
+                    },
+                    "statusName":
+                    {
+                        "type": "string",
+                        "description": "The status description",
+                        "maxLength": 4
+                    },
+                    "customerMnemonic":
+                    {
+                        "type": "string",
+                        "description": "Specifies an alternative easy means of referencing the Customer",
+                        "maxLength": 10
+                    },
+                    "nationalityId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the nationality of a legal entity",
+                        "maxLength": 2
+                    },
+                    "residenceId":
+                    {
+                        "type": "string",
+                        "description": "The residence country identifier",
+                        "maxLength": 2
+                    },
+                    "accountOfficerId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the account officer",
+                        "maxLength": 4
+                    },
+                    "industryId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the industry",
+                        "maxLength": 4
+                    },
+                    "sectorId":
+                    {
+                        "type": "string",
+                        "description": "The sector identifier",
+                        "maxLength": 4
+                    },
+                    "lastName":
+                    {
+                        "type": "string",
+                        "description": "The last name of an individual",
+                        "maxLength": 50
+                    }
+                }
+            }
+        }
+    }
+}
