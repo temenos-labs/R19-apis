@@ -1,0 +1,1575 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "version": "v1.0.0",
+        "title": "Funds Transfer Provider APIs",
+        "description": "These APIs are used to create and get FundsTransfer records."
+    },
+    "host": "localhost:9089",
+    "basePath": "/irf-test-web/api/v1.0.0",
+    "schemes": [
+    "https", "http"
+  ],
+    "paths":
+    {
+        "/order/PSD2/payments/":
+        {
+            "post":
+            {
+                "operationId": "createPayment",
+                "description": "Used to create an unauthorized Funds Transfer record.To authorize, please use updatePaymentTransfer API",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "description": "payload to create payment",
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createPayment"
+                    }
+                },
+                {
+                    "name": "function",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "validate the payment"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createPaymentExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createPaymentExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createPaymentErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createPaymentErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/payments/SEPA":
+        {
+            "post":
+            {
+                "operationId": "createSEPAPayment",
+                "description": "Used to create an unauthorized SEPA Funds Transfer record.To authorize, please use updateSEPAPaymentTransfer API",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "description": "payload to create SEPA payment",
+                    "schema":
+                    {
+                        "$ref": "#/definitions/createSEPAPaymentExampleResponse"
+                    }
+                },
+                {
+                    "name": "function",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "validate the SEPA payment"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createSEPAPaymentExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createSEPAPaymentExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "createSEPAPaymentErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/createSEPAPaymentErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/payments/{paymentId}/":
+        {
+            "get":
+            {
+                "operationId": "getPayment",
+                "description": "Used to get the Funds Transfer record.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "paymentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updatePaymentTransfer",
+                "description": "Used to authorize a Funds Transfer record.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "paymentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updatePaymentTransfer Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updatePaymentTransferExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updatePaymentTransfer error response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updatePaymentTransferErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/payments/{paymentId}/SEPA":
+        {
+            "get":
+            {
+                "operationId": "getSEPAPayment",
+                "description": "Used to get SEPA Funds Transfer record.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "paymentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getSEPAPaymentExampleResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getSEPAPaymentExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getSEPAPaymentErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getSEPAPaymentErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put":
+            {
+                "operationId": "updateSEPAPaymentTransfer",
+                "description": "Used to authorize SEPA Funds Transfer record.",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "paymentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "updateSEPAPaymentTransfer Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateSEPAPaymentTransferExampleResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "updateSEPAPaymentTransfer error response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/updateSEPAPaymentTransferErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/payments/account/{accountId}/list":
+        {
+            "get":
+            {
+                "operationId": "getPaymentTransferList",
+                "description": "Used to get the Funds Transfer records list of a particular account.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                },
+                {
+                    "name": "startDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The start date from which records in response should be displayed."
+                },
+                {
+                    "name": "endDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The end date upto which records in response should be displayed."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The total number of records per page"
+                },
+                {
+                    "name": "viewType",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates the summary or detail of account. S-Summary, D-Detail."
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The record no from which the response should be displayed"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentTransferListResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentTransferListResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentTransferListErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentTransferListErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/PSD2/payments/{paymentId}/status":
+        {
+            "get":
+            {
+                "operationId": "getPaymentTransferStatus",
+                "description": "Used to get the status of Funds Transfer record.",
+                "produces": [
+          "application/json"
+        ],
+                "parameters": [
+                {
+                    "name": "paymentId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The total number of records per page"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "required": false,
+                    "type": "number",
+                    "description": "The record no from which the response should be displayed"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Random and unique string for each page. Used for security purpose"
+                }
+        ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "getPaymentTransferStatusResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentTransferStatusResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getPaymentTransferStatusErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getPaymentTransferStatusErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":
+    {
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string"
+                },
+                "status":
+                {
+                    "type": "string"
+                },
+                "transactionStatus":
+                {
+                    "type": "string"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            }
+        },
+        "ScreenHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "T24_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "parse_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "createPaymentExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "executionDate":
+                {
+                    "type": "string",
+                    "format": "date"
+                },
+                "paymentId":
+                {
+                    "type": "string"
+                },
+                "exchangeRate":
+                {
+                    "type": "string"
+                },
+                "commissionName":
+                {
+                    "type": "string"
+                },
+                "commissionAmount":
+                {
+                    "type": "string"
+                },
+                "chargeName":
+                {
+                    "type": "string"
+                },
+                "chargeAmount":
+                {
+                    "type": "string"
+                },
+                "totalDebitAmount":
+                {
+                    "type": "string"
+                },
+                "creditValueDate":
+                {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "createSEPAPaymentExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "executionDate":
+                {
+                    "type": "string",
+                    "format": "date"
+                },
+                "paymentId":
+                {
+                    "type": "string"
+                },
+                "exchangeRate":
+                {
+                    "type": "string"
+                },
+                "commissionName":
+                {
+                    "type": "string"
+                },
+                "commissionAmount":
+                {
+                    "type": "string"
+                },
+                "chargeName":
+                {
+                    "type": "string"
+                },
+                "chargeAmount":
+                {
+                    "type": "string"
+                },
+                "totalDebitAmount":
+                {
+                    "type": "string"
+                },
+                "creditValueDate":
+                {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "getPaymentTransferStatusResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentTransferStatusResponseBody"
+                }
+            },
+            "description": "getPaymentTransferStatusResponse"
+        },
+        "getPaymentTransferListResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentTransferListResponseBody"
+                }
+            },
+            "description": "getPaymentTransferListResponse"
+        },
+        "updatePaymentTransferErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updatePaymentTransferErrorResponseBody"
+                }
+            }
+        },
+        "updateSEPAPaymentTransferErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/updateSEPAPaymentTransferErrorResponseBody"
+                }
+            }
+        },
+        "getPaymentTransferListErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentTransferListErrorResponseBody"
+                }
+            },
+            "description": "getPaymentTransferListErrorResponse"
+        },
+        "getPaymentTransferStatusErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentTransferStatusErrorResponseBody"
+                }
+            },
+            "description": "getPaymentTransferStatusErrorResponse"
+        },
+        "PayloadHeader":
+        {
+            "type": "object"
+        },
+        "getPaymentTransferListErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentTransferStatusErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createPayment":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createPaymentBody"
+                }
+            },
+            "description": "createPayment"
+        },
+        "getPaymentTransferStatusResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "paymentTransferId":
+                    {
+                        "type": "string",
+                        "maxLength": 35
+                    },
+                    "amount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "paymentTransferStatus":
+                    {
+                        "type": "string"
+                    },
+                    "currency":
+                    {
+                        "type": "string"
+                    },
+                    "paymentStatus":
+                    {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "createPaymentBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "benAddressLine":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressLine1":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeBearer":
+                {
+                    "type": "string"
+                },
+                "beneficiaryCountryId":
+                {
+                    "type": "string"
+                },
+                "creditorAgentNationalCode":
+                {
+                    "type": "string"
+                },
+                "acctWithBk":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "creditorAgentBIC":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditReference":
+                {
+                    "type": "string"
+                },
+                "beneficiaryIBAN":
+                {
+                    "type": "string"
+                },
+                "executionDate":
+                {
+                    "type": "string"
+                },
+                "debitReference":
+                {
+                    "type": "string"
+                },
+                "debitAccountId":
+                {
+                    "type": "string"
+                },
+                "benTown":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressCity":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentType":
+                {
+                    "type": "string"
+                },
+                "remittanceInformation":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "paymentDetails":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAccount":
+                {
+                    "type": "string"
+                },
+                "transactionAmount":
+                {
+                    "type": "string"
+                },
+                "benName":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentCurrency":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getPaymentExampleResponseBody"
+                }
+            },
+            "description": "getPaymentExampleResponse"
+        },
+        "getSEPAPaymentExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getSEPAPaymentExampleResponseBody"
+                }
+            },
+            "description": "getSEPAPaymentExampleResponse"
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "T24_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "parse_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "getPaymentTransferListResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "accountId":
+                    {
+                        "type": "string"
+                    },
+                    "paymentTransferId":
+                    {
+                        "type": "string"
+                    },
+                    "amount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "paymentTransferStatus":
+                    {
+                        "type": "string"
+                    },
+                    "beneficiaryAccount":
+                    {
+                        "type": "string"
+                    },
+                    "accountIBAN":
+                    {
+                        "type": "string"
+                    },
+                    "currency":
+                    {
+                        "type": "string"
+                    },
+                    "paymentDetails":
+                    {
+                        "type": "string"
+                    },
+                    "debtorReference":
+                    {
+                        "type": "string"
+                    },
+                    "creditorReference":
+                    {
+                        "type": "string"
+                    },
+                    "paymentStatus":
+                    {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "createPaymentExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createPaymentExampleResponseBody"
+                }
+            },
+            "description": "createPaymentExampleResponse"
+        },
+        "createSEPAPaymentExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/createSEPAPaymentExampleResponseBody"
+                }
+            },
+            "description": "createSEPAPaymentExampleResponse"
+        },
+        "updatePaymentTransferExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updatePaymentTransferExampleResponseBody"
+                }
+            }
+        },
+        "updateSEPAPaymentTransferExampleResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ScreenHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/updateSEPAPaymentTransferExampleResponseBody"
+                }
+            }
+        },
+        "updatePaymentTransferExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "paymentTransferStatus":
+                {
+                    "type": "string"
+                },
+                "paymentTransferId":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateSEPAPaymentTransferExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "paymentTransferStatus":
+                {
+                    "type": "string"
+                },
+                "paymentTransferId":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "benAddressLine":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressLine1":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeBearer":
+                {
+                    "type": "string"
+                },
+                "beneficiaryCountryId":
+                {
+                    "type": "string"
+                },
+                "creditorAgentNationalCode":
+                {
+                    "type": "string"
+                },
+                "acctWithBk":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "creditorAgentBIC":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditReference":
+                {
+                    "type": "string"
+                },
+                "beneficiaryIBAN":
+                {
+                    "type": "string"
+                },
+                "executionDate":
+                {
+                    "type": "string"
+                },
+                "debitReference":
+                {
+                    "type": "string"
+                },
+                "debitAccountId":
+                {
+                    "type": "string"
+                },
+                "benTown":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressCity":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentType":
+                {
+                    "type": "string"
+                },
+                "remittanceInformation":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "paymentDetails":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAccount":
+                {
+                    "type": "string"
+                },
+                "transactionAmount":
+                {
+                    "type": "string"
+                },
+                "benName":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentCurrency":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getSEPAPaymentExampleResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "benAddressLine":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressLine1":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "chargeBearer":
+                {
+                    "type": "string"
+                },
+                "beneficiaryCountryId":
+                {
+                    "type": "string"
+                },
+                "creditorAgentNationalCode":
+                {
+                    "type": "string"
+                },
+                "acctWithBk":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "creditorAgentBIC":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "creditReference":
+                {
+                    "type": "string"
+                },
+                "beneficiaryIBAN":
+                {
+                    "type": "string"
+                },
+                "executionDate":
+                {
+                    "type": "string"
+                },
+                "debitReference":
+                {
+                    "type": "string"
+                },
+                "debitAccountId":
+                {
+                    "type": "string"
+                },
+                "benTown":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryAddressCity":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentType":
+                {
+                    "type": "string"
+                },
+                "remittanceInformation":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "paymentDetails":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "beneficiaryAccount":
+                {
+                    "type": "string"
+                },
+                "transactionAmount":
+                {
+                    "type": "string"
+                },
+                "benName":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "beneficiaryName":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "paymentCurrency":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getPaymentErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getPaymentErrorResponseBody"
+                }
+            },
+            "description": "getPaymentErrorResponse"
+        },
+        "getSEPAPaymentErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getSEPAPaymentErrorResponseBody"
+                }
+            },
+            "description": "getSEPAPaymentErrorResponse"
+        },
+        "getPaymentErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "getSEPAPaymentErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createPaymentErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createPaymentErrorResponseBody"
+                }
+            },
+            "description": "createPaymentErrorResponse"
+        },
+        "createSEPAPaymentErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/createSEPAPaymentErrorResponseBody"
+                }
+            },
+            "description": "createSEPAPaymentErrorResponse"
+        },
+        "createPaymentErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updatePaymentTransferErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "updateSEPAPaymentTransferErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "createSEPAPaymentErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string"
+                            },
+                            "code":
+                            {
+                                "type": "string"
+                            },
+                            "message":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
