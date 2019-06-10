@@ -79,25 +79,25 @@
                         "schema":
                         {
                             "$ref": "#/definitions/getTransactionHistoryResponse"
-                        }
-                    },
-                    "examples": {
-                        "application/json":{
-                            "status": true,
-                            "response": {
-                                "amount": 1234.56,
-                                "transactionReference": "Payment to someone for something.",
-                                "toAccountId": "ZA245-09876",
-                                "valueDate": "17 April, 2018",
-                                "transactionTypeName": "Payment",
-                                "transactionId": "Z123456",
-                                "toCustomerId": "1233456789",
-                                "transactionType": "Transfer",
-                                "exchangeRate": "USD to GBP",
-                                "remittanceInformation": "Payment made on this day",
-                                "transactionAmount": 1234.56,
-                                "bookingDate": "18 April, 2018",
-                                "currency": "USD",
+                        },
+                        "examples": {
+                            "application/json":{
+                                "status": true,
+                                "response": {
+                                    "amount": 1234.56,
+                                    "transactionReference": "Payment to someone for something.",
+                                    "toAccountId": "ZA245-09876",
+                                    "valueDate": "17 April, 2018",
+                                    "transactionTypeName": "Payment",
+                                    "transactionId": "Z123456",
+                                    "toCustomerId": "1233456789",
+                                    "transactionType": "Transfer",
+                                    "exchangeRate": "USD to GBP",
+                                    "remittanceInformation": "Payment made on this day",
+                                    "transactionAmount": 1234.56,
+                                    "bookingDate": "18 April, 2018",
+                                    "currency": "USD"
+                                }
                             }
                         }
                     },
@@ -106,14 +106,12 @@
                         "schema": {
                             "$ref": "#/definitions/getTransactionHistoryErrorResponse"
                           }
-                        }
                     },
                     "404": {
                         "description": "Bad Request. The Account Number used does not exist. If using Model Bank data, use 10995 for a working ID.",
                         "schema": {
                             "$ref": "#/definitions/getTransactionHistoryErrorResponse"
                           }
-                        }
                     },
                     "default":
                     {
@@ -125,7 +123,8 @@
                     }
                 }
             }
-        },
+        }
+    },
     "definitions":
     {
         "ErrorHeader":
@@ -409,3 +408,5 @@
         }
     }
 }
+
+        
