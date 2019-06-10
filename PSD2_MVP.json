@@ -1,0 +1,411 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1.0.0",
+        "title": "PSD2 Specification Accounts Provider API",
+        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. AS part of the open banking specification, these endpoints do not return as much infromation as is possible from the underlying system. Instead they are focused on returning a standard set of data in a standardized manner so that any instituion or application can exchange information seamlessly."
+    },
+    "host": "localhost:9089",
+    "basePath": "/irf-test-web/api/v1.0.0",
+    "schemes": [ "https", "http" ],
+    "paths": {
+        "/holdings/PSD2/accounts/{accountId}/transactions": {
+            "get": {
+                "description": "Used to get the transaction history associated with a specific account ID. You must supply the account ID in the querry in order for the response to work. If using shared sandbox/model bank, the account ID 10995 will work. For your own institution the ID format will likely be unique and thus all formats cannot be presented here.",
+                "operationId": "getTransactionHistory",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "This is the account number for the referenced account. Because of the wide variety of possible ID formats, an example cannot be given for every scenario. If you are using the shared sandbox/model bank data, the 10995 is a working Account ID."
+                },
+                {
+                    "name": "fromDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The start date from which records in the query response should be displayed."
+                },
+                {
+                    "name": "toDate",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "The end date up to which records in the query response should be displayed."
+                },
+                {
+                    "name": "viewType",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates the summary and/or detailed information of the account requested. S-Summary, D-Detail."
+                },
+                {
+                    "name": "toTime",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Indicates the time up to which records in the query response should be displayed."
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page of the response. Multi-page responses will include a Page key.",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The starting transaction record number from which the response should be displayed. Transaction IDs can have multiple formats. It is suggested that a query be run without this option defined first so you can see the way your institution fomrats this field.",
+                    "required": false,
+                    "type": "number"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Random and unique string for each page. Used for security purposes so that a page cannot be recalled outside of the specific API query. This is a random hash that is generate by the endpoint for this specific response.",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Successful Query Response",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionHistoryResponse"
+                        }
+                    },
+                    "examples": {
+                        "application/json":{
+                            "status": true,
+                            "response": {
+                                "amount": 1234.56,
+                                "transactionReference": "Payment to someone for something.",
+                                "toAccountId": "ZA245-09876",
+                                "valueDate": "17 April, 2018",
+                                "transactionTypeName": "Payment",
+                                "transactionId": "Z123456",
+                                "toCustomerId": "1233456789",
+                                "transactionType": "Transfer",
+                                "exchangeRate": "USD to GBP",
+                                "remittanceInformation": "Payment made on this day",
+                                "transactionAmount": 1234.56,
+                                "bookingDate": "18 April, 2018",
+                                "currency": "USD",
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request. The account nuber is in the wrong format. If using Model Bank data, use 10995 for a working ID.",
+                        "schema": {
+                            "$ref": "#/definitions/getTransactionHistoryErrorResponse"
+                          }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request. The Account Number used does not exist. If using Model Bank data, use 10995 for a working ID.",
+                        "schema": {
+                            "$ref": "#/definitions/getTransactionHistoryErrorResponse"
+                          }
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "getTransactionHistoryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/getTransactionHistoryErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+    "definitions":
+    {
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "id":
+                {
+                    "type": "string"
+                },
+                "status":
+                {
+                    "type": "string"
+                },
+                "transactionStatus":
+                {
+                    "type": "string"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            }
+        },
+       "getTransactionHistoryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string"
+                },
+                "message":
+                {
+                    "type": "string"
+                },
+                "type":
+                {
+                    "type": "string"
+                }
+            }
+        },
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "T24_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "parse_time":
+                            {
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "getTransactionHistoryResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/getTransactionHistoryResponseQueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/getTransactionHistoryResponseBody"
+                }
+            },
+            "description": "getTransactionHistoryResponse"
+        },
+        "getTransactionHistoryResponseQueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "page_token":
+                {
+                    "type": "string"
+                },
+                "data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "id":
+                        {
+                            "type": "string"
+                        },
+                        "accountId":
+                        {
+                            "type": "string"
+                        },
+                        "accountDesc":
+                        {
+                            "type": "string"
+                        },
+                        "accountIBAN":
+                        {
+                            "type": "string"
+                        },
+                        "openBalance":
+                        {
+                            "type": "number"
+                        },
+                        "closeBalance":
+                        {
+                            "type": "number"
+                        },
+                        "executionEndTime":
+                        {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "getTransactionHistoryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/getTransactionHistoryErrorResponseBody"
+                }
+            },
+            "description": "getTransactionHistoryErrorResponse"
+        },
+        "getTransactionHistoryResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "properties":
+                {
+                    "amount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "toAccountId":
+                    {
+                        "type": "string"
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "transactionTypeName":
+                    {
+                        "type": "string"
+                    },
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "maxLength": 90
+                    },
+                    "toCustomerId":
+                    {
+                        "type": "string"
+                    },
+                    "transactionType":
+                    {
+                        "type": "string",
+                        "maxLength": 3
+                    },
+                    "exchangeRate":
+                    {
+                        "type": "string",
+                        "maxLength": 11
+                    },
+                    "remittanceInformation":
+                    {
+                        "type": "string",
+                        "maxLength": 65
+                    },
+                    "transactionAmount":
+                    {
+                        "type": "number",
+                        "maxLength": 25
+                    },
+                    "bookingDate":
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "maxLength": 3
+                    }
+                }
+            }
+        }
+    }
+}

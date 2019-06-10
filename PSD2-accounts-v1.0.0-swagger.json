@@ -1,21 +1,16 @@
 {
     "swagger": "2.0",
-    "info":
-    {
+    "info": {
         "version": "v1.0.0",
-        "title": "Accounts Provider APIs",
-        "description": "These APIs are used to get the account information."
+        "title": "PSD2 Specification Accounts Provider API",
+        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. AS part of the open banking specification, these endpoints do not return as much infromation as is possible from the underlying system. Instead they are focused on returning a standard set of data in a standardized manner so that any instituion or application can exchange information seamlessly."
     },
     "host": "localhost:9089",
     "basePath": "/irf-test-web/api/v1.0.0",
-    "schemes": [ "https", "http"
-  ],
-    "paths":
-    {
-        "/holdings/PSD2/accounts/{accountId}/transactions":
-        {
-            "get":
-            {
+    "schemes": [ "https", "http" ],
+    "paths": {
+        "/holdings/PSD2/accounts/{accountId}/transactions": {
+            "get": {
                 "operationId": "getTransactionHistory",
                 "description": "Used to get the transactions of a particular account.",
                 "produces": [ "application/json" ],
@@ -25,54 +20,54 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "This is the account number for the referenced account. Because of the wide variety of possible ID formats, an example cannot be given for every scenario. If you are using the shared sandbox/model bank data, the 10995 is a working Account ID."
                 },
                 {
                     "name": "fromDate",
                     "in": "query",
                     "required": false,
                     "type": "string",
-                    "description": "The start date from which records in response should be displayed."
+                    "description": "The start date from which records in the query response should be displayed."
                 },
                 {
                     "name": "toDate",
                     "in": "query",
                     "required": false,
                     "type": "string",
-                    "description": "The end date upto which records in response should be displayed."
+                    "description": "The end date up to which records in the query response should be displayed."
                 },
                 {
                     "name": "viewType",
                     "in": "query",
                     "required": false,
                     "type": "string",
-                    "description": "Indicates the summary or detail of account. S-Summary, D-Detail."
+                    "description": "Indicates the summary and/or detailed information of the account requested. S-Summary, D-Detail."
                 },
                 {
                     "name": "toTime",
                     "in": "query",
                     "required": false,
                     "type": "string",
-                    "description": "Indicates the time upto which records in response should be displayed."
+                    "description": "Indicates the time up to which records in the query response should be displayed."
                 },
                 {
                     "name": "page_size",
                     "in": "query",
-                    "description": "The total number of records per page",
+                    "description": "The total number of records per page of the response. Multi-page responses will include a 'Page' key."
                     "required": false,
                     "type": "number"
                 },
                 {
                     "name": "page_start",
                     "in": "query",
-                    "description": "The record from which the response should be displayed",
+                    "description": "The starting transaction record number from which the response should be displayed. Transaction IDs can have multiple formats. It is suggested that a query be run without this option defined first so you can see the way your institution fomrats this field.",
                     "required": false,
                     "type": "number"
                 },
                 {
                     "name": "page_token",
                     "in": "query",
-                    "description": "Random and unique string for each page. Used for security purpose",
+                    "description": "Random and unique string for each page. Used for security purposes so that a page cannot be recalled outside of the specific API query. This is a random hash that is generate by the endpoint for this specific response.",
                     "required": false,
                     "type": "string"
                 } ],
