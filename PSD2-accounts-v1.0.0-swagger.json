@@ -53,7 +53,7 @@
                 {
                     "name": "page_size",
                     "in": "query",
-                    "description": "The total number of records per page of the response. Multi-page responses will include a 'Page' key."
+                    "description": "The total number of records per page of the response. Multi-page responses will include a 'Page' key.",
                     "required": false,
                     "type": "number"
                 },
