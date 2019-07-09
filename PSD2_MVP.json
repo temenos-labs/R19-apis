@@ -2,15 +2,19 @@
     "swagger": "2.0",
     "info": {
         "version": "v1.0.0",
-        "title": "PSD2 Specification Accounts Provider API",
-        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. AS part of the open banking specification, these endpoints do not return as much infromation as is possible from the underlying system. Instead they are focused on returning a standard set of data in a standardized manner so that any instituion or application can exchange information seamlessly."
+        "title": "Accounts Provider",
+        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. As part of the open banking specification, these endpoints do not return as much infromation as is possible from the underlying system. Instead they are focused on returning a standard set of data in a standardized manner so that any instituion or application can exchange information seamlessly."
     },
-    "host": "localhost:9089",
-    "basePath": "/irf-test-web/api/v1.0.0",
+    "host": "psd2mvpapi.getsandbox.com:443",
+    "basePath": "/api/v1.0.0",
     "schemes": [ "https", "http" ],
     "paths": {
         "/holdings/PSD2/accounts/{accountId}/transactions": {
             "get": {
+                "tags": [
+                    "PSD2 Transaction History"
+                  ],
+                "summary": "Transaction History",
                 "description": "Used to get the transaction history associated with a specific account ID. You must supply the account ID in the querry in order for the response to work. If using shared sandbox/model bank, the account ID 10995 will work. For your own institution the ID format will likely be unique and thus all formats cannot be presented here.",
                 "operationId": "getTransactionHistory",
                 "produces": [ "application/json" ],
@@ -20,7 +24,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "This is the account number for the referenced account. Because of the wide variety of possible ID formats, an example cannot be given for every scenario. If you are using the shared sandbox/model bank data, the 10995 is a working Account ID."
+                    "description": "This is the account number for the referenced account. Because of the wide variety of possible ID formats, an example cannot be given for every scenario. If you are using the shared sandbox/model bank data, the 10995 is a working Account ID.",
+                    "default": "10995"
                 },
                 {
                     "name": "fromDate",
@@ -83,6 +88,10 @@
                         "examples": {
                             "application/json":{
                                 "status": true,
+                                "header": {
+                                    "id": "12334",
+                                    "status": "useless header info"
+                                },
                                 "response": {
                                     "amount": 1234.56,
                                     "transactionReference": "Payment to someone for something.",
@@ -105,12 +114,32 @@
                         "description": "Bad Request. The account nuber is in the wrong format. If using Model Bank data, use 10995 for a working ID.",
                         "schema": {
                             "$ref": "#/definitions/getTransactionHistoryErrorResponse"
-                          }
+                          },
+                          "examples": {
+                              "application/json":{
+                                  "status": true,
+                                  "response": {
+                                      "error": "Something went wrong",
+                                      "payload": "Your account nummber is in the incorrect format",
+                                      "accountId": "ZA245-09876"
+                                  }
+                              }
+                        }
                     },
                     "404": {
                         "description": "Bad Request. The Account Number used does not exist. If using Model Bank data, use 10995 for a working ID.",
                         "schema": {
                             "$ref": "#/definitions/getTransactionHistoryErrorResponse"
+                          },
+                          "examples": {
+                              "application/json":{
+                                  "status": true,
+                                  "response": {
+                                      "error": "Something went wrong",
+                                      "payload": "This account number wasn't found",
+                                      "accountId": "ZA245-09876"
+                                  }
+                              }
                           }
                     },
                     "default":
@@ -119,6 +148,15 @@
                         "schema":
                         {
                             "$ref": "#/definitions/getTransactionHistoryErrorResponse"
+                        },
+                        "examples": {
+                            "application/json":{
+                                "status": true,
+                                "response": {
+                                    "error": "Something went wrong",
+                                    "payload": "YThere was an error"
+                                }
+                            }
                         }
                     }
                 }
@@ -344,7 +382,8 @@
                     "amount":
                     {
                         "type": "number",
-                        "maxLength": 25
+                        "maxLength": 25,
+                        "example": "1099.00"
                     },
                     "transactionReference":
                     {
