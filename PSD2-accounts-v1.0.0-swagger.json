@@ -2,14 +2,17 @@
     "swagger": "2.0",
     "info": {
         "version": "v1.0.0",
-        "title": "PSD2 Specification Accounts Provider API",
-"description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. As part of the open banking specification, these endpoints do not return as much information as is possible from the underlying system. Instead, they are focused on returning a standard set of data in a standardized manner so that any institution or application can exchange information seamlessly."    },
+        "title": "PSD2 Account Provider",
+        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. As part of the open banking specification, these endpoints do not return as much information as is possible from the underlying system. Instead, they are focused on returning a standard set of data in a standardized manner so that any institution or application can exchange information seamlessly."    
+    },
     "host": "localhost:9089",
     "basePath": "/irf-test-web/api/v1.0.0",
     "schemes": [ "https", "http" ],
     "paths": {
         "/holdings/PSD2/accounts/{accountId}/transactions": {
             "get": {
+                "tags": ["Transaction History"],
+                "summary": "Transaction History",
                 "operationId": "getTransactionHistory",
                 "description": "Used to get the transactions of a particular account.",
                 "produces": [ "application/json" ],
@@ -19,7 +22,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "This is the account number for the referenced account. Because of the wide variety of possible ID formats, an example cannot be given for every scenario. If you are using the shared sandbox/model bank data, the 10995 is a working Account ID."
+                    "description": "This is the account number for the referenced account. Because of the wide variety of possible ID formats, an example cannot be given for every scenario. If you are using the shared sandbox/model bank data, the 10995 is a working Account ID.",
+                    "default": "84239"
                 },
                 {
                     "name": "fromDate",
@@ -78,6 +82,12 @@
                         "schema":
                         {
                             "$ref": "#/definitions/getTransactionHistoryResponse"
+                        },
+                        "examples": {
+                            "application/json": 
+                                
+                            {
+
                         }
                     },
                     "default":
@@ -95,6 +105,8 @@
         {
             "get":
             {
+                "tags": ["Account Balance"],
+                "summary": "Account Balance",
                 "operationId": "getAccountBalance",
                 "description": "Used to get the balance of a particular account.",
                 "produces": [ "application/json" ],
@@ -104,7 +116,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application.",
+                    "default": "10995"  
                 },
                 {
                     "name": "page_size",
@@ -152,6 +165,8 @@
         {
             "get":
             {
+                "tags": ["Account Status"],
+                "summary": "Account Status",
                 "operationId": "getAccountStatus",
                 "description": "Used to get the status of a particular account.",
                 "produces": [ "application/json" ],
@@ -161,7 +176,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application.",
+                    "default": "10995"
                 },
                 {
                     "name": "page_size",
@@ -209,6 +225,8 @@
         {
             "get":
             {
+                "tags": ["Account Overview"],
+                "summary": "Account Overview",
                 "operationId": "getAccountOverview",
                 "description": "Used to get the overview of a particular account.",
                 "produces": [ "application/json" ],
@@ -218,7 +236,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application.",
+                    "default": "10995"
                 },
                 {
                     "name": "page_size",
@@ -266,6 +285,8 @@
         {
             "get":
             {
+                "tags": ["Balance Reporting"],
+                "summary": "Balance Reporting",
                 "operationId": "getAccountBalanceReport",
                 "description": "Used to get the balance report of a particular account.",
                 "produces": [ "application/json" ],
@@ -275,7 +296,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application.",
+                    "default": "10995"
                 },
                 {
                     "name": "amount",
