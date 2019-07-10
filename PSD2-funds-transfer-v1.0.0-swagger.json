@@ -8,15 +8,15 @@
     },
     "host": "localhost:9089",
     "basePath": "/irf-test-web/api/v1.0.0",
-    "schemes": [
-    "https", "http"
-  ],
+    "schemes": [ "https", "http" ],
     "paths":
     {
         "/order/PSD2/payments/":
         {
             "post":
             {
+                "tags": ["Create Funds Transfer Record"],
+                "summary": "Create Funds Transfer Record",
                 "operationId": "createPayment",
                 "description": "Used to create an unauthorized Funds Transfer record.To authorize, please use updatePaymentTransfer API",
                 "produces": [
@@ -66,6 +66,8 @@
         {
             "post":
             {
+                "tags": ["Create SEPA Payment Record"],
+                "summary": "Create SEPA Payment Record",
                 "operationId": "createSEPAPayment",
                 "description": "Used to create an unauthorized SEPA Funds Transfer record.To authorize, please use updateSEPAPaymentTransfer API",
                 "produces": [
@@ -115,18 +117,19 @@
         {
             "get":
             {
+                "tags": ["Get Payment Record"],
+                "summary": "Get Payment Record",
                 "operationId": "getPayment",
                 "description": "Used to get the Funds Transfer record.",
-                "produces": [
-          "application/json"
-        ],
+                "produces": [ "application/json" ],
                 "parameters": [
                 {
                     "name": "paymentId",
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number.",
+                    "default": "FT192503456"
                 }
         ],
                 "responses":
@@ -151,6 +154,8 @@
             },
             "put":
             {
+                "tags": ["Authorize Funds Transfer Record"],
+                "summary": "Authorize Funds Transfer Record",
                 "operationId": "updatePaymentTransfer",
                 "description": "Used to authorize a Funds Transfer record.",
                 "produces": [ "application/json" ],
@@ -160,7 +165,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number.",
+                    "default": "FT192503456"
                 } ],
                 "responses":
                 {
@@ -187,18 +193,19 @@
         {
             "get":
             {
+                "tags": ["Get SEPA Funds Transfer Record"],
+                "summary": "Get SEPA Funds Transfer Record",
                 "operationId": "getSEPAPayment",
                 "description": "Used to get SEPA Funds Transfer record.",
-                "produces": [
-          "application/json"
-        ],
+                "produces": [ "application/json" ],
                 "parameters": [
                 {
                     "name": "paymentId",
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number.",
+                    "default": "FT192503456"
                 }
         ],
                 "responses":
@@ -223,6 +230,8 @@
             },
             "put":
             {
+                "tags": ["Authorize SEPA Funds Transfer Record"],
+                "summary": "Authorize SEPA Funds Transfer Record",
                 "operationId": "updateSEPAPaymentTransfer",
                 "description": "Used to authorize SEPA Funds Transfer record.",
                 "produces": [ "application/json" ],
@@ -232,7 +241,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number.",
+                    "default": "FT192503456"
                 } ],
                 "responses":
                 {
@@ -259,18 +269,19 @@
         {
             "get":
             {
+                "tags": ["Get Funds Transfer History by Account"],
+                "summary": "Get Funds Transfer History by Account",
                 "operationId": "getPaymentTransferList",
                 "description": "Used to get the Funds Transfer records list of a particular account.",
-                "produces": [
-          "application/json"
-        ],
+                "produces": [ "application/json" ],
                 "parameters": [
                 {
                     "name": "accountId",
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application.",
+                    "default": "10995"
                 },
                 {
                     "name": "startDate",
@@ -340,18 +351,19 @@
         {
             "get":
             {
+                "tags": ["Get Funds Transfer Status"],
+                "summary": "Get Funds Transfer Status",
                 "operationId": "getPaymentTransferStatus",
                 "description": "Used to get the status of Funds Transfer record.",
-                "produces": [
-          "application/json"
-        ],
+                "produces": [ "application/json" ],
                 "parameters": [
                 {
                     "name": "paymentId",
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number."
+                    "description": "Identifies uniquely each Funds Transfer transaction. 12 character standard id. Explanation of Reference Number format: FTYYDDDNNNNN where FT-Application indicator - FT for the Funds Transfer Application, YY-Last two digits of year when transaction is processed, DDD-Julian day number within year when the F.T. is processed, NNNNN-Sequence number.",
+                    "default": "FT192503456"
                 },
                 {
                     "name": "page_size",

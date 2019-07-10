@@ -8,27 +8,26 @@
     },
     "host": "localhost:9089",
     "basePath": "/irf-test-web/api/v1.0.0",
-    "schemes": [
-    "https", "http"
-  ],
+    "schemes": [ "https", "http" ],
     "paths":
     {
         "/order/PSD2/paymentOrders/{paymentOrderId}":
         {
             "get":
             {
+                "tags": ["Payment Order Record"],
+                "summary": "Get Payment Order Record",
                 "operationId": "getPaymentOrder",
                 "description": "Used to get the PaymentOrder record.",
-                "produces": [
-          "application/json"
-        ],
+                "produces": [ "application/json" ],
                 "parameters": [
                 {
                     "name": "paymentOrderId",
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "ID of the payment order record"
+                    "description": "ID of the payment order record",
+                    "default": "Some_ID"
                 }
         ],
                 "responses":
@@ -53,6 +52,8 @@
             },
             "put":
             {
+                "tags": ["Put Payment Order Record"],
+                "summary": "Put Payment Order Record",
                 "operationId": "updatePaymentOrder",
                 "description": "Used to authorize a PaymentOrder record.",
                 "produces": [ "application/json" ],
@@ -62,7 +63,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "ID of the payment order record"
+                    "description": "ID of the payment order record",
+                    "default": "Some_ID"
                 } ],
                 "responses":
                 {
@@ -89,6 +91,8 @@
         {
             "get":
             {
+                "tags": ["Get Payment Order Records by Account"],
+                "summary": "Get Payment Order Records by Account",
                 "operationId": "getPaymentOrderList",
                 "description": "Used to get the PaymentOrder records list of a particular account.",
                 "produces": [
@@ -100,7 +104,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application."
+                    "description": "The field holds the reference of the underlying ACCOUNT application. This should just be the same as trying a new input on ACCOUNT application.",
+                    "default": "10995"
                 },
                 {
                     "name": "startDate",
@@ -170,11 +175,11 @@
         {
             "post":
             {
+                "tags": ["Create Payment Order Record"],
+                "summary": "Create Payment Order Record",
                 "operationId": "createPaymentInitiation",
                 "description": "Used to create an unauthorized PaymentOrder record. To authorize it, please use updatePaymentOrder API",
-                "produces": [
-          "application/json"
-        ],
+                "produces": ["application/json"],
                 "parameters": [
                 {
                     "in": "body",
@@ -219,6 +224,8 @@
         {
             "get":
             {
+                "tags": ["Get Payment Order Status by PaymentID"],
+                "summary": "Get Payment Order Status by PaymentID",
                 "operationId": "getPaymentOrderStatus",
                 "description": "Used to get the status of a PaymentOrder record.",
                 "produces": [
@@ -230,7 +237,8 @@
                     "in": "path",
                     "required": true,
                     "type": "string",
-                    "description": "ID of the payment order record"
+                    "description": "ID of the payment order record",
+                    "default": "Some_ID"
                 },
                 {
                     "name": "page_size",
