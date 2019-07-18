@@ -3,7 +3,10 @@
     "info": {
         "version": "v1.0.0",
         "title": "Accounts Provider",
-        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. As part of the open banking specification, these endpoints do not return as much infromation as is possible from the underlying system. Instead they are focused on returning a standard set of data in a standardized manner so that any instituion or application can exchange information seamlessly."
+        "description": "The PSD2 specification defines the following endpoints and methods for getting and displaying account information in a standard format. As part of the open banking specification, these endpoints do not return as much infromation as is possible from the underlying system. Instead they are focused on returning a standard set of data in a standardized manner so that any instituion or application can exchange information seamlessly.",
+        "x-BIAN": "Payment",
+        "x-Temn_Prod": "Payments",
+        "x-Experience": "True"
     },
     "host": "psd2mvpapi.getsandbox.com:443",
     "basePath": "/api/v1.0.0",
