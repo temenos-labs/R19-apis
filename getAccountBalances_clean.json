@@ -1,0 +1,333 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Allows the retrieval of PSD2 Account Balance information\n\n",
+    "version": "v1.0.0",
+    "title": "Account Balance"
+  },
+  "host": "api.server.com",
+  "basePath": "/api/v1.0.0/",
+  "tags": [
+    {
+      "name": "PSD2 Account Balance (AIS)",
+      "description": "PSD2 API to return balances information"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "paths": {
+    "/party/accounts/balance/{accountId}": {
+      "get": {
+        "tags": [
+          "PSD2 Account Balance (AIS)"
+        ],
+        "summary": "API to retrieve customer account's balance information",
+        "description": "The API retrieves the account balance information for the specified account number. For PSD2 this API can be linked to Berlin Group's 'Read Balance' published API **GET /accounts​/{account-id}​/balances** to return account balance data for a given account",
+        "operationId": "getAccountBalance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.\n Accepts both IBAN & BBAN",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date for which the balance is requested. Defaults to current date if left blank or if the date supplied is in the past.\n Accepts date in the format YYYYMMDD. E.g. 20191231",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "The total number of records per page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page_start",
+            "in": "query",
+            "description": "The record from which the response should be displayed",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "description": "Unique id expected to get as part of response from system on every enquiry request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "credentials",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "companyId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AccountBalanceResponse",
+            "schema": {
+              "$ref": "#/definitions/AccountBalanceResponse"
+            }
+          },
+          "400": {
+            "description": "BusinessQueryErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/BusinessQueryErrorResponse"
+            }
+          },
+          "500": {
+            "description": "SystemQueryErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/SystemQueryErrorResponse"
+            }
+          },
+          "default": {
+            "description": "QueryErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/QueryErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "definitions": {
+    "AccountBalanceResponseQueryHeader": {
+      "properties": {
+        "audit": {
+          "type": "object",
+          "properties": {
+            "T24_time": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Time taken to response by T24"
+            },
+            "versionNumber": {
+              "type": "string",
+              "description": "The CURR.NO. of the record"
+            },
+            "parse_time": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Time taken to parse the response by IRIS"
+            }
+          }
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of records per page"
+        },
+        "page_start": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The record from which the response should be displayed"
+        },
+        "total_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of records present"
+        },
+        "page_token": {
+          "type": "string",
+          "description": "Unique id expected to get as part of response from system on every enquiry request"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "accountId": {
+              "type": "string",
+              "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+            },
+            "accountIBAN": {
+              "type": "string",
+              "description": "This is the International Bank Account Number (IBAN) of the account. For example GB98MIDL07009312345678, FR7630006000011234567890189"
+            },
+            "lastPayment": {
+              "type": "string",
+              "description": "Last transaction amount for the account"
+            }
+          }
+        }
+      }
+    },
+    "AccountBalanceResponse": {
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/AccountBalanceResponseQueryHeader"
+        },
+        "body": {
+          "$ref": "#/definitions/AccountBalanceResponseBody"
+        }
+      },
+      "description": "AccountBalanceResponse"
+    },
+    "AccountBalanceResponseBody": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "balanceType": {
+            "type": "string",
+            "description": "Identifies the type of balance returned. For e.g. closingBooked, expected, openingBooked, interimBooked, interimAvailable & forwardAvailable"
+          },
+          "creditLimitIncluded": {
+            "type": "string",
+            "description": "Identifies whether the credit limit amount has been included in the balance amount. Set to 'true' if the associated balance amount includes value of credit limits "
+          },
+          "balanceAmount": {
+            "type": "number",
+            "description": "The amount of the balance"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Identifies the currency. E.g. USD, GBP etc"
+          },
+          "referenceDate": {
+            "type": "string",
+            "description": "The date for which the balance is valid. The response will be returned ISODate format. For 'closingBooked' balance type this date will be previous system date. For others except 'forwardAvailable' this date will be current system date. For 'forwardAvailable' this will be the date for which the balance was requested. E.g. 22 APR 2019"
+          },
+          "dateTime": {
+            "type": "string",
+            "description": "The time and date for which the balance was valid from. This may change multiple times a day dependant on the transaction(s) that have been processed and therefore affect the balance amount. The response will be ISO date time format. E.g. '2018-10-31T12:00:00'"
+          }
+        }
+      }
+    },
+    "ErrorHeader": {
+      "properties": {
+        "audit": {
+          "type": "object",
+          "properties": {
+            "T24_time": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Time taken to response by T24"
+            },
+            "versionNumber": {
+              "type": "string",
+              "description": "The CURR.NO. of the record"
+            },
+            "parse_time": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "QueryErrorResponse": {
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/ErrorHeader"
+        },
+        "error": {
+          "$ref": "#/definitions/QueryErrorResponseBody"
+        }
+      },
+      "description": "QueryErrorResponse"
+    },
+    "QueryErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The identifier of the error message "
+        },
+        "message": {
+          "type": "string",
+          "description": "The actual t24 error message "
+        },
+        "type": {
+          "type": "string",
+          "description": "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessQueryErrorResponse": {
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/ErrorHeader"
+        },
+        "error": {
+          "$ref": "#/definitions/BusinessQueryErrorResponseBody"
+        }
+      },
+      "description": "BusinessQueryErrorResponse"
+    },
+    "BusinessQueryErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The identifier of the error message "
+        },
+        "message": {
+          "type": "string",
+          "description": "The actual t24 error message for bad requests"
+        },
+        "type": {
+          "type": "string",
+          "description": "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemQueryErrorResponse": {
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/ErrorHeader"
+        },
+        "error": {
+          "$ref": "#/definitions/SystemQueryErrorResponseBody"
+        }
+      },
+      "description": "SystemQueryErrorResponse"
+    },
+    "SystemQueryErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The identifier of the error message "
+        },
+        "message": {
+          "type": "string",
+          "description": "The actual t24 error message caused by server"
+        },
+        "type": {
+          "type": "string",
+          "description": "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}
