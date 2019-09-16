@@ -1,0 +1,490 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves transaction history for a requested period, for the requested account",
+        "version": "v1.0.0",
+        "title": "PSD II API to retreive account transaction history"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1.0.0/",
+    "schemes": [ "http", "https" ],
+    "security": [
+    {
+        "basicAuth": [ ]
+    } ],
+    "paths":
+    {
+        "/party/{accountId}/transaction/{transactionStatus}":
+        {
+            "get":
+            {
+                "summary": "Retrieves account transaction history",
+                "description": "Retrieves account transaction history list and balances for a given account specified in accountId. For PSD2, this is linked to the 'Read transaction list' published API in accordance to open banking standards.",
+                "operationId": "getTransactionsDetails",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "accountId",
+                    "in": "path",
+                    "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "transactionStatus",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "in": "query",
+                    "description": "Specifies the start date when the instruction or transaction or payment will be made active",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "endDate",
+                    "in": "query",
+                    "description": "Indicates the date till which the transaction history requested. If 20120101 is the start date and 20120201 is the end date, all transactions that are booked between January 1 to February 1 2012 are returned",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "reference",
+                    "in": "query",
+                    "description": "Indicates the transaction reference for which the history of transactions is requested. It is steered by the attribute 'booked' given the start date and end date or the entry from which the history is requested",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "noOfEntries",
+                    "in": "query",
+                    "description": "Indicates the number of entries to be retreived when transaction history for an account is requested. ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "deltaList",
+                    "in": "query",
+                    "description": "Indicates the entry from which the transaction history needs to be retreived. If an end date is not specified, transactions from delta list till 'today' are retreived. ",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "withBalance",
+                    "in": "query",
+                    "description": "Identifies whether balance information needs to be retrieved. Possible values YES or NO. Default is NO.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "TransactionsDetailsResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/TransactionsDetailsResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessQueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessQueryErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemQueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemQueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "TransactionsDetailsResponseQueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                },
+                "data":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "accountId":
+                        {
+                            "type": "string",
+                            "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                        },
+                        "accountIBAN":
+                        {
+                            "type": "string",
+                            "description": "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+                        },
+                        "balanceAmount":
+                        {
+                            "type": "string",
+                            "description": "Amount of the balance, typically linked to a balance type"
+                        },
+                        "lastUsedAt":
+                        {
+                            "type": "string",
+                            "description": "Indicates the time stamp at which the transaction history for the account is retreived. "
+                        }
+                    }
+                }
+            }
+        },
+        "TransactionsDetailsResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/TransactionsDetailsResponseQueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/TransactionsDetailsResponseBody"
+                }
+            },
+            "description": "TransactionsDetailsResponse"
+        },
+        "TransactionsDetailsResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "bookingDate":
+                    {
+                        "type": "string",
+                        "description": "The business date on which the accounting entry was generated.",
+                        "maxLength": 11
+                    },
+                    "valueDate":
+                    {
+                        "type": "string",
+                        "description": "Indicates the value date on which the underlying accounting entry is to be given value (for interest purposes)",
+                        "maxLength": 11
+                    },
+                    "transactionId":
+                    {
+                        "type": "string",
+                        "description": "Unique transaction identifier for retrieving the details of the transaction. For example: FT0102030333 etc.",
+                        "maxLength": 90
+                    },
+                    "transactionReference":
+                    {
+                        "type": "string",
+                        "description": "The transaction reference identifier.",
+                        "maxLength": 150
+                    },
+                    "accountCurrency":
+                    {
+                        "type": "string",
+                        "description": "Currency of the account. For example: USD, GBP."
+                    },
+                    "transactionAmount":
+                    {
+                        "type": "number",
+                        "description": "Contains the transaction amount. This is based on the currency, either local or foreign currency"
+                    },
+                    "creditorAgentId":
+                    {
+                        "type": "string",
+                        "description": "Clearing system identifier for the beneficiary institution. Contains a valid ISO code for the clearing."
+                    },
+                    "creditAccountId":
+                    {
+                        "type": "string",
+                        "description": "Credit account identifier of the payment or transaction"
+                    },
+                    "debtorReference":
+                    {
+                        "type": "string",
+                        "description": "The reference number for the debit side of the transaction."
+                    },
+                    "debitAccountId":
+                    {
+                        "type": "string",
+                        "description": "Indicates the debit account number of the payment or transaction"
+                    },
+                    "paymentDetail":
+                    {
+                        "type": "string",
+                        "description": "Indicates the Payment Details to enable the Beneficiary to apply the payment. ",
+                        "maxLength": 34
+                    },
+                    "remittanceInformation":
+                    {
+                        "type": "string",
+                        "description": "Indicates the remittance information that is supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivable system, in an unstructured form.",
+                        "maxLength": 34
+                    },
+                    "balanceType":
+                    {
+                        "type": "string",
+                        "description": "Type of balance (e.g. current balance, credit interest accrued, deferred commission, etc.) as defined in the institution's accounting schemas.",
+                        "maxLength": 20
+                    },
+                    "bankTransactionCode":
+                    {
+                        "type": "string",
+                        "description": "Identifies the type of transaction.  The code is used to determine what references and narratives will be printed on statements."
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message "
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: "
+                }
+            }
+        },
+        "BusinessQueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/BusinessQueryErrorResponseBody"
+                }
+            },
+            "description": "BusinessQueryErrorResponse"
+        },
+        "BusinessQueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message for bad requests"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: Business"
+                }
+            }
+        },
+        "SystemQueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/SystemQueryErrorResponseBody"
+                }
+            },
+            "description": "SystemQueryErrorResponse"
+        },
+        "SystemQueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message caused by server"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: System"
+                }
+            }
+        }
+    }
+}

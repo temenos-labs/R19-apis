@@ -1,0 +1,473 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves consent record",
+        "version": "v1.0.0",
+        "title": "PSD II API to retrieve consent record"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": [ "http", "https" ],
+    "security": [
+    {
+        "basicAuth": [ ]
+    } ],
+    "paths":
+    {
+        "/product/consents/{consentId}":
+        {
+            "get":
+            {
+                "summary": "Retrieves consent record",
+                "description": "Retrieves entire consent record. For PSD2, this API can be linked to 'get consent status request' published API in accordance to open banking standards.",
+                "operationId": "getConsentRequest",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "consentId",
+                    "in": "path",
+                    "description": "Identifier of the corresponding consent object as retrieved by an account Information consent Request.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "ConsentRequestResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ConsentRequestResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessQueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessQueryErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemQueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemQueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "ConsentRequestResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ConsentRequestResponseBody"
+                }
+            },
+            "description": "ConsentRequestResponse"
+        },
+        "ConsentRequestResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "defConsentTypes":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "defConsentType":
+                                {
+                                    "type": "array",
+                                    "description": "Indicates the default consent type of the PSD2 consent created. Ex : If the default consent type is allPsd2, then the customer has requetsed for a global consent ",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "consentTypes":
+                    {
+                        "type": "array",
+                        "description": "The consent type of for which consent is given.  Drop down list pre-defined at product level and defaulted to the account.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "consentType":
+                                {
+                                    "type": "array",
+                                    "description": "The consent type of for which consent is given.  Drop down list pre-defined at product level and defaulted to the account.",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "consentStatuses":
+                    {
+                        "type": "array",
+                        "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "consentStatus":
+                                {
+                                    "type": "array",
+                                    "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                },
+                                "lastActionDate":
+                                {
+                                    "type": "array",
+                                    "description": "Indicates the date on which the status of the consent arrangement changed.",
+                                    "items":
+                                    {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "accountId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId."
+                    },
+                    "accountName":
+                    {
+                        "type": "string",
+                        "description": "Display name or short name of the account specified."
+                    },
+                    "recurringIndicator":
+                    {
+                        "type": "string",
+                        "description": "Indicatess whether the expiry date to be recalculated for every duration of expiry period."
+                    },
+                    "validUntil":
+                    {
+                        "type": "string",
+                        "description": "Valid until date"
+                    },
+                    "frequencyPerDay":
+                    {
+                        "type": "string",
+                        "description": "Specifies the frequency in which the payment application executes the payment instruction"
+                    },
+                    "arrangementId":
+                    {
+                        "type": "string",
+                        "description": "The identifier of the arrangement"
+                    },
+                    "currency":
+                    {
+                        "type": "string",
+                        "description": "Identifies the underlying currency used for the transaction."
+                    },
+                    "category":
+                    {
+                        "type": "string",
+                        "description": "Indicates the account or contract product name. For example for an account this maybe current, savings etc."
+                    },
+                    "productDescription":
+                    {
+                        "type": "string",
+                        "description": "Description of the product"
+                    },
+                    "availableBalance":
+                    {
+                        "type": "string",
+                        "description": "Shows the net balance of an account, however may or may not include unauthorized debits and credits depending on the business setup."
+                    },
+                    "sortCode":
+                    {
+                        "type": "string",
+                        "description": "The bank identifier/sort code which identifies both the bank and the branch where the account is held."
+                    },
+                    "IBAN":
+                    {
+                        "type": "string",
+                        "description": "International Bank Account number, an identifier of the account. E.g. GB29 NWBK 6016 1331 9268 19"
+                    },
+                    "productId":
+                    {
+                        "type": "string",
+                        "description": "Contains the unique identifier of the product, e.g. the product id of the arrangement account."
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message "
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: "
+                }
+            }
+        },
+        "BusinessQueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/BusinessQueryErrorResponseBody"
+                }
+            },
+            "description": "BusinessQueryErrorResponse"
+        },
+        "BusinessQueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message for bad requests"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: Business"
+                }
+            }
+        },
+        "SystemQueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/SystemQueryErrorResponseBody"
+                }
+            },
+            "description": "SystemQueryErrorResponse"
+        },
+        "SystemQueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message caused by server"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: System"
+                }
+            }
+        }
+    }
+}

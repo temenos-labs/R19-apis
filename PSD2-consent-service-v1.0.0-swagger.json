@@ -1,0 +1,1748 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Allows for consent creation and deletion",
+        "version": "v1.0.0",
+        "title": "PSD II API for consent management"
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": [ "http", "https" ],
+    "security": [
+    {
+        "basicAuth": [ ]
+    } ],
+    "paths":
+    {
+        "/product/consents":
+        {
+            "post":
+            {
+                "summary": "Consent management",
+                "description": "Consent creation. For PSD2, this API can be linked to 'create consent' published API in accordance to open banking standards. ",
+                "operationId": "createConsent",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Consent"
+                    }
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "createConsentResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ConsentResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ArrangementErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessArrangementErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemArrangementErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/consents/{consentId}":
+        {
+            "put":
+            {
+                "summary": "Consent management",
+                "description": "Consent intiation. For PSD2, this API can be linked to 'initiate consent' published API in accordance to open banking standards. ",
+                "operationId": "initiateConsent",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Consent"
+                    }
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "initiateConsentResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ConsentResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ArrangementErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessArrangementErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemArrangementErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "summary": "Consent management",
+                "description": "Consent deletion. For PSD2, this API can be linked to 'delete consent' published API in accordance to open banking standards. ",
+                "operationId": "deleteConsent",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "deleteConsentResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ConsentResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ArrangementErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessArrangementErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemArrangementErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+            {
+                "name": "consentId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            } ]
+        },
+        "/product/consents/approval/{consentId}":
+        {
+            "put":
+            {
+                "summary": "Consent management",
+                "description": "Consent amendment. For PSD2, this API can be linked to 'amend consent' published API in accordance to open banking standards. ",
+                "operationId": "amendConsent",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Consent"
+                    }
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "amendConsentResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ConsentResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ArrangementErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessArrangementErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemArrangementErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+            {
+                "name": "consentId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            } ]
+        },
+        "/product/consents/withdrawal/{consentId}":
+        {
+            "put":
+            {
+                "summary": "Consent management",
+                "description": "Consent withdrawal. For PSD2, this API can be linked to 'withdraw consent' published API in accordance to open banking standards. ",
+                "operationId": "withdrawConsent",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "validate_only",
+                    "in": "query",
+                    "description": "The identifier to indicate if it is set to only validate or not.",
+                    "required": false,
+                    "type": "boolean"
+                },
+                {
+                    "in": "body",
+                    "name": "payload",
+                    "required": true,
+                    "schema":
+                    {
+                        "$ref": "#/definitions/Consent1"
+                    }
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "withdrawConsentResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ConsentResponse1"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "ArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/ArrangementErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessArrangementErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemArrangementErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemArrangementErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+            {
+                "name": "consentId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            } ]
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "PayloadHeader":
+        {
+            "properties":
+            {
+                "override":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "overrideDetails":
+                        {
+                            "type": "array",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "id":
+                                    {
+                                        "type": "string",
+                                        "description": "The identifier of the override"
+                                    },
+                                    "description":
+                                    {
+                                        "type": "string",
+                                        "description": "The actual override message"
+                                    },
+                                    "responseCode":
+                                    {
+                                        "type": "string",
+                                        "description": "The user input to accept/reject the override."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        }
+                    }
+                }
+            }
+        },
+        "Consent":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ConsentBody"
+                }
+            },
+            "description": "Consent"
+        },
+        "ConsentBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "arrangement":
+                {
+                    "type": "string",
+                    "description": "Unique identifier for the arrangement contract"
+                },
+                "customer":
+                {
+                    "type": "string",
+                    "description": "Contains the customer identifier to fetch list of consent arrangements for the customer or customer identifier of the debtor account. This will be populated once the SCA(Strong Customer Authentication) is completed."
+                },
+                "product":
+                {
+                    "type": "string",
+                    "description": "Contains the unique identifier of the product, e.g. the product id of the arrangement account."
+                },
+                "arrangementEffectiveDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date from which the arrangement activity is effective"
+                },
+                "activity":
+                {
+                    "type": "string",
+                    "description": "Defines the activity to be processed against the Arrangement. The activity may be a user activity or a system generated activity."
+                },
+                "reason":
+                {
+                    "type": "string",
+                    "description": "Contains the reason for performing the current activity"
+                },
+                "accountConsent":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "consentTypes":
+                        {
+                            "type": "array",
+                            "description": "Consent Type for which the consent is given",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "consentType":
+                                    {
+                                        "type": "string",
+                                        "description": "Consent Type for which the consent is given"
+                                    }
+                                }
+                            }
+                        },
+                        "accountIBANs":
+                        {
+                            "type": "array",
+                            "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent.",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "accountIBAN":
+                                    {
+                                        "type": "string",
+                                        "description": "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+                                    },
+                                    "isConsentGiven":
+                                    {
+                                        "type": "string",
+                                        "description": "Indicates whether the customer consents to adding this account to the TPP (third party provider) service they are signing up for or otherwise."
+                                    },
+                                    "accountBlock":
+                                    {
+                                        "type": "string",
+                                        "description": "Indicates whether the consent account has been blocked or not. Holds YES/NO/Blank."
+                                    },
+                                    "blockFrom":
+                                    {
+                                        "type": "string",
+                                        "description": "Specifies the date on which account consent is blocked."
+                                    },
+                                    "blockTill":
+                                    {
+                                        "type": "string",
+                                        "description": "Specifies until which date account consent to be blocked."
+                                    },
+                                    "blockNotes":
+                                    {
+                                        "type": "string",
+                                        "description": "Reason for blocking the account in the consent."
+                                    },
+                                    "consentSubTypes":
+                                    {
+                                        "type": "array",
+                                        "items":
+                                        {
+                                            "type": "object",
+                                            "properties":
+                                            {
+                                                "consentSubType":
+                                                {
+                                                    "type": "string",
+                                                    "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "consentStatuses":
+                        {
+                            "type": "array",
+                            "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "consentStatus":
+                                    {
+                                        "type": "string",
+                                        "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu."
+                                    },
+                                    "lastActionDate":
+                                    {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "Indicates the date on which the status of the consent arrangement changed."
+                                    }
+                                }
+                            }
+                        },
+                        "thirdpartyproviderId":
+                        {
+                            "type": "string",
+                            "description": "Unique TPP(third party provider) reference which is the global urn of the TPP. For example: PSDLU-CSSF-9db9074bf3be45550237a21cd2a11585"
+                        },
+                        "signUpService":
+                        {
+                            "type": "string",
+                            "description": "Indicates whether the signing up information is to be AISP(Accounts information service provider) or PISP(Payments information service provider)."
+                        },
+                        "recurringIndicator":
+                        {
+                            "type": "string",
+                            "description": "Indicates whether the expiry date to be recalculated for every duration of expiry period."
+                        },
+                        "validUntil":
+                        {
+                            "type": "string",
+                            "description": "Valid until date"
+                        },
+                        "frequencyPerDay":
+                        {
+                            "type": "string",
+                            "description": "Specifies the frequency in which the payment application executes the payment instruction"
+                        },
+                        "combinedServiceIndicator":
+                        {
+                            "type": "string",
+                            "description": "Specifies whether the payment initiation service will be addressed in the same session as account information consent request"
+                        },
+                        "scaStatus":
+                        {
+                            "type": "string",
+                            "description": "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+                        },
+                        "link":
+                        {
+                            "type": "string",
+                            "description": "Contains the arrangement activity reference of the parent. This is used during secondary activity processing where child activities are generated at runtime during processing."
+                        }
+                    }
+                }
+            }
+        },
+        "ArrangementHeader":
+        {
+            "properties":
+            {
+                "transactionStatus":
+                {
+                    "type": "string",
+                    "description": "The status of the transaction"
+                },
+                "aaaId":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the aa record created"
+                },
+                "id":
+                {
+                    "type": "string",
+                    "description": "The Identifier of the record created"
+                },
+                "status":
+                {
+                    "type": "string",
+                    "description": "The status of the record"
+                },
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "ConsentResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ArrangementHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ConsentResponseBody"
+                }
+            },
+            "description": "ConsentResponse"
+        },
+        "ConsentResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "arrangementActivity":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "arrangement":
+                        {
+                            "type": "string",
+                            "description": "Unique identifier for the arrangement contract"
+                        },
+                        "customer":
+                        {
+                            "type": "string",
+                            "description": "Contains the customer identifier to fetch list of consent arrangements for the customer or customer identifier of the debtor account. This will be populated once the SCA(Strong Customer Authentication) is completed."
+                        },
+                        "product":
+                        {
+                            "type": "string",
+                            "description": "Contains the unique identifier of the product, e.g. the product id of the arrangement account."
+                        },
+                        "arrangementEffectiveDate":
+                        {
+                            "type": "string",
+                            "format": "date",
+                            "description": "Date from which the arrangement activity is effective"
+                        },
+                        "activity":
+                        {
+                            "type": "string",
+                            "description": "Defines the activity to be processed against the Arrangement. The activity may be a user activity or a system generated activity."
+                        },
+                        "reason":
+                        {
+                            "type": "string",
+                            "description": "Contains the reason for performing the current activity"
+                        }
+                    }
+                },
+                "activities":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "{activityName}":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "activity":
+                                {
+                                    "type": "string"
+                                },
+                                "transactionStatus":
+                                {
+                                    "type": "string",
+                                    "description": "The status of the transaction"
+                                },
+                                "id":
+                                {
+                                    "type": "string",
+                                    "description": "The Identifier of the record created"
+                                }
+                            }
+                        }
+                    }
+                },
+                "properties":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "customer":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "header":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "transactionStatus":
+                                        {
+                                            "type": "string"
+                                        },
+                                        "id":
+                                        {
+                                            "type": "string"
+                                        },
+                                        "status":
+                                        {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "officers":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "header":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "transactionStatus":
+                                        {
+                                            "type": "string"
+                                        },
+                                        "id":
+                                        {
+                                            "type": "string"
+                                        },
+                                        "status":
+                                        {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "accountConsent":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "header":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "transactionStatus":
+                                        {
+                                            "type": "string",
+                                            "description": "The status of the transaction"
+                                        },
+                                        "audit":
+                                        {
+                                            "type": "object",
+                                            "properties":
+                                            {
+                                                "parseTime":
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "description": "Time taken to parse the response by IRIS"
+                                                }
+                                            }
+                                        },
+                                        "id":
+                                        {
+                                            "type": "string",
+                                            "description": "The Identifier of the record created"
+                                        },
+                                        "status":
+                                        {
+                                            "type": "string",
+                                            "description": "The status of the record"
+                                        }
+                                    }
+                                },
+                                "body":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "consentTypes":
+                                        {
+                                            "type": "array",
+                                            "description": "Consent Type for which the consent is given",
+                                            "items":
+                                            {
+                                                "type": "object",
+                                                "properties":
+                                                {
+                                                    "consentType":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Consent Type for which the consent is given"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "accountIBANs":
+                                        {
+                                            "type": "array",
+                                            "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent.",
+                                            "items":
+                                            {
+                                                "type": "object",
+                                                "properties":
+                                                {
+                                                    "accountIBAN":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+                                                    },
+                                                    "isConsentGiven":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Indicates whether the customer consents to adding this account to the TPP (third party provider) service they are signing up for or otherwise."
+                                                    },
+                                                    "accountBlock":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Indicates whether the consent account has been blocked or not. Holds YES/NO/Blank."
+                                                    },
+                                                    "blockFrom":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Specifies the date on which account consent is blocked."
+                                                    },
+                                                    "blockTill":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Specifies until which date account consent to be blocked."
+                                                    },
+                                                    "blockNotes":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Reason for blocking the account in the consent."
+                                                    },
+                                                    "consentSubTypes":
+                                                    {
+                                                        "type": "array",
+                                                        "items":
+                                                        {
+                                                            "type": "object",
+                                                            "properties":
+                                                            {
+                                                                "consentSubType":
+                                                                {
+                                                                    "type": "string",
+                                                                    "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent."
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "consentStatuses":
+                                        {
+                                            "type": "array",
+                                            "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+                                            "items":
+                                            {
+                                                "type": "object",
+                                                "properties":
+                                                {
+                                                    "consentStatus":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu."
+                                                    },
+                                                    "lastActionDate":
+                                                    {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "description": "Indicates the date on which the status of the consent arrangement changed."
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "thirdpartyproviderId":
+                                        {
+                                            "type": "string",
+                                            "description": "Unique TPP(third party provider) reference which is the global urn of the TPP. For example: PSDLU-CSSF-9db9074bf3be45550237a21cd2a11585"
+                                        },
+                                        "signUpService":
+                                        {
+                                            "type": "string",
+                                            "description": "Indicates whether the signing up information is to be AISP(Accounts information service provider) or PISP(Payments information service provider)."
+                                        },
+                                        "recurringIndicator":
+                                        {
+                                            "type": "string",
+                                            "description": "Indicates whether the expiry date to be recalculated for every duration of expiry period."
+                                        },
+                                        "validUntil":
+                                        {
+                                            "type": "string",
+                                            "description": "Valid until date"
+                                        },
+                                        "frequencyPerDay":
+                                        {
+                                            "type": "string",
+                                            "description": "Specifies the frequency in which the payment application executes the payment instruction"
+                                        },
+                                        "combinedServiceIndicator":
+                                        {
+                                            "type": "string",
+                                            "description": "Specifies whether the payment initiation service will be addressed in the same session as account information consent request"
+                                        },
+                                        "scaStatus":
+                                        {
+                                            "type": "string",
+                                            "description": "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+                                        },
+                                        "link":
+                                        {
+                                            "type": "string",
+                                            "description": "Contains the arrangement activity reference of the parent. This is used during secondary activity processing where child activities are generated at runtime during processing."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "overrideBody":
+        {
+            "properties":
+            {
+                "overrideDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "id":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the override"
+                            },
+                            "description":
+                            {
+                                "type": "string",
+                                "description": "The actual override message"
+                            },
+                            "options":
+                            {
+                                "type": "array",
+                                "description": "The usable options for the override",
+                                "items":
+                                {
+                                    "type": "string"
+                                }
+                            },
+                            "type":
+                            {
+                                "type": "string",
+                                "description": "The type of the override"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ArrangementErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ArrangementHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/ArrangementErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "ArrangementErrorResponse"
+        },
+        "ArrangementErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message "
+                            },
+                            "property":
+                            {
+                                "type": "string",
+                                "description": "The corresponding property"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: "
+                }
+            }
+        },
+        "BusinessArrangementErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ArrangementHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/BusinessArrangementErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "BusinessArrangementErrorResponse"
+        },
+        "BusinessArrangementErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message for bad requests"
+                            },
+                            "property":
+                            {
+                                "type": "string",
+                                "description": "The corresponding property"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: Business"
+                }
+            }
+        },
+        "SystemArrangementErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ArrangementHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/SystemArrangementErrorResponseBody"
+                },
+                "override":
+                {
+                    "$ref": "#/definitions/overrideBody"
+                }
+            },
+            "description": "SystemArrangementErrorResponse"
+        },
+        "SystemArrangementErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "errorDetails":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "fieldName":
+                            {
+                                "type": "string",
+                                "description": "The name of the field"
+                            },
+                            "code":
+                            {
+                                "type": "string",
+                                "description": "The identifier of the error message"
+                            },
+                            "message":
+                            {
+                                "type": "string",
+                                "description": "The actual t24 error message caused by server"
+                            },
+                            "property":
+                            {
+                                "type": "string",
+                                "description": "The corresponding property"
+                            }
+                        }
+                    }
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: System"
+                }
+            }
+        },
+        "Consent1":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/PayloadHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/Consent1Body"
+                }
+            },
+            "description": "Consent1"
+        },
+        "Consent1Body":
+        {
+            "type": "object",
+            "properties":
+            {
+                "arrangement":
+                {
+                    "type": "string",
+                    "description": "Unique identifier for the arrangement contract"
+                },
+                "customer":
+                {
+                    "type": "string",
+                    "description": "Contains the customer identifier to fetch list of consent arrangements for the customer or customer identifier of the debtor account. This will be populated once the SCA(Strong Customer Authentication) is completed."
+                },
+                "product":
+                {
+                    "type": "string",
+                    "description": "Contains the unique identifier of the product, e.g. the product id of the arrangement account."
+                },
+                "arrangementEffectiveDate":
+                {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date from which the arrangement activity is effective"
+                },
+                "activity":
+                {
+                    "type": "string",
+                    "description": "Defines the activity to be processed against the Arrangement. The activity may be a user activity or a system generated activity."
+                },
+                "reason":
+                {
+                    "type": "string",
+                    "description": "Contains the reason for performing the current activity"
+                },
+                "accountConsent":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "consentTypes":
+                        {
+                            "type": "array",
+                            "description": "Consent Type for which the consent is given",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "consentType":
+                                    {
+                                        "type": "string",
+                                        "description": "Consent Type for which the consent is given"
+                                    }
+                                }
+                            }
+                        },
+                        "accountIBANs":
+                        {
+                            "type": "array",
+                            "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent.",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "accountIBAN":
+                                    {
+                                        "type": "string",
+                                        "description": "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+                                    },
+                                    "isConsentGiven":
+                                    {
+                                        "type": "string",
+                                        "description": "Indicates whether the customer consents to adding this account to the TPP (third party provider) service they are signing up for or otherwise."
+                                    },
+                                    "accountBlock":
+                                    {
+                                        "type": "string",
+                                        "description": "Indicates whether the consent account has been blocked or not. Holds YES/NO/Blank."
+                                    },
+                                    "blockFrom":
+                                    {
+                                        "type": "string",
+                                        "description": "Specifies the date on which account consent is blocked."
+                                    },
+                                    "blockTill":
+                                    {
+                                        "type": "string",
+                                        "description": "Specifies until which date account consent to be blocked."
+                                    },
+                                    "blockNotes":
+                                    {
+                                        "type": "string",
+                                        "description": "Reason for blocking the account in the consent."
+                                    },
+                                    "consentSubTypes":
+                                    {
+                                        "type": "array",
+                                        "items":
+                                        {
+                                            "type": "object",
+                                            "properties":
+                                            {
+                                                "consentSubType":
+                                                {
+                                                    "type": "string",
+                                                    "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "consentStatuses":
+                        {
+                            "type": "array",
+                            "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "consentStatus":
+                                    {
+                                        "type": "string",
+                                        "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu."
+                                    },
+                                    "lastActionDate":
+                                    {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "Indicates the date on which the status of the consent arrangement changed."
+                                    }
+                                }
+                            }
+                        },
+                        "thirdpartyproviderId":
+                        {
+                            "type": "string",
+                            "description": "Unique TPP(third party provider) reference which is the global urn of the TPP. For example: PSDLU-CSSF-9db9074bf3be45550237a21cd2a11585"
+                        },
+                        "signUpService":
+                        {
+                            "type": "string",
+                            "description": "Indicates whether the signing up information is to be AISP(Accounts information service provider) or PISP(Payments information service provider)."
+                        },
+                        "recurringIndicator":
+                        {
+                            "type": "string",
+                            "description": "Indicates whether the expiry date to be recalculated for every duration of expiry period."
+                        },
+                        "validUntil":
+                        {
+                            "type": "string",
+                            "description": "Valid until date"
+                        },
+                        "frequencyPerDay":
+                        {
+                            "type": "string",
+                            "description": "Specifies the frequency in which the payment application executes the payment instruction"
+                        },
+                        "combinedServiceIndicator":
+                        {
+                            "type": "string",
+                            "description": "Specifies whether the payment initiation service will be addressed in the same session as account information consent request"
+                        },
+                        "scaStatus":
+                        {
+                            "type": "string",
+                            "description": "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+                        },
+                        "link":
+                        {
+                            "type": "string",
+                            "description": "Contains the arrangement activity reference of the parent. This is used during secondary activity processing where child activities are generated at runtime during processing."
+                        }
+                    }
+                }
+            }
+        },
+        "ConsentResponse1":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ArrangementHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/ConsentResponse1Body"
+                }
+            },
+            "description": "ConsentResponse1"
+        },
+        "ConsentResponse1Body":
+        {
+            "type": "object",
+            "properties":
+            {
+                "arrangementActivity":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "arrangement":
+                        {
+                            "type": "string",
+                            "description": "Unique identifier for the arrangement contract"
+                        },
+                        "customer":
+                        {
+                            "type": "string",
+                            "description": "Contains the customer identifier to fetch list of consent arrangements for the customer or customer identifier of the debtor account. This will be populated once the SCA(Strong Customer Authentication) is completed."
+                        },
+                        "product":
+                        {
+                            "type": "string",
+                            "description": "Contains the unique identifier of the product, e.g. the product id of the arrangement account."
+                        },
+                        "arrangementEffectiveDate":
+                        {
+                            "type": "string",
+                            "format": "date",
+                            "description": "Date from which the arrangement activity is effective"
+                        },
+                        "activity":
+                        {
+                            "type": "string",
+                            "description": "Defines the activity to be processed against the Arrangement. The activity may be a user activity or a system generated activity."
+                        },
+                        "reason":
+                        {
+                            "type": "string",
+                            "description": "Contains the reason for performing the current activity"
+                        }
+                    }
+                },
+                "activities":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "{activityName}":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "activity":
+                                {
+                                    "type": "string"
+                                },
+                                "transactionStatus":
+                                {
+                                    "type": "string",
+                                    "description": "The status of the transaction"
+                                },
+                                "id":
+                                {
+                                    "type": "string",
+                                    "description": "The Identifier of the record created"
+                                }
+                            }
+                        }
+                    }
+                },
+                "properties":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "accountConsent":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "header":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "transactionStatus":
+                                        {
+                                            "type": "string",
+                                            "description": "The status of the transaction"
+                                        },
+                                        "audit":
+                                        {
+                                            "type": "object",
+                                            "properties":
+                                            {
+                                                "parseTime":
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "description": "Time taken to parse the response by IRIS"
+                                                }
+                                            }
+                                        },
+                                        "id":
+                                        {
+                                            "type": "string",
+                                            "description": "The Identifier of the record created"
+                                        },
+                                        "status":
+                                        {
+                                            "type": "string",
+                                            "description": "The status of the record"
+                                        }
+                                    }
+                                },
+                                "body":
+                                {
+                                    "type": "object",
+                                    "properties":
+                                    {
+                                        "consentTypes":
+                                        {
+                                            "type": "array",
+                                            "description": "Consent Type for which the consent is given",
+                                            "items":
+                                            {
+                                                "type": "object",
+                                                "properties":
+                                                {
+                                                    "consentType":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Consent Type for which the consent is given"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "accountIBANs":
+                                        {
+                                            "type": "array",
+                                            "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent.",
+                                            "items":
+                                            {
+                                                "type": "object",
+                                                "properties":
+                                                {
+                                                    "accountIBAN":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+                                                    },
+                                                    "isConsentGiven":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Indicates whether the customer consents to adding this account to the TPP (third party provider) service they are signing up for or otherwise."
+                                                    },
+                                                    "accountBlock":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Indicates whether the consent account has been blocked or not. Holds YES/NO/Blank."
+                                                    },
+                                                    "blockFrom":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Specifies the date on which account consent is blocked."
+                                                    },
+                                                    "blockTill":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Specifies until which date account consent to be blocked."
+                                                    },
+                                                    "blockNotes":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Reason for blocking the account in the consent."
+                                                    },
+                                                    "consentSubTypes":
+                                                    {
+                                                        "type": "array",
+                                                        "items":
+                                                        {
+                                                            "type": "object",
+                                                            "properties":
+                                                            {
+                                                                "consentSubType":
+                                                                {
+                                                                    "type": "string",
+                                                                    "description": "Indicates the consent type provided for a particular account. For example, If consent sub type for account 100100 is given as allPsd2, the account is given global consent."
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "consentStatuses":
+                                        {
+                                            "type": "array",
+                                            "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+                                            "items":
+                                            {
+                                                "type": "object",
+                                                "properties":
+                                                {
+                                                    "consentStatus":
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu."
+                                                    },
+                                                    "lastActionDate":
+                                                    {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "description": "Indicates the date on which the status of the consent arrangement changed."
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "thirdpartyproviderId":
+                                        {
+                                            "type": "string",
+                                            "description": "Unique TPP(third party provider) reference which is the global urn of the TPP. For example: PSDLU-CSSF-9db9074bf3be45550237a21cd2a11585"
+                                        },
+                                        "signUpService":
+                                        {
+                                            "type": "string",
+                                            "description": "Indicates whether the signing up information is to be AISP(Accounts information service provider) or PISP(Payments information service provider)."
+                                        },
+                                        "recurringIndicator":
+                                        {
+                                            "type": "string",
+                                            "description": "Indicates whether the expiry date to be recalculated for every duration of expiry period."
+                                        },
+                                        "validUntil":
+                                        {
+                                            "type": "string",
+                                            "description": "Valid until date"
+                                        },
+                                        "frequencyPerDay":
+                                        {
+                                            "type": "string",
+                                            "description": "Specifies the frequency in which the payment application executes the payment instruction"
+                                        },
+                                        "combinedServiceIndicator":
+                                        {
+                                            "type": "string",
+                                            "description": "Specifies whether the payment initiation service will be addressed in the same session as account information consent request"
+                                        },
+                                        "scaStatus":
+                                        {
+                                            "type": "string",
+                                            "description": "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+                                        },
+                                        "link":
+                                        {
+                                            "type": "string",
+                                            "description": "Contains the arrangement activity reference of the parent. This is used during secondary activity processing where child activities are generated at runtime during processing."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

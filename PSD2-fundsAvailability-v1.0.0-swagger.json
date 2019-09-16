@@ -1,0 +1,336 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Retrieves availability of balances for a dedicated account, which is linked to the consent type 'balances'",
+    "version" : "v1.0.0",
+    "title" : "PSD II API for availability of balances for a given account"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/api/v1.0.0/",
+  "schemes" : [ "https" ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/party/balance" : {
+      "get" : {
+        "summary" : "Availability of balances or funds for an account.",
+        "description" : "Retrieves availability of balances for a dedicated account, which is linked to the consent type 'balances'. For PSD2 this API can be linked to 'Confirmation of Funds Request' published API in accordance to open banking standards to return availability of balances for an account.",
+        "operationId" : "getBalance",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "account",
+          "in" : "query",
+          "description" : "Identifies the unique account Id of the payment entered.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "cardNumber",
+          "in" : "query",
+          "description" : "Cards issued are defined with an identifier consisting of three elements. The card type, a full stop and the card number. The card number may be any alphanumeric construction, commonly a 16 numeric number is used. VISA.5332870296579001. The id must be in the form of:  CCCC.AAAAAAAAAAAAAAAA  Where CCCC is the card type and AAAAAAAAAAAAAAAA is a unique identifier.  Examples:   VISA.1234567887654321   GC.1111222233334444   AB21.1111111122222222",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "instructedAmount",
+          "in" : "query",
+          "description" : "Specifies the amount which is allocated or instructed for the account reference included in the selection for a specific transaction.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "payee",
+          "in" : "query",
+          "description" : "Creditor account which receives payment from a transaction.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "currency",
+          "in" : "query",
+          "description" : "Identifies the currency. E.g. USD, GBP etc",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "transactionCode",
+          "in" : "query",
+          "description" : "Identifies the system internal transaction code applicable to the transaction",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "creditDebitIndicator",
+          "in" : "query",
+          "description" : "Identifies the type of transaction i.e. DEBIT or CREDIT",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "BalanceResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BalanceResponse"
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/QueryErrorResponse"
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BusinessQueryErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/SystemQueryErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "QueryHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        },
+        "page_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records per page"
+        },
+        "page_start" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The record from which the response should be displayed"
+        },
+        "total_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records present"
+        },
+        "page_token" : {
+          "type" : "string",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request"
+        }
+      }
+    },
+    "BalanceResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/QueryHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/BalanceResponseBody"
+        }
+      },
+      "description" : "BalanceResponse"
+    },
+    "BalanceResponseBody" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "accountId" : {
+            "type" : "string",
+            "description" : "Identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId. Accepts both IBAN & BBAN"
+          },
+          "accountIBAN" : {
+            "type" : "string",
+            "description" : "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+          },
+          "cardNumber" : {
+            "type" : "string",
+            "description" : "Cards issued are defined with an identifier consisting of three elements. The card type, a full stop and the card number. The card number may be any alphanumeric construction, commonly a 16 numeric number is used. VISA.5332870296579001. The id must be in the form of:  CCCC.AAAAAAAAAAAAAAAA  Where CCCC is the card type and AAAAAAAAAAAAAAAA is a unique identifier.  Examples:   VISA.1234567887654321   GC.1111222233334444   AB21.1111111122222222",
+            "maxLength" : 20
+          },
+          "instructedAmount" : {
+            "type" : "string",
+            "description" : "Specifies the amount which is allocated or instructed for the account reference included in the selection for a specific transaction.",
+            "maxLength" : 19
+          },
+          "currency" : {
+            "type" : "string",
+            "description" : "Identifies the currency. E.g. USD, GBP etc",
+            "maxLength" : 19
+          },
+          "accountStatus" : {
+            "type" : "string",
+            "description" : "Specifies the current status of the account, which is either active, inactive or closed.",
+            "maxLength" : 19
+          },
+          "dateTime" : {
+            "type" : "string",
+            "description" : "Date and time separated by '-'",
+            "maxLength" : 20
+          },
+          "fundsAvailable" : {
+            "type" : "string",
+            "description" : "Indicator which determines whether the entered amount/balance is available for the account or not. The values returned are TRUE/FALSE.",
+            "maxLength" : 19
+          }
+        }
+      }
+    },
+    "ErrorHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "QueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/QueryErrorResponseBody"
+        }
+      },
+      "description" : "QueryErrorResponse"
+    },
+    "QueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message "
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/BusinessQueryErrorResponseBody"
+        }
+      },
+      "description" : "BusinessQueryErrorResponse"
+    },
+    "BusinessQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message for bad requests"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/SystemQueryErrorResponseBody"
+        }
+      },
+      "description" : "SystemQueryErrorResponse"
+    },
+    "SystemQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message caused by server"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}

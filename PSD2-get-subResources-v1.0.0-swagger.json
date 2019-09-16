@@ -1,0 +1,382 @@
+{
+    "swagger": "2.0",
+    "info":
+    {
+        "description": "Retrieves information related to sub resources created for a particular payment",
+        "version": "v1.0.0",
+        "title": "PSD II API to retreive the sub resources information for a particular payment "
+    },
+    "host": "api.server.com",
+    "basePath": "/api/v1.0.0/",
+    "schemes": [ "http", "https" ],
+    "security": [
+    {
+        "basicAuth": [ ]
+    } ],
+    "paths":
+    {
+        "/party/subResourceIds":
+        {
+            "get":
+            {
+                "summary": "Retrieves payment sub resource information",
+                "description": "Retrieves the sub resource information for a particular payment. For PSD2, this API is used by 'get Authorisations', 'get SCA Status of payment authorisations', 'get SCA status of payment cancellations' and 'getcancellations' published APIs in accordance to open banking standards.",
+                "operationId": "getSubResources",
+                "produces": [ "application/json" ],
+                "parameters": [
+                {
+                    "name": "paymentId",
+                    "in": "query",
+                    "description": "Indicates the unique reference number of the payment",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "subResourceType",
+                    "in": "query",
+                    "description": "Indicates if the sub resource is created for authorization or cancellation of the PSD2 payment. Can contain values 'AUTH' or 'CANC' which indicates authorization and cancellation respectively.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "subResourceId",
+                    "in": "query",
+                    "description": "Contains the sub resource identifier which is constructed of the payment Id, status of the payment and sequence number during authorisation or deletion of a payment. Applies to both implicit & explicit payment workflows. For example: FT0003003-AUTH-1",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "page_size",
+                    "in": "query",
+                    "description": "The total number of records per page",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_start",
+                    "in": "query",
+                    "description": "The record from which the response should be displayed",
+                    "required": false,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                {
+                    "name": "page_token",
+                    "in": "query",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request.",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "credentials",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "companyId",
+                    "in": "header",
+                    "required": false,
+                    "type": "string"
+                } ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "SubResourcesResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SubResourcesResponse"
+                        }
+                    },
+                    "default":
+                    {
+                        "description": "QueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/QueryErrorResponse"
+                        }
+                    },
+                    "400":
+                    {
+                        "description": "BusinessQueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/BusinessQueryErrorResponse"
+                        }
+                    },
+                    "500":
+                    {
+                        "description": "SystemQueryErrorResponse",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/SystemQueryErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions":
+    {
+        "basicAuth":
+        {
+            "type": "basic"
+        }
+    },
+    "definitions":
+    {
+        "QueryHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                },
+                "page_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records per page"
+                },
+                "page_start":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The record from which the response should be displayed"
+                },
+                "total_size":
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The total number of records present"
+                },
+                "page_token":
+                {
+                    "type": "string",
+                    "description": "Unique id expected to get as part of response from t24 on every enquiry request"
+                }
+            }
+        },
+        "SubResourcesResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/QueryHeader"
+                },
+                "body":
+                {
+                    "$ref": "#/definitions/SubResourcesResponseBody"
+                }
+            },
+            "description": "SubResourcesResponse"
+        },
+        "SubResourcesResponseBody":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "paymentId":
+                    {
+                        "type": "string",
+                        "description": "Indicates the unique reference number of the payment",
+                        "maxLength": 35
+                    },
+                    "subResourceId":
+                    {
+                        "type": "string",
+                        "description": "Contains the sub resource identifier which is constructed of the payment Id, status of the payment and sequence number during authorisation or deletion of a payment. Applies to both implicit & explicit payment workflows. For example: FT0003003-AUTH-1"
+                    },
+                    "subResourceType":
+                    {
+                        "type": "string",
+                        "description": "Indicates if the sub resource is created for authorization or cancellation of the PSD2 payment. Can contain values 'AUTH' or 'CANC' which indicates authorization and cancellation respectively."
+                    },
+                    "scaStatus":
+                    {
+                        "type": "string",
+                        "description": "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+                    },
+                    "nextSubResourceId":
+                    {
+                        "type": "string",
+                        "description": "Indicates the next sub resource that can be used for authorisation or cancellation of the payment. Example: For a Funds transfer payment FT1234567, if the utilised sub resource Id for authorisation of the FT is FT1234567-AUTH-1, the next sub resource Id for authorisation of the FT would be FT1234567-AUTH-2"
+                    },
+                    "scaFlow":
+                    {
+                        "type": "string",
+                        "description": "Indicates the strong customer authentication (SCA) flow. Specifies if the PSD2 payment follows implicit or explicit approach"
+                    }
+                }
+            }
+        },
+        "ErrorHeader":
+        {
+            "properties":
+            {
+                "audit":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "T24_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to response by T24"
+                        },
+                        "versionNumber":
+                        {
+                            "type": "string",
+                            "description": "The CURR.NO. of the record"
+                        },
+                        "parse_time":
+                        {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Time taken to parse the response by IRIS"
+                        }
+                    }
+                }
+            }
+        },
+        "QueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/QueryErrorResponseBody"
+                }
+            },
+            "description": "QueryErrorResponse"
+        },
+        "QueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message "
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: "
+                }
+            }
+        },
+        "BusinessQueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/BusinessQueryErrorResponseBody"
+                }
+            },
+            "description": "BusinessQueryErrorResponse"
+        },
+        "BusinessQueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message for bad requests"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: Business"
+                }
+            }
+        },
+        "SystemQueryErrorResponse":
+        {
+            "properties":
+            {
+                "header":
+                {
+                    "$ref": "#/definitions/ErrorHeader"
+                },
+                "error":
+                {
+                    "$ref": "#/definitions/SystemQueryErrorResponseBody"
+                }
+            },
+            "description": "SystemQueryErrorResponse"
+        },
+        "SystemQueryErrorResponseBody":
+        {
+            "type": "object",
+            "properties":
+            {
+                "code":
+                {
+                    "type": "string",
+                    "description": "The identifier of the error message "
+                },
+                "message":
+                {
+                    "type": "string",
+                    "description": "The actual t24 error message caused by server"
+                },
+                "type":
+                {
+                    "type": "string",
+                    "description": "The identifier of error type: System"
+                }
+            }
+        }
+    }
+}

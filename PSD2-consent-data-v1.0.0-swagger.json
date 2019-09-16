@@ -1,0 +1,361 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Retrieves the detailed consent information",
+    "version" : "v1.0.0",
+    "title" : "PSD II API for detailed consent information retrieval"
+  },
+  "host" : "api.server.com",
+  "basePath" : "/api/v1.0.0/",
+  "schemes" : [ "http", "https" ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/party/customers/{customerId}/consents" : {
+      "get" : {
+        "summary" : "Retrieves the consent information and status of TPP",
+        "description" : "Retrieves the detailed consent information along with the status of third party payment provider, with specified consent id, consent status and customer. For PSD2 this API can be linked to 'getConsentData' published API in accordance to open banking standards to return details of all consents.",
+        "operationId" : "getConsentData",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "customerId",
+          "in" : "path",
+          "description" : "Identifier of the customer",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "consentStatus",
+          "in" : "query",
+          "description" : "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "consentId",
+          "in" : "query",
+          "description" : "Identifier of the corresponding consent object as retrieved by an account Information consent Request.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ConsentDataResponse",
+            "schema" : {
+              "$ref" : "#/definitions/ConsentDataResponse"
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/QueryErrorResponse"
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BusinessQueryErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/SystemQueryErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "QueryHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        },
+        "page_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records per page"
+        },
+        "page_start" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The record from which the response should be displayed"
+        },
+        "total_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records present"
+        },
+        "page_token" : {
+          "type" : "string",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request"
+        }
+      }
+    },
+    "ConsentDataResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/QueryHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/ConsentDataResponseBody"
+        }
+      },
+      "description" : "ConsentDataResponse"
+    },
+    "ConsentDataResponseBody" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "accountIBANs" : {
+            "type" : "array",
+            "description" : "Consent Type for which the consent is given",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "accountIBAN" : {
+                  "type" : "string",
+                  "description" : "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+                },
+                "isConsentGiven" : {
+                  "type" : "string",
+                  "description" : "Indicates whether the customer consents to adding this account to the TPP (third party provider) service they are signing up for or otherwise."
+                },
+                "accountBlock" : {
+                  "type" : "string",
+                  "description" : "Indicates whether the consent account has been blocked or not. Holds YES/NO/Blank."
+                },
+                "blockFrom" : {
+                  "type" : "string",
+                  "description" : "Specifies the date on which account consent is blocked."
+                },
+                "blockTill" : {
+                  "type" : "string",
+                  "description" : "Specifies until which date account consent to be blocked."
+                },
+                "blockNotes" : {
+                  "type" : "string",
+                  "description" : "Reason for blocking the account in the consent."
+                },
+                "consentTypes" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "consentType" : {
+                        "type" : "string",
+                        "description" : "Consent Type for which the consent is given"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "consentId" : {
+            "type" : "string",
+            "description" : "Identifier of the corresponding consent object as retrieved by an account Information consent Request.",
+            "maxLength" : 35
+          },
+          "thirdpartyproviderId" : {
+            "type" : "string",
+            "description" : "Unique TPP(third party provider) reference which is the global urn of the TPP. For example: PSDLU-CSSF-9db9074bf3be45550237a21cd2a11585"
+          },
+          "thirdpartyprovider" : {
+            "type" : "string",
+            "description" : "Contains the TPP (third party provider) name or text of the TPP reference"
+          },
+          "signUpService" : {
+            "type" : "string",
+            "description" : "Indicates whether the signing up information is to be AISP(Accounts information service provider) or PISP(Payments information service provider)."
+          },
+          "recurringIndicator" : {
+            "type" : "string",
+            "description" : "Indicates whether the expiry date to be recalculated for every duration of expiry period."
+          },
+          "validUntil" : {
+            "type" : "string",
+            "description" : "Valid until date"
+          },
+          "consentStatus" : {
+            "type" : "string",
+            "description" : "Status of the consent. This can be of received, valid, expired, terminatedByTpp or revokedByPsu.",
+            "maxLength" : 35
+          },
+          "lastActionDate" : {
+            "type" : "string",
+            "description" : "Indicates the date on which the status of the consent arrangement changed."
+          },
+          "arrangementStatus" : {
+            "type" : "string",
+            "description" : "Status of the arrangement. E.g. AUTH, CLOSE, UNAUTH etc."
+          },
+          "imagePath" : {
+            "type" : "string",
+            "description" : "Identifies the image stored on the file system, specifically based on the logo url mentioned in open banking directory."
+          }
+        }
+      }
+    },
+    "ErrorHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "QueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/QueryErrorResponseBody"
+        }
+      },
+      "description" : "QueryErrorResponse"
+    },
+    "QueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message "
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/BusinessQueryErrorResponseBody"
+        }
+      },
+      "description" : "BusinessQueryErrorResponse"
+    },
+    "BusinessQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message for bad requests"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/SystemQueryErrorResponseBody"
+        }
+      },
+      "description" : "SystemQueryErrorResponse"
+    },
+    "SystemQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message caused by server"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}

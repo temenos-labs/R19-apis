@@ -1,0 +1,372 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Retrieves the transaction details of a single transaction",
+    "version" : "v1.0.0",
+    "title" : "PSD II API for retrieving transaction details "
+  },
+  "host" : "localhost:9089",
+  "basePath" : "/api/v1.0.0/",
+  "schemes" : [ "http", "https" ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/party/transaction/detail/{transactionId}" : {
+      "get" : {
+        "summary" : "Retrieves detailed transaction information.",
+        "description" : "Retrieves the details of a single transaction. For PSD2 this API can be linked to 'Read Transaction Detail' published API in accordance to open banking standards to return single transaction detail.",
+        "operationId" : "getTransactionDetails",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "transactionId",
+          "in" : "path",
+          "description" : "Unique transaction identifier for retrieving the details of the transaction. For example: FT0102030333 etc.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "accountId",
+          "in" : "query",
+          "description" : "Identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId. Accepts both IBAN & BBAN",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "TransactionDetailsResponse",
+            "schema" : {
+              "$ref" : "#/definitions/TransactionDetailsResponse"
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/QueryErrorResponse"
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BusinessQueryErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/SystemQueryErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "QueryHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        },
+        "page_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records per page"
+        },
+        "page_start" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The record from which the response should be displayed"
+        },
+        "total_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records present"
+        },
+        "page_token" : {
+          "type" : "string",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request"
+        }
+      }
+    },
+    "TransactionDetailsResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/QueryHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/TransactionDetailsResponseBody"
+        }
+      },
+      "description" : "TransactionDetailsResponse"
+    },
+    "TransactionDetailsResponseBody" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "accountId" : {
+            "type" : "string",
+            "description" : "Identifier of the account. Often referred to as the account number, yet for consistency this is always referred to as accountId. Accepts both IBAN & BBAN"
+          },
+          "accountIBAN" : {
+            "type" : "string",
+            "description" : "Represents the International Bank Account Number (IBAN) of the account.  E.g. GB29 NWBK 6016 1331 9268 19"
+          },
+          "transactionId" : {
+            "type" : "string",
+            "description" : "Unique transaction identifier for retrieving the details of the transaction. For example: FT0102030333 etc."
+          },
+          "transactionReference" : {
+            "type" : "string",
+            "description" : "Transaction reference identifier."
+          },
+          "endToEndReference" : {
+            "type" : "string",
+            "description" : "Indicates the end to end reference for the payment. This field can be provided by the person who instructs the payment and this flows through the lifecycle of the payment."
+          },
+          "mandateId" : {
+            "type" : "string",
+            "description" : "Contains the mandatory SEPA(Single Euro Payment Area) payment identifier from the transaction"
+          },
+          "chequeNumber" : {
+            "type" : "string",
+            "description" : "Cheque number associated with the transaction or accounting entry."
+          },
+          "creditorAgentId" : {
+            "type" : "string",
+            "description" : "Clearing system identifier for the beneficiary institution. Contains a valid ISO code for the clearing."
+          },
+          "bookingDate" : {
+            "type" : "string",
+            "description" : "Business date on which the accounting entry was generated."
+          },
+          "valueDate" : {
+            "type" : "string",
+            "description" : "Indicates the value date on which the underlying accounting entry is to be given value (for interest purposes)"
+          },
+          "accountCurrency" : {
+            "type" : "string",
+            "description" : "Currency of the account. For example: USD, GBP."
+          },
+          "transactionCurrency" : {
+            "type" : "string",
+            "description" : "Indicates the currency of the transaction. For example GBP, USD etc."
+          },
+          "exchangeRate" : {
+            "type" : "string",
+            "description" : "Contains the exchange rate returned from the system. i.e. For entries over foreign currency accounts, this contains the rate which used to convert the currency amount to the local equivalent at the time of the originating transaction."
+          },
+          "amountInAccountCurrency" : {
+            "type" : "number",
+            "description" : "Amount in the currency of the account"
+          },
+          "transactionAmount" : {
+            "type" : "number",
+            "description" : "Contains the transaction amount. This is based on the currency, either local or foreign currency"
+          },
+          "creditorName" : {
+            "type" : "string",
+            "description" : "Name or short title of the credit account"
+          },
+          "creditAccountId" : {
+            "type" : "string",
+            "description" : "Credit account identifier of the payment or transaction"
+          },
+          "ultimateCreditor" : {
+            "type" : "string",
+            "description" : "Contains the actual creditor account number"
+          },
+          "debtorReference" : {
+            "type" : "string",
+            "description" : "Reference number for the debit side of the transaction."
+          },
+          "debitAccountId" : {
+            "type" : "string",
+            "description" : "Indicates the debit account number of the payment or transaction."
+          },
+          "ultimateDebtor" : {
+            "type" : "string",
+            "description" : "Contains the actual debitor account number"
+          },
+          "remittanceInformation" : {
+            "type" : "string",
+            "description" : "Indicates the remittance information that is supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivable system, in an unstructured form."
+          },
+          "paymentDetail" : {
+            "type" : "string",
+            "description" : "Indicates the payment details for the beneficiary to apply the payment."
+          },
+          "purposeId" : {
+            "type" : "string",
+            "description" : "Purpose identifier of the payment or transaction, for SEPA payments in general."
+          },
+          "bankTransactionCode" : {
+            "type" : "string",
+            "description" : "Identifies the type of transaction.  The code is used to determine what references and narratives will be printed on statements."
+          },
+          "transactionType" : {
+            "type" : "string",
+            "description" : "Identifies the transaction type applicable to the transaction being processed, i.e. outward or inward payment. For example: ACPX, OTPX etc."
+          }
+        }
+      }
+    },
+    "ErrorHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "QueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/QueryErrorResponseBody"
+        }
+      },
+      "description" : "QueryErrorResponse"
+    },
+    "QueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message "
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/BusinessQueryErrorResponseBody"
+        }
+      },
+      "description" : "BusinessQueryErrorResponse"
+    },
+    "BusinessQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message for bad requests"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/SystemQueryErrorResponseBody"
+        }
+      },
+      "description" : "SystemQueryErrorResponse"
+    },
+    "SystemQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message caused by server"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}

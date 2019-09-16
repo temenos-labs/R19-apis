@@ -1,0 +1,540 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Initiates creation of crossborder standing order instruction",
+    "version" : "v1.0.0",
+    "title" : "PSD II API for cross border standing order initiation"
+  },
+  "host" : "api.server.com",
+  "basePath" : "/api/v1.0.0/",
+  "schemes" : [ "http", "https" ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/order/PSD2/standingOrdersInitiation/{standingOrderId}" : {
+      "post" : {
+        "summary" : "Initiates creation of standing order instruction",
+        "description" : "Creates a standing order(periodic) payment initiation request for cross border credit transfers. For PSD2 this API can be linked to 'createPeriodicPayment' published API in accordance to open banking standards to create a periodic payment.",
+        "operationId" : "createPSD2StandingOrderInitiation",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "standingOrderId",
+          "in" : "path",
+          "description" : "The unique standing order identifier",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "payload",
+          "description" : "body Payload",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PSD2StandingOrderInitiation"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "PSD2StandingOrderInitiationResponse",
+            "schema" : {
+              "$ref" : "#/definitions/PSD2StandingOrderInitiationResponse"
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/ScreenErrorResponse"
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BusinessScreenErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/SystemScreenErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "PayloadHeader" : {
+      "properties" : {
+        "override" : {
+          "type" : "object",
+          "properties" : {
+            "overrideDetails" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "string",
+                    "description" : "The identifier of the override"
+                  },
+                  "description" : {
+                    "type" : "string",
+                    "description" : "The actual override message"
+                  },
+                  "responseCode" : {
+                    "type" : "string",
+                    "description" : "The user input to accept/reject the override."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            }
+          }
+        }
+      }
+    },
+    "PSD2StandingOrderInitiation" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/PayloadHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/PSD2StandingOrderInitiationBody"
+        }
+      },
+      "description" : "PSD2StandingOrderInitiation"
+    },
+    "PSD2StandingOrderInitiationBody" : {
+      "type" : "object",
+      "properties" : {
+        "creditorAddresses" : {
+          "type" : "array",
+          "description" : "Address of the creditor or beneficiary account",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "creditorAddress" : {
+                "type" : "string",
+                "description" : "Address of the creditor or beneficiary account"
+              }
+            }
+          }
+        },
+        "currency" : {
+          "type" : "string",
+          "description" : "Identifies the currency. E.g. USD, GBP etc"
+        },
+        "instructedAmount" : {
+          "type" : "number",
+          "description" : "Specifies the amount which is allocated or instructed for the account reference included in the selection for a specific transaction."
+        },
+        "currentFrequencyDate" : {
+          "type" : "string",
+          "format" : "date",
+          "description" : "Indicates the date based on current frequency"
+        },
+        "dateAdjustment" : {
+          "type" : "string",
+          "format" : "date",
+          "description" : "Defines the behavior when recurring payment dates falls on a weekend or bank holiday. The payment is then executed either the 'preceding' or 'following' working day. ASPSP might reject the request due to the communicated value, if rules in Online-Banking are not supporting this execution rule."
+        },
+        "currentEndDate" : {
+          "type" : "string",
+          "format" : "date",
+          "description" : "Identifies the current end date of the standing order for the currency, amount and frequency specified. When the bank has received from the customer clear instructions which stipulate that the standing order must  only be executed during a determined period of time.  This is the date of the last execution of the standing order or when the customer has requested the bank to pay a certain amount during a determined period of time and then another amount starting from that date. In this case, this field specifies the end date of the first standing order amount.  After that date the second amount will then be executed."
+        },
+        "creditorName" : {
+          "type" : "string",
+          "description" : "Name or short title of the credit account"
+        },
+        "beneficiaryAccountId" : {
+          "type" : "string",
+          "description" : "Unique account identifier of the beneficiary account number."
+        },
+        "creditAccountId" : {
+          "type" : "string",
+          "description" : "Credit account identifier of the payment or transaction"
+        },
+        "creditorAgent" : {
+          "type" : "string",
+          "description" : "Available balance of account"
+        },
+        "beneficiaryOurCharges" : {
+          "type" : "string",
+          "description" : "Indicates the bearer of the charges. For example: BEN( All transaction charges are to be borne by the beneficiary customer.), OUR (All transaction charges are to be borne by the ordering customer.), SHA (Transaction charges on the Sender's side are to be borne by the ordering customer, transaction charges on the Receiver's side are to be borne by the beneficiary customer.)"
+        },
+        "beneficiaryIBAN" : {
+          "type" : "string",
+          "description" : "International Bank Account Number (IBAN) of the beneficiary account, required only for International transfers/payments outside the Bank. For example: GB98 MIDL07009312345678, FR7630006000011234567890189"
+        },
+        "paymentDetail" : {
+          "type" : "string",
+          "description" : "Indicates the payment details for the beneficiary to apply the payment."
+        },
+        "createExternally" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "chkTransparency" : {
+          "type" : "string",
+          "description" : "Specifies if PSD transparency checks are executed. YES or NO"
+        },
+        "reqSentTime" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "ScreenHeader" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The Identifier of the record created"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The status of the record"
+        },
+        "transactionStatus" : {
+          "type" : "string",
+          "description" : "The status of the transaction"
+        },
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "PSD2StandingOrderInitiationResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ScreenHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/PSD2StandingOrderInitiationResponseBody"
+        }
+      },
+      "description" : "PSD2StandingOrderInitiationResponse"
+    },
+    "PSD2StandingOrderInitiationResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "creditorAddresses" : {
+          "type" : "array",
+          "description" : "Address of the creditor or beneficiary account",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "creditorAddress" : {
+                "type" : "string",
+                "description" : "Address of the creditor or beneficiary account"
+              }
+            }
+          }
+        },
+        "currency" : {
+          "type" : "string",
+          "description" : "Identifies the currency. E.g. USD, GBP etc"
+        },
+        "instructedAmount" : {
+          "type" : "number",
+          "description" : "Specifies the amount which is allocated or instructed for the account reference included in the selection for a specific transaction."
+        },
+        "currentFrequencyDate" : {
+          "type" : "string",
+          "format" : "date",
+          "description" : "Indicates the date based on current frequency"
+        },
+        "dateAdjustment" : {
+          "type" : "string",
+          "format" : "date",
+          "description" : "Defines the behavior when recurring payment dates falls on a weekend or bank holiday. The payment is then executed either the 'preceding' or 'following' working day. ASPSP might reject the request due to the communicated value, if rules in Online-Banking are not supporting this execution rule."
+        },
+        "currentEndDate" : {
+          "type" : "string",
+          "format" : "date",
+          "description" : "Identifies the current end date of the standing order for the currency, amount and frequency specified. When the bank has received from the customer clear instructions which stipulate that the standing order must  only be executed during a determined period of time.  This is the date of the last execution of the standing order or when the customer has requested the bank to pay a certain amount during a determined period of time and then another amount starting from that date. In this case, this field specifies the end date of the first standing order amount.  After that date the second amount will then be executed."
+        },
+        "creditorName" : {
+          "type" : "string",
+          "description" : "Name or short title of the credit account"
+        },
+        "beneficiaryAccountId" : {
+          "type" : "string",
+          "description" : "Unique account identifier of the beneficiary account number."
+        },
+        "creditAccountId" : {
+          "type" : "string",
+          "description" : "Credit account identifier of the payment or transaction"
+        },
+        "creditorAgent" : {
+          "type" : "string",
+          "description" : "Available balance of account"
+        },
+        "beneficiaryOurCharges" : {
+          "type" : "string",
+          "description" : "Indicates the bearer of the charges. For example: BEN( All transaction charges are to be borne by the beneficiary customer.), OUR (All transaction charges are to be borne by the ordering customer.), SHA (Transaction charges on the Sender's side are to be borne by the ordering customer, transaction charges on the Receiver's side are to be borne by the beneficiary customer.)"
+        },
+        "beneficiaryIBAN" : {
+          "type" : "string",
+          "description" : "International Bank Account Number (IBAN) of the beneficiary account, required only for International transfers/payments outside the Bank. For example: GB98 MIDL07009312345678, FR7630006000011234567890189"
+        },
+        "paymentDetail" : {
+          "type" : "string",
+          "description" : "Indicates the payment details for the beneficiary to apply the payment."
+        },
+        "createExternally" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "chkTransparency" : {
+          "type" : "string",
+          "description" : "Specifies if PSD transparency checks are executed. YES or NO"
+        },
+        "reqSentTime" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "ErrorHeader" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The Identifier of the record created"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The status of the record"
+        },
+        "transactionStatus" : {
+          "type" : "string",
+          "description" : "The status of the transaction"
+        },
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "overrideBody" : {
+      "properties" : {
+        "overrideDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "id" : {
+                "type" : "string",
+                "description" : "The identifier of the override"
+              },
+              "description" : {
+                "type" : "string",
+                "description" : "The actual override message"
+              },
+              "options" : {
+                "type" : "array",
+                "description" : "The usable options for the override",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "type" : {
+                "type" : "string",
+                "description" : "The type of the override"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ScreenErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/ScreenErrorResponseBody"
+        },
+        "override" : {
+          "$ref" : "#/definitions/overrideBody"
+        }
+      },
+      "description" : "ScreenErrorResponse"
+    },
+    "ScreenErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "errorDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "fieldName" : {
+                "type" : "string",
+                "description" : "The name of the field"
+              },
+              "code" : {
+                "type" : "string",
+                "description" : "The identifier of the error message"
+              },
+              "message" : {
+                "type" : "string",
+                "description" : "The actual t24 error message "
+              }
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessScreenErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/BusinessScreenErrorResponseBody"
+        },
+        "override" : {
+          "$ref" : "#/definitions/overrideBody"
+        }
+      },
+      "description" : "BusinessScreenErrorResponse"
+    },
+    "BusinessScreenErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "errorDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "fieldName" : {
+                "type" : "string",
+                "description" : "The name of the field"
+              },
+              "code" : {
+                "type" : "string",
+                "description" : "The identifier of the error message"
+              },
+              "message" : {
+                "type" : "string",
+                "description" : "The actual t24 error message for bad requests"
+              }
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemScreenErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/SystemScreenErrorResponseBody"
+        },
+        "override" : {
+          "$ref" : "#/definitions/overrideBody"
+        }
+      },
+      "description" : "SystemScreenErrorResponse"
+    },
+    "SystemScreenErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "errorDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "fieldName" : {
+                "type" : "string",
+                "description" : "The name of the field"
+              },
+              "code" : {
+                "type" : "string",
+                "description" : "The identifier of the error message"
+              },
+              "message" : {
+                "type" : "string",
+                "description" : "The actual t24 error message caused by server"
+              }
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}

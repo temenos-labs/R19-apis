@@ -1,0 +1,526 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Updates information to be used for payment initiation.",
+    "version" : "v1.0.0",
+    "title" : "PSD II API  for updating details of the payment initiation"
+  },
+  "host" : "api.server.com",
+  "basePath" : "/api/v1.0.0/",
+  "schemes" : [ "http", "https" ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/order/PSD2/payments/TPPrequests/{paymentId}" : {
+      "post" : {
+        "summary" : "Updates additional payment information for payment initiation requests",
+        "description" : "Updates additional payment information for payment initiation requests made through PSD2 APIs. For PSD2 this API can be linked to 'Update PSU data for payment initiation and Update PSU Data for payment initiation cancellation' published API in accordance to open banking standards.",
+        "operationId" : "updatePaymentResource",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "paymentId",
+          "in" : "path",
+          "description" : "Indicates the unique reference number of the payment",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "payload",
+          "description" : "body Payload",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PaymentResource"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "PaymentResourceResponse",
+            "schema" : {
+              "$ref" : "#/definitions/PaymentResourceResponse"
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/ScreenErrorResponse"
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BusinessScreenErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/SystemScreenErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "PayloadHeader" : {
+      "properties" : {
+        "override" : {
+          "type" : "object",
+          "properties" : {
+            "overrideDetails" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "string",
+                    "description" : "The identifier of the override"
+                  },
+                  "description" : {
+                    "type" : "string",
+                    "description" : "The actual override message"
+                  },
+                  "responseCode" : {
+                    "type" : "string",
+                    "description" : "The user input to accept/reject the override."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            }
+          }
+        }
+      }
+    },
+    "PaymentResource" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/PayloadHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/PaymentResourceBody"
+        }
+      },
+      "description" : "PaymentResource"
+    },
+    "PaymentResourceBody" : {
+      "type" : "object",
+      "properties" : {
+        "subResourceIds" : {
+          "type" : "array",
+          "description" : "",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "subResourceId" : {
+                "type" : "string",
+                "description" : "Contains the sub resource identifier which is constructed of the payment Id, status of the payment and sequence number during authorisation or deletion of a payment. Applies to both implicit & explicit payment workflows. For example: FT0003003-AUTH-1"
+              },
+              "subResourceScaStatus" : {
+                "type" : "string",
+                "description" : "Contains the SCA(Strong Customer Authentication) status of a sub resource linked to a payment transaction. For example: received,started,finalised,exempted,psuIdentified etc."
+              },
+              "subResourceCaptureMethod" : {
+                "type" : "string",
+                "description" : "Specifies whether the payment was automatically created by the system (AUTO / Implicit) or based on a TPP (third party provider) request (TPP / Explicit)  "
+              },
+              "subResourceRequestId" : {
+                "type" : "string",
+                "description" : "Specifes if the sub-resource is created by a TPP (third party provider), this contains the incoming X-Request-ID which created it."
+              }
+            }
+          }
+        },
+        "globalURN" : {
+          "type" : "string",
+          "description" : "globalURNSpecifies the GLOBAL.URN reference of the TPP (third party provider). This will be retrieved from the request and should match a GLOBAL.URN from a record within the Open Banking Directory."
+        },
+        "customerId" : {
+          "type" : "string",
+          "description" : "Identifier of the customer"
+        },
+        "scaHint" : {
+          "type" : "string",
+          "description" : "Specifies whether the SCA (strong customer authentication) is required or not. For example: scaRequired, scaNotRequired."
+        },
+        "paymentStatus" : {
+          "type" : "string",
+          "description" : "Contains the current status of the transaction. For example: 'ACCC': 'AcceptedSettlementCompleted' - Settlement on the creditor's account has been completed.'ACCP': 'AcceptedCustomerProfile' - Preceding check of technical validation was successful. Customer profile check was also successful.'CANC': 'Cancelled' Payment initiation has been cancelled before execution Remark: This codeis accepted as new code by ISO20022.'RCVD': 'Received' - Payment initiation has been received by the receiving agent."
+        },
+        "scaStatus" : {
+          "type" : "string",
+          "description" : "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+        },
+        "defaultRedirectURL" : {
+          "type" : "string",
+          "description" : "Default redirection URL provided by the TPP (third party provider)."
+        },
+        "successRedirectURL" : {
+          "type" : "string",
+          "description" : "successRedirectURL"
+        },
+        "failureRedirectURL" : {
+          "type" : "string",
+          "description" : "Contains the default redirection URL provided by the TPP (third party provider) for a failed or cancelled payment in the case where TPP specifies different URLs for different payment outcomes."
+        },
+        "externalPaymentStatus" : {
+          "type" : "string",
+          "description" : "Status of the payment when the payment processing system is external"
+        },
+        "externalStatusReason" : {
+          "type" : "string",
+          "description" : "Status reason of the payment when the payment processing system is external"
+        },
+        "trustedBeneficiary" : {
+          "type" : "string",
+          "description" : "Indicator to determine whether the credit account number belongs to one of the customer's trusted beneficiaries. Contains TRUE/FALSE."
+        }
+      }
+    },
+    "ScreenHeader" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The Identifier of the record created"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The status of the record"
+        },
+        "transactionStatus" : {
+          "type" : "string",
+          "description" : "The status of the transaction"
+        },
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "PaymentResourceResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ScreenHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/PaymentResourceResponseBody"
+        }
+      },
+      "description" : "PaymentResourceResponse"
+    },
+    "PaymentResourceResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "subResourceIds" : {
+          "type" : "array",
+          "description" : "",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "subResourceId" : {
+                "type" : "string",
+                "description" : "Contains the sub resource identifier which is constructed of the payment Id, status of the payment and sequence number during authorisation or deletion of a payment. Applies to both implicit & explicit payment workflows. For example: FT0003003-AUTH-1"
+              },
+              "subResourceScaStatus" : {
+                "type" : "string",
+                "description" : "Contains the SCA(Strong Customer Authentication) status of a sub resource linked to a payment transaction. For example: received,started,finalised,exempted,psuIdentified etc."
+              },
+              "subResourceCaptureMethod" : {
+                "type" : "string",
+                "description" : "Specifies whether the payment was automatically created by the system (AUTO / Implicit) or based on a TPP (third party provider) request (TPP / Explicit)  "
+              },
+              "subResourceRequestId" : {
+                "type" : "string",
+                "description" : "Specifes if the sub-resource is created by a TPP (third party provider), this contains the incoming X-Request-ID which created it."
+              }
+            }
+          }
+        },
+        "globalURN" : {
+          "type" : "string",
+          "description" : "globalURNSpecifies the GLOBAL.URN reference of the TPP (third party provider). This will be retrieved from the request and should match a GLOBAL.URN from a record within the Open Banking Directory."
+        },
+        "customerId" : {
+          "type" : "string",
+          "description" : "Identifier of the customer"
+        },
+        "scaHint" : {
+          "type" : "string",
+          "description" : "Specifies whether the SCA (strong customer authentication) is required or not. For example: scaRequired, scaNotRequired."
+        },
+        "paymentStatus" : {
+          "type" : "string",
+          "description" : "Contains the current status of the transaction. For example: 'ACCC': 'AcceptedSettlementCompleted' - Settlement on the creditor's account has been completed.'ACCP': 'AcceptedCustomerProfile' - Preceding check of technical validation was successful. Customer profile check was also successful.'CANC': 'Cancelled' Payment initiation has been cancelled before execution Remark: This codeis accepted as new code by ISO20022.'RCVD': 'Received' - Payment initiation has been received by the receiving agent."
+        },
+        "scaStatus" : {
+          "type" : "string",
+          "description" : "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+        },
+        "defaultRedirectURL" : {
+          "type" : "string",
+          "description" : "Default redirection URL provided by the TPP (third party provider)."
+        },
+        "successRedirectURL" : {
+          "type" : "string",
+          "description" : "successRedirectURL"
+        },
+        "failureRedirectURL" : {
+          "type" : "string",
+          "description" : "Contains the default redirection URL provided by the TPP (third party provider) for a failed or cancelled payment in the case where TPP specifies different URLs for different payment outcomes."
+        },
+        "externalPaymentStatus" : {
+          "type" : "string",
+          "description" : "Status of the payment when the payment processing system is external"
+        },
+        "externalStatusReason" : {
+          "type" : "string",
+          "description" : "Status reason of the payment when the payment processing system is external"
+        },
+        "trustedBeneficiary" : {
+          "type" : "string",
+          "description" : "Indicator to determine whether the credit account number belongs to one of the customer's trusted beneficiaries. Contains TRUE/FALSE."
+        }
+      }
+    },
+    "ErrorHeader" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The Identifier of the record created"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "The status of the record"
+        },
+        "transactionStatus" : {
+          "type" : "string",
+          "description" : "The status of the transaction"
+        },
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "overrideBody" : {
+      "properties" : {
+        "overrideDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "id" : {
+                "type" : "string",
+                "description" : "The identifier of the override"
+              },
+              "description" : {
+                "type" : "string",
+                "description" : "The actual override message"
+              },
+              "options" : {
+                "type" : "array",
+                "description" : "The usable options for the override",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "type" : {
+                "type" : "string",
+                "description" : "The type of the override"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ScreenErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/ScreenErrorResponseBody"
+        },
+        "override" : {
+          "$ref" : "#/definitions/overrideBody"
+        }
+      },
+      "description" : "ScreenErrorResponse"
+    },
+    "ScreenErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "errorDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "fieldName" : {
+                "type" : "string",
+                "description" : "The name of the field"
+              },
+              "code" : {
+                "type" : "string",
+                "description" : "The identifier of the error message"
+              },
+              "message" : {
+                "type" : "string",
+                "description" : "The actual t24 error message "
+              }
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessScreenErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/BusinessScreenErrorResponseBody"
+        },
+        "override" : {
+          "$ref" : "#/definitions/overrideBody"
+        }
+      },
+      "description" : "BusinessScreenErrorResponse"
+    },
+    "BusinessScreenErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "errorDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "fieldName" : {
+                "type" : "string",
+                "description" : "The name of the field"
+              },
+              "code" : {
+                "type" : "string",
+                "description" : "The identifier of the error message"
+              },
+              "message" : {
+                "type" : "string",
+                "description" : "The actual t24 error message for bad requests"
+              }
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemScreenErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/SystemScreenErrorResponseBody"
+        },
+        "override" : {
+          "$ref" : "#/definitions/overrideBody"
+        }
+      },
+      "description" : "SystemScreenErrorResponse"
+    },
+    "SystemScreenErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "errorDetails" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "fieldName" : {
+                "type" : "string",
+                "description" : "The name of the field"
+              },
+              "code" : {
+                "type" : "string",
+                "description" : "The identifier of the error message"
+              },
+              "message" : {
+                "type" : "string",
+                "description" : "The actual t24 error message caused by server"
+              }
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}

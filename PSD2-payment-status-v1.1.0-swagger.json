@@ -1,0 +1,422 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Retrieves the details of the payment",
+    "version" : "v1.1.0",
+    "title" : "PSD II API to retreive the details of a PSD II Payment"
+  },
+  "host" : "api.server.com",
+  "basePath" : "/api/v1.1.0/",
+  "schemes" : [ "http", "https" ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "paths" : {
+    "/order/PSD2/payments/{paymentId}/pymtStatus" : {
+      "get" : {
+        "summary" : "Retrieves the details of the payment",
+        "description" : "Retrieves the payment status and all the necessary details of the payment specified with paymentId. For PSD2 this API can be linked to 'Get Payment Information and Payment initiation status request' published API in accordance to open banking standards to fetch the payment details.",
+        "operationId" : "getPaymentStatus",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "paymentId",
+          "in" : "path",
+          "description" : "Indicates the unique reference number of the payment",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "PaymentStatusResponse",
+            "schema" : {
+              "$ref" : "#/definitions/PaymentStatusResponse"
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/QueryErrorResponse"
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/BusinessQueryErrorResponse"
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "schema" : {
+              "$ref" : "#/definitions/SystemQueryErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basicAuth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "QueryHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        },
+        "page_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records per page"
+        },
+        "page_start" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The record from which the response should be displayed"
+        },
+        "total_size" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The total number of records present"
+        },
+        "page_token" : {
+          "type" : "string",
+          "description" : "Unique id expected to get as part of response from t24 on every enquiry request"
+        }
+      }
+    },
+    "PaymentStatusResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/QueryHeader"
+        },
+        "body" : {
+          "$ref" : "#/definitions/PaymentStatusResponseBody"
+        }
+      },
+      "description" : "PaymentStatusResponse"
+    },
+    "PaymentStatusResponseBody" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "debtorReference" : {
+            "type" : "string",
+            "description" : "Reference number for the debit side of the transaction."
+          },
+          "debitAccountId" : {
+            "type" : "string",
+            "description" : "Indicates the debit account number of the payment or transaction."
+          },
+          "debitAmount" : {
+            "type" : "string",
+            "description" : "Amount to be debited in a payment transaction"
+          },
+          "debitAccountIBAN" : {
+            "type" : "string",
+            "description" : "International Bank Account Number (IBAN) of the debtor account, required only for International transfers/payments outside the Bank. For example: GB98 MIDL07009312345678, FR7630006000011234567890189"
+          },
+          "debitCurrency" : {
+            "type" : "string",
+            "description" : "Currency of the debit account. For example: USD, EUR etc."
+          },
+          "payoutSortCode" : {
+            "type" : "string",
+            "description" : "Contains the bank sort code or iban branch identifier for the settlement account"
+          },
+          "availableBalance" : {
+            "type" : "string",
+            "description" : "Available balance of the account which is the projected balance which includes the net movements of both debits and credits against the account."
+          },
+          "creditorName" : {
+            "type" : "string",
+            "description" : "Name or short title of the credit account"
+          },
+          "creditAccountId" : {
+            "type" : "string",
+            "description" : "Credit account identifier of the payment or transaction"
+          },
+          "creditAmount" : {
+            "type" : "string",
+            "description" : "Amount to be credited in a payment transaction"
+          },
+          "creditCurrency" : {
+            "type" : "string",
+            "description" : "Currency of the account which funds will be transferred to."
+          },
+          "payInSortCode" : {
+            "type" : "string",
+            "description" : "Contains the bank sort code or iban branch identifier for the credit account"
+          },
+          "street" : {
+            "type" : "string",
+            "description" : "Contains the first line of customer's base address, example building number, street number etc."
+          },
+          "addressDetail" : {
+            "type" : "string",
+            "description" : "Additional address information, e.g. Contact Person. Building, Floor, Apartment, Street Number, Street Name, Town, Area, Code"
+          },
+          "city" : {
+            "type" : "string",
+            "description" : "City address stated on driver licence or utlility bill. For example London, New York etc."
+          },
+          "postCode" : {
+            "type" : "string",
+            "description" : "Identifies the address postal code for the customer."
+          },
+          "country" : {
+            "type" : "string",
+            "description" : "Identifies the country of the customer."
+          },
+          "debitValueDate" : {
+            "type" : "string",
+            "description" : "Date on which the amount will be debited for settlement"
+          },
+          "creditValueDate" : {
+            "type" : "string",
+            "description" : "Reference quoted by the credit account for a payment"
+          },
+          "executionDate" : {
+            "type" : "string",
+            "description" : "Date on which the transaction or payment gets processed, i.e. the processing date of the transaction."
+          },
+          "currentFrequency" : {
+            "type" : "string",
+            "description" : "Indicates the current frequency of the standing order"
+          },
+          "currentEndDate" : {
+            "type" : "string",
+            "description" : "Identifies the current end date of the standing order for the currency, amount and frequency specified. When the bank has received from the customer clear instructions which stipulate that the standing order must  only be executed during a determined period of time.  This is the date of the last execution of the standing order or when the customer has requested the bank to pay a certain amount during a determined period of time and then another amount starting from that date. In this case, this field specifies the end date of the first standing order amount.  After that date the second amount will then be executed."
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Contains the description of purpose of the payment."
+          },
+          "exchangeRate" : {
+            "type" : "string",
+            "description" : "Contains the exchange rate returned from the system. i.e. For entries over foreign currency accounts, this contains the rate which used to convert the currency amount to the local equivalent at the time of the originating transaction."
+          },
+          "chargeAmount" : {
+            "type" : "string",
+            "description" : "Charge amount equivalent in currency of the charge account"
+          },
+          "chargeCurrency" : {
+            "type" : "string",
+            "description" : "Indicates the currency code of the charge account from where the fee is deducted"
+          },
+          "beneficiaryOurCharges" : {
+            "type" : "string",
+            "description" : "Indicates the bearer of the charges. For example: BEN( All transaction charges are to be borne by the beneficiary customer.), OUR (All transaction charges are to be borne by the ordering customer.), SHA (Transaction charges on the Sender's side are to be borne by the ordering customer, transaction charges on the Receiver's side are to be borne by the beneficiary customer.)"
+          },
+          "chargeCode" : {
+            "type" : "string",
+            "description" : "Indicates the charge code to which the charges are identified and calculated and to be debited to the customer account. For example: C(Credit less Charges The Credit less Charges), D(Debit plus Charge The Debit plus Charge) , W(Waive)."
+          },
+          "chargeType" : {
+            "type" : "string",
+            "description" : "Indicates the charge types which are applicable for the transaction. Example: CORRBKCHG"
+          },
+          "commissionAmount" : {
+            "type" : "string",
+            "description" : "Amount of commission charged for the payment created with respect to the commission type used."
+          },
+          "commissionCurrency" : {
+            "type" : "string",
+            "description" : "Currency of the account from which commission is deducted. For example: USD, EUR, GBP etc."
+          },
+          "taxAmount" : {
+            "type" : "string",
+            "description" : "Total amount of taxes applicable on all commission or charges calculated for the transaction/payment."
+          },
+          "taxCurrency" : {
+            "type" : "string",
+            "description" : "Contains the currency that tax is to be levied in. Example USD, GBP etc."
+          },
+          "remittanceInformation" : {
+            "type" : "string",
+            "description" : "Indicates the remittance information that is supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivable system, in an unstructured form."
+          },
+          "trustedBeneficiary" : {
+            "type" : "string",
+            "description" : "Indicator to determine whether the credit account number belongs to one of the customer's trusted beneficiaries. Contains TRUE/FALSE."
+          },
+          "paymentStatus" : {
+            "type" : "string",
+            "description" : "Contains the current status of the transaction. For example: 'ACCC': 'AcceptedSettlementCompleted' - Settlement on the creditor's account has been completed.'ACCP': 'AcceptedCustomerProfile' - Preceding check of technical validation was successful. Customer profile check was also successful.'CANC': 'Cancelled' Payment initiation has been cancelled before execution Remark: This codeis accepted as new code by ISO20022.'RCVD': 'Received' - Payment initiation has been received by the receiving agent."
+          },
+          "scaStatus" : {
+            "type" : "string",
+            "description" : "Contains the status of the strong customer authentication process for the payment or consent. Valid values are received, psuIdentified, scaMethodSelected, started, finalised or failed"
+          },
+          "transactionType" : {
+            "type" : "string",
+            "description" : "Identifies the transaction type applicable to the transaction being processed, i.e. outward or inward payment. For example: ACPX, OTPX etc."
+          },
+          "startDate" : {
+            "type" : "string",
+            "description" : "Contains the date on which the transaction or payment gets initiated."
+          },
+          "frequency" : {
+            "type" : "string",
+            "description" : "Specifies the frequency in which the payment application(periodic payments) execute the payment instruction."
+          }
+        }
+      }
+    },
+    "ErrorHeader" : {
+      "properties" : {
+        "audit" : {
+          "type" : "object",
+          "properties" : {
+            "T24_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to response by T24"
+            },
+            "versionNumber" : {
+              "type" : "string",
+              "description" : "The CURR.NO. of the record"
+            },
+            "parse_time" : {
+              "type" : "integer",
+              "format" : "int32",
+              "description" : "Time taken to parse the response by IRIS"
+            }
+          }
+        }
+      }
+    },
+    "QueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/QueryErrorResponseBody"
+        }
+      },
+      "description" : "QueryErrorResponse"
+    },
+    "QueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message "
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: "
+        }
+      }
+    },
+    "BusinessQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/BusinessQueryErrorResponseBody"
+        }
+      },
+      "description" : "BusinessQueryErrorResponse"
+    },
+    "BusinessQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message for bad requests"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: Business"
+        }
+      }
+    },
+    "SystemQueryErrorResponse" : {
+      "properties" : {
+        "header" : {
+          "$ref" : "#/definitions/ErrorHeader"
+        },
+        "error" : {
+          "$ref" : "#/definitions/SystemQueryErrorResponseBody"
+        }
+      },
+      "description" : "SystemQueryErrorResponse"
+    },
+    "SystemQueryErrorResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "description" : "The identifier of the error message "
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual t24 error message caused by server"
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "The identifier of error type: System"
+        }
+      }
+    }
+  }
+}
